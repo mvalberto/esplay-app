@@ -1,6 +1,6 @@
 {
     "@@locale": "cs",
-    "appTitle": "Moonfin",
+    "appTitle": "EsPlay",
     "@appTitle": {
         "description": "The application title"
     },
@@ -82,7 +82,7 @@
     "@selectServer": {
         "description": "Button to navigate back to server selection"
     },
-    "appVersionFooter": "Moonfin verze {version}",
+    "appVersionFooter": "EsPlay verze {version}",
     "@appVersionFooter": {
         "description": "App version shown in footer",
         "placeholders": {
@@ -156,7 +156,7 @@
     "@secureStorageUnavailable": {
         "description": "Dialog title when system keyring is inaccessible"
     },
-    "secureStorageUnavailableMessage": "Moonfin nemá přístup k vaší systémové klíčence. Přihlášení může pokračovat, ale bezpečné úložiště tokenů nemusí být dostupné, dokud nebude klíčenka odemčena.",
+    "secureStorageUnavailableMessage": "EsPlay nemá přístup k vaší systémové klíčence. Přihlášení může pokračovat, ale bezpečné úložiště tokenů nemusí být dostupné, dokud nebude klíčenka odemčena.",
     "@secureStorageUnavailableMessage": {
         "description": "Explanation when secure storage is not available"
     },
@@ -168,15 +168,15 @@
     "@settingsAppearanceTheme": {
         "description": "Title for the theme selection screen and theme settings entry"
     },
-    "settingsAppearanceThemeSubtitle": "Přepínejte mezi Moonfin a Neon Pulse bez restartování aplikace",
+    "settingsAppearanceThemeSubtitle": "Přepínejte mezi EsPlay a Neon Pulse bez restartování aplikace",
     "@settingsAppearanceThemeSubtitle": {
         "description": "Subtitle for the theme selection screen and theme settings entry"
     },
-    "themeMoonfin": "Moonfin",
+    "themeMoonfin": "EsPlay",
     "@themeMoonfin": {
         "description": "Display name for the Moonfin theme"
     },
-    "themeMoonfinSubtitle": "Současný vzhled Moonfin, který jste si všichni zamilovali",
+    "themeMoonfinSubtitle": "Současný vzhled EsPlay, který jste si všichni zamilovali",
     "@themeMoonfinSubtitle": {
         "description": "Preview description for the Moonfin theme"
     },
@@ -249,7 +249,7 @@
             }
         }
     },
-    "exitApp": "Ukončit Moonfin?",
+    "exitApp": "Ukončit EsPlay?",
     "@exitApp": {
         "description": "Title of exit confirmation dialog"
     },
@@ -3109,7 +3109,7 @@
     "@customMpvConfPath": {
         "description": "Setting for custom mpv.conf path"
     },
-    "notSetMpvConf": "Není nastaveno. Moonfin zkusí výchozí mpv.conf ve složkách app/data.",
+    "notSetMpvConf": "Není nastaveno. EsPlay zkusí výchozí mpv.conf ve složkách app/data.",
     "@notSetMpvConf": {
         "description": "Description when no custom mpv.conf is set"
     },
@@ -3336,7 +3336,7 @@
     "@saveToDownloadsFolder": {
         "description": "Setting for saving to downloads folder"
     },
-    "downloadsVisibleToOtherApps": "Downloads/Moonfin — viditelné pro ostatní aplikace",
+    "downloadsVisibleToOtherApps": "Downloads/EsPlay — viditelné pro ostatní aplikace",
     "@downloadsVisibleToOtherApps": {
         "description": "Description for downloads folder visibility"
     },
@@ -3372,7 +3372,7 @@
     "@saveToDownloadsFolderQuestion": {
         "description": "Dialog title for saving to downloads folder"
     },
-    "saveToDownloadsFolderDescription": "Stažená média se uloží do složky Downloads/Moonfin na vašem zařízení. Tyto soubory budou viditelné pro ostatní aplikace, jako je vaše galerie nebo hudební přehrávač.\n\nStávající stažené soubory zůstanou na svém aktuálním místě.",
+    "saveToDownloadsFolderDescription": "Stažená média se uloží do složky Downloads/EsPlay na vašem zařízení. Tyto soubory budou viditelné pro ostatní aplikace, jako je vaše galerie nebo hudební přehrávač.\n\nStávající stažené soubory zůstanou na svém aktuálním místě.",
     "@saveToDownloadsFolderDescription": {
         "description": "Description for saving to downloads folder"
     },
@@ -3504,7 +3504,7 @@
     "@libraryVisibility": {
         "description": "Section title for library visibility"
     },
-    "libraryVisibilityDescription": "Přepnout viditelnost domovské stránky podle knihovny. Restartujte Moonfin, aby se změny projevily.",
+    "libraryVisibilityDescription": "Přepnout viditelnost domovské stránky podle knihovny. Restartujte EsPlay, aby se změny projevily.",
     "@libraryVisibilityDescription": {
         "description": "Explanation shown on the library visibility settings screen"
     },
@@ -3553,7 +3553,7 @@
     "@mediaBarModeDescription": {
         "description": "Description for media bar style setting"
     },
-    "mediaBarModeMoonfin": "Moonfin",
+    "mediaBarModeMoonfin": "EsPlay",
     "@mediaBarModeMoonfin": {
         "description": "Media bar style option: Moonfin"
     },
@@ -3943,7 +3943,7 @@
     "@ratingSourcesDescription": {
         "description": "Description for rating sources"
     },
-    "pluginLabel": "Plugin Moonbase",
+    "pluginLabel": "Plugin EsPlay",
     "@pluginLabel": {
         "description": "Settings title for plugin"
     },
@@ -4076,11 +4076,11 @@
     "@discoverRows": {
         "description": "Section title for discover rows"
     },
-    "discoverRowsDescriptionPlugin": "Povolte řádky, které chcete vidět na hlavní stránce Seerr. Přetažením změníte pořadí. Vlastní pořadí se synchronizuje s pluginem Moonbase.",
+    "discoverRowsDescriptionPlugin": "Povolte řádky, které chcete vidět na hlavní stránce Seerr. Přetažením změníte pořadí. Vlastní pořadí se synchronizuje s pluginem EsPlay.",
     "@discoverRowsDescriptionPlugin": {
         "description": "Description for discover rows with plugin"
     },
-    "discoverRowsDescription": "Povolte řádky, které chcete vidět na hlavní stránce Seerr. Přetažením změníte pořadí. Vlastní pořadí se synchronizuje s pluginem Moonbase.",
+    "discoverRowsDescription": "Povolte řádky, které chcete vidět na hlavní stránce Seerr. Přetažením změníte pořadí. Vlastní pořadí se synchronizuje s pluginem EsPlay.",
     "@discoverRowsDescription": {
         "description": "Description for discover rows without plugin"
     },
@@ -4281,7 +4281,7 @@
     "@cancelRequest": {
         "description": "Button/dialog title to cancel a media request"
     },
-    "playInMoonfin": "Hrajte v Moonfin",
+    "playInMoonfin": "Hrajte v EsPlay",
     "@playInMoonfin": {
         "description": "Button to play available media in Moonfin"
     },
@@ -4335,7 +4335,7 @@
     "@keep": {
         "description": "Button to keep/dismiss a cancel dialog"
     },
-    "itemNotFoundInLibrary": "Položka nebyla nalezena ve vaší knihovně Moonfin",
+    "itemNotFoundInLibrary": "Položka nebyla nalezena ve vaší knihovně EsPlay",
     "@itemNotFoundInLibrary": {
         "description": "Snackbar when Seerr item cannot be found in Jellyfin"
     },
@@ -4639,7 +4639,7 @@
         }
     },
     "adminServerRebootInProgress": "Probíhá restart serveru",
-    "adminServerRebootMessage": "Probíhá restart serveru, restartujte prosím Moonfin",
+    "adminServerRebootMessage": "Probíhá restart serveru, restartujte prosím EsPlay",
     "adminActiveSessions": "Aktivní relace",
     "adminSessionsLoadFailed": "Načtení relací se nezdařilo",
     "adminNoActiveSessions": "Žádné aktivní relace",
@@ -6527,12 +6527,12 @@
     "settingsShowGenresButtonInNavigation": "Zobrazit tlačítko žánry v navigační liště",
     "settingsShowFavoritesButtonInNavigation": "Zobrazit tlačítko oblíbených v navigační liště",
     "settingsShowLibrariesButtonInNavigation": "Zobrazit tlačítko knihoven v navigační liště",
-    "settingsLibraryVisibilitySubtitle": "Přepnout viditelnost domovské stránky podle knihovny. Restartujte Moonfin, aby se změny projevily.",
+    "settingsLibraryVisibilitySubtitle": "Přepnout viditelnost domovské stránky podle knihovny. Restartujte EsPlay, aby se změny projevily.",
     "settingsMediaBarAndLocalPreviews": "Panel médií a místní náhledy",
     "settingsVisualOverlays": "Vizuální překryvy",
     "settingsSeasonalSurprise": "Sezónní překvapení",
     "settingsMetadataAndRatings": "Metadata a hodnocení",
-    "settingsPluginScreenDescription": "Moonbase zajišťuje integraci na straně serveru včetně dalších zdrojů hodnocení, požadavků Seerr a synchronizovaných předvoleb.",
+    "settingsPluginScreenDescription": "EsPlay zajišťuje integraci na straně serveru včetně dalších zdrojů hodnocení, požadavků Seerr a synchronizovaných předvoleb.",
     "settingsOfflineDownloads": "Offline stahování",
     "settingsHigh": "Vysoký",
     "settingsLow": "Nízký",
@@ -6546,14 +6546,14 @@
     "settingsJoinDiscord": "Připojte se k Discordu",
     "settingsJoinDiscordSubtitle": "Chatujte s komunitou",
     "settingsJoinTheDiscord": "Připojte se k Discordu",
-    "settingsSupportMoonfin": "Podpořte Moonfina",
+    "settingsSupportMoonfin": "Podpořte EsPlaya",
     "settingsLegal": "PRÁVNÍ",
     "settingsLicenses": "licence",
     "settingsOpenSourceLicenseNotices": "Oznámení o licenci s otevřeným zdrojovým kódem",
     "settingsPrivacyPolicy": "Zásady ochrany osobních údajů",
-    "settingsPrivacyPolicySubtitle": "Jak Moonfin nakládá s vašimi daty",
+    "settingsPrivacyPolicySubtitle": "Jak EsPlay nakládá s vašimi daty",
     "settingsCheckForUpdates": "Zkontrolujte aktualizace",
-    "settingsCheckForUpdatesSubtitle": "Podívejte se na nejnovější vydání Moonfin",
+    "settingsCheckForUpdatesSubtitle": "Podívejte se na nejnovější vydání EsPlay",
     "settingsPoweredByFlutter": "Běží na Flutter",
     "settingsLicenseNoticesCount": "{count, plural, one {# licenční upozornění} few {# licenční upozornění} many {# licenčního upozornění} other {# licenčních upozornění}}",
     "@settingsLicenseNoticesCount": {
@@ -7023,7 +7023,7 @@
         }
     },
     "savedThemesTitle": "Uložená témata",
-    "savedThemesDescription": "Toto jsou témata stažená z pluginu Moonfin pro aktuální server. Odstraněním se odstraní pouze tato místní kopie.",
+    "savedThemesDescription": "Toto jsou témata stažená z pluginu EsPlay pro aktuální server. Odstraněním se odstraní pouze tato místní kopie.",
     "savedThemesEmpty": "Pro tento server nebyly nalezeny žádné uložené motivy.",
     "savedThemesCurrentThemeId": "{themeId} • Aktuálně aktivní",
     "@savedThemesCurrentThemeId": {
@@ -7037,7 +7037,7 @@
     "savedThemesDeleteTooltip": "Smazat uložené téma",
     "savedThemesManageSubtitle": "Spravujte stažená témata pluginů na tomto zařízení",
     "themeEditor": "Editor motivů",
-    "themeEditorSubtitle": "Otevřete ve svém prohlížeči editor motivů Moonfin",
+    "themeEditorSubtitle": "Otevřete ve svém prohlížeči editor motivů EsPlay",
     "homeScreen": "Domovská obrazovka",
     "bottomBar": "Spodní lišta",
     "homeRowsStyleClassic": "Klasický",
@@ -7086,12 +7086,12 @@
     "preferSdhSubtitles": "Preferujte titulky SDH",
     "preferSdhSubtitlesSubtitle": "Při automatickém výběru upřednostněte stopy titulků SDH/CC.",
     "webDiagnostics": "Webová diagnostika",
-    "webDiagnosticsTitle": "Moonfin Webová diagnostika",
+    "webDiagnosticsTitle": "EsPlay Webová diagnostika",
     "webDiagnosticsIntro": "Tato stránka slouží k diagnostice problémů s připojením prohlížeče (CORS, smíšený obsah a nastavení zjišťování).",
     "webDiagnosticsDetectedMixedContentFailure": "Zjištěno selhání smíšeného obsahu",
     "webDiagnosticsDetectedCorsPreflightFailure": "Zjištěno selhání CORS/předletové kontroly",
-    "webDiagnosticsMixedContentFailureBody": "Moonfin zjistil HTTPS stránku, která se pokouší volat URL HTTP serveru. Prohlížeče zablokují tento požadavek dříve, než se dostane na váš server.",
-    "webDiagnosticsCorsFailureBody": "Moonfin zjistil selhání požadavku na úrovni prohlížeče, které je běžně způsobeno chybějícími hlavičkami CORS nebo preflight na serveru médií.",
+    "webDiagnosticsMixedContentFailureBody": "EsPlay zjistil HTTPS stránku, která se pokouší volat URL HTTP serveru. Prohlížeče zablokují tento požadavek dříve, než se dostane na váš server.",
+    "webDiagnosticsCorsFailureBody": "EsPlay zjistil selhání požadavku na úrovni prohlížeče, které je běžně způsobeno chybějícími hlavičkami CORS nebo preflight na serveru médií.",
     "webDiagnosticsTargetUrl": "Cílová adresa URL: {url}",
     "@webDiagnosticsTargetUrl": {
         "description": "Target URL shown in diagnostics summary",
@@ -7121,7 +7121,7 @@
     "notConfigured": "není nakonfigurováno",
     "webDiagnosticsMixedContent": "Smíšený obsah",
     "webDiagnosticsMixedContentDetected": "Tato stránka se načítá přes HTTPS, ale jedna nebo více nakonfigurovaných adres URL je HTTP. Prohlížeče blokují stránky HTTPS ve volání rozhraní API HTTP.",
-    "webDiagnosticsMixedContentFix": "Oprava: obsluhovat váš mediální server nebo proxy koncový bod přes HTTPS nebo načíst Moonfin přes HTTP pouze v důvěryhodných místních sítích.",
+    "webDiagnosticsMixedContentFix": "Oprava: obsluhovat váš mediální server nebo proxy koncový bod přes HTTPS nebo načíst EsPlay přes HTTP pouze v důvěryhodných místních sítích.",
     "webDiagnosticsNoMixedContentDetected": "Z aktuálního nastavení runtime nebyla zjištěna žádná zjevná konfigurace se smíšeným obsahem.",
     "webDiagnosticsCorsChecklist": "Kontrolní seznam CORS",
     "webDiagnosticsCorsChecklistItem1": "• Povolit původ prohlížeče v Access-Control-Allow-Origin.",
@@ -7318,7 +7318,7 @@
     "@detailScreenStyle": {
         "description": "Label for the media detail screen layout style setting"
     },
-    "detailScreenStyleSubtitle": "Klasický je původní vystředěné rozvržení Moonfinu. Moderní je responzivní filmové rozvržení.",
+    "detailScreenStyleSubtitle": "Klasický je původní vystředěné rozvržení EsPlayu. Moderní je responzivní filmové rozvržení.",
     "@detailScreenStyleSubtitle": {
         "description": "Explanation under the detail screen style setting"
     },
@@ -7350,11 +7350,11 @@
     "@recommendationSystem": {
         "description": "Label for the Recommendation System setting"
     },
-    "recommendationSystemSubtitle": "Použijte algoritmus Moonfin doporučuje pro místní knihovnu, nebo online metriky podobnosti z TMDb. Poznámka: Online doporučení vyžadují integraci Seerr.",
+    "recommendationSystemSubtitle": "Použijte algoritmus EsPlay doporučuje pro místní knihovnu, nebo online metriky podobnosti z TMDb. Poznámka: Online doporučení vyžadují integraci Seerr.",
     "@recommendationSystemSubtitle": {
         "description": "Explanation under the recommendation system setting"
     },
-    "recommendationSystemMoonfin": "Moonfin doporučuje",
+    "recommendationSystemMoonfin": "EsPlay doporučuje",
     "@recommendationSystemMoonfin": {
         "description": "Recommendation system option: Moonfin Recommends"
     },
@@ -7366,7 +7366,7 @@
     "@recommendationsApplyParentalRatingCap": {
         "description": "Label for the toggle that controls whether similar suggestions are capped by target media parental rating"
     },
-    "recommendationsApplyParentalRatingCapSubtitle": "Omezit návrhy Moonfin doporučuje podle rodičovského hodnocení cílového média",
+    "recommendationsApplyParentalRatingCapSubtitle": "Omezit návrhy EsPlay doporučuje podle rodičovského hodnocení cílového média",
     "@recommendationsApplyParentalRatingCapSubtitle": {
         "description": "Explanation under the parental rating cap setting toggle"
     },
@@ -7414,7 +7414,7 @@
     "@customThemeTitle": {
         "description": "Title for the custom theme settings section"
     },
-    "customThemeSubtitle": "Vlastní motivy mění vzhled napříč celým Moonfinem. Vyberte si možnost, která vyhovuje vašemu stylu.",
+    "customThemeSubtitle": "Vlastní motivy mění vzhled napříč celým EsPlayem. Vyberte si možnost, která vyhovuje vašemu stylu.",
     "@customThemeSubtitle": {
         "description": "Description under custom themes section"
     },
@@ -7587,7 +7587,7 @@
     "@shuffleAllMusic": {
         "description": "Car browse action that shuffles the whole music library"
     },
-    "carSignInPrompt": "Přihlaste se do Moonfinu na telefonu",
+    "carSignInPrompt": "Přihlaste se do EsPlayu na telefonu",
     "@carSignInPrompt": {
         "description": "Shown in the car when no account is signed in"
     },
@@ -8927,7 +8927,7 @@
     "@impellerRendering": {
         "description": "Title of the setting that selects the Flutter rendering engine (Impeller vs. legacy)."
     },
-    "impellerRenderingSubtitle": "Impeller je moderní GPU renderer Flutteru pro plynulejší animace a méně zadrhávání. Na některých TV boxech a starších GPU může způsobovat grafické chyby nebo černé video; v takovém případě jej vypněte. Automaticky zvolí nejlepší výchozí nastavení pro vaše zařízení. Změna se projeví po restartu Moonfinu.",
+    "impellerRenderingSubtitle": "Impeller je moderní GPU renderer Flutteru pro plynulejší animace a méně zadrhávání. Na některých TV boxech a starších GPU může způsobovat grafické chyby nebo černé video; v takovém případě jej vypněte. Automaticky zvolí nejlepší výchozí nastavení pro vaše zařízení. Změna se projeví po restartu EsPlayu.",
     "@impellerRenderingSubtitle": {
         "description": "Explanatory description under the rendering engine setting."
     },
@@ -8938,7 +8938,7 @@
     "@impellerRestartTitle": {
         "description": "Title of the dialog shown after changing the rendering engine."
     },
-    "impellerRestartMessage": "Ke změně vykreslovacího jádra je nutné Moonfin restartovat. Zavřete aplikaci a znovu ji otevřete, aby se změna projevila.",
+    "impellerRestartMessage": "Ke změně vykreslovacího jádra je nutné EsPlay restartovat. Zavřete aplikaci a znovu ji otevřete, aby se změna projevila.",
     "@impellerRestartMessage": {
         "description": "Body of the dialog shown after changing the rendering engine."
     },

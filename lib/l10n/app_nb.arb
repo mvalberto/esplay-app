@@ -1,6 +1,6 @@
 {
     "@@locale": "nb",
-    "appTitle": "Moonfin",
+    "appTitle": "EsPlay",
     "@appTitle": {
         "description": "The application title"
     },
@@ -82,7 +82,7 @@
     "@selectServer": {
         "description": "Button to navigate back to server selection"
     },
-    "appVersionFooter": "Moonfin versjon {version}",
+    "appVersionFooter": "EsPlay versjon {version}",
     "@appVersionFooter": {
         "description": "App version shown in footer",
         "placeholders": {
@@ -156,7 +156,7 @@
     "@secureStorageUnavailable": {
         "description": "Dialog title when system keyring is inaccessible"
     },
-    "secureStorageUnavailableMessage": "Moonfin fikk ikke tilgang til systemets nøkkelring. Påloggingen kan fortsette, men sikker tokenlagring kan være utilgjengelig før nøkkelringen er låst opp.",
+    "secureStorageUnavailableMessage": "EsPlay fikk ikke tilgang til systemets nøkkelring. Påloggingen kan fortsette, men sikker tokenlagring kan være utilgjengelig før nøkkelringen er låst opp.",
     "@secureStorageUnavailableMessage": {
         "description": "Explanation when secure storage is not available"
     },
@@ -172,11 +172,11 @@
     "@settingsAppearanceThemeSubtitle": {
         "description": "Subtitle for the theme selection screen and theme settings entry"
     },
-    "themeMoonfin": "Moonfin",
+    "themeMoonfin": "EsPlay",
     "@themeMoonfin": {
         "description": "Display name for the Moonfin theme"
     },
-    "themeMoonfinSubtitle": "Det originale og stilrene Moonfin-standarden.",
+    "themeMoonfinSubtitle": "Det originale og stilrene EsPlay-standarden.",
     "@themeMoonfinSubtitle": {
         "description": "Preview description for the Moonfin theme"
     },
@@ -249,7 +249,7 @@
             }
         }
     },
-    "exitApp": "Vil du avslutte Moonfin?",
+    "exitApp": "Vil du avslutte EsPlay?",
     "@exitApp": {
         "description": "Title of exit confirmation dialog"
     },
@@ -3109,7 +3109,7 @@
     "@customMpvConfPath": {
         "description": "Setting for custom mpv.conf path"
     },
-    "notSetMpvConf": "Ikke satt. Moonfin vil prøve en standard mpv.conf i app/data-mapper.",
+    "notSetMpvConf": "Ikke satt. EsPlay vil prøve en standard mpv.conf i app/data-mapper.",
     "@notSetMpvConf": {
         "description": "Description when no custom mpv.conf is set"
     },
@@ -3336,7 +3336,7 @@
     "@saveToDownloadsFolder": {
         "description": "Setting for saving to downloads folder"
     },
-    "downloadsVisibleToOtherApps": "Nedlastinger/Moonfin — synlig for andre apper",
+    "downloadsVisibleToOtherApps": "Nedlastinger/EsPlay — synlig for andre apper",
     "@downloadsVisibleToOtherApps": {
         "description": "Description for downloads folder visibility"
     },
@@ -3372,7 +3372,7 @@
     "@saveToDownloadsFolderQuestion": {
         "description": "Dialog title for saving to downloads folder"
     },
-    "saveToDownloadsFolderDescription": "Nedlastede medier vil bli lagret i Nedlastinger/Moonfin på enheten din. Disse filene vil være synlige for andre apper som galleriet eller musikkspilleren.\n\nEksisterende nedlastinger forblir på deres nåværende plassering.",
+    "saveToDownloadsFolderDescription": "Nedlastede medier vil bli lagret i Nedlastinger/EsPlay på enheten din. Disse filene vil være synlige for andre apper som galleriet eller musikkspilleren.\n\nEksisterende nedlastinger forblir på deres nåværende plassering.",
     "@saveToDownloadsFolderDescription": {
         "description": "Description for saving to downloads folder"
     },
@@ -3504,7 +3504,7 @@
     "@libraryVisibility": {
         "description": "Section title for library visibility"
     },
-    "libraryVisibilityDescription": "Slå av og på hjemmesidens synlighet per bibliotek. Start Moonfin på nytt for at endringer skal tre i kraft.",
+    "libraryVisibilityDescription": "Slå av og på hjemmesidens synlighet per bibliotek. Start EsPlay på nytt for at endringer skal tre i kraft.",
     "@libraryVisibilityDescription": {
         "description": "Explanation shown on the library visibility settings screen"
     },
@@ -3553,7 +3553,7 @@
     "@mediaBarModeDescription": {
         "description": "Description for media bar style setting"
     },
-    "mediaBarModeMoonfin": "Moonfin",
+    "mediaBarModeMoonfin": "EsPlay",
     "@mediaBarModeMoonfin": {
         "description": "Media bar style option: Moonfin"
     },
@@ -3943,7 +3943,7 @@
     "@ratingSourcesDescription": {
         "description": "Description for rating sources"
     },
-    "pluginLabel": "Moonbase-plugin",
+    "pluginLabel": "EsPlay-plugin",
     "@pluginLabel": {
         "description": "Settings title for plugin"
     },
@@ -4076,11 +4076,11 @@
     "@discoverRows": {
         "description": "Section title for discover rows"
     },
-    "discoverRowsDescriptionPlugin": "Aktiver radene du vil se på Seerr-hovedsiden. Dra for å endre rekkefølge. Egendefinert rekkefølge synkroniseres med Moonbase.",
+    "discoverRowsDescriptionPlugin": "Aktiver radene du vil se på Seerr-hovedsiden. Dra for å endre rekkefølge. Egendefinert rekkefølge synkroniseres med EsPlay.",
     "@discoverRowsDescriptionPlugin": {
         "description": "Description for discover rows with plugin"
     },
-    "discoverRowsDescription": "Aktiver radene du vil se på Seerr-hovedsiden. Dra for å endre rekkefølge. Egendefinert rekkefølge synkroniseres med Moonbase.",
+    "discoverRowsDescription": "Aktiver radene du vil se på Seerr-hovedsiden. Dra for å endre rekkefølge. Egendefinert rekkefølge synkroniseres med EsPlay.",
     "@discoverRowsDescription": {
         "description": "Description for discover rows without plugin"
     },
@@ -4281,7 +4281,7 @@
     "@cancelRequest": {
         "description": "Button/dialog title to cancel a media request"
     },
-    "playInMoonfin": "Spill i Moonfin",
+    "playInMoonfin": "Spill i EsPlay",
     "@playInMoonfin": {
         "description": "Button to play available media in Moonfin"
     },
@@ -4335,7 +4335,7 @@
     "@keep": {
         "description": "Button to keep/dismiss a cancel dialog"
     },
-    "itemNotFoundInLibrary": "Elementet ble ikke funnet i Moonfin-biblioteket",
+    "itemNotFoundInLibrary": "Elementet ble ikke funnet i EsPlay-biblioteket",
     "@itemNotFoundInLibrary": {
         "description": "Snackbar when Seerr item cannot be found in Jellyfin"
     },
@@ -4639,7 +4639,7 @@
         }
     },
     "adminServerRebootInProgress": "Server omstart pågår",
-    "adminServerRebootMessage": "Server omstart pågår, vennligst start Moonfin på nytt",
+    "adminServerRebootMessage": "Server omstart pågår, vennligst start EsPlay på nytt",
     "adminActiveSessions": "Aktive økter",
     "adminSessionsLoadFailed": "Kunne ikke laste inn økter",
     "adminNoActiveSessions": "Ingen aktive økter",
@@ -6527,12 +6527,12 @@
     "settingsShowGenresButtonInNavigation": "Vis sjangerknappen i navigasjonslinjen",
     "settingsShowFavoritesButtonInNavigation": "Vis favorittknappen i navigasjonslinjen",
     "settingsShowLibrariesButtonInNavigation": "Vis bibliotek-knappen i navigasjonslinjen",
-    "settingsLibraryVisibilitySubtitle": "Slå av og på hjemmesidens synlighet per bibliotek. Start Moonfin på nytt for at endringer skal tre i kraft.",
+    "settingsLibraryVisibilitySubtitle": "Slå av og på hjemmesidens synlighet per bibliotek. Start EsPlay på nytt for at endringer skal tre i kraft.",
     "settingsMediaBarAndLocalPreviews": "Media Bar og lokale forhåndsvisninger",
     "settingsVisualOverlays": "Visuelle overlegg",
     "settingsSeasonalSurprise": "Sesongmessig overraskelse",
     "settingsMetadataAndRatings": "Metadata og vurderinger",
-    "settingsPluginScreenDescription": "Moonbase driver integrasjoner på serversiden, inkludert ytterligere vurderingskilder, Seerr-forespørsler og synkroniserte preferanser.",
+    "settingsPluginScreenDescription": "EsPlay driver integrasjoner på serversiden, inkludert ytterligere vurderingskilder, Seerr-forespørsler og synkroniserte preferanser.",
     "settingsOfflineDownloads": "Frakoblede nedlastinger",
     "settingsHigh": "Høy",
     "settingsLow": "Lav",
@@ -6546,14 +6546,14 @@
     "settingsJoinDiscord": "Bli med i Discord",
     "settingsJoinDiscordSubtitle": "Chat med fellesskapet",
     "settingsJoinTheDiscord": "Bli med i Discord",
-    "settingsSupportMoonfin": "Støtt Moonfin",
+    "settingsSupportMoonfin": "Støtt EsPlay",
     "settingsLegal": "LOVLIG",
     "settingsLicenses": "Lisenser",
     "settingsOpenSourceLicenseNotices": "Lisensmerknader for åpen kildekode",
     "settingsPrivacyPolicy": "Personvernerklæring",
-    "settingsPrivacyPolicySubtitle": "Hvordan Moonfin håndterer dataene dine",
+    "settingsPrivacyPolicySubtitle": "Hvordan EsPlay håndterer dataene dine",
     "settingsCheckForUpdates": "Se etter oppdateringer",
-    "settingsCheckForUpdatesSubtitle": "Se etter den siste Moonfin-utgivelsen",
+    "settingsCheckForUpdatesSubtitle": "Se etter den siste EsPlay-utgivelsen",
     "settingsPoweredByFlutter": "Drevet av Flutter",
     "settingsLicenseNoticesCount": "{count, plural, one {# lisensmerknad} other {# lisensmerknader}}",
     "@settingsLicenseNoticesCount": {
@@ -7023,7 +7023,7 @@
         }
     },
     "savedThemesTitle": "Lagrede temaer",
-    "savedThemesDescription": "Dette er temaer som er lastet ned fra Moonfin-tillegget for den gjeldende serveren. Sletting fjerner bare denne lokale kopien.",
+    "savedThemesDescription": "Dette er temaer som er lastet ned fra EsPlay-tillegget for den gjeldende serveren. Sletting fjerner bare denne lokale kopien.",
     "savedThemesEmpty": "Fant ingen lagrede temaer for denne serveren.",
     "savedThemesCurrentThemeId": "{themeId} • Aktiv nå",
     "@savedThemesCurrentThemeId": {
@@ -7037,7 +7037,7 @@
     "savedThemesDeleteTooltip": "Slett lagret tema",
     "savedThemesManageSubtitle": "Administrer nedlastede tilleggstemaer på denne enheten",
     "themeEditor": "Temaredigering",
-    "themeEditorSubtitle": "Åpne temaredigering for Moonfin i nettleseren",
+    "themeEditorSubtitle": "Åpne temaredigering for EsPlay i nettleseren",
     "homeScreen": "Startskjerm",
     "bottomBar": "Bunnlinje",
     "homeRowsStyleClassic": "Klassisk",
@@ -7086,12 +7086,12 @@
     "preferSdhSubtitles": "Foretrekk SDH-undertekster",
     "preferSdhSubtitlesSubtitle": "Prioriter SDH-/CC-undertekstspor ved automatisk valg.",
     "webDiagnostics": "Nettdiagnostikk",
-    "webDiagnosticsTitle": "Moonfin nettdiagnostikk",
+    "webDiagnosticsTitle": "EsPlay nettdiagnostikk",
     "webDiagnosticsIntro": "Bruk denne siden til å diagnostisere tilkoblingsproblemer i nettleseren (CORS, blandet innhold og oppdagelsesinnstillinger).",
     "webDiagnosticsDetectedMixedContentFailure": "Oppdaget feil med blandet innhold",
     "webDiagnosticsDetectedCorsPreflightFailure": "Oppdaget CORS-/preflight-feil",
-    "webDiagnosticsMixedContentFailureBody": "Moonfin oppdaget en HTTPS-side som prøver å kalle en HTTP-server-URL. Nettlesere blokkerer denne forespørselen før den når serveren din.",
-    "webDiagnosticsCorsFailureBody": "Moonfin oppdaget en forespørselsfeil på nettlesernivå som vanligvis skyldes manglende CORS- eller preflight-hoder på medieserveren.",
+    "webDiagnosticsMixedContentFailureBody": "EsPlay oppdaget en HTTPS-side som prøver å kalle en HTTP-server-URL. Nettlesere blokkerer denne forespørselen før den når serveren din.",
+    "webDiagnosticsCorsFailureBody": "EsPlay oppdaget en forespørselsfeil på nettlesernivå som vanligvis skyldes manglende CORS- eller preflight-hoder på medieserveren.",
     "webDiagnosticsTargetUrl": "Mål-URL: {url}",
     "@webDiagnosticsTargetUrl": {
         "description": "Target URL shown in diagnostics summary",
@@ -7121,7 +7121,7 @@
     "notConfigured": "ikke konfigurert",
     "webDiagnosticsMixedContent": "Blandet innhold",
     "webDiagnosticsMixedContentDetected": "Denne siden lastes over HTTPS, men én eller flere konfigurerte URL-er bruker HTTP. Nettlesere blokkerer HTTPS-sider fra å kalle HTTP-API-er.",
-    "webDiagnosticsMixedContentFix": "Løsning: server medieserveren eller proxy-endepunktet via HTTPS, eller last Moonfin over HTTP bare på klarerte lokale nettverk.",
+    "webDiagnosticsMixedContentFix": "Løsning: server medieserveren eller proxy-endepunktet via HTTPS, eller last EsPlay over HTTP bare på klarerte lokale nettverk.",
     "webDiagnosticsNoMixedContentDetected": "Ingen åpenbar konfigurasjon med blandet innhold ble oppdaget ut fra gjeldende kjøretidsinnstillinger.",
     "webDiagnosticsCorsChecklist": "CORS-sjekkliste",
     "webDiagnosticsCorsChecklistItem1": "• Tillat nettleserens origin i Access-Control-Allow-Origin.",
@@ -7318,7 +7318,7 @@
     "@detailScreenStyle": {
         "description": "Label for the media detail screen layout style setting"
     },
-    "detailScreenStyleSubtitle": "Klassisk er den opprinnelige, midtstilte Moonfin-layouten. Moderne er en responsiv, filmatisk layout.",
+    "detailScreenStyleSubtitle": "Klassisk er den opprinnelige, midtstilte EsPlay-layouten. Moderne er en responsiv, filmatisk layout.",
     "@detailScreenStyleSubtitle": {
         "description": "Explanation under the detail screen style setting"
     },
@@ -7350,11 +7350,11 @@
     "@recommendationSystem": {
         "description": "Label for the Recommendation System setting"
     },
-    "recommendationSystemSubtitle": "Bruk den lokale bibliotekalgoritmen Moonfin anbefaler, eller TMDb-likhetsmålinger på nett. Merk: Anbefalinger på nett krever Seerr-integrasjon.",
+    "recommendationSystemSubtitle": "Bruk den lokale bibliotekalgoritmen EsPlay anbefaler, eller TMDb-likhetsmålinger på nett. Merk: Anbefalinger på nett krever Seerr-integrasjon.",
     "@recommendationSystemSubtitle": {
         "description": "Explanation under the recommendation system setting"
     },
-    "recommendationSystemMoonfin": "Moonfin anbefaler",
+    "recommendationSystemMoonfin": "EsPlay anbefaler",
     "@recommendationSystemMoonfin": {
         "description": "Recommendation system option: Moonfin Recommends"
     },
@@ -7366,7 +7366,7 @@
     "@recommendationsApplyParentalRatingCap": {
         "description": "Label for the toggle that controls whether similar suggestions are capped by target media parental rating"
     },
-    "recommendationsApplyParentalRatingCapSubtitle": "Begrens forslag fra Moonfin anbefaler etter aldersgrensen til det aktuelle innholdet",
+    "recommendationsApplyParentalRatingCapSubtitle": "Begrens forslag fra EsPlay anbefaler etter aldersgrensen til det aktuelle innholdet",
     "@recommendationsApplyParentalRatingCapSubtitle": {
         "description": "Explanation under the parental rating cap setting toggle"
     },
@@ -7414,7 +7414,7 @@
     "@customThemeTitle": {
         "description": "Title for the custom theme settings section"
     },
-    "customThemeSubtitle": "Egendefinerte temaer endrer visuelle elementer i hele Moonfin. Velg et av disse alternativene som passer din stil.",
+    "customThemeSubtitle": "Egendefinerte temaer endrer visuelle elementer i hele EsPlay. Velg et av disse alternativene som passer din stil.",
     "@customThemeSubtitle": {
         "description": "Description under custom themes section"
     },
@@ -7587,7 +7587,7 @@
     "@shuffleAllMusic": {
         "description": "Car browse action that shuffles the whole music library"
     },
-    "carSignInPrompt": "Logg på Moonfin på telefonen",
+    "carSignInPrompt": "Logg på EsPlay på telefonen",
     "@carSignInPrompt": {
         "description": "Shown in the car when no account is signed in"
     },
@@ -8927,7 +8927,7 @@
     "@impellerRendering": {
         "description": "Title of the setting that selects the Flutter rendering engine (Impeller vs. legacy)."
     },
-    "impellerRenderingSubtitle": "Impeller er Flutters moderne GPU-gjengiver som gir jevnere animasjoner og mindre hakking. På enkelte TV-bokser og eldre GPU-er kan den forårsake feil eller svart video – slå den av hvis du opplever det. Automatisk velger den beste standardinnstillingen for enheten din. Start Moonfin på nytt for å ta i bruk endringen.",
+    "impellerRenderingSubtitle": "Impeller er Flutters moderne GPU-gjengiver som gir jevnere animasjoner og mindre hakking. På enkelte TV-bokser og eldre GPU-er kan den forårsake feil eller svart video – slå den av hvis du opplever det. Automatisk velger den beste standardinnstillingen for enheten din. Start EsPlay på nytt for å ta i bruk endringen.",
     "@impellerRenderingSubtitle": {
         "description": "Explanatory description under the rendering engine setting."
     },
@@ -8938,7 +8938,7 @@
     "@impellerRestartTitle": {
         "description": "Title of the dialog shown after changing the rendering engine."
     },
-    "impellerRestartMessage": "Moonfin må startes på nytt for å endre gjengivelsesmotoren. Lukk appen nå, og åpne den igjen for å ta i bruk endringen.",
+    "impellerRestartMessage": "EsPlay må startes på nytt for å endre gjengivelsesmotoren. Lukk appen nå, og åpne den igjen for å ta i bruk endringen.",
     "@impellerRestartMessage": {
         "description": "Body of the dialog shown after changing the rendering engine."
     },
@@ -9138,7 +9138,7 @@
     "@interfaceLayout": {
         "description": "Setting to override which UI layout the app uses"
     },
-    "interfaceLayoutSubtitle": "Overstyr oppsettet dersom enheten gjenkjennes feil. Start Moonfin på nytt for å ta i bruk endringene.",
+    "interfaceLayoutSubtitle": "Overstyr oppsettet dersom enheten gjenkjennes feil. Start EsPlay på nytt for å ta i bruk endringene.",
     "@interfaceLayoutSubtitle": {
         "description": "Subtitle for the interface layout setting"
     },

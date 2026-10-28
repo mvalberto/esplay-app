@@ -10,7 +10,7 @@ class AppLocalizationsDa extends AppLocalizations {
   AppLocalizationsDa([String locale = 'da']) : super(locale);
 
   @override
-  String get appTitle => 'Moonfin';
+  String get appTitle => 'EsPlay';
 
   @override
   String get animeMarkerFiller => 'Filler';
@@ -147,7 +147,7 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String appVersionFooter(String version) {
-    return 'Moonfin version $version';
+    return 'EsPlay version $version';
   }
 
   @override
@@ -201,7 +201,7 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get secureStorageUnavailableMessage =>
-      'Moonfin kunne ikke få adgang til din systemnøglering. Login kan fortsætte, men sikker token-opbevaring er muligvis ikke tilgængelig, før nøgleringen er låst op.';
+      'EsPlay kunne ikke få adgang til din systemnøglering. Login kan fortsætte, men sikker token-opbevaring er muligvis ikke tilgængelig, før nøgleringen er låst op.';
 
   @override
   String get ok => 'OK';
@@ -214,7 +214,7 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get detailScreenStyleSubtitle =>
-      'Klassisk er det oprindelige centrerede Moonfin-layout. Moderne er et responsivt, filmisk layout.';
+      'Klassisk er det oprindelige centrerede EsPlay-layout. Moderne er et responsivt, filmisk layout.';
 
   @override
   String get detailScreenStyleMoonfin => 'Klassisk';
@@ -454,10 +454,10 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get recommendationSystemSubtitle =>
-      'Brug Moonfin Anbefaler-algoritmen til dit lokale bibliotek eller TMDb\'s lighedsmålinger online. Bemærk: Onlineanbefalinger kræver Seerr-integration.';
+      'Brug EsPlay Anbefaler-algoritmen til dit lokale bibliotek eller TMDb\'s lighedsmålinger online. Bemærk: Onlineanbefalinger kræver Seerr-integration.';
 
   @override
-  String get recommendationSystemMoonfin => 'Moonfin Anbefaler';
+  String get recommendationSystemMoonfin => 'EsPlay Anbefaler';
 
   @override
   String get recommendationSystemJellyfin => 'Jellyfin Recommends';
@@ -471,7 +471,7 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get recommendationsApplyParentalRatingCapSubtitle =>
-      'Begræns forslag fra Moonfin Anbefaler efter målmediets aldersgrænse';
+      'Begræns forslag fra EsPlay Anbefaler efter målmediets aldersgrænse';
 
   @override
   String get interfaceStyle => 'Grænsefladestil';
@@ -494,7 +494,7 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get interfaceLayoutSubtitle =>
-      'Override the detected layout when this device is read wrong. Restart Moonfin for changes to take effect.';
+      'Override the detected layout when this device is read wrong. Restart EsPlay for changes to take effect.';
 
   @override
   String get interfaceLayoutAutomatic => 'Automatic';
@@ -572,21 +572,21 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get settingsAppearanceThemeSubtitle =>
-      'Skift mellem Moonfin og Neon Pulse uden at genstarte appen';
+      'Skift mellem EsPlay og Neon Pulse uden at genstarte appen';
 
   @override
   String get customThemeTitle => 'Brugerdefineret tema';
 
   @override
   String get customThemeSubtitle =>
-      'Brugerdefinerede temaer ændrer visuelle elementer i hele Moonfin. Vælg en af disse muligheder, der passer til din stil.';
+      'Brugerdefinerede temaer ændrer visuelle elementer i hele EsPlay. Vælg en af disse muligheder, der passer til din stil.';
 
   @override
   String get keyboardStyle => 'Keyboard Style';
 
   @override
   String get keyboardStyleDescription =>
-      'Native uses your TV\'s own keyboard. Classic is the original Moonfin keyboard. Glass is a frosted panel with larger keys. Docked fills the bottom of the screen and shows what you type above the keys.';
+      'Native uses your TV\'s own keyboard. Classic is the original EsPlay keyboard. Glass is a frosted panel with larger keys. Docked fills the bottom of the screen and shows what you type above the keys.';
 
   @override
   String get keyboardStyleNative => 'Native';
@@ -620,11 +620,11 @@ class AppLocalizationsDa extends AppLocalizations {
       'Let a connected game controller move focus and select items';
 
   @override
-  String get themeMoonfin => 'Moonfin';
+  String get themeMoonfin => 'EsPlay';
 
   @override
   String get themeMoonfinSubtitle =>
-      'Det nuværende Moonfin-udseende, som alle vil komme til at elske';
+      'Det nuværende EsPlay-udseende, som alle vil komme til at elske';
 
   @override
   String get themeNeonPulse => 'Neonpuls';
@@ -720,7 +720,7 @@ class AppLocalizationsDa extends AppLocalizations {
   }
 
   @override
-  String get exitApp => 'Afslut Moonfin?';
+  String get exitApp => 'Afslut EsPlay?';
 
   @override
   String get exitAppConfirmation => 'Er du sikker på, at du vil afslutte?';
@@ -1898,7 +1898,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get shuffleAllMusic => 'Bland al musik';
 
   @override
-  String get carSignInPrompt => 'Log ind på Moonfin på din telefon';
+  String get carSignInPrompt => 'Log ind på EsPlay på din telefon';
 
   @override
   String get carServerUnreachable => 'Kan ikke få forbindelse til din server';
@@ -2179,7 +2179,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get shortcutToggleFullscreen => 'Fullscreen on or off';
 
   @override
-  String get shortcutQuit => 'Quit Moonfin';
+  String get shortcutQuit => 'Quit EsPlay';
 
   @override
   String get shortcutPlayPause => 'Play or pause';
@@ -2350,7 +2350,7 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get bookReadingUnavailableMessage =>
-      'Open it in Moonfin on a phone, tablet or computer to read it. Audiobooks still play here.';
+      'Open it in EsPlay on a phone, tablet or computer to read it. Audiobooks still play here.';
 
   @override
   String formatCannotRenderInApp(String extension) {
@@ -3178,7 +3178,7 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get loadingAnimationDescription =>
-      'Customize the loading animations used throughout Moonfin';
+      'Customize the loading animations used throughout EsPlay';
 
   @override
   String get loadingAnimationConfiguration => 'Loading Animation Configuration';
@@ -3187,7 +3187,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get loadingAnimationImage => 'Image';
 
   @override
-  String get loadingAnimationImageMoonfinLogo => 'Moonfin Logo';
+  String get loadingAnimationImageMoonfinLogo => 'EsPlay Logo';
 
   @override
   String get loadingAnimationImageSpinner => 'Spinner';
@@ -3199,7 +3199,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get loadingAnimationImageMoonPhases => 'Moon Phases';
 
   @override
-  String get loadingAnimationImageMoonfinPhases => 'Moonfin Phases';
+  String get loadingAnimationImageMoonfinPhases => 'EsPlay Phases';
 
   @override
   String get loadingAnimationImageNeonfinPhases => 'Neonfin Phases';
@@ -4204,7 +4204,7 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get notSetMpvConf =>
-      'Ikke indstillet. Moonfin vil prøve en standard mpv.conf i app/data-mapper.';
+      'Ikke indstillet. EsPlay vil prøve en standard mpv.conf i app/data-mapper.';
 
   @override
   String get selectMpvConf => 'Vælg mpv.conf';
@@ -4503,14 +4503,14 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get downloadLocationLimitedByAndroid =>
-      'Android only lets Moonfin write to the folders it owns, and this device has no removable storage. Turn on Save to Downloads folder above to keep downloads somewhere other apps can reach.';
+      'Android only lets EsPlay write to the folders it owns, and this device has no removable storage. Turn on Save to Downloads folder above to keep downloads somewhere other apps can reach.';
 
   @override
   String get saveToDownloadsFolder => 'Gem i mappen Downloads';
 
   @override
   String get downloadsVisibleToOtherApps =>
-      'Downloads/Moonfin — synlig for andre apps';
+      'Downloads/EsPlay — synlig for andre apps';
 
   @override
   String get dangerZone => 'Farezone';
@@ -4541,7 +4541,7 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get saveToDownloadsFolderDescription =>
-      'Downloadede medier vil blive gemt i Downloads/Moonfin på din enhed. Disse filer vil være synlige for andre apps, såsom dit galleri eller din musikafspiller.\n\nEksisterende downloads forbliver på deres nuværende placering.';
+      'Downloadede medier vil blive gemt i Downloads/EsPlay på din enhed. Disse filer vil være synlige for andre apps, såsom dit galleri eller din musikafspiller.\n\nEksisterende downloads forbliver på deres nuværende placering.';
 
   @override
   String get transcodingTimeRemainingUnavailable =>
@@ -4789,7 +4789,7 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get libraryVisibilityDescription =>
-      'Skift startsidesynlighed pr. bibliotek. Genstart Moonfin for at ændringerne træder i kraft.';
+      'Skift startsidesynlighed pr. bibliotek. Genstart EsPlay for at ændringerne træder i kraft.';
 
   @override
   String get showInNavigation => 'Vis i navigation';
@@ -4858,7 +4858,7 @@ class AppLocalizationsDa extends AppLocalizations {
       'Show the top half of the first row along the bottom of the media bar';
 
   @override
-  String get mediaBarModeMoonfin => 'Moonfin';
+  String get mediaBarModeMoonfin => 'EsPlay';
 
   @override
   String get mediaBarModeMakd => 'MakD';
@@ -5218,7 +5218,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get screensaverBackdropBlack => 'Black';
 
   @override
-  String get screensaverBackdropMoonfin => 'Moonfin';
+  String get screensaverBackdropMoonfin => 'EsPlay';
 
   @override
   String get screensaverBackdropCalm => 'Calm';
@@ -5233,7 +5233,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get screensaverAdditionalComponent => 'Additional Component';
 
   @override
-  String get screensaverComponentMoonfinLogo => 'Moonfin Logo';
+  String get screensaverComponentMoonfinLogo => 'EsPlay Logo';
 
   @override
   String get screensaverComponentRunner => 'Runner';
@@ -5490,11 +5490,11 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get discoverRowsDescriptionPlugin =>
-      'Aktiver de rækker, du vil se på Seerr-hovedsiden. Træk for at omarrangere. Den tilpassede rækkefølge synkroniseres med Moonbase.';
+      'Aktiver de rækker, du vil se på Seerr-hovedsiden. Træk for at omarrangere. Den tilpassede rækkefølge synkroniseres med EsPlay.';
 
   @override
   String get discoverRowsDescription =>
-      'Aktiver de rækker, du vil se på Seerr-hovedsiden. Træk for at omarrangere. Den tilpassede rækkefølge synkroniseres med Moonbase.';
+      'Aktiver de rækker, du vil se på Seerr-hovedsiden. Træk for at omarrangere. Den tilpassede rækkefølge synkroniseres med EsPlay.';
 
   @override
   String get enabled => 'Aktiveret';
@@ -5692,7 +5692,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get cancelRequest4k => 'Cancel 4K Request';
 
   @override
-  String get playInMoonfin => 'Spil i Moonfin';
+  String get playInMoonfin => 'Spil i EsPlay';
 
   @override
   String get requestedByLabel => 'Requested by';
@@ -5738,7 +5738,7 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get itemNotFoundInLibrary =>
-      'Element blev ikke fundet i dit Moonfin-bibliotek';
+      'Element blev ikke fundet i dit EsPlay-bibliotek';
 
   @override
   String get errorSearchingLibrary => 'Fejl ved søgning i bibliotek';
@@ -7733,7 +7733,7 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get adminServerRebootMessage =>
-      'Servergenstart er i gang. Genstart venligst Moonfin';
+      'Servergenstart er i gang. Genstart venligst EsPlay';
 
   @override
   String get adminActiveSessions => 'Aktive sessioner';
@@ -11470,7 +11470,7 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get settingsLibraryVisibilitySubtitle =>
-      'Skift startsidesynlighed pr. bibliotek. Genstart Moonfin for at ændringerne træder i kraft.';
+      'Skift startsidesynlighed pr. bibliotek. Genstart EsPlay for at ændringerne træder i kraft.';
 
   @override
   String get settingsMediaBarAndLocalPreviews =>
@@ -11590,7 +11590,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get settingsJoinTheDiscord => 'Deltag i Discord';
 
   @override
-  String get settingsSupportMoonfin => 'Støt Moonfin';
+  String get settingsSupportMoonfin => 'Støt EsPlay';
 
   @override
   String get settingsSupportMoonfinSubtitle =>
@@ -11611,14 +11611,14 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get settingsPrivacyPolicySubtitle =>
-      'Hvordan Moonfin håndterer dine data';
+      'Hvordan EsPlay håndterer dine data';
 
   @override
   String get settingsCheckForUpdates => 'Se efter opdateringer';
 
   @override
   String get settingsCheckForUpdatesSubtitle =>
-      'Se efter den seneste Moonfin-udgivelse';
+      'Se efter den seneste EsPlay-udgivelse';
 
   @override
   String get settingsBoth => 'Begge';
@@ -12056,7 +12056,7 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get savedThemesDescription =>
-      'Disse er temaer, der er downloadet fra Moonfin plugin til den aktuelle server. Sletning fjerner kun denne lokale kopi.';
+      'Disse er temaer, der er downloadet fra EsPlay plugin til den aktuelle server. Sletning fjerner kun denne lokale kopi.';
 
   @override
   String get savedThemesEmpty =>
@@ -12078,7 +12078,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get themeEditor => 'Tema redaktør';
 
   @override
-  String get themeEditorSubtitle => 'Åbn Moonfin Theme Editor i din browser';
+  String get themeEditorSubtitle => 'Åbn EsPlay Theme Editor i din browser';
 
   @override
   String get homeScreen => 'Startskærm';
@@ -12472,7 +12472,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get webDiagnostics => 'Webdiagnostik';
 
   @override
-  String get webDiagnosticsTitle => 'Moonfin Webdiagnostik';
+  String get webDiagnosticsTitle => 'EsPlay Webdiagnostik';
 
   @override
   String get webDiagnosticsIntro =>
@@ -12488,11 +12488,11 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get webDiagnosticsMixedContentFailureBody =>
-      'Moonfin registrerede en HTTPS-side, der forsøgte at kalde en HTTP-server-URL. Browsere blokerer denne anmodning, før den når din server.';
+      'EsPlay registrerede en HTTPS-side, der forsøgte at kalde en HTTP-server-URL. Browsere blokerer denne anmodning, før den når din server.';
 
   @override
   String get webDiagnosticsCorsFailureBody =>
-      'Moonfin har registreret en anmodningsfejl på browserniveau, der almindeligvis er forårsaget af manglende CORS eller preflight-headers på medieserveren.';
+      'EsPlay har registreret en anmodningsfejl på browserniveau, der almindeligvis er forårsaget af manglende CORS eller preflight-headers på medieserveren.';
 
   @override
   String webDiagnosticsTargetUrl(String url) {
@@ -12540,7 +12540,7 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get webDiagnosticsMixedContentFix =>
-      'Fix: server din medieserver eller proxy-slutpunkt via HTTPS, eller indlæs kun Moonfin over HTTP på betroede lokale netværk.';
+      'Fix: server din medieserver eller proxy-slutpunkt via HTTPS, eller indlæs kun EsPlay over HTTP på betroede lokale netværk.';
 
   @override
   String get webDiagnosticsNoMixedContentDetected =>
@@ -14250,7 +14250,7 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get impellerRenderingSubtitle =>
-      'Impeller er Flutters moderne GPU-renderer, der giver jævnere animationer og mindre hakken. På nogle TV-bokse og ældre GPU\'er kan den give grafikfejl eller sort video; slå den fra, hvis du oplever det. Automatisk vælger den bedste standardindstilling til din enhed. Genstart Moonfin for at anvende ændringen.';
+      'Impeller er Flutters moderne GPU-renderer, der giver jævnere animationer og mindre hakken. På nogle TV-bokse og ældre GPU\'er kan den give grafikfejl eller sort video; slå den fra, hvis du oplever det. Automatisk vælger den bedste standardindstilling til din enhed. Genstart EsPlay for at anvende ændringen.';
 
   @override
   String get impellerAuto => 'Automatisk';
@@ -14266,7 +14266,7 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get impellerRestartMessage =>
-      'Moonfin skal genstartes for at skifte gengivelsesmotor. Luk appen nu, og åbn den igen for at anvende ændringen.';
+      'EsPlay skal genstartes for at skifte gengivelsesmotor. Luk appen nu, og åbn den igen for at anvende ændringen.';
 
   @override
   String get impellerCloseNow => 'Luk appen nu';
@@ -14764,7 +14764,7 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get autoDownloadTranscodedForegroundNote =>
-      'Transcoded qualities only download while Moonfin is open. Original quality also downloads in the background.';
+      'Transcoded qualities only download while EsPlay is open. Original quality also downloads in the background.';
 
   @override
   String get autoDownloadTranscodedRunningNote =>
@@ -14772,7 +14772,7 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get autoDownloadForegroundOnly =>
-      'Downloads only while Moonfin is open';
+      'Downloads only while EsPlay is open';
 
   @override
   String get autoDownloadQualityTitle => 'Auto-download quality';
@@ -14795,7 +14795,7 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get smartDownloadsEnableDescription =>
-      'When you finish an episode on any device, Moonfin downloads the next ones. Episodes it downloads are deleted once watched.';
+      'When you finish an episode on any device, EsPlay downloads the next ones. Episodes it downloads are deleted once watched.';
 
   @override
   String get smartDownloadsKeepReady => 'Episodes to Keep Downloaded';
@@ -14869,15 +14869,15 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get autoDownloadBackgroundRefreshSubtitle =>
-      'Allow the system to check for new episodes periodically while Moonfin is closed';
+      'Allow the system to check for new episodes periodically while EsPlay is closed';
 
   @override
   String get autoDownloadBackgroundRefreshDenied =>
-      'Background App Refresh is disabled for Moonfin. Enable it in iOS Settings.';
+      'Background App Refresh is disabled for EsPlay. Enable it in iOS Settings.';
 
   @override
   String get autoDownloadBackgroundRestrictedAndroid =>
-      'Background usage is restricted for Moonfin in Android Settings.';
+      'Background usage is restricted for EsPlay in Android Settings.';
 
   @override
   String get autoDownloadCheckNow => 'Check Now';
@@ -15095,13 +15095,13 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get topShelfDescription =>
-      'What the Apple TV home screen shows above the Moonfin icon when it is selected. This setting stays on this device.';
+      'What the Apple TV home screen shows above the EsPlay icon when it is selected. This setting stays on this device.';
 
   @override
   String get topShelfLatestMedia => 'Latest media';
 
   @override
-  String get topShelfAppBanner => 'Moonfin banner';
+  String get topShelfAppBanner => 'EsPlay banner';
 
   @override
   String get keepVideoClearOfDynamicIsland =>
@@ -15181,7 +15181,7 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get settingsSyncSubtitle =>
-      'Moonbase plugin sync and customization profiles';
+      'EsPlay plugin sync and customization profiles';
 
   @override
   String get navigationBar => 'Navigation Bar';
@@ -15810,7 +15810,7 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get rommUnlinkNote =>
-      'Unlinking stops Moonfin from using your RomM key. The key stays in RomM until you remove it from your API tokens there.';
+      'Unlinking stops EsPlay from using your RomM key. The key stays in RomM until you remove it from your API tokens there.';
 
   @override
   String get rommUnlink => 'Unlink';
@@ -15824,7 +15824,7 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get rommUnreachable =>
-      'Moonfin couldn\'t reach RomM. Try again in a moment.';
+      'EsPlay couldn\'t reach RomM. Try again in a moment.';
 
   @override
   String get rommNotAvailable => 'This server has no RomM library.';

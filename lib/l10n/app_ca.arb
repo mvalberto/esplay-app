@@ -1,6 +1,6 @@
 {
     "@@locale": "ca",
-    "appTitle": "Moonfin",
+    "appTitle": "EsPlay",
     "@appTitle": {
         "description": "The application title"
     },
@@ -82,7 +82,7 @@
     "@selectServer": {
         "description": "Button to navigate back to server selection"
     },
-    "appVersionFooter": "Moonfin versió {version}",
+    "appVersionFooter": "EsPlay versió {version}",
     "@appVersionFooter": {
         "description": "App version shown in footer",
         "placeholders": {
@@ -156,7 +156,7 @@
     "@secureStorageUnavailable": {
         "description": "Dialog title when system keyring is inaccessible"
     },
-    "secureStorageUnavailableMessage": "Moonfin no ha pogut accedir al teu gestor de claus del sistema. L'inici de sessió pot continuar, però és possible que l'emmagatzematge de testimoni segur no estigui disponible fins que no es desbloquegi el gestor de claus.",
+    "secureStorageUnavailableMessage": "EsPlay no ha pogut accedir al teu gestor de claus del sistema. L'inici de sessió pot continuar, però és possible que l'emmagatzematge de testimoni segur no estigui disponible fins que no es desbloquegi el gestor de claus.",
     "@secureStorageUnavailableMessage": {
         "description": "Explanation when secure storage is not available"
     },
@@ -172,11 +172,11 @@
     "@settingsAppearanceThemeSubtitle": {
         "description": "Subtitle for the theme selection screen and theme settings entry"
     },
-    "themeMoonfin": "Moonfin",
+    "themeMoonfin": "EsPlay",
     "@themeMoonfin": {
         "description": "Display name for the Moonfin theme"
     },
-    "themeMoonfinSubtitle": "L'aspecte original de Moonfin.",
+    "themeMoonfinSubtitle": "L'aspecte original de EsPlay.",
     "@themeMoonfinSubtitle": {
         "description": "Preview description for the Moonfin theme"
     },
@@ -249,7 +249,7 @@
             }
         }
     },
-    "exitApp": "Sortir de Moonfin?",
+    "exitApp": "Sortir de EsPlay?",
     "@exitApp": {
         "description": "Title of exit confirmation dialog"
     },
@@ -3109,7 +3109,7 @@
     "@customMpvConfPath": {
         "description": "Setting for custom mpv.conf path"
     },
-    "notSetMpvConf": "No configurat. Moonfin provarà un mpv.conf predeterminat a les carpetes d'aplicacions/dades.",
+    "notSetMpvConf": "No configurat. EsPlay provarà un mpv.conf predeterminat a les carpetes d'aplicacions/dades.",
     "@notSetMpvConf": {
         "description": "Description when no custom mpv.conf is set"
     },
@@ -3336,7 +3336,7 @@
     "@saveToDownloadsFolder": {
         "description": "Setting for saving to downloads folder"
     },
-    "downloadsVisibleToOtherApps": "Baixades/Moonfin: visible per a altres aplicacions",
+    "downloadsVisibleToOtherApps": "Baixades/EsPlay: visible per a altres aplicacions",
     "@downloadsVisibleToOtherApps": {
         "description": "Description for downloads folder visibility"
     },
@@ -3372,7 +3372,7 @@
     "@saveToDownloadsFolderQuestion": {
         "description": "Dialog title for saving to downloads folder"
     },
-    "saveToDownloadsFolderDescription": "Els mitjans baixats es desaran a Baixades/Moonfin al vostre dispositiu. Aquests fitxers seran visibles per a altres aplicacions, com ara la galeria o el reproductor de música.\n\nLes baixades existents es mantindran a la seva ubicació actual.",
+    "saveToDownloadsFolderDescription": "Els mitjans baixats es desaran a Baixades/EsPlay al vostre dispositiu. Aquests fitxers seran visibles per a altres aplicacions, com ara la galeria o el reproductor de música.\n\nLes baixades existents es mantindran a la seva ubicació actual.",
     "@saveToDownloadsFolderDescription": {
         "description": "Description for saving to downloads folder"
     },
@@ -3504,7 +3504,7 @@
     "@libraryVisibility": {
         "description": "Section title for library visibility"
     },
-    "libraryVisibilityDescription": "Commuta la visibilitat de la pàgina d'inici per biblioteca. Reinicieu Moonfin perquè els canvis tinguin efecte.",
+    "libraryVisibilityDescription": "Commuta la visibilitat de la pàgina d'inici per biblioteca. Reinicieu EsPlay perquè els canvis tinguin efecte.",
     "@libraryVisibilityDescription": {
         "description": "Explanation shown on the library visibility settings screen"
     },
@@ -3549,11 +3549,11 @@
     "@mediaBarMode": {
         "description": "Setting for choosing media bar style"
     },
-    "mediaBarModeDescription": "Trieu entre Moonfin, MakD o desactiva la barra multimèdia",
+    "mediaBarModeDescription": "Trieu entre EsPlay, MakD o desactiva la barra multimèdia",
     "@mediaBarModeDescription": {
         "description": "Description for media bar style setting"
     },
-    "mediaBarModeMoonfin": "Moonfin",
+    "mediaBarModeMoonfin": "EsPlay",
     "@mediaBarModeMoonfin": {
         "description": "Media bar style option: Moonfin"
     },
@@ -3943,7 +3943,7 @@
     "@ratingSourcesDescription": {
         "description": "Description for rating sources"
     },
-    "pluginLabel": "Connector Moonbase",
+    "pluginLabel": "Connector EsPlay",
     "@pluginLabel": {
         "description": "Settings title for plugin"
     },
@@ -4076,11 +4076,11 @@
     "@discoverRows": {
         "description": "Section title for discover rows"
     },
-    "discoverRowsDescriptionPlugin": "Activeu les files que voleu veure a la pàgina principal de Seerr. Arrossegueu per reordenar. L'ordre personalitzat es sincronitza amb Moonbase.",
+    "discoverRowsDescriptionPlugin": "Activeu les files que voleu veure a la pàgina principal de Seerr. Arrossegueu per reordenar. L'ordre personalitzat es sincronitza amb EsPlay.",
     "@discoverRowsDescriptionPlugin": {
         "description": "Description for discover rows with plugin"
     },
-    "discoverRowsDescription": "Activeu les files que voleu veure a la pàgina principal de Seerr. Arrossegueu per reordenar. L'ordre personalitzat es sincronitza amb Moonbase.",
+    "discoverRowsDescription": "Activeu les files que voleu veure a la pàgina principal de Seerr. Arrossegueu per reordenar. L'ordre personalitzat es sincronitza amb EsPlay.",
     "@discoverRowsDescription": {
         "description": "Description for discover rows without plugin"
     },
@@ -4281,7 +4281,7 @@
     "@cancelRequest": {
         "description": "Button/dialog title to cancel a media request"
     },
-    "playInMoonfin": "Reprodueix a Moonfin",
+    "playInMoonfin": "Reprodueix a EsPlay",
     "@playInMoonfin": {
         "description": "Button to play available media in Moonfin"
     },
@@ -4335,7 +4335,7 @@
     "@keep": {
         "description": "Button to keep/dismiss a cancel dialog"
     },
-    "itemNotFoundInLibrary": "No s'ha trobat l'element a la vostra biblioteca de Moonfin",
+    "itemNotFoundInLibrary": "No s'ha trobat l'element a la vostra biblioteca de EsPlay",
     "@itemNotFoundInLibrary": {
         "description": "Snackbar when Seerr item cannot be found in Jellyfin"
     },
@@ -4639,7 +4639,7 @@
         }
     },
     "adminServerRebootInProgress": "Reinici del servidor en curs",
-    "adminServerRebootMessage": "S'està reiniciant el servidor, reinicieu Moonfin",
+    "adminServerRebootMessage": "S'està reiniciant el servidor, reinicieu EsPlay",
     "adminActiveSessions": "Sessions actives",
     "adminSessionsLoadFailed": "No s'han pogut carregar les sessions",
     "adminNoActiveSessions": "No hi ha sessions actives",
@@ -6527,12 +6527,12 @@
     "settingsShowGenresButtonInNavigation": "Mostra el botó de gèneres a la barra de navegació",
     "settingsShowFavoritesButtonInNavigation": "Mostra el botó de preferits a la barra de navegació",
     "settingsShowLibrariesButtonInNavigation": "Mostra el botó de biblioteques a la barra de navegació",
-    "settingsLibraryVisibilitySubtitle": "Commuta la visibilitat de la pàgina d'inici per biblioteca. Reinicieu Moonfin perquè els canvis tinguin efecte.",
+    "settingsLibraryVisibilitySubtitle": "Commuta la visibilitat de la pàgina d'inici per biblioteca. Reinicieu EsPlay perquè els canvis tinguin efecte.",
     "settingsMediaBarAndLocalPreviews": "Barra multimèdia i visualitzacions prèvies locals",
     "settingsVisualOverlays": "Superposicions visuals",
     "settingsSeasonalSurprise": "Sorpresa de temporada",
     "settingsMetadataAndRatings": "Metadades i puntuacions",
-    "settingsPluginScreenDescription": "Moonbase potencia les integracions del servidor, incloses fonts de qualificació addicionals, sol·licituds de Seerr i preferències sincronitzades.",
+    "settingsPluginScreenDescription": "EsPlay potencia les integracions del servidor, incloses fonts de qualificació addicionals, sol·licituds de Seerr i preferències sincronitzades.",
     "settingsOfflineDownloads": "Baixades fora de línia",
     "settingsHigh": "Alt",
     "settingsLow": "Baixa",
@@ -6546,14 +6546,14 @@
     "settingsJoinDiscord": "Uneix-te a Discord",
     "settingsJoinDiscordSubtitle": "Xateja amb la comunitat",
     "settingsJoinTheDiscord": "Uneix-te al Discord",
-    "settingsSupportMoonfin": "Suport Moonfin",
+    "settingsSupportMoonfin": "Suport EsPlay",
     "settingsLegal": "LEGAL",
     "settingsLicenses": "Llicències",
     "settingsOpenSourceLicenseNotices": "Avisos de llicència de codi obert",
     "settingsPrivacyPolicy": "Política de privadesa",
-    "settingsPrivacyPolicySubtitle": "Com Moonfin gestiona les vostres dades",
+    "settingsPrivacyPolicySubtitle": "Com EsPlay gestiona les vostres dades",
     "settingsCheckForUpdates": "Comproveu si hi ha actualitzacions",
-    "settingsCheckForUpdatesSubtitle": "Comproveu l'últim llançament de Moonfin",
+    "settingsCheckForUpdatesSubtitle": "Comproveu l'últim llançament de EsPlay",
     "settingsPoweredByFlutter": "Desenvolupat per Flutter",
     "settingsLicenseNoticesCount": "{count, plural, one {# avís de llicència} other {# avisos de llicència}}",
     "@settingsLicenseNoticesCount": {
@@ -7023,7 +7023,7 @@
         }
     },
     "savedThemesTitle": "Temes desats",
-    "savedThemesDescription": "Aquests són temes baixats del connector Moonfin per al servidor actual. En suprimir, només s'elimina aquesta còpia local.",
+    "savedThemesDescription": "Aquests són temes baixats del connector EsPlay per al servidor actual. En suprimir, només s'elimina aquesta còpia local.",
     "savedThemesEmpty": "No s'ha trobat cap tema desat per a aquest servidor.",
     "savedThemesCurrentThemeId": "{themeId} • Actualment actiu",
     "@savedThemesCurrentThemeId": {
@@ -7037,7 +7037,7 @@
     "savedThemesDeleteTooltip": "Suprimeix el tema desat",
     "savedThemesManageSubtitle": "Gestiona els temes de connectors baixats en aquest dispositiu",
     "themeEditor": "Editor de temes",
-    "themeEditorSubtitle": "Obriu l'editor de temes Moonfin al vostre navegador",
+    "themeEditorSubtitle": "Obriu l'editor de temes EsPlay al vostre navegador",
     "homeScreen": "Pantalla d'inici",
     "bottomBar": "Barra inferior",
     "homeRowsStyleClassic": "Clàssic",
@@ -7086,12 +7086,12 @@
     "preferSdhSubtitles": "Preferiu els subtítols SDH",
     "preferSdhSubtitlesSubtitle": "Doneu prioritat a les pistes de subtítols SDH/CC quan feu la selecció automàtica.",
     "webDiagnostics": "Diagnòstic web",
-    "webDiagnosticsTitle": "Moonfin Diagnòstic web",
+    "webDiagnosticsTitle": "EsPlay Diagnòstic web",
     "webDiagnosticsIntro": "Utilitzeu aquesta pàgina per diagnosticar problemes de connectivitat del navegador (CORS, contingut mixt i configuració de descobriment).",
     "webDiagnosticsDetectedMixedContentFailure": "S'ha detectat un error de contingut mixt",
     "webDiagnosticsDetectedCorsPreflightFailure": "S'ha detectat una fallada CORS/preflight",
-    "webDiagnosticsMixedContentFailureBody": "Moonfin ha detectat una pàgina HTTPS que intentava trucar a un URL de servidor HTTP. Els navegadors bloquegen aquesta sol·licitud abans que arribi al vostre servidor.",
-    "webDiagnosticsCorsFailureBody": "Moonfin ha detectat un error de sol·licitud a nivell de navegador que sol ser causat per la falta de capçaleres CORS o de comprovació prèvia al servidor multimèdia.",
+    "webDiagnosticsMixedContentFailureBody": "EsPlay ha detectat una pàgina HTTPS que intentava trucar a un URL de servidor HTTP. Els navegadors bloquegen aquesta sol·licitud abans que arribi al vostre servidor.",
+    "webDiagnosticsCorsFailureBody": "EsPlay ha detectat un error de sol·licitud a nivell de navegador que sol ser causat per la falta de capçaleres CORS o de comprovació prèvia al servidor multimèdia.",
     "webDiagnosticsTargetUrl": "URL de destinació: {url}",
     "@webDiagnosticsTargetUrl": {
         "description": "Target URL shown in diagnostics summary",
@@ -7121,7 +7121,7 @@
     "notConfigured": "no configurat",
     "webDiagnosticsMixedContent": "Contingut mixt",
     "webDiagnosticsMixedContentDetected": "Aquesta pàgina es carrega mitjançant HTTPS, però un o més URL configurats són HTTP. Els navegadors impedeixen que les pàgines HTTPS cridin a les API HTTP.",
-    "webDiagnosticsMixedContentFix": "Solució: doneu servei al vostre servidor multimèdia o punt final del servidor intermediari mitjançant HTTPS o carregueu Moonfin mitjançant HTTP només a xarxes locals de confiança.",
+    "webDiagnosticsMixedContentFix": "Solució: doneu servei al vostre servidor multimèdia o punt final del servidor intermediari mitjançant HTTPS o carregueu EsPlay mitjançant HTTP només a xarxes locals de confiança.",
     "webDiagnosticsNoMixedContentDetected": "No s'ha detectat cap configuració òbvia de contingut mixt des de la configuració actual del temps d'execució.",
     "webDiagnosticsCorsChecklist": "Llista de verificació CORS",
     "webDiagnosticsCorsChecklistItem1": "• Permet l'origen del navegador a Access-Control-Allow-Origin.",
@@ -7560,11 +7560,11 @@
     "@recommendationSystem": {
         "description": "Label for the Recommendation System setting"
     },
-    "recommendationSystemSubtitle": "Fes servir l'algorisme de biblioteca local Recomanacions Moonfin, el motor del servidor Recomanacions Jellyfin o les mètriques de similitud en línia de TMDb. Nota: les recomanacions en línia requereixen la integració amb Seerr.",
+    "recommendationSystemSubtitle": "Fes servir l'algorisme de biblioteca local Recomanacions EsPlay, el motor del servidor Recomanacions Jellyfin o les mètriques de similitud en línia de TMDb. Nota: les recomanacions en línia requereixen la integració amb Seerr.",
     "@recommendationSystemSubtitle": {
         "description": "Explanation under the recommendation system setting"
     },
-    "recommendationSystemMoonfin": "Recomanacions Moonfin",
+    "recommendationSystemMoonfin": "Recomanacions EsPlay",
     "@recommendationSystemMoonfin": {
         "description": "Recommendation system option: Moonfin Recommends"
     },
@@ -7647,7 +7647,7 @@
     "@recommendationsApplyParentalRatingCap": {
         "description": "Label for the toggle that controls whether similar suggestions are capped by target media parental rating"
     },
-    "recommendationsApplyParentalRatingCapSubtitle": "Limita els suggeriments de Recomanacions Moonfin segons la classificació per edats del contingut de destinació",
+    "recommendationsApplyParentalRatingCapSubtitle": "Limita els suggeriments de Recomanacions EsPlay segons la classificació per edats del contingut de destinació",
     "@recommendationsApplyParentalRatingCapSubtitle": {
         "description": "Explanation under the parental rating cap setting toggle"
     },
@@ -7671,7 +7671,7 @@
     "@customThemeTitle": {
         "description": "Title for the custom theme settings section"
     },
-    "customThemeSubtitle": "Els temes personalitzats modifiquen els elements visuals de tot Moonfin. Tria una d'aquestes opcions segons el teu estil.",
+    "customThemeSubtitle": "Els temes personalitzats modifiquen els elements visuals de tot EsPlay. Tria una d'aquestes opcions segons el teu estil.",
     "@customThemeSubtitle": {
         "description": "Description under custom themes section"
     },
@@ -7783,7 +7783,7 @@
     "@shuffleAllMusic": {
         "description": "Car browse action that shuffles the whole music library"
     },
-    "carSignInPrompt": "Inicia la sessió a Moonfin al teu telèfon",
+    "carSignInPrompt": "Inicia la sessió a EsPlay al teu telèfon",
     "@carSignInPrompt": {
         "description": "Shown in the car when no account is signed in"
     },
@@ -8927,7 +8927,7 @@
     "@impellerRendering": {
         "description": "Title of the setting that selects the Flutter rendering engine (Impeller vs. legacy)."
     },
-    "impellerRenderingSubtitle": "Impeller és el renderitzador de GPU modern de Flutter, per a animacions més fluides i menys interrupcions. En alguns descodificadors de TV i GPU antigues pot provocar defectes visuals o vídeo en negre; desactiva'l si en detectes. Automàtic tria el millor valor predeterminat per al teu dispositiu. Reinicia Moonfin per aplicar-ho.",
+    "impellerRenderingSubtitle": "Impeller és el renderitzador de GPU modern de Flutter, per a animacions més fluides i menys interrupcions. En alguns descodificadors de TV i GPU antigues pot provocar defectes visuals o vídeo en negre; desactiva'l si en detectes. Automàtic tria el millor valor predeterminat per al teu dispositiu. Reinicia EsPlay per aplicar-ho.",
     "@impellerRenderingSubtitle": {
         "description": "Explanatory description under the rendering engine setting."
     },
@@ -8938,7 +8938,7 @@
     "@impellerRestartTitle": {
         "description": "Title of the dialog shown after changing the rendering engine."
     },
-    "impellerRestartMessage": "Moonfin s'ha de reiniciar per canviar el motor de renderització. Tanca l'aplicació ara i torna a obrir-la per aplicar-ho.",
+    "impellerRestartMessage": "EsPlay s'ha de reiniciar per canviar el motor de renderització. Tanca l'aplicació ara i torna a obrir-la per aplicar-ho.",
     "@impellerRestartMessage": {
         "description": "Body of the dialog shown after changing the rendering engine."
     },
@@ -9460,7 +9460,7 @@
     "@sdCard": {
         "description": "Download location option for a removable storage volume"
     },
-    "downloadLocationLimitedByAndroid": "Android només permet que Moonfin escrigui a les carpetes que posseeix, i aquest dispositiu no té emmagatzematge extraïble. Activa la carpeta «Desar a Baixades» anterior per guardar les baixades en un lloc al qual les altres aplicacions puguin accedir.",
+    "downloadLocationLimitedByAndroid": "Android només permet que EsPlay escrigui a les carpetes que posseeix, i aquest dispositiu no té emmagatzematge extraïble. Activa la carpeta «Desar a Baixades» anterior per guardar les baixades en un lloc al qual les altres aplicacions puguin accedir.",
     "@downloadLocationLimitedByAndroid": {
         "description": "Note shown when the only download location Android allows is the default one"
     },
@@ -9622,7 +9622,7 @@
     "@scrollSensitivitySubtitle": {
         "description": "Explains the desktop scroll sensitivity slider."
     },
-    "interfaceLayoutSubtitle": "Canvia el tipus de disposicó detectada si el teu dispositiu no es reconeix correctament. Reinicia Moonfin per aplicar els canvis.",
+    "interfaceLayoutSubtitle": "Canvia el tipus de disposicó detectada si el teu dispositiu no es reconeix correctament. Reinicia EsPlay per aplicar els canvis.",
     "@interfaceLayoutSubtitle": {
         "description": "Subtitle for the interface layout setting"
     },
@@ -10272,7 +10272,7 @@
     "@loadingAnimationConfiguration": {
         "description": "Subtitle header for loading animation settings"
     },
-    "loadingAnimationDescription": "Personalitza les animacions de càrrega que utilitza Moonfin",
+    "loadingAnimationDescription": "Personalitza les animacions de càrrega que utilitza EsPlay",
     "@loadingAnimationDescription": {
         "description": "Description for loading animation customization settings"
     },
@@ -10284,7 +10284,7 @@
     "@loadingAnimationImage": {
         "description": "Title for loading animation image selection"
     },
-    "loadingAnimationImageMoonfinLogo": "Logotip de Moonfin",
+    "loadingAnimationImageMoonfinLogo": "Logotip de EsPlay",
     "@loadingAnimationImageMoonfinLogo": {
         "description": "Loading animation image option: Moonfin Logo"
     },
@@ -10304,7 +10304,7 @@
     "@loadingAnimationImageNeonfinPhases": {
         "description": "Loading animation image option: Neonfin Phases in neon colors"
     },
-    "loadingAnimationImageMoonfinPhases": "Fases de Moonfin",
+    "loadingAnimationImageMoonfinPhases": "Fases de EsPlay",
     "@loadingAnimationImageMoonfinPhases": {
         "description": "Loading animation image option: Moonfin Phases in brand gradient"
     },
@@ -10420,7 +10420,7 @@
     "@screensaverBackdropBlack": {
         "description": "Screensaver backdrop: Black"
     },
-    "screensaverBackdropMoonfin": "Moonfin",
+    "screensaverBackdropMoonfin": "EsPlay",
     "@screensaverBackdropMoonfin": {
         "description": "Screensaver backdrop: Moonfin"
     },
@@ -10440,7 +10440,7 @@
     "@screensaverAdditionalComponent": {
         "description": "Setting for screensaver additional component"
     },
-    "screensaverComponentMoonfinLogo": "Logotip de Moonfin",
+    "screensaverComponentMoonfinLogo": "Logotip de EsPlay",
     "@screensaverComponentMoonfinLogo": {
         "description": "Screensaver component: Moonfin Logo"
     },
@@ -10619,7 +10619,7 @@
             }
         }
     },
-    "autoDownloadTranscodedForegroundNote": "Les qualitats transcodificades només es baixen mentre Moonfin està obert. La qualitat original també es baixa en segon pla.",
+    "autoDownloadTranscodedForegroundNote": "Les qualitats transcodificades només es baixen mentre EsPlay està obert. La qualitat original també es baixa en segon pla.",
     "@autoDownloadTranscodedForegroundNote": {
         "description": "Shown under transcoded options when choosing the quality of an auto-download subscription"
     },
@@ -10627,7 +10627,7 @@
     "@autoDownloadTranscodedRunningNote": {
         "description": "Shown under a running transcoded download that a subscription queued"
     },
-    "autoDownloadForegroundOnly": "Només es baixa mentre Moonfin està obert",
+    "autoDownloadForegroundOnly": "Només es baixa mentre EsPlay està obert",
     "@autoDownloadForegroundOnly": {
         "description": "Short note next to a followed series in a transcoded quality"
     },
@@ -10697,15 +10697,15 @@
     "@autoDownloadBackgroundRefresh": {
         "description": "Setting that lets the system wake the app to check for new episodes"
     },
-    "autoDownloadBackgroundRefreshSubtitle": "Permet que el sistema comprovi periòdicament si hi ha episodis nous mentre Moonfin està tancat",
+    "autoDownloadBackgroundRefreshSubtitle": "Permet que el sistema comprovi periòdicament si hi ha episodis nous mentre EsPlay està tancat",
     "@autoDownloadBackgroundRefreshSubtitle": {
         "description": "Explains the background refresh setting"
     },
-    "autoDownloadBackgroundRefreshDenied": "Background App Refresh està desactivat per a Moonfin. Activa'l a iOS Settings.",
+    "autoDownloadBackgroundRefreshDenied": "Background App Refresh està desactivat per a EsPlay. Activa'l a iOS Settings.",
     "@autoDownloadBackgroundRefreshDenied": {
         "description": "Shown when iOS forbids background refresh for the app"
     },
-    "autoDownloadBackgroundRestrictedAndroid": "L'ús en segon pla està restringit per a Moonfin a Android Settings.",
+    "autoDownloadBackgroundRestrictedAndroid": "L'ús en segon pla està restringit per a EsPlay a Android Settings.",
     "@autoDownloadBackgroundRestrictedAndroid": {
         "description": "Shown when Android restricts the app from running in the background"
     },
@@ -11204,7 +11204,7 @@
     "@shortcutToggleFullscreen": {
         "description": "F11 and Alt+Enter anywhere, F in the player"
     },
-    "shortcutQuit": "Surt de Moonfin",
+    "shortcutQuit": "Surt de EsPlay",
     "@shortcutQuit": {
         "description": "What Ctrl+Q does on desktop"
     },
@@ -13379,7 +13379,7 @@
     "@topShelf": {
         "description": "Apple TV settings label for what the tvOS home screen shows above the Moonfin icon. Top Shelf is Apple's name for that area"
     },
-    "topShelfDescription": "El que mostra la pantalla d'inici de l'Apple TV a sobre de la icona de Moonfin quan està seleccionada. Aquesta configuració només es desa en aquest dispositiu.",
+    "topShelfDescription": "El que mostra la pantalla d'inici de l'Apple TV a sobre de la icona de EsPlay quan està seleccionada. Aquesta configuració només es desa en aquest dispositiu.",
     "@topShelfDescription": {
         "description": "Apple TV settings subtitle for the Top Shelf option"
     },
@@ -13387,7 +13387,7 @@
     "@topShelfLatestMedia": {
         "description": "Top Shelf option that shows a carousel of the newest items from the home screen's Latest rows"
     },
-    "topShelfAppBanner": "Bàner de Moonfin",
+    "topShelfAppBanner": "Bàner de EsPlay",
     "@topShelfAppBanner": {
         "description": "Top Shelf option that shows only the static Moonfin logo banner, nothing from the library"
     },
@@ -13552,7 +13552,7 @@
     "@settingsSync": {
         "description": "Settings screen for syncing settings through the Moonbase plugin"
     },
-    "settingsSyncSubtitle": "Sincronització amb el connector Moonbase i perfils de personalització",
+    "settingsSyncSubtitle": "Sincronització amb el connector EsPlay i perfils de personalització",
     "@settingsSyncSubtitle": {
         "description": "Subtitle for the Settings Sync entry"
     },
@@ -14731,7 +14731,7 @@
     "@searchMusic": {
         "description": "Placeholder and label for the search control in a music library"
     },
-    "smartDownloadsEnableDescription": "Quan acabes un episodi en qualsevol dispositiu, Moonfin baixa els següents. Els episodis que baixa s'eliminen un cop vistos.",
+    "smartDownloadsEnableDescription": "Quan acabes un episodi en qualsevol dispositiu, EsPlay baixa els següents. Els episodis que baixa s'eliminen un cop vistos.",
     "@smartDownloadsEnableDescription": {
         "description": "Explains the smart downloads switch, including that watched episodes are deleted"
     },
@@ -14819,7 +14819,7 @@
     "@bookReadingUnavailableTitle": {
         "description": "Title of the dialog shown on Apple TV when the user tries to open a book or comic, which tvOS has no reader for"
     },
-    "bookReadingUnavailableMessage": "Obre'l al Moonfin en un telèfon, una tauleta o un ordinador per llegir-lo. Els audiollibres sí que es poden reproduir aquí.",
+    "bookReadingUnavailableMessage": "Obre'l al EsPlay en un telèfon, una tauleta o un ordinador per llegir-lo. Els audiollibres sí que es poden reproduir aquí.",
     "@bookReadingUnavailableMessage": {
         "description": "Body of the dialog shown on Apple TV when the user tries to open a book or comic"
     },
@@ -15482,7 +15482,7 @@
     "@rommLinked": {
         "description": "Shown when the user's RomM account is linked and the server sent no user name"
     },
-    "rommUnlinkNote": "En desenllaçar-lo, Moonfin deixa de fer servir la teva clau de RomM. La clau es manté a RomM fins que l'eliminis dels testimonis de l'API de RomM.",
+    "rommUnlinkNote": "En desenllaçar-lo, EsPlay deixa de fer servir la teva clau de RomM. La clau es manté a RomM fins que l'eliminis dels testimonis de l'API de RomM.",
     "@rommUnlinkNote": {
         "description": "Explains what Unlink does on the RomM account screen"
     },
@@ -15498,7 +15498,7 @@
     "@rommLinkDenied": {
         "description": "Error when the user declined the RomM link request"
     },
-    "rommUnreachable": "Moonfin no ha pogut connectar amb RomM. Torna-ho a provar d'aquí a un moment.",
+    "rommUnreachable": "EsPlay no ha pogut connectar amb RomM. Torna-ho a provar d'aquí a un moment.",
     "@rommUnreachable": {
         "description": "Error when the server couldn't reach RomM while linking"
     },
@@ -15547,7 +15547,7 @@
     "@keyboardStyle": {
         "description": "Label for the setting that picks how the on-screen keyboard looks, or whether the TV's own keyboard is used"
     },
-    "keyboardStyleDescription": "«Natiu» fa servir el teclat de la teva TV. «Clàssic» és el teclat original de Moonfin. «Glass» és un panell esmerilat amb tecles més grans. «Acoblat» ocupa la part inferior de la pantalla i mostra el que escrius a sobre de les tecles.",
+    "keyboardStyleDescription": "«Natiu» fa servir el teclat de la teva TV. «Clàssic» és el teclat original de EsPlay. «Glass» és un panell esmerilat amb tecles més grans. «Acoblat» ocupa la part inferior de la pantalla i mostra el que escrius a sobre de les tecles.",
     "@keyboardStyleDescription": {
         "description": "Explanation under the keyboard style setting"
     },

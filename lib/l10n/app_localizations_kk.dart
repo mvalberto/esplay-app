@@ -10,7 +10,7 @@ class AppLocalizationsKk extends AppLocalizations {
   AppLocalizationsKk([String locale = 'kk']) : super(locale);
 
   @override
-  String get appTitle => 'Moonfin';
+  String get appTitle => 'EsPlay';
 
   @override
   String get animeMarkerFiller => 'Filler';
@@ -147,7 +147,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String appVersionFooter(String version) {
-    return 'Moonfin нұсқасы $version';
+    return 'EsPlay нұсқасы $version';
   }
 
   @override
@@ -199,7 +199,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get secureStorageUnavailableMessage =>
-      'Moonfin жүйе кілттеріне қол жеткізе алмады. Жүйеге кіруді жалғастыруға болады, бірақ кілт сақинасының құлпы ашылғанша қауіпсіз таңбалауыш қоймасы қолжетімсіз болуы мүмкін.';
+      'EsPlay жүйе кілттеріне қол жеткізе алмады. Жүйеге кіруді жалғастыруға болады, бірақ кілт сақинасының құлпы ашылғанша қауіпсіз таңбалауыш қоймасы қолжетімсіз болуы мүмкін.';
 
   @override
   String get ok => 'Жарайды';
@@ -212,7 +212,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get detailScreenStyleSubtitle =>
-      '«Классикалық» — Moonfin бағдарламасының бастапқы, ортаға тураланған қалыбы. «Заманауи» — бейімделгіш кинематографиялық қалып.';
+      '«Классикалық» — EsPlay бағдарламасының бастапқы, ортаға тураланған қалыбы. «Заманауи» — бейімделгіш кинематографиялық қалып.';
 
   @override
   String get detailScreenStyleMoonfin => 'Классикалық';
@@ -452,10 +452,10 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get recommendationSystemSubtitle =>
-      'Moonfin ұсынады жергілікті кітапхана алгоритмін немесе TMDb ұсынатын желілік ұқсастық метрикаларын пайдаланыңыз. Ескертпе: желілік ұсыныстар Seerr интеграциясын талап етеді.';
+      'EsPlay ұсынады жергілікті кітапхана алгоритмін немесе TMDb ұсынатын желілік ұқсастық метрикаларын пайдаланыңыз. Ескертпе: желілік ұсыныстар Seerr интеграциясын талап етеді.';
 
   @override
-  String get recommendationSystemMoonfin => 'Moonfin ұсынады';
+  String get recommendationSystemMoonfin => 'EsPlay ұсынады';
 
   @override
   String get recommendationSystemJellyfin => 'Jellyfin Recommends';
@@ -469,7 +469,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get recommendationsApplyParentalRatingCapSubtitle =>
-      'Moonfin ұсынады тізіміндегі ұсыныстарды таңдалған медиафайлдың жас шектеуі бойынша шектеу';
+      'EsPlay ұсынады тізіміндегі ұсыныстарды таңдалған медиафайлдың жас шектеуі бойынша шектеу';
 
   @override
   String get interfaceStyle => 'Интерфейс стилі';
@@ -492,7 +492,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get interfaceLayoutSubtitle =>
-      'Override the detected layout when this device is read wrong. Restart Moonfin for changes to take effect.';
+      'Override the detected layout when this device is read wrong. Restart EsPlay for changes to take effect.';
 
   @override
   String get interfaceLayoutAutomatic => 'Automatic';
@@ -570,21 +570,21 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get settingsAppearanceThemeSubtitle =>
-      'Қолданбаны қайта іске қоспай, Moonfin және Neon Pulse арасында ауысыңыз';
+      'Қолданбаны қайта іске қоспай, EsPlay және Neon Pulse арасында ауысыңыз';
 
   @override
   String get customThemeTitle => 'Жеке тақырып';
 
   @override
   String get customThemeSubtitle =>
-      'Жеке тақырыптар Moonfin бойынша визуалды элементтерді өзгертеді. Өз стиліңізге сай нұсқаны таңдаңыз.';
+      'Жеке тақырыптар EsPlay бойынша визуалды элементтерді өзгертеді. Өз стиліңізге сай нұсқаны таңдаңыз.';
 
   @override
   String get keyboardStyle => 'Keyboard Style';
 
   @override
   String get keyboardStyleDescription =>
-      'Native uses your TV\'s own keyboard. Classic is the original Moonfin keyboard. Glass is a frosted panel with larger keys. Docked fills the bottom of the screen and shows what you type above the keys.';
+      'Native uses your TV\'s own keyboard. Classic is the original EsPlay keyboard. Glass is a frosted panel with larger keys. Docked fills the bottom of the screen and shows what you type above the keys.';
 
   @override
   String get keyboardStyleNative => 'Native';
@@ -618,10 +618,10 @@ class AppLocalizationsKk extends AppLocalizations {
       'Let a connected game controller move focus and select items';
 
   @override
-  String get themeMoonfin => 'Moonfin';
+  String get themeMoonfin => 'EsPlay';
 
   @override
-  String get themeMoonfinSubtitle => 'Ағымдағы Moonfin келбеті бәріңізге ұнады';
+  String get themeMoonfinSubtitle => 'Ағымдағы EsPlay келбеті бәріңізге ұнады';
 
   @override
   String get themeNeonPulse => 'Неон импульсі';
@@ -718,7 +718,7 @@ class AppLocalizationsKk extends AppLocalizations {
   }
 
   @override
-  String get exitApp => 'Moonfin шығу керек пе?';
+  String get exitApp => 'EsPlay шығу керек пе?';
 
   @override
   String get exitAppConfirmation => 'Шығыңыз келетініне сенімдісіз бе?';
@@ -1900,7 +1900,7 @@ class AppLocalizationsKk extends AppLocalizations {
   String get shuffleAllMusic => 'Барлық музыканы араластыру';
 
   @override
-  String get carSignInPrompt => 'Телефоныңызда Moonfin-ге кіріңіз';
+  String get carSignInPrompt => 'Телефоныңызда EsPlay-ге кіріңіз';
 
   @override
   String get carServerUnreachable => 'Серверге қосылу мүмкін емес';
@@ -2182,7 +2182,7 @@ class AppLocalizationsKk extends AppLocalizations {
   String get shortcutToggleFullscreen => 'Fullscreen on or off';
 
   @override
-  String get shortcutQuit => 'Quit Moonfin';
+  String get shortcutQuit => 'Quit EsPlay';
 
   @override
   String get shortcutPlayPause => 'Play or pause';
@@ -2353,7 +2353,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get bookReadingUnavailableMessage =>
-      'Open it in Moonfin on a phone, tablet or computer to read it. Audiobooks still play here.';
+      'Open it in EsPlay on a phone, tablet or computer to read it. Audiobooks still play here.';
 
   @override
   String formatCannotRenderInApp(String extension) {
@@ -3184,7 +3184,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get loadingAnimationDescription =>
-      'Customize the loading animations used throughout Moonfin';
+      'Customize the loading animations used throughout EsPlay';
 
   @override
   String get loadingAnimationConfiguration => 'Loading Animation Configuration';
@@ -3193,7 +3193,7 @@ class AppLocalizationsKk extends AppLocalizations {
   String get loadingAnimationImage => 'Image';
 
   @override
-  String get loadingAnimationImageMoonfinLogo => 'Moonfin Logo';
+  String get loadingAnimationImageMoonfinLogo => 'EsPlay Logo';
 
   @override
   String get loadingAnimationImageSpinner => 'Spinner';
@@ -3205,7 +3205,7 @@ class AppLocalizationsKk extends AppLocalizations {
   String get loadingAnimationImageMoonPhases => 'Moon Phases';
 
   @override
-  String get loadingAnimationImageMoonfinPhases => 'Moonfin Phases';
+  String get loadingAnimationImageMoonfinPhases => 'EsPlay Phases';
 
   @override
   String get loadingAnimationImageNeonfinPhases => 'Neonfin Phases';
@@ -4211,7 +4211,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get notSetMpvConf =>
-      'Орнатылмаған. Moonfin қолданба/деректер қалталарында әдепкі mpv.conf файлын қолданып көреді.';
+      'Орнатылмаған. EsPlay қолданба/деректер қалталарында әдепкі mpv.conf файлын қолданып көреді.';
 
   @override
   String get selectMpvConf => 'mpv.conf таңдаңыз';
@@ -4511,14 +4511,14 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get downloadLocationLimitedByAndroid =>
-      'Android only lets Moonfin write to the folders it owns, and this device has no removable storage. Turn on Save to Downloads folder above to keep downloads somewhere other apps can reach.';
+      'Android only lets EsPlay write to the folders it owns, and this device has no removable storage. Turn on Save to Downloads folder above to keep downloads somewhere other apps can reach.';
 
   @override
   String get saveToDownloadsFolder => 'Жүктеулер қалтасына сақтаңыз';
 
   @override
   String get downloadsVisibleToOtherApps =>
-      'Жүктеулер/Moonfin — басқа қолданбаларға көрінеді';
+      'Жүктеулер/EsPlay — басқа қолданбаларға көрінеді';
 
   @override
   String get dangerZone => 'Қауіпті аймақ';
@@ -4549,7 +4549,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get saveToDownloadsFolderDescription =>
-      'Жүктеп алынған медиа құрылғыңыздағы Жүктеулер/Moonfin ішіне сақталады. Бұл файлдар галерея немесе музыка ойнатқышы сияқты басқа қолданбаларға көрінеді.\n\nБар жүктеп алынған файлдар ағымдағы орнында қалады.';
+      'Жүктеп алынған медиа құрылғыңыздағы Жүктеулер/EsPlay ішіне сақталады. Бұл файлдар галерея немесе музыка ойнатқышы сияқты басқа қолданбаларға көрінеді.\n\nБар жүктеп алынған файлдар ағымдағы орнында қалады.';
 
   @override
   String get transcodingTimeRemainingUnavailable =>
@@ -4799,7 +4799,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get libraryVisibilityDescription =>
-      'Әрбір кітапхананың басты бетінің көріну мүмкіндігін ауыстырып-қосқыш. Өзгерістердің күшіне енуі үшін Moonfin қолданбасын қайта іске қосыңыз.';
+      'Әрбір кітапхананың басты бетінің көріну мүмкіндігін ауыстырып-қосқыш. Өзгерістердің күшіне енуі үшін EsPlay қолданбасын қайта іске қосыңыз.';
 
   @override
   String get showInNavigation => 'Навигацияда көрсету';
@@ -4868,7 +4868,7 @@ class AppLocalizationsKk extends AppLocalizations {
       'Show the top half of the first row along the bottom of the media bar';
 
   @override
-  String get mediaBarModeMoonfin => 'Moonfin';
+  String get mediaBarModeMoonfin => 'EsPlay';
 
   @override
   String get mediaBarModeMakd => 'МакД';
@@ -5231,7 +5231,7 @@ class AppLocalizationsKk extends AppLocalizations {
   String get screensaverBackdropBlack => 'Black';
 
   @override
-  String get screensaverBackdropMoonfin => 'Moonfin';
+  String get screensaverBackdropMoonfin => 'EsPlay';
 
   @override
   String get screensaverBackdropCalm => 'Calm';
@@ -5246,7 +5246,7 @@ class AppLocalizationsKk extends AppLocalizations {
   String get screensaverAdditionalComponent => 'Additional Component';
 
   @override
-  String get screensaverComponentMoonfinLogo => 'Moonfin Logo';
+  String get screensaverComponentMoonfinLogo => 'EsPlay Logo';
 
   @override
   String get screensaverComponentRunner => 'Runner';
@@ -5509,11 +5509,11 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get discoverRowsDescriptionPlugin =>
-      'Seerr негізгі бетінде көрсетілетін жолдарды қосыңыз. Ретін өзгерту үшін сүйреңіз. Жеке рет Moonbase-пен синхрондалады.';
+      'Seerr негізгі бетінде көрсетілетін жолдарды қосыңыз. Ретін өзгерту үшін сүйреңіз. Жеке рет EsPlay-пен синхрондалады.';
 
   @override
   String get discoverRowsDescription =>
-      'Seerr негізгі бетінде көрсетілетін жолдарды қосыңыз. Ретін өзгерту үшін сүйреңіз. Жеке рет Moonbase-пен синхрондалады.';
+      'Seerr негізгі бетінде көрсетілетін жолдарды қосыңыз. Ретін өзгерту үшін сүйреңіз. Жеке рет EsPlay-пен синхрондалады.';
 
   @override
   String get enabled => 'Қосылған';
@@ -5709,7 +5709,7 @@ class AppLocalizationsKk extends AppLocalizations {
   String get cancelRequest4k => 'Cancel 4K Request';
 
   @override
-  String get playInMoonfin => 'Moonfin ойынында ойнаңыз';
+  String get playInMoonfin => 'EsPlay ойынында ойнаңыз';
 
   @override
   String get requestedByLabel => 'Requested by';
@@ -5754,8 +5754,7 @@ class AppLocalizationsKk extends AppLocalizations {
   String get keep => 'Сақтау';
 
   @override
-  String get itemNotFoundInLibrary =>
-      'Элемент Moonfin кітапханасынан табылмады';
+  String get itemNotFoundInLibrary => 'Элемент EsPlay кітапханасынан табылмады';
 
   @override
   String get errorSearchingLibrary => 'Кітапхананы іздеу қатесі';
@@ -7750,7 +7749,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get adminServerRebootMessage =>
-      'Сервер қайта жүктелуде, Moonfin қайта іске қосыңыз';
+      'Сервер қайта жүктелуде, EsPlay қайта іске қосыңыз';
 
   @override
   String get adminActiveSessions => 'Белсенді сессиялар';
@@ -11507,7 +11506,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get settingsLibraryVisibilitySubtitle =>
-      'Әрбір кітапхананың басты бетінің көріну мүмкіндігін ауыстырып-қосқыш. Өзгерістердің күшіне енуі үшін Moonfin қолданбасын қайта іске қосыңыз.';
+      'Әрбір кітапхананың басты бетінің көріну мүмкіндігін ауыстырып-қосқыш. Өзгерістердің күшіне енуі үшін EsPlay қолданбасын қайта іске қосыңыз.';
 
   @override
   String get settingsMediaBarAndLocalPreviews =>
@@ -11629,7 +11628,7 @@ class AppLocalizationsKk extends AppLocalizations {
   String get settingsJoinTheDiscord => 'Discord қосылыңыз';
 
   @override
-  String get settingsSupportMoonfin => 'Қолдау Moonfin';
+  String get settingsSupportMoonfin => 'Қолдау EsPlay';
 
   @override
   String get settingsSupportMoonfinSubtitle =>
@@ -11650,14 +11649,14 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get settingsPrivacyPolicySubtitle =>
-      'Moonfin деректеріңізді қалай өңдейді';
+      'EsPlay деректеріңізді қалай өңдейді';
 
   @override
   String get settingsCheckForUpdates => 'Жаңартуларды тексеріңіз';
 
   @override
   String get settingsCheckForUpdatesSubtitle =>
-      'Соңғы Moonfin шығарылымын тексеріңіз';
+      'Соңғы EsPlay шығарылымын тексеріңіз';
 
   @override
   String get settingsBoth => 'Екеуі де';
@@ -12101,7 +12100,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get savedThemesDescription =>
-      'Бұл — ағымдағы сервер үшін Moonfin плагинінен жүктелген тақырыптар. Жою тек осы жергілікті көшірмені өшіреді.';
+      'Бұл — ағымдағы сервер үшін EsPlay плагинінен жүктелген тақырыптар. Жою тек осы жергілікті көшірмені өшіреді.';
 
   @override
   String get savedThemesEmpty =>
@@ -12123,7 +12122,7 @@ class AppLocalizationsKk extends AppLocalizations {
   String get themeEditor => 'Тақырып өңдегіші';
 
   @override
-  String get themeEditorSubtitle => 'Браузерде Moonfin тақырып өңдегішін ашу';
+  String get themeEditorSubtitle => 'Браузерде EsPlay тақырып өңдегішін ашу';
 
   @override
   String get homeScreen => 'Негізгі экран';
@@ -12518,7 +12517,7 @@ class AppLocalizationsKk extends AppLocalizations {
   String get webDiagnostics => 'Веб-диагностика';
 
   @override
-  String get webDiagnosticsTitle => 'Moonfin веб-диагностикасы';
+  String get webDiagnosticsTitle => 'EsPlay веб-диагностикасы';
 
   @override
   String get webDiagnosticsIntro =>
@@ -12534,11 +12533,11 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get webDiagnosticsMixedContentFailureBody =>
-      'Moonfin HTTPS бетінің HTTP сервер URL-іне қоңырау шалу әрекетін анықтады. Браузерлер бұл сұранысты серверіңізге жетпей тұрып бұғаттайды.';
+      'EsPlay HTTPS бетінің HTTP сервер URL-іне қоңырау шалу әрекетін анықтады. Браузерлер бұл сұранысты серверіңізге жетпей тұрып бұғаттайды.';
 
   @override
   String get webDiagnosticsCorsFailureBody =>
-      'Moonfin браузер деңгейіндегі сұраныс қатесін анықтады, ол әдетте медиасервердегі CORS немесе preflight тақырыптарының болмауынан туындайды.';
+      'EsPlay браузер деңгейіндегі сұраныс қатесін анықтады, ол әдетте медиасервердегі CORS немесе preflight тақырыптарының болмауынан туындайды.';
 
   @override
   String webDiagnosticsTargetUrl(String url) {
@@ -12587,7 +12586,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get webDiagnosticsMixedContentFix =>
-      'Түзету: медиасерверіңізді немесе прокси нүктеңізді HTTPS арқылы ұсыныңыз, немесе Moonfin-ді HTTP арқылы тек сенімді жергілікті желілерде жүктеңіз.';
+      'Түзету: медиасерверіңізді немесе прокси нүктеңізді HTTPS арқылы ұсыныңыз, немесе EsPlay-ді HTTP арқылы тек сенімді жергілікті желілерде жүктеңіз.';
 
   @override
   String get webDiagnosticsNoMixedContentDetected =>
@@ -14296,7 +14295,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get impellerRenderingSubtitle =>
-      'Impeller — плавнырақ анимациялар мен азырақ кідірістер үшін Flutter-дің заманауи GPU рендерері. Кейбір ТД-приставкаларда және ескі GPU-ларда ол ақаулар немесе қара бейне тудыруы мүмкін; мұны көрсеңіз, өшіріңіз. «Автоматты» құрылғыңызға ең қолайлы әдепкіні таңдайды. Қолдану үшін Moonfin-ді қайта іске қосыңыз.';
+      'Impeller — плавнырақ анимациялар мен азырақ кідірістер үшін Flutter-дің заманауи GPU рендерері. Кейбір ТД-приставкаларда және ескі GPU-ларда ол ақаулар немесе қара бейне тудыруы мүмкін; мұны көрсеңіз, өшіріңіз. «Автоматты» құрылғыңызға ең қолайлы әдепкіні таңдайды. Қолдану үшін EsPlay-ді қайта іске қосыңыз.';
 
   @override
   String get impellerAuto => 'Автоматты';
@@ -14312,7 +14311,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get impellerRestartMessage =>
-      'Рендеринг қозғалтқышын өзгерту үшін Moonfin-ді қайта іске қосу қажет. Қолдану үшін қолданбаны қазір жауып, содан кейін қайта ашыңыз.';
+      'Рендеринг қозғалтқышын өзгерту үшін EsPlay-ді қайта іске қосу қажет. Қолдану үшін қолданбаны қазір жауып, содан кейін қайта ашыңыз.';
 
   @override
   String get impellerCloseNow => 'Қолданбаны қазір жабу';
@@ -14810,7 +14809,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get autoDownloadTranscodedForegroundNote =>
-      'Transcoded qualities only download while Moonfin is open. Original quality also downloads in the background.';
+      'Transcoded qualities only download while EsPlay is open. Original quality also downloads in the background.';
 
   @override
   String get autoDownloadTranscodedRunningNote =>
@@ -14818,7 +14817,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get autoDownloadForegroundOnly =>
-      'Downloads only while Moonfin is open';
+      'Downloads only while EsPlay is open';
 
   @override
   String get autoDownloadQualityTitle => 'Auto-download quality';
@@ -14841,7 +14840,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get smartDownloadsEnableDescription =>
-      'When you finish an episode on any device, Moonfin downloads the next ones. Episodes it downloads are deleted once watched.';
+      'When you finish an episode on any device, EsPlay downloads the next ones. Episodes it downloads are deleted once watched.';
 
   @override
   String get smartDownloadsKeepReady => 'Episodes to Keep Downloaded';
@@ -14915,15 +14914,15 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get autoDownloadBackgroundRefreshSubtitle =>
-      'Allow the system to check for new episodes periodically while Moonfin is closed';
+      'Allow the system to check for new episodes periodically while EsPlay is closed';
 
   @override
   String get autoDownloadBackgroundRefreshDenied =>
-      'Background App Refresh is disabled for Moonfin. Enable it in iOS Settings.';
+      'Background App Refresh is disabled for EsPlay. Enable it in iOS Settings.';
 
   @override
   String get autoDownloadBackgroundRestrictedAndroid =>
-      'Background usage is restricted for Moonfin in Android Settings.';
+      'Background usage is restricted for EsPlay in Android Settings.';
 
   @override
   String get autoDownloadCheckNow => 'Check Now';
@@ -15141,13 +15140,13 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get topShelfDescription =>
-      'What the Apple TV home screen shows above the Moonfin icon when it is selected. This setting stays on this device.';
+      'What the Apple TV home screen shows above the EsPlay icon when it is selected. This setting stays on this device.';
 
   @override
   String get topShelfLatestMedia => 'Latest media';
 
   @override
-  String get topShelfAppBanner => 'Moonfin banner';
+  String get topShelfAppBanner => 'EsPlay banner';
 
   @override
   String get keepVideoClearOfDynamicIsland =>
@@ -15227,7 +15226,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get settingsSyncSubtitle =>
-      'Moonbase plugin sync and customization profiles';
+      'EsPlay plugin sync and customization profiles';
 
   @override
   String get navigationBar => 'Navigation Bar';
@@ -15856,7 +15855,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get rommUnlinkNote =>
-      'Unlinking stops Moonfin from using your RomM key. The key stays in RomM until you remove it from your API tokens there.';
+      'Unlinking stops EsPlay from using your RomM key. The key stays in RomM until you remove it from your API tokens there.';
 
   @override
   String get rommUnlink => 'Unlink';
@@ -15870,7 +15869,7 @@ class AppLocalizationsKk extends AppLocalizations {
 
   @override
   String get rommUnreachable =>
-      'Moonfin couldn\'t reach RomM. Try again in a moment.';
+      'EsPlay couldn\'t reach RomM. Try again in a moment.';
 
   @override
   String get rommNotAvailable => 'This server has no RomM library.';

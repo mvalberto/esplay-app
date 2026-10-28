@@ -1,6 +1,6 @@
 {
     "@@locale": "he",
-    "appTitle": "Moonfin",
+    "appTitle": "EsPlay",
     "@appTitle": {
         "description": "The application title"
     },
@@ -82,7 +82,7 @@
     "@selectServer": {
         "description": "Button to navigate back to server selection"
     },
-    "appVersionFooter": "Moonfin גרסה {version}",
+    "appVersionFooter": "EsPlay גרסה {version}",
     "@appVersionFooter": {
         "description": "App version shown in footer",
         "placeholders": {
@@ -156,7 +156,7 @@
     "@secureStorageUnavailable": {
         "description": "Dialog title when system keyring is inaccessible"
     },
-    "secureStorageUnavailableMessage": "Moonfin לא הצליח לגשת למחזיק המפתחות של המערכת שלך. הכניסה יכולה להמשיך, אך ייתכן שאחסון אסימונים מאובטח לא יהיה זמין עד לביטול הנעילה של מחזיק המפתחות.",
+    "secureStorageUnavailableMessage": "EsPlay לא הצליח לגשת למחזיק המפתחות של המערכת שלך. הכניסה יכולה להמשיך, אך ייתכן שאחסון אסימונים מאובטח לא יהיה זמין עד לביטול הנעילה של מחזיק המפתחות.",
     "@secureStorageUnavailableMessage": {
         "description": "Explanation when secure storage is not available"
     },
@@ -168,15 +168,15 @@
     "@settingsAppearanceTheme": {
         "description": "Title for the theme selection screen and theme settings entry"
     },
-    "settingsAppearanceThemeSubtitle": "מעבר בין Moonfin ל-Neon Pulse מבלי להפעיל מחדש את האפליקציה",
+    "settingsAppearanceThemeSubtitle": "מעבר בין EsPlay ל-Neon Pulse מבלי להפעיל מחדש את האפליקציה",
     "@settingsAppearanceThemeSubtitle": {
         "description": "Subtitle for the theme selection screen and theme settings entry"
     },
-    "themeMoonfin": "Moonfin",
+    "themeMoonfin": "EsPlay",
     "@themeMoonfin": {
         "description": "Display name for the Moonfin theme"
     },
-    "themeMoonfinSubtitle": "מראה Moonfin נוכחי שכולכם למדתם לאהוב",
+    "themeMoonfinSubtitle": "מראה EsPlay נוכחי שכולכם למדתם לאהוב",
     "@themeMoonfinSubtitle": {
         "description": "Preview description for the Moonfin theme"
     },
@@ -249,7 +249,7 @@
             }
         }
     },
-    "exitApp": "לצאת מ- Moonfin?",
+    "exitApp": "לצאת מ- EsPlay?",
     "@exitApp": {
         "description": "Title of exit confirmation dialog"
     },
@@ -3109,7 +3109,7 @@
     "@customMpvConfPath": {
         "description": "Setting for custom mpv.conf path"
     },
-    "notSetMpvConf": "לא מוגדר. Moonfin ינסה ברירת מחדל mpv.conf בתיקיות אפליקציות/נתונים.",
+    "notSetMpvConf": "לא מוגדר. EsPlay ינסה ברירת מחדל mpv.conf בתיקיות אפליקציות/נתונים.",
     "@notSetMpvConf": {
         "description": "Description when no custom mpv.conf is set"
     },
@@ -3336,7 +3336,7 @@
     "@saveToDownloadsFolder": {
         "description": "Setting for saving to downloads folder"
     },
-    "downloadsVisibleToOtherApps": "הורדות/Moonfin — גלויות לאפליקציות אחרות",
+    "downloadsVisibleToOtherApps": "הורדות/EsPlay — גלויות לאפליקציות אחרות",
     "@downloadsVisibleToOtherApps": {
         "description": "Description for downloads folder visibility"
     },
@@ -3372,7 +3372,7 @@
     "@saveToDownloadsFolderQuestion": {
         "description": "Dialog title for saving to downloads folder"
     },
-    "saveToDownloadsFolderDescription": "מדיה שהורדת תישמר להורדות/Moonfin במכשיר שלך. קבצים אלה יהיו גלויים לאפליקציות אחרות כגון הגלריה או נגן המוזיקה שלך.\n\nהורדות קיימות יישארו במיקומן הנוכחי.",
+    "saveToDownloadsFolderDescription": "מדיה שהורדת תישמר להורדות/EsPlay במכשיר שלך. קבצים אלה יהיו גלויים לאפליקציות אחרות כגון הגלריה או נגן המוזיקה שלך.\n\nהורדות קיימות יישארו במיקומן הנוכחי.",
     "@saveToDownloadsFolderDescription": {
         "description": "Description for saving to downloads folder"
     },
@@ -3504,7 +3504,7 @@
     "@libraryVisibility": {
         "description": "Section title for library visibility"
     },
-    "libraryVisibilityDescription": "החלף את נראות דף הבית לכל ספריה. הפעל מחדש את Moonfin כדי שהשינויים ייכנסו לתוקף.",
+    "libraryVisibilityDescription": "החלף את נראות דף הבית לכל ספריה. הפעל מחדש את EsPlay כדי שהשינויים ייכנסו לתוקף.",
     "@libraryVisibilityDescription": {
         "description": "Explanation shown on the library visibility settings screen"
     },
@@ -3553,7 +3553,7 @@
     "@mediaBarModeDescription": {
         "description": "Description for media bar style setting"
     },
-    "mediaBarModeMoonfin": "Moonfin",
+    "mediaBarModeMoonfin": "EsPlay",
     "@mediaBarModeMoonfin": {
         "description": "Media bar style option: Moonfin"
     },
@@ -3943,7 +3943,7 @@
     "@ratingSourcesDescription": {
         "description": "Description for rating sources"
     },
-    "pluginLabel": "תוסף Moonbase",
+    "pluginLabel": "תוסף EsPlay",
     "@pluginLabel": {
         "description": "Settings title for plugin"
     },
@@ -4076,11 +4076,11 @@
     "@discoverRows": {
         "description": "Section title for discover rows"
     },
-    "discoverRowsDescriptionPlugin": "הפעל את השורות שיוצגו בעמוד הראשי של Seerr. גרור כדי לשנות את הסדר. הסדר המותאם מסונכרן עם Moonbase.",
+    "discoverRowsDescriptionPlugin": "הפעל את השורות שיוצגו בעמוד הראשי של Seerr. גרור כדי לשנות את הסדר. הסדר המותאם מסונכרן עם EsPlay.",
     "@discoverRowsDescriptionPlugin": {
         "description": "Description for discover rows with plugin"
     },
-    "discoverRowsDescription": "הפעל את השורות שיוצגו בעמוד הראשי של Seerr. גרור כדי לשנות את הסדר. הסדר המותאם מסונכרן עם Moonbase.",
+    "discoverRowsDescription": "הפעל את השורות שיוצגו בעמוד הראשי של Seerr. גרור כדי לשנות את הסדר. הסדר המותאם מסונכרן עם EsPlay.",
     "@discoverRowsDescription": {
         "description": "Description for discover rows without plugin"
     },
@@ -4281,7 +4281,7 @@
     "@cancelRequest": {
         "description": "Button/dialog title to cancel a media request"
     },
-    "playInMoonfin": "שחקו ב- Moonfin",
+    "playInMoonfin": "שחקו ב- EsPlay",
     "@playInMoonfin": {
         "description": "Button to play available media in Moonfin"
     },
@@ -4335,7 +4335,7 @@
     "@keep": {
         "description": "Button to keep/dismiss a cancel dialog"
     },
-    "itemNotFoundInLibrary": "הפריט לא נמצא בספריית Moonfin שלך",
+    "itemNotFoundInLibrary": "הפריט לא נמצא בספריית EsPlay שלך",
     "@itemNotFoundInLibrary": {
         "description": "Snackbar when Seerr item cannot be found in Jellyfin"
     },
@@ -4639,7 +4639,7 @@
         }
     },
     "adminServerRebootInProgress": "אתחול השרת מתבצע",
-    "adminServerRebootMessage": "אתחול השרת מתבצע, אנא הפעל מחדש את Moonfin",
+    "adminServerRebootMessage": "אתחול השרת מתבצע, אנא הפעל מחדש את EsPlay",
     "adminActiveSessions": "הפעלות פעילות",
     "adminSessionsLoadFailed": "טעינת ההפעלות נכשלה",
     "adminNoActiveSessions": "אין הפעלות פעילות",
@@ -6527,12 +6527,12 @@
     "settingsShowGenresButtonInNavigation": "הצג את לחצן הז'אנרים בסרגל הניווט",
     "settingsShowFavoritesButtonInNavigation": "הצג את לחצן המועדפים בסרגל הניווט",
     "settingsShowLibrariesButtonInNavigation": "הצג את לחצן הספריות בסרגל הניווט",
-    "settingsLibraryVisibilitySubtitle": "החלף את נראות דף הבית לכל ספריה. הפעל מחדש את Moonfin כדי שהשינויים ייכנסו לתוקף.",
+    "settingsLibraryVisibilitySubtitle": "החלף את נראות דף הבית לכל ספריה. הפעל מחדש את EsPlay כדי שהשינויים ייכנסו לתוקף.",
     "settingsMediaBarAndLocalPreviews": "סרגל מדיה ותצוגות מקדימות מקומיות",
     "settingsVisualOverlays": "שכבות חזותיות",
     "settingsSeasonalSurprise": "הפתעה עונתית",
     "settingsMetadataAndRatings": "מטא נתונים ודירוגים",
-    "settingsPluginScreenDescription": "Moonbase מפעיל שילובים בצד השרת, כולל מקורות דירוג נוספים, בקשות Seerr והעדפות מסונכרנות.",
+    "settingsPluginScreenDescription": "EsPlay מפעיל שילובים בצד השרת, כולל מקורות דירוג נוספים, בקשות Seerr והעדפות מסונכרנות.",
     "settingsOfflineDownloads": "הורדות לא מקוונות",
     "settingsHigh": "גָבוֹהַ",
     "settingsLow": "נָמוּך",
@@ -6546,14 +6546,14 @@
     "settingsJoinDiscord": "הצטרף ל-Discord",
     "settingsJoinDiscordSubtitle": "צ'אט עם הקהילה",
     "settingsJoinTheDiscord": "הצטרף ל-Discord",
-    "settingsSupportMoonfin": "תמכו ב- Moonfin",
+    "settingsSupportMoonfin": "תמכו ב- EsPlay",
     "settingsLegal": "מִשׁפָּטִי",
     "settingsLicenses": "רישיונות",
     "settingsOpenSourceLicenseNotices": "הודעות רישיון קוד פתוח",
     "settingsPrivacyPolicy": "מדיניות פרטיות",
-    "settingsPrivacyPolicySubtitle": "כיצד Moonfin מטפל בנתונים שלך",
+    "settingsPrivacyPolicySubtitle": "כיצד EsPlay מטפל בנתונים שלך",
     "settingsCheckForUpdates": "בדוק אם קיימים עדכונים",
-    "settingsCheckForUpdatesSubtitle": "בדוק את המהדורה האחרונה של Moonfin",
+    "settingsCheckForUpdatesSubtitle": "בדוק את המהדורה האחרונה של EsPlay",
     "settingsPoweredByFlutter": "מופעל על ידי Flutter",
     "settingsLicenseNoticesCount": "{count, plural, one {# הודעת רישיון} two {# הודעות רישיון} other {# הודעות רישיון}}",
     "@settingsLicenseNoticesCount": {
@@ -7023,7 +7023,7 @@
         }
     },
     "savedThemesTitle": "ערכות נושא שמורות",
-    "savedThemesDescription": "אלו ערכות נושא שהורדו מתוסף Moonfin עבור השרת הנוכחי. מחיקה מסירה רק את העותק המקומי הזה.",
+    "savedThemesDescription": "אלו ערכות נושא שהורדו מתוסף EsPlay עבור השרת הנוכחי. מחיקה מסירה רק את העותק המקומי הזה.",
     "savedThemesEmpty": "לא נמצאו ערכות נושא שמורות עבור שרת זה.",
     "savedThemesCurrentThemeId": "{themeId} • פעילה כעת",
     "@savedThemesCurrentThemeId": {
@@ -7037,7 +7037,7 @@
     "savedThemesDeleteTooltip": "מחק ערכת נושא שמורה",
     "savedThemesManageSubtitle": "נהל ערכות נושא של התוסף שהורדו למכשיר הזה",
     "themeEditor": "עורך ערכות הנושא",
-    "themeEditorSubtitle": "פתח את עורך ערכות הנושא של Moonfin בדפדפן",
+    "themeEditorSubtitle": "פתח את עורך ערכות הנושא של EsPlay בדפדפן",
     "homeScreen": "מסך הבית",
     "bottomBar": "הסרגל התחתון",
     "homeRowsStyleClassic": "קלאסי",
@@ -7086,12 +7086,12 @@
     "preferSdhSubtitles": "העדף כתוביות SDH",
     "preferSdhSubtitlesSubtitle": "תעדף רצועות כתוביות SDH/CC בבחירה אוטומטית.",
     "webDiagnostics": "אבחון ווב",
-    "webDiagnosticsTitle": "אבחון ווב של Moonfin",
+    "webDiagnosticsTitle": "אבחון ווב של EsPlay",
     "webDiagnosticsIntro": "השתמש בעמוד זה כדי לאבחן בעיות קישוריות בדפדפן (CORS, תוכן מעורב והגדרות איתור).",
     "webDiagnosticsDetectedMixedContentFailure": "זוהה כשל תוכן מעורב",
     "webDiagnosticsDetectedCorsPreflightFailure": "זוהה כשל CORS/Preflight",
-    "webDiagnosticsMixedContentFailureBody": "Moonfin זיהה עמוד HTTPS שמנסה לפנות לכתובת שרת HTTP. דפדפנים חוסמים בקשה זו עוד לפני שהיא מגיעה לשרת שלך.",
-    "webDiagnosticsCorsFailureBody": "Moonfin זיהה כשל בקשה ברמת הדפדפן, שנגרם בדרך כלל מכותרות CORS או preflight חסרות בשרת המדיה.",
+    "webDiagnosticsMixedContentFailureBody": "EsPlay זיהה עמוד HTTPS שמנסה לפנות לכתובת שרת HTTP. דפדפנים חוסמים בקשה זו עוד לפני שהיא מגיעה לשרת שלך.",
+    "webDiagnosticsCorsFailureBody": "EsPlay זיהה כשל בקשה ברמת הדפדפן, שנגרם בדרך כלל מכותרות CORS או preflight חסרות בשרת המדיה.",
     "webDiagnosticsTargetUrl": "כתובת יעד: {url}",
     "@webDiagnosticsTargetUrl": {
         "description": "Target URL shown in diagnostics summary",
@@ -7121,7 +7121,7 @@
     "notConfigured": "לא מוגדר",
     "webDiagnosticsMixedContent": "תוכן מעורב",
     "webDiagnosticsMixedContentDetected": "עמוד זה נטען דרך HTTPS, אך אחת או יותר מהכתובות המוגדרות הן HTTP. דפדפנים חוסמים פנייה של עמודי HTTPS לממשקי API מסוג HTTP.",
-    "webDiagnosticsMixedContentFix": "פתרון: הגש את שרת המדיה או את נקודת הקצה של הפרוקסי דרך HTTPS, או טען את Moonfin דרך HTTP ברשתות מקומיות מהימנות בלבד.",
+    "webDiagnosticsMixedContentFix": "פתרון: הגש את שרת המדיה או את נקודת הקצה של הפרוקסי דרך HTTPS, או טען את EsPlay דרך HTTP ברשתות מקומיות מהימנות בלבד.",
     "webDiagnosticsNoMixedContentDetected": "לא זוהתה תצורת תוכן מעורב מובהקת מהגדרות זמן הריצה הנוכחיות.",
     "webDiagnosticsCorsChecklist": "רשימת בדיקה ל-CORS",
     "webDiagnosticsCorsChecklistItem1": "• אפשר את מקור הדפדפן ב-Access-Control-Allow-Origin.",
@@ -7318,7 +7318,7 @@
     "@detailScreenStyle": {
         "description": "Label for the media detail screen layout style setting"
     },
-    "detailScreenStyleSubtitle": "קלאסי הוא הפריסה הממורכזת המקורית של Moonfin. מודרני הוא פריסה קולנועית רספונסיבית.",
+    "detailScreenStyleSubtitle": "קלאסי הוא הפריסה הממורכזת המקורית של EsPlay. מודרני הוא פריסה קולנועית רספונסיבית.",
     "@detailScreenStyleSubtitle": {
         "description": "Explanation under the detail screen style setting"
     },
@@ -7350,11 +7350,11 @@
     "@recommendationSystem": {
         "description": "Label for the Recommendation System setting"
     },
-    "recommendationSystemSubtitle": "השתמש באלגוריתם הספרייה המקומית של Moonfin Recommends או במדדי הדמיון המקוונים של TMDb. לתשומת לבך: המלצות מקוונות מחייבות שילוב עם Seerr.",
+    "recommendationSystemSubtitle": "השתמש באלגוריתם הספרייה המקומית של EsPlay Recommends או במדדי הדמיון המקוונים של TMDb. לתשומת לבך: המלצות מקוונות מחייבות שילוב עם Seerr.",
     "@recommendationSystemSubtitle": {
         "description": "Explanation under the recommendation system setting"
     },
-    "recommendationSystemMoonfin": "Moonfin Recommends",
+    "recommendationSystemMoonfin": "EsPlay Recommends",
     "@recommendationSystemMoonfin": {
         "description": "Recommendation system option: Moonfin Recommends"
     },
@@ -7366,7 +7366,7 @@
     "@recommendationsApplyParentalRatingCap": {
         "description": "Label for the toggle that controls whether similar suggestions are capped by target media parental rating"
     },
-    "recommendationsApplyParentalRatingCapSubtitle": "הגבל את ההצעות של Moonfin Recommends לפי דירוג ההורים של המדיה",
+    "recommendationsApplyParentalRatingCapSubtitle": "הגבל את ההצעות של EsPlay Recommends לפי דירוג ההורים של המדיה",
     "@recommendationsApplyParentalRatingCapSubtitle": {
         "description": "Explanation under the parental rating cap setting toggle"
     },
@@ -7414,7 +7414,7 @@
     "@customThemeTitle": {
         "description": "Title for the custom theme settings section"
     },
-    "customThemeSubtitle": "ערכות נושא מותאמות משנות רכיבים חזותיים ברחבי Moonfin. בחר אחת מהאפשרויות כדי להתאים לסגנון שלך.",
+    "customThemeSubtitle": "ערכות נושא מותאמות משנות רכיבים חזותיים ברחבי EsPlay. בחר אחת מהאפשרויות כדי להתאים לסגנון שלך.",
     "@customThemeSubtitle": {
         "description": "Description under custom themes section"
     },
@@ -7587,7 +7587,7 @@
     "@shuffleAllMusic": {
         "description": "Car browse action that shuffles the whole music library"
     },
-    "carSignInPrompt": "היכנס ל-Moonfin בטלפון שלך",
+    "carSignInPrompt": "היכנס ל-EsPlay בטלפון שלך",
     "@carSignInPrompt": {
         "description": "Shown in the car when no account is signed in"
     },
@@ -8927,7 +8927,7 @@
     "@impellerRendering": {
         "description": "Title of the setting that selects the Flutter rendering engine (Impeller vs. legacy)."
     },
-    "impellerRenderingSubtitle": "Impeller הוא מנוע ה-GPU המודרני של Flutter, לאנימציות חלקות יותר ולפחות קפיצות. בחלק ממכשירי הטלוויזיה ובמעבדים גרפיים ישנים הוא עלול לגרום לתקלות תצוגה או לווידאו שחור; כבה אותו אם אתה נתקל בכך. אוטומטי בוחר את ברירת המחדל הטובה ביותר עבור המכשיר שלך. הפעל מחדש את Moonfin כדי להחיל.",
+    "impellerRenderingSubtitle": "Impeller הוא מנוע ה-GPU המודרני של Flutter, לאנימציות חלקות יותר ולפחות קפיצות. בחלק ממכשירי הטלוויזיה ובמעבדים גרפיים ישנים הוא עלול לגרום לתקלות תצוגה או לווידאו שחור; כבה אותו אם אתה נתקל בכך. אוטומטי בוחר את ברירת המחדל הטובה ביותר עבור המכשיר שלך. הפעל מחדש את EsPlay כדי להחיל.",
     "@impellerRenderingSubtitle": {
         "description": "Explanatory description under the rendering engine setting."
     },
@@ -8938,7 +8938,7 @@
     "@impellerRestartTitle": {
         "description": "Title of the dialog shown after changing the rendering engine."
     },
-    "impellerRestartMessage": "יש להפעיל מחדש את Moonfin כדי לשנות את מנוע הרינדור. סגור את האפליקציה עכשיו ופתח אותה שוב כדי להחיל.",
+    "impellerRestartMessage": "יש להפעיל מחדש את EsPlay כדי לשנות את מנוע הרינדור. סגור את האפליקציה עכשיו ופתח אותה שוב כדי להחיל.",
     "@impellerRestartMessage": {
         "description": "Body of the dialog shown after changing the rendering engine."
     },

@@ -1136,15 +1136,15 @@ class DeviceProfileBuilder {
   static String _profileName() {
     if (PlatformDetection.isWeb) {
       return webRuntimeConfig.pluginMode
-          ? 'Moonfin for Web'
-          : 'Moonfin on Github';
+          ? 'EsPlay for Web'
+          : 'EsPlay on Github';
     }
-    if (PlatformDetection.isAndroid) return 'Moonfin for Android';
-    if (PlatformDetection.isIOS) return 'Moonfin iOS';
-    if (PlatformDetection.isMacOS) return 'Moonfin macOS';
-    if (PlatformDetection.isWindows) return 'Moonfin Windows';
-    if (PlatformDetection.isLinux) return 'Moonfin Linux';
-    return 'Moonfin';
+    if (PlatformDetection.isAndroid) return 'EsPlay for Android';
+    if (PlatformDetection.isIOS) return 'EsPlay iOS';
+    if (PlatformDetection.isMacOS) return 'EsPlay macOS';
+    if (PlatformDetection.isWindows) return 'EsPlay Windows';
+    if (PlatformDetection.isLinux) return 'EsPlay Linux';
+    return 'EsPlay';
   }
 
   static List<Map<String, dynamic>> _codecProfiles({

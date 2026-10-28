@@ -1,6 +1,6 @@
 {
     "@@locale": "el",
-    "appTitle": "Moonfin",
+    "appTitle": "EsPlay",
     "@appTitle": {
         "description": "The application title"
     },
@@ -82,7 +82,7 @@
     "@selectServer": {
         "description": "Button to navigate back to server selection"
     },
-    "appVersionFooter": "Moonfin έκδοση {version}",
+    "appVersionFooter": "EsPlay έκδοση {version}",
     "@appVersionFooter": {
         "description": "App version shown in footer",
         "placeholders": {
@@ -156,7 +156,7 @@
     "@secureStorageUnavailable": {
         "description": "Dialog title when system keyring is inaccessible"
     },
-    "secureStorageUnavailableMessage": "Ο Moonfin δεν μπόρεσε να αποκτήσει πρόσβαση στο μπρελόκ του συστήματός σας. Η σύνδεση μπορεί να συνεχιστεί, αλλά η ασφαλής αποθήκευση διακριτικών ενδέχεται να μην είναι διαθέσιμη μέχρι να ξεκλειδωθεί το μπρελόκ.",
+    "secureStorageUnavailableMessage": "Ο EsPlay δεν μπόρεσε να αποκτήσει πρόσβαση στο μπρελόκ του συστήματός σας. Η σύνδεση μπορεί να συνεχιστεί, αλλά η ασφαλής αποθήκευση διακριτικών ενδέχεται να μην είναι διαθέσιμη μέχρι να ξεκλειδωθεί το μπρελόκ.",
     "@secureStorageUnavailableMessage": {
         "description": "Explanation when secure storage is not available"
     },
@@ -172,11 +172,11 @@
     "@settingsAppearanceThemeSubtitle": {
         "description": "Subtitle for the theme selection screen and theme settings entry"
     },
-    "themeMoonfin": "Moonfin",
+    "themeMoonfin": "EsPlay",
     "@themeMoonfin": {
         "description": "Display name for the Moonfin theme"
     },
-    "themeMoonfinSubtitle": "Η τρέχουσα εμφάνιση Moonfin που όλοι έχετε αγαπήσει.",
+    "themeMoonfinSubtitle": "Η τρέχουσα εμφάνιση EsPlay που όλοι έχετε αγαπήσει.",
     "@themeMoonfinSubtitle": {
         "description": "Preview description for the Moonfin theme"
     },
@@ -249,7 +249,7 @@
             }
         }
     },
-    "exitApp": "Έξοδος από Moonfin;",
+    "exitApp": "Έξοδος από EsPlay;",
     "@exitApp": {
         "description": "Title of exit confirmation dialog"
     },
@@ -3109,7 +3109,7 @@
     "@customMpvConfPath": {
         "description": "Setting for custom mpv.conf path"
     },
-    "notSetMpvConf": "Δεν έχει οριστεί. Το Moonfin θα δοκιμάσει ένα προεπιλεγμένο mpv.conf στους φακέλους εφαρμογής/δεδομένων.",
+    "notSetMpvConf": "Δεν έχει οριστεί. Το EsPlay θα δοκιμάσει ένα προεπιλεγμένο mpv.conf στους φακέλους εφαρμογής/δεδομένων.",
     "@notSetMpvConf": {
         "description": "Description when no custom mpv.conf is set"
     },
@@ -3336,7 +3336,7 @@
     "@saveToDownloadsFolder": {
         "description": "Setting for saving to downloads folder"
     },
-    "downloadsVisibleToOtherApps": "Λήψεις/Moonfin — ορατές σε άλλες εφαρμογές",
+    "downloadsVisibleToOtherApps": "Λήψεις/EsPlay — ορατές σε άλλες εφαρμογές",
     "@downloadsVisibleToOtherApps": {
         "description": "Description for downloads folder visibility"
     },
@@ -3372,7 +3372,7 @@
     "@saveToDownloadsFolderQuestion": {
         "description": "Dialog title for saving to downloads folder"
     },
-    "saveToDownloadsFolderDescription": "Τα ληφθέντα πολυμέσα θα αποθηκευτούν στο Downloads/Moonfin στη συσκευή σας. Αυτά τα αρχεία θα είναι ορατά σε άλλες εφαρμογές, όπως η γκαλερί ή το πρόγραμμα αναπαραγωγής μουσικής.\n\nΟι υπάρχουσες λήψεις θα παραμείνουν στην τρέχουσα θέση τους.",
+    "saveToDownloadsFolderDescription": "Τα ληφθέντα πολυμέσα θα αποθηκευτούν στο Downloads/EsPlay στη συσκευή σας. Αυτά τα αρχεία θα είναι ορατά σε άλλες εφαρμογές, όπως η γκαλερί ή το πρόγραμμα αναπαραγωγής μουσικής.\n\nΟι υπάρχουσες λήψεις θα παραμείνουν στην τρέχουσα θέση τους.",
     "@saveToDownloadsFolderDescription": {
         "description": "Description for saving to downloads folder"
     },
@@ -3504,7 +3504,7 @@
     "@libraryVisibility": {
         "description": "Section title for library visibility"
     },
-    "libraryVisibilityDescription": "Εναλλαγή ορατότητας αρχικής σελίδας ανά βιβλιοθήκη. Επανεκκινήστε το Moonfin για να τεθούν σε ισχύ οι αλλαγές.",
+    "libraryVisibilityDescription": "Εναλλαγή ορατότητας αρχικής σελίδας ανά βιβλιοθήκη. Επανεκκινήστε το EsPlay για να τεθούν σε ισχύ οι αλλαγές.",
     "@libraryVisibilityDescription": {
         "description": "Explanation shown on the library visibility settings screen"
     },
@@ -3553,7 +3553,7 @@
     "@mediaBarModeDescription": {
         "description": "Description for media bar style setting"
     },
-    "mediaBarModeMoonfin": "Moonfin",
+    "mediaBarModeMoonfin": "EsPlay",
     "@mediaBarModeMoonfin": {
         "description": "Media bar style option: Moonfin"
     },
@@ -3943,7 +3943,7 @@
     "@ratingSourcesDescription": {
         "description": "Description for rating sources"
     },
-    "pluginLabel": "Πρόσθετο Moonbase",
+    "pluginLabel": "Πρόσθετο EsPlay",
     "@pluginLabel": {
         "description": "Settings title for plugin"
     },
@@ -4076,11 +4076,11 @@
     "@discoverRows": {
         "description": "Section title for discover rows"
     },
-    "discoverRowsDescriptionPlugin": "Ενεργοποιήστε τις σειρές που θέλετε να βλέπετε στην κύρια σελίδα του Seerr. Σύρετε για αναδιάταξη. Η προσαρμοσμένη σειρά συγχρονίζεται με το Moonbase.",
+    "discoverRowsDescriptionPlugin": "Ενεργοποιήστε τις σειρές που θέλετε να βλέπετε στην κύρια σελίδα του Seerr. Σύρετε για αναδιάταξη. Η προσαρμοσμένη σειρά συγχρονίζεται με το EsPlay.",
     "@discoverRowsDescriptionPlugin": {
         "description": "Description for discover rows with plugin"
     },
-    "discoverRowsDescription": "Ενεργοποιήστε τις σειρές που θέλετε να βλέπετε στην κύρια σελίδα του Seerr. Σύρετε για αναδιάταξη. Η προσαρμοσμένη σειρά συγχρονίζεται με το Moonbase.",
+    "discoverRowsDescription": "Ενεργοποιήστε τις σειρές που θέλετε να βλέπετε στην κύρια σελίδα του Seerr. Σύρετε για αναδιάταξη. Η προσαρμοσμένη σειρά συγχρονίζεται με το EsPlay.",
     "@discoverRowsDescription": {
         "description": "Description for discover rows without plugin"
     },
@@ -4281,7 +4281,7 @@
     "@cancelRequest": {
         "description": "Button/dialog title to cancel a media request"
     },
-    "playInMoonfin": "Αναπαραγωγή στο Moonfin",
+    "playInMoonfin": "Αναπαραγωγή στο EsPlay",
     "@playInMoonfin": {
         "description": "Button to play available media in Moonfin"
     },
@@ -4335,7 +4335,7 @@
     "@keep": {
         "description": "Button to keep/dismiss a cancel dialog"
     },
-    "itemNotFoundInLibrary": "Το αντικείμενο δεν βρέθηκε στη βιβλιοθήκη σας Moonfin",
+    "itemNotFoundInLibrary": "Το αντικείμενο δεν βρέθηκε στη βιβλιοθήκη σας EsPlay",
     "@itemNotFoundInLibrary": {
         "description": "Snackbar when Seerr item cannot be found in Jellyfin"
     },
@@ -4639,7 +4639,7 @@
         }
     },
     "adminServerRebootInProgress": "Επανεκκίνηση διακομιστή σε εξέλιξη",
-    "adminServerRebootMessage": "Επανεκκίνηση διακομιστή σε εξέλιξη, κάντε επανεκκίνηση Moonfin",
+    "adminServerRebootMessage": "Επανεκκίνηση διακομιστή σε εξέλιξη, κάντε επανεκκίνηση EsPlay",
     "adminActiveSessions": "Ενεργές συνεδρίες",
     "adminSessionsLoadFailed": "Αποτυχία φόρτωσης συνεδριών",
     "adminNoActiveSessions": "Δεν υπάρχουν ενεργές συνεδρίες",
@@ -6527,12 +6527,12 @@
     "settingsShowGenresButtonInNavigation": "Εμφάνιση του κουμπιού ειδών στη γραμμή πλοήγησης",
     "settingsShowFavoritesButtonInNavigation": "Εμφάνιση του κουμπιού αγαπημένων στη γραμμή πλοήγησης",
     "settingsShowLibrariesButtonInNavigation": "Εμφάνιση του κουμπιού βιβλιοθήκες στη γραμμή πλοήγησης",
-    "settingsLibraryVisibilitySubtitle": "Εναλλαγή ορατότητας αρχικής σελίδας ανά βιβλιοθήκη. Επανεκκινήστε το Moonfin για να τεθούν σε ισχύ οι αλλαγές.",
+    "settingsLibraryVisibilitySubtitle": "Εναλλαγή ορατότητας αρχικής σελίδας ανά βιβλιοθήκη. Επανεκκινήστε το EsPlay για να τεθούν σε ισχύ οι αλλαγές.",
     "settingsMediaBarAndLocalPreviews": "Γραμμή πολυμέσων και τοπικές προεπισκοπήσεις",
     "settingsVisualOverlays": "Οπτικές επικαλύψεις",
     "settingsSeasonalSurprise": "Εποχιακή Έκπληξη",
     "settingsMetadataAndRatings": "Μεταδεδομένα & Βαθμολογίες",
-    "settingsPluginScreenDescription": "Το Moonbase παρέχει ενσωματώσεις από την πλευρά του διακομιστή, συμπεριλαμβανομένων πρόσθετων πηγών αξιολόγησης, αιτημάτων Seerr και συγχρονισμένων προτιμήσεων.",
+    "settingsPluginScreenDescription": "Το EsPlay παρέχει ενσωματώσεις από την πλευρά του διακομιστή, συμπεριλαμβανομένων πρόσθετων πηγών αξιολόγησης, αιτημάτων Seerr και συγχρονισμένων προτιμήσεων.",
     "settingsOfflineDownloads": "Λήψεις εκτός σύνδεσης",
     "settingsHigh": "Ψηλά",
     "settingsLow": "Χαμηλός",
@@ -6546,14 +6546,14 @@
     "settingsJoinDiscord": "Εγγραφείτε Discord",
     "settingsJoinDiscordSubtitle": "Συζήτηση με την κοινότητα",
     "settingsJoinTheDiscord": "Εγγραφείτε στο Discord",
-    "settingsSupportMoonfin": "Υποστήριξη Moonfin",
+    "settingsSupportMoonfin": "Υποστήριξη EsPlay",
     "settingsLegal": "ΝΟΜΙΚΟΣ",
     "settingsLicenses": "Άδειες",
     "settingsOpenSourceLicenseNotices": "Ειδοποιήσεις άδειας ανοιχτού κώδικα",
     "settingsPrivacyPolicy": "Πολιτική Απορρήτου",
-    "settingsPrivacyPolicySubtitle": "Πώς χειρίζεται ο Moonfin τα δεδομένα σας",
+    "settingsPrivacyPolicySubtitle": "Πώς χειρίζεται ο EsPlay τα δεδομένα σας",
     "settingsCheckForUpdates": "Ελέγξτε για Ενημερώσεις",
-    "settingsCheckForUpdatesSubtitle": "Ελέγξτε για την πιο πρόσφατη έκδοση Moonfin",
+    "settingsCheckForUpdatesSubtitle": "Ελέγξτε για την πιο πρόσφατη έκδοση EsPlay",
     "settingsPoweredByFlutter": "Με την υποστήριξη του Flutter",
     "settingsLicenseNoticesCount": "{count, plural, one {# ειδοποίηση άδειας} other {# ειδοποιήσεις άδειας}}",
     "@settingsLicenseNoticesCount": {
@@ -7023,7 +7023,7 @@
         }
     },
     "savedThemesTitle": "Αποθηκευμένα θέματα",
-    "savedThemesDescription": "Αυτά είναι θέματα που έχουν ληφθεί από την προσθήκη Moonfin για τον τρέχοντα διακομιστή. Η διαγραφή καταργεί μόνο αυτό το τοπικό αντίγραφο.",
+    "savedThemesDescription": "Αυτά είναι θέματα που έχουν ληφθεί από την προσθήκη EsPlay για τον τρέχοντα διακομιστή. Η διαγραφή καταργεί μόνο αυτό το τοπικό αντίγραφο.",
     "savedThemesEmpty": "Δεν βρέθηκαν αποθηκευμένα θέματα για αυτόν τον διακομιστή.",
     "savedThemesCurrentThemeId": "{themeId} • Αυτήν τη στιγμή ενεργό",
     "@savedThemesCurrentThemeId": {
@@ -7037,7 +7037,7 @@
     "savedThemesDeleteTooltip": "Διαγραφή αποθηκευμένου θέματος",
     "savedThemesManageSubtitle": "Διαχειριστείτε τα ληφθέντα θέματα προσθηκών σε αυτήν τη συσκευή",
     "themeEditor": "Επεξεργαστής θεμάτων",
-    "themeEditorSubtitle": "Ανοίξτε το πρόγραμμα επεξεργασίας θεμάτων Moonfin στο πρόγραμμα περιήγησής σας",
+    "themeEditorSubtitle": "Ανοίξτε το πρόγραμμα επεξεργασίας θεμάτων EsPlay στο πρόγραμμα περιήγησής σας",
     "homeScreen": "Αρχική οθόνη",
     "bottomBar": "Μπάρα κάτω",
     "homeRowsStyleClassic": "Κλασσικός",
@@ -7086,12 +7086,12 @@
     "preferSdhSubtitles": "Προτιμήστε υπότιτλους SDH",
     "preferSdhSubtitlesSubtitle": "Δώστε προτεραιότητα στα κομμάτια υποτίτλων SDH/CC κατά την αυτόματη επιλογή.",
     "webDiagnostics": "Διαγνωστικά Web",
-    "webDiagnosticsTitle": "Moonfin Διαγνωστικά Ιστού",
+    "webDiagnosticsTitle": "EsPlay Διαγνωστικά Ιστού",
     "webDiagnosticsIntro": "Χρησιμοποιήστε αυτήν τη σελίδα για να διαγνώσετε προβλήματα συνδεσιμότητας του προγράμματος περιήγησης (CORS, μικτό περιεχόμενο και ρυθμίσεις εντοπισμού).",
     "webDiagnosticsDetectedMixedContentFailure": "Εντοπίστηκε αποτυχία μικτού περιεχομένου",
     "webDiagnosticsDetectedCorsPreflightFailure": "Εντοπίστηκε αποτυχία CORS/Προκαταρκτικής πτήσης",
-    "webDiagnosticsMixedContentFailureBody": "Ο Moonfin εντόπισε μια σελίδα HTTPS που προσπαθεί να καλέσει μια διεύθυνση URL διακομιστή HTTP. Τα προγράμματα περιήγησης αποκλείουν αυτό το αίτημα πριν φτάσει στον διακομιστή σας.",
-    "webDiagnosticsCorsFailureBody": "Ο Moonfin εντόπισε μια αποτυχία αιτήματος σε επίπεδο προγράμματος περιήγησης που συνήθως προκαλείται από έλλειψη κεφαλίδων CORS ή προκαταρκτικής πτήσης στον διακομιστή πολυμέσων.",
+    "webDiagnosticsMixedContentFailureBody": "Ο EsPlay εντόπισε μια σελίδα HTTPS που προσπαθεί να καλέσει μια διεύθυνση URL διακομιστή HTTP. Τα προγράμματα περιήγησης αποκλείουν αυτό το αίτημα πριν φτάσει στον διακομιστή σας.",
+    "webDiagnosticsCorsFailureBody": "Ο EsPlay εντόπισε μια αποτυχία αιτήματος σε επίπεδο προγράμματος περιήγησης που συνήθως προκαλείται από έλλειψη κεφαλίδων CORS ή προκαταρκτικής πτήσης στον διακομιστή πολυμέσων.",
     "webDiagnosticsTargetUrl": "Διεύθυνση URL στόχου: {url}",
     "@webDiagnosticsTargetUrl": {
         "description": "Target URL shown in diagnostics summary",
@@ -7121,7 +7121,7 @@
     "notConfigured": "δεν έχει ρυθμιστεί",
     "webDiagnosticsMixedContent": "Μικτό Περιεχόμενο",
     "webDiagnosticsMixedContentDetected": "Αυτή η σελίδα φορτώνεται μέσω HTTPS, αλλά μία ή περισσότερες διαμορφωμένες διευθύνσεις URL είναι HTTP. Τα προγράμματα περιήγησης εμποδίζουν τις σελίδες HTTPS να καλούν HTTP API.",
-    "webDiagnosticsMixedContentFix": "Διόρθωση: εξυπηρετήστε τον διακομιστή πολυμέσων ή το τελικό σημείο του διακομιστή μεσολάβησης μέσω HTTPS ή φορτώστε το Moonfin μέσω HTTP μόνο σε αξιόπιστα τοπικά δίκτυα.",
+    "webDiagnosticsMixedContentFix": "Διόρθωση: εξυπηρετήστε τον διακομιστή πολυμέσων ή το τελικό σημείο του διακομιστή μεσολάβησης μέσω HTTPS ή φορτώστε το EsPlay μέσω HTTP μόνο σε αξιόπιστα τοπικά δίκτυα.",
     "webDiagnosticsNoMixedContentDetected": "Δεν εντοπίστηκε προφανής διαμόρφωση μικτού περιεχομένου από τις τρέχουσες ρυθμίσεις χρόνου εκτέλεσης.",
     "webDiagnosticsCorsChecklist": "Λίστα ελέγχου CORS",
     "webDiagnosticsCorsChecklistItem1": "• Να επιτρέπεται η προέλευση του προγράμματος περιήγησης στο Access-Control-Allow-Origin.",
@@ -7318,7 +7318,7 @@
     "@detailScreenStyle": {
         "description": "Label for the media detail screen layout style setting"
     },
-    "detailScreenStyleSubtitle": "Το Κλασικό είναι η αρχική, κεντραρισμένη διάταξη του Moonfin. Το Μοντέρνο είναι μια προσαρμοστική, κινηματογραφική διάταξη.",
+    "detailScreenStyleSubtitle": "Το Κλασικό είναι η αρχική, κεντραρισμένη διάταξη του EsPlay. Το Μοντέρνο είναι μια προσαρμοστική, κινηματογραφική διάταξη.",
     "@detailScreenStyleSubtitle": {
         "description": "Explanation under the detail screen style setting"
     },
@@ -7350,11 +7350,11 @@
     "@recommendationSystem": {
         "description": "Label for the Recommendation System setting"
     },
-    "recommendationSystemSubtitle": "Χρησιμοποιήστε τον αλγόριθμο τοπικής βιβλιοθήκης «Προτάσεις Moonfin» ή τις διαδικτυακές μετρήσεις ομοιότητας του TMDb. Σημείωση: οι διαδικτυακές προτάσεις απαιτούν ενσωμάτωση με το Seerr.",
+    "recommendationSystemSubtitle": "Χρησιμοποιήστε τον αλγόριθμο τοπικής βιβλιοθήκης «Προτάσεις EsPlay» ή τις διαδικτυακές μετρήσεις ομοιότητας του TMDb. Σημείωση: οι διαδικτυακές προτάσεις απαιτούν ενσωμάτωση με το Seerr.",
     "@recommendationSystemSubtitle": {
         "description": "Explanation under the recommendation system setting"
     },
-    "recommendationSystemMoonfin": "Προτάσεις Moonfin",
+    "recommendationSystemMoonfin": "Προτάσεις EsPlay",
     "@recommendationSystemMoonfin": {
         "description": "Recommendation system option: Moonfin Recommends"
     },
@@ -7366,7 +7366,7 @@
     "@recommendationsApplyParentalRatingCap": {
         "description": "Label for the toggle that controls whether similar suggestions are capped by target media parental rating"
     },
-    "recommendationsApplyParentalRatingCapSubtitle": "Περιορισμός των προτάσεων του Moonfin με βάση τη γονική διαβάθμιση του επιλεγμένου περιεχομένου",
+    "recommendationsApplyParentalRatingCapSubtitle": "Περιορισμός των προτάσεων του EsPlay με βάση τη γονική διαβάθμιση του επιλεγμένου περιεχομένου",
     "@recommendationsApplyParentalRatingCapSubtitle": {
         "description": "Explanation under the parental rating cap setting toggle"
     },
@@ -7414,7 +7414,7 @@
     "@customThemeTitle": {
         "description": "Title for the custom theme settings section"
     },
-    "customThemeSubtitle": "Τα προσαρμοσμένα θέματα αλλάζουν τα οπτικά στοιχεία σε όλο το Moonfin. Επιλέξτε μία από αυτές τις επιλογές που ταιριάζει στο στυλ σας.",
+    "customThemeSubtitle": "Τα προσαρμοσμένα θέματα αλλάζουν τα οπτικά στοιχεία σε όλο το EsPlay. Επιλέξτε μία από αυτές τις επιλογές που ταιριάζει στο στυλ σας.",
     "@customThemeSubtitle": {
         "description": "Description under custom themes section"
     },
@@ -7587,7 +7587,7 @@
     "@shuffleAllMusic": {
         "description": "Car browse action that shuffles the whole music library"
     },
-    "carSignInPrompt": "Συνδεθείτε στο Moonfin από το τηλέφωνό σας",
+    "carSignInPrompt": "Συνδεθείτε στο EsPlay από το τηλέφωνό σας",
     "@carSignInPrompt": {
         "description": "Shown in the car when no account is signed in"
     },
@@ -8927,7 +8927,7 @@
     "@impellerRendering": {
         "description": "Title of the setting that selects the Flutter rendering engine (Impeller vs. legacy)."
     },
-    "impellerRenderingSubtitle": "Το Impeller είναι ο σύγχρονος επεξεργαστής απόδοσης GPU του Flutter, για πιο ομαλά κινούμενα γραφικά και λιγότερα κολλήματα. Σε ορισμένα TV box και παλαιότερες GPU μπορεί να προκαλέσει προβλήματα εμφάνισης ή μαύρο βίντεο· απενεργοποιήστε το αν παρατηρήσετε κάτι τέτοιο. Το Αυτόματο επιλέγει την καλύτερη προεπιλογή για τη συσκευή σας. Επανεκκινήστε το Moonfin για να εφαρμοστεί.",
+    "impellerRenderingSubtitle": "Το Impeller είναι ο σύγχρονος επεξεργαστής απόδοσης GPU του Flutter, για πιο ομαλά κινούμενα γραφικά και λιγότερα κολλήματα. Σε ορισμένα TV box και παλαιότερες GPU μπορεί να προκαλέσει προβλήματα εμφάνισης ή μαύρο βίντεο· απενεργοποιήστε το αν παρατηρήσετε κάτι τέτοιο. Το Αυτόματο επιλέγει την καλύτερη προεπιλογή για τη συσκευή σας. Επανεκκινήστε το EsPlay για να εφαρμοστεί.",
     "@impellerRenderingSubtitle": {
         "description": "Explanatory description under the rendering engine setting."
     },
@@ -8938,7 +8938,7 @@
     "@impellerRestartTitle": {
         "description": "Title of the dialog shown after changing the rendering engine."
     },
-    "impellerRestartMessage": "Το Moonfin πρέπει να επανεκκινήσει για να αλλάξει η μηχανή απόδοσης. Κλείστε την εφαρμογή τώρα και ανοίξτε την ξανά για να εφαρμοστεί.",
+    "impellerRestartMessage": "Το EsPlay πρέπει να επανεκκινήσει για να αλλάξει η μηχανή απόδοσης. Κλείστε την εφαρμογή τώρα και ανοίξτε την ξανά για να εφαρμοστεί.",
     "@impellerRestartMessage": {
         "description": "Body of the dialog shown after changing the rendering engine."
     },

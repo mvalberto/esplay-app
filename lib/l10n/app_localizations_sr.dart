@@ -10,7 +10,7 @@ class AppLocalizationsSr extends AppLocalizations {
   AppLocalizationsSr([String locale = 'sr']) : super(locale);
 
   @override
-  String get appTitle => 'Moonfin';
+  String get appTitle => 'EsPlay';
 
   @override
   String get animeMarkerFiller => 'Филер';
@@ -592,7 +592,7 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get customThemeSubtitle =>
-      'Прилагођене теме мењају изглед елемената широм апликације Мунфин (Moonfin). Изаберите једну од понуђених опција према свом укусу.';
+      'Прилагођене теме мењају изглед елемената широм апликације Мунфин (EsPlay). Изаберите једну од понуђених опција према свом укусу.';
 
   @override
   String get keyboardStyle => 'Стил тастатуре';
@@ -633,7 +633,7 @@ class AppLocalizationsSr extends AppLocalizations {
       'Омогућава повезаном контролеру за игре да помера фокус и бира ставке';
 
   @override
-  String get themeMoonfin => 'Мунфин (Moonfin)';
+  String get themeMoonfin => 'Мунфин (EsPlay)';
 
   @override
   String get themeMoonfinSubtitle =>
@@ -1926,7 +1926,7 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get carSignInPrompt =>
-      'Пријавите се у апликацију Мунфин (Moonfin) на телефону';
+      'Пријавите се у апликацију Мунфин (EsPlay) на телефону';
 
   @override
   String get carServerUnreachable => 'Није могуће повезати се са сервером';
@@ -2383,7 +2383,7 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get bookReadingUnavailableMessage =>
-      'Open it in Moonfin on a phone, tablet or computer to read it. Audiobooks still play here.';
+      'Open it in EsPlay on a phone, tablet or computer to read it. Audiobooks still play here.';
 
   @override
   String formatCannotRenderInApp(String extension) {
@@ -3213,7 +3213,7 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get loadingAnimationDescription =>
-      'Прилагодите анимације учитавања које се користе широм Мунфина (Moonfin)';
+      'Прилагодите анимације учитавања које се користе широм Мунфина (EsPlay)';
 
   @override
   String get loadingAnimationConfiguration => 'Подешавање анимације учитавања';
@@ -3222,7 +3222,7 @@ class AppLocalizationsSr extends AppLocalizations {
   String get loadingAnimationImage => 'Слика';
 
   @override
-  String get loadingAnimationImageMoonfinLogo => 'Лого Мунфина (Moonfin)';
+  String get loadingAnimationImageMoonfinLogo => 'Лого Мунфина (EsPlay)';
 
   @override
   String get loadingAnimationImageSpinner => 'Ротирајући индикатор';
@@ -3234,7 +3234,7 @@ class AppLocalizationsSr extends AppLocalizations {
   String get loadingAnimationImageMoonPhases => 'Месечеве мене';
 
   @override
-  String get loadingAnimationImageMoonfinPhases => 'Мене Мунфина (Moonfin)';
+  String get loadingAnimationImageMoonfinPhases => 'Мене Мунфина (EsPlay)';
 
   @override
   String get loadingAnimationImageNeonfinPhases => 'Мене Неонфина (Neonfin)';
@@ -4256,7 +4256,7 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get notSetMpvConf =>
-      'Није подешено. Мунфин (Moonfin) ће покушати да пронађе подразумевану датотеку mpv.conf у фасциклама апликације или података.';
+      'Није подешено. Мунфин (EsPlay) ће покушати да пронађе подразумевану датотеку mpv.conf у фасциклама апликације или података.';
 
   @override
   String get selectMpvConf => 'Изабери mpv.conf';
@@ -4557,14 +4557,14 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get downloadLocationLimitedByAndroid =>
-      'Андроид (Android) дозвољава Мунфину (Moonfin) да уписује само у фасцикле које припадају апликацији, а овај уређај нема преносиво складиште. Укључите опцију „Сачувај у фасциклу за преузимања“ изнад да би преузимања била на месту доступном другим апликацијама.';
+      'Андроид (Android) дозвољава Мунфину (EsPlay) да уписује само у фасцикле које припадају апликацији, а овај уређај нема преносиво складиште. Укључите опцију „Сачувај у фасциклу за преузимања“ изнад да би преузимања била на месту доступном другим апликацијама.';
 
   @override
   String get saveToDownloadsFolder => 'Сачувај у фасциклу за преузимања';
 
   @override
   String get downloadsVisibleToOtherApps =>
-      'Downloads/Moonfin — видљиво другим апликацијама';
+      'Downloads/EsPlay — видљиво другим апликацијама';
 
   @override
   String get dangerZone => 'Зона опасности';
@@ -4595,7 +4595,7 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get saveToDownloadsFolderDescription =>
-      'Преузети медијски садржај биће сачуван у фасцикли Downloads/Moonfin на вашем уређају. Те датотеке биће видљиве другим апликацијама, као што су галерија или музички плејер.\n\nПостојећа преузимања остаће на тренутној локацији.';
+      'Преузети медијски садржај биће сачуван у фасцикли Downloads/EsPlay на вашем уређају. Те датотеке биће видљиве другим апликацијама, као што су галерија или музички плејер.\n\nПостојећа преузимања остаће на тренутној локацији.';
 
   @override
   String get transcodingTimeRemainingUnavailable =>
@@ -4845,7 +4845,7 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get libraryVisibilityDescription =>
-      'Укључите или искључите видљивост сваке библиотеке на почетној страници. Поново покрените Мунфин (Moonfin) да би промене ступиле на снагу.';
+      'Укључите или искључите видљивост сваке библиотеке на почетној страници. Поново покрените Мунфин (EsPlay) да би промене ступиле на снагу.';
 
   @override
   String get showInNavigation => 'Прикажи у навигацији';
@@ -4916,7 +4916,7 @@ class AppLocalizationsSr extends AppLocalizations {
       'Show the top half of the first row along the bottom of the media bar';
 
   @override
-  String get mediaBarModeMoonfin => 'Мунфин (Moonfin)';
+  String get mediaBarModeMoonfin => 'Мунфин (EsPlay)';
 
   @override
   String get mediaBarModeMakd => 'МакД (MakD)';
@@ -5278,7 +5278,7 @@ class AppLocalizationsSr extends AppLocalizations {
   String get screensaverBackdropBlack => 'Црна';
 
   @override
-  String get screensaverBackdropMoonfin => 'Мунфин (Moonfin)';
+  String get screensaverBackdropMoonfin => 'Мунфин (EsPlay)';
 
   @override
   String get screensaverBackdropCalm => 'Смирена';
@@ -5293,7 +5293,7 @@ class AppLocalizationsSr extends AppLocalizations {
   String get screensaverAdditionalComponent => 'Додатна компонента';
 
   @override
-  String get screensaverComponentMoonfinLogo => 'Лого Мунфина (Moonfin)';
+  String get screensaverComponentMoonfinLogo => 'Лого Мунфина (EsPlay)';
 
   @override
   String get screensaverComponentRunner => 'Покретни елемент';
@@ -5555,11 +5555,11 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get discoverRowsDescriptionPlugin =>
-      'Омогућите редове који ће се приказивати на главној страници Сира (Seerr). Превуците их да бисте променили редослед. Прилагођени редослед се синхронизује са Мунбејсом (Moonbase).';
+      'Омогућите редове који ће се приказивати на главној страници Сира (Seerr). Превуците их да бисте променили редослед. Прилагођени редослед се синхронизује са Мунбејсом (EsPlay).';
 
   @override
   String get discoverRowsDescription =>
-      'Омогућите редове који ће се приказивати на главној страници Сира (Seerr). Превуците их да бисте променили редослед. Прилагођени редослед се синхронизује са Мунбејсом (Moonbase).';
+      'Омогућите редове који ће се приказивати на главној страници Сира (Seerr). Превуците их да бисте променили редослед. Прилагођени редослед се синхронизује са Мунбејсом (EsPlay).';
 
   @override
   String get enabled => 'Омогућено';
@@ -5758,7 +5758,7 @@ class AppLocalizationsSr extends AppLocalizations {
   String get cancelRequest4k => 'Откажи захтев за 4К резолуцију';
 
   @override
-  String get playInMoonfin => 'Пусти у Мунфину (Moonfin)';
+  String get playInMoonfin => 'Пусти у Мунфину (EsPlay)';
 
   @override
   String get requestedByLabel => 'Затражио/ла';
@@ -5804,7 +5804,7 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get itemNotFoundInLibrary =>
-      'Ставка није пронађена у вашој библиотеци Мунфина (Moonfin)';
+      'Ставка није пронађена у вашој библиотеци Мунфина (EsPlay)';
 
   @override
   String get errorSearchingLibrary => 'Грешка при претрази библиотеке';
@@ -7804,7 +7804,7 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get adminServerRebootMessage =>
-      'Поновно покретање сервера је у току, поново покрените Мунфин (Moonfin)';
+      'Поновно покретање сервера је у току, поново покрените Мунфин (EsPlay)';
 
   @override
   String get adminActiveSessions => 'Активне сесије';
@@ -11580,7 +11580,7 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get settingsLibraryVisibilitySubtitle =>
-      'Укључите или искључите видљивост сваке библиотеке на почетној страници. Поново покрените Мунфин (Moonfin) да би промене ступиле на снагу.';
+      'Укључите или искључите видљивост сваке библиотеке на почетној страници. Поново покрените Мунфин (EsPlay) да би промене ступиле на снагу.';
 
   @override
   String get settingsMediaBarAndLocalPreviews =>
@@ -11705,7 +11705,7 @@ class AppLocalizationsSr extends AppLocalizations {
   String get settingsJoinTheDiscord => 'Придружи се Дискорду (Discord)';
 
   @override
-  String get settingsSupportMoonfin => 'Подржи Мунфин (Moonfin)';
+  String get settingsSupportMoonfin => 'Подржи Мунфин (EsPlay)';
 
   @override
   String get settingsSupportMoonfinSubtitle => 'Частите програмера кафом';
@@ -11725,14 +11725,14 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get settingsPrivacyPolicySubtitle =>
-      'Како Мунфин (Moonfin) поступа са вашим подацима';
+      'Како Мунфин (EsPlay) поступа са вашим подацима';
 
   @override
   String get settingsCheckForUpdates => 'Провери да ли постоје ажурирања';
 
   @override
   String get settingsCheckForUpdatesSubtitle =>
-      'Проверите да ли је доступно најновије издање Мунфина (Moonfin)';
+      'Проверите да ли је доступно најновије издање Мунфина (EsPlay)';
 
   @override
   String get settingsBoth => 'Обоје';
@@ -12178,7 +12178,7 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get savedThemesDescription =>
-      'Ово су теме преузете из додатка Муфин (Moonfin) за тренутни сервер. Брисањем се уклања само локална копија.';
+      'Ово су теме преузете из додатка Муфин (EsPlay) за тренутни сервер. Брисањем се уклања само локална копија.';
 
   @override
   String get savedThemesEmpty => 'За овај сервер нису пронађене сачуване теме.';
@@ -12200,7 +12200,7 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get themeEditorSubtitle =>
-      'Отвори уређивач тема Муфин (Moonfin) у прегледачу';
+      'Отвори уређивач тема Муфин (EsPlay) у прегледачу';
 
   @override
   String get homeScreen => 'Почетни екран';
@@ -12596,7 +12596,7 @@ class AppLocalizationsSr extends AppLocalizations {
   String get webDiagnostics => 'Веб-дијагностика';
 
   @override
-  String get webDiagnosticsTitle => 'Веб-дијагностика Муфин (Moonfin)';
+  String get webDiagnosticsTitle => 'Веб-дијагностика Муфин (EsPlay)';
 
   @override
   String get webDiagnosticsIntro =>
@@ -12612,11 +12612,11 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get webDiagnosticsMixedContentFailureBody =>
-      'Муфин (Moonfin) је открио да страница учитана преко ХТТПС-а (HTTPS) покушава да приступи адреси сервера преко ХТТП-а (HTTP). Прегледачи блокирају овај захтев пре него што стигне до сервера.';
+      'Муфин (EsPlay) је открио да страница учитана преко ХТТПС-а (HTTPS) покушава да приступи адреси сервера преко ХТТП-а (HTTP). Прегледачи блокирају овај захтев пре него што стигне до сервера.';
 
   @override
   String get webDiagnosticsCorsFailureBody =>
-      'Муфин (Moonfin) је открио неуспех захтева на нивоу прегледача, који је често последица недостајућих заглавља за ЦОРС (CORS) или претходну проверу на медијском серверу.';
+      'Муфин (EsPlay) је открио неуспех захтева на нивоу прегледача, који је често последица недостајућих заглавља за ЦОРС (CORS) или претходну проверу на медијском серверу.';
 
   @override
   String webDiagnosticsTargetUrl(String url) {
@@ -12666,7 +12666,7 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get webDiagnosticsMixedContentFix =>
-      'Решење: омогућите приступ медијском серверу или адреси посредника преко ХТТПС-а (HTTPS), или учитајте Муфин (Moonfin) преко ХТТП-а (HTTP) само на поузданим локалним мрежама.';
+      'Решење: омогућите приступ медијском серверу или адреси посредника преко ХТТПС-а (HTTPS), или учитајте Муфин (EsPlay) преко ХТТП-а (HTTP) само на поузданим локалним мрежама.';
 
   @override
   String get webDiagnosticsNoMixedContentDetected =>
@@ -14902,7 +14902,7 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get autoDownloadTranscodedForegroundNote =>
-      'Транскодирани квалитети преузимају се само док је Мунфин (Moonfin) отворен. Оригинални квалитет се преузима и у позадини.';
+      'Транскодирани квалитети преузимају се само док је Мунфин (EsPlay) отворен. Оригинални квалитет се преузима и у позадини.';
 
   @override
   String get autoDownloadTranscodedRunningNote =>
@@ -14910,7 +14910,7 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get autoDownloadForegroundOnly =>
-      'Преузима се само док је Мунфин (Moonfin) отворен';
+      'Преузима се само док је Мунфин (EsPlay) отворен';
 
   @override
   String get autoDownloadQualityTitle => 'Квалитет аутоматског преузимања';
@@ -14933,7 +14933,7 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get smartDownloadsEnableDescription =>
-      'When you finish an episode on any device, Moonfin downloads the next ones. Episodes it downloads are deleted once watched.';
+      'When you finish an episode on any device, EsPlay downloads the next ones. Episodes it downloads are deleted once watched.';
 
   @override
   String get smartDownloadsKeepReady => 'Episodes to Keep Downloaded';
@@ -15007,15 +15007,15 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get autoDownloadBackgroundRefreshSubtitle =>
-      'Дозволи систему да повремено проверава има ли нових епизода док је Мунфин (Moonfin) затворен';
+      'Дозволи систему да повремено проверава има ли нових епизода док је Мунфин (EsPlay) затворен';
 
   @override
   String get autoDownloadBackgroundRefreshDenied =>
-      'Освежавање апликације у позадини је онемогућено за Мунфин (Moonfin). Омогућите га у подешавањима иОС-а (iOS).';
+      'Освежавање апликације у позадини је онемогућено за Мунфин (EsPlay). Омогућите га у подешавањима иОС-а (iOS).';
 
   @override
   String get autoDownloadBackgroundRestrictedAndroid =>
-      'Употреба Мунфина (Moonfin) у позадини ограничена је у подешавањима Андроида (Android).';
+      'Употреба Мунфина (EsPlay) у позадини ограничена је у подешавањима Андроида (Android).';
 
   @override
   String get autoDownloadCheckNow => 'Провери сада';
@@ -15234,13 +15234,13 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get topShelfDescription =>
-      'Садржај који се приказује изнад иконе Мунфина (Moonfin) на почетном екрану Епл ТВ-а (Apple TV) када је изабрана. Ово подешавање важи само за овај уређај.';
+      'Садржај који се приказује изнад иконе Мунфина (EsPlay) на почетном екрану Епл ТВ-а (Apple TV) када је изабрана. Ово подешавање важи само за овај уређај.';
 
   @override
   String get topShelfLatestMedia => 'Најновији садржаји';
 
   @override
-  String get topShelfAppBanner => 'Банер Мунфина (Moonfin)';
+  String get topShelfAppBanner => 'Банер Мунфина (EsPlay)';
 
   @override
   String get keepVideoClearOfDynamicIsland =>
@@ -15320,7 +15320,7 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get settingsSyncSubtitle =>
-      'Moonbase plugin sync and customization profiles';
+      'EsPlay plugin sync and customization profiles';
 
   @override
   String get navigationBar => 'Navigation Bar';
@@ -15949,7 +15949,7 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get rommUnlinkNote =>
-      'Unlinking stops Moonfin from using your RomM key. The key stays in RomM until you remove it from your API tokens there.';
+      'Unlinking stops EsPlay from using your RomM key. The key stays in RomM until you remove it from your API tokens there.';
 
   @override
   String get rommUnlink => 'Unlink';
@@ -15963,7 +15963,7 @@ class AppLocalizationsSr extends AppLocalizations {
 
   @override
   String get rommUnreachable =>
-      'Moonfin couldn\'t reach RomM. Try again in a moment.';
+      'EsPlay couldn\'t reach RomM. Try again in a moment.';
 
   @override
   String get rommNotAvailable => 'This server has no RomM library.';

@@ -1,6 +1,6 @@
 {
     "@@locale": "lt",
-    "appTitle": "Moonfin",
+    "appTitle": "EsPlay",
     "@appTitle": {
         "description": "The application title"
     },
@@ -82,7 +82,7 @@
     "@selectServer": {
         "description": "Button to navigate back to server selection"
     },
-    "appVersionFooter": "Moonfin versija {version}",
+    "appVersionFooter": "EsPlay versija {version}",
     "@appVersionFooter": {
         "description": "App version shown in footer",
         "placeholders": {
@@ -156,7 +156,7 @@
     "@secureStorageUnavailable": {
         "description": "Dialog title when system keyring is inaccessible"
     },
-    "secureStorageUnavailableMessage": "Moonfin negalėjo pasiekti jūsų sistemos raktų pakabuko. Prisijungimas gali būti tęsiamas, tačiau saugi žetonų saugykla gali būti nepasiekiama, kol nebus atrakintas raktų pakabukas.",
+    "secureStorageUnavailableMessage": "EsPlay negalėjo pasiekti jūsų sistemos raktų pakabuko. Prisijungimas gali būti tęsiamas, tačiau saugi žetonų saugykla gali būti nepasiekiama, kol nebus atrakintas raktų pakabukas.",
     "@secureStorageUnavailableMessage": {
         "description": "Explanation when secure storage is not available"
     },
@@ -168,15 +168,15 @@
     "@settingsAppearanceTheme": {
         "description": "Title for the theme selection screen and theme settings entry"
     },
-    "settingsAppearanceThemeSubtitle": "Perjunkite „Moonfin“ ir „Neon Pulse“ iš naujo nepaleidę programos",
+    "settingsAppearanceThemeSubtitle": "Perjunkite „EsPlay“ ir „Neon Pulse“ iš naujo nepaleidę programos",
     "@settingsAppearanceThemeSubtitle": {
         "description": "Subtitle for the theme selection screen and theme settings entry"
     },
-    "themeMoonfin": "Moonfin",
+    "themeMoonfin": "EsPlay",
     "@themeMoonfin": {
         "description": "Display name for the Moonfin theme"
     },
-    "themeMoonfinSubtitle": "Dabartinė Moonfin išvaizda, kurią jūs visi pamėgote",
+    "themeMoonfinSubtitle": "Dabartinė EsPlay išvaizda, kurią jūs visi pamėgote",
     "@themeMoonfinSubtitle": {
         "description": "Preview description for the Moonfin theme"
     },
@@ -249,7 +249,7 @@
             }
         }
     },
-    "exitApp": "Išeiti iš Moonfin?",
+    "exitApp": "Išeiti iš EsPlay?",
     "@exitApp": {
         "description": "Title of exit confirmation dialog"
     },
@@ -3109,7 +3109,7 @@
     "@customMpvConfPath": {
         "description": "Setting for custom mpv.conf path"
     },
-    "notSetMpvConf": "Nenustatyta. „Moonfin“ išbandys numatytąjį mpv.conf failą programų / duomenų aplankuose.",
+    "notSetMpvConf": "Nenustatyta. „EsPlay“ išbandys numatytąjį mpv.conf failą programų / duomenų aplankuose.",
     "@notSetMpvConf": {
         "description": "Description when no custom mpv.conf is set"
     },
@@ -3336,7 +3336,7 @@
     "@saveToDownloadsFolder": {
         "description": "Setting for saving to downloads folder"
     },
-    "downloadsVisibleToOtherApps": "Atsisiuntimai / Moonfin – matoma kitoms programoms",
+    "downloadsVisibleToOtherApps": "Atsisiuntimai / EsPlay – matoma kitoms programoms",
     "@downloadsVisibleToOtherApps": {
         "description": "Description for downloads folder visibility"
     },
@@ -3372,7 +3372,7 @@
     "@saveToDownloadsFolderQuestion": {
         "description": "Dialog title for saving to downloads folder"
     },
-    "saveToDownloadsFolderDescription": "Atsisiųsta medija bus išsaugota jūsų įrenginio aplanke „Atsisiuntimai/Moonfin“. Šiuos failus matys kitos programos, pvz., galerija ar muzikos grotuvas.\n\nEsami atsisiuntimai liks dabartinėje vietoje.",
+    "saveToDownloadsFolderDescription": "Atsisiųsta medija bus išsaugota jūsų įrenginio aplanke „Atsisiuntimai/EsPlay“. Šiuos failus matys kitos programos, pvz., galerija ar muzikos grotuvas.\n\nEsami atsisiuntimai liks dabartinėje vietoje.",
     "@saveToDownloadsFolderDescription": {
         "description": "Description for saving to downloads folder"
     },
@@ -3504,7 +3504,7 @@
     "@libraryVisibility": {
         "description": "Section title for library visibility"
     },
-    "libraryVisibilityDescription": "Perjungti pagrindinio puslapio matomumą pagal biblioteką. Iš naujo paleiskite „Moonfin“, kad pakeitimai įsigaliotų.",
+    "libraryVisibilityDescription": "Perjungti pagrindinio puslapio matomumą pagal biblioteką. Iš naujo paleiskite „EsPlay“, kad pakeitimai įsigaliotų.",
     "@libraryVisibilityDescription": {
         "description": "Explanation shown on the library visibility settings screen"
     },
@@ -3553,7 +3553,7 @@
     "@mediaBarModeDescription": {
         "description": "Description for media bar style setting"
     },
-    "mediaBarModeMoonfin": "Moonfin",
+    "mediaBarModeMoonfin": "EsPlay",
     "@mediaBarModeMoonfin": {
         "description": "Media bar style option: Moonfin"
     },
@@ -3943,7 +3943,7 @@
     "@ratingSourcesDescription": {
         "description": "Description for rating sources"
     },
-    "pluginLabel": "Moonbase papildinys",
+    "pluginLabel": "EsPlay papildinys",
     "@pluginLabel": {
         "description": "Settings title for plugin"
     },
@@ -4076,11 +4076,11 @@
     "@discoverRows": {
         "description": "Section title for discover rows"
     },
-    "discoverRowsDescriptionPlugin": "Įjunkite eilutes, kurias norite matyti Seerr pagrindiniame puslapyje. Vilkite, kad pertvarkytumėte. Pasirinktinė tvarka sinchronizuojama su Moonbase.",
+    "discoverRowsDescriptionPlugin": "Įjunkite eilutes, kurias norite matyti Seerr pagrindiniame puslapyje. Vilkite, kad pertvarkytumėte. Pasirinktinė tvarka sinchronizuojama su EsPlay.",
     "@discoverRowsDescriptionPlugin": {
         "description": "Description for discover rows with plugin"
     },
-    "discoverRowsDescription": "Įjunkite eilutes, kurias norite matyti Seerr pagrindiniame puslapyje. Vilkite, kad pertvarkytumėte. Pasirinktinė tvarka sinchronizuojama su Moonbase.",
+    "discoverRowsDescription": "Įjunkite eilutes, kurias norite matyti Seerr pagrindiniame puslapyje. Vilkite, kad pertvarkytumėte. Pasirinktinė tvarka sinchronizuojama su EsPlay.",
     "@discoverRowsDescription": {
         "description": "Description for discover rows without plugin"
     },
@@ -4281,7 +4281,7 @@
     "@cancelRequest": {
         "description": "Button/dialog title to cancel a media request"
     },
-    "playInMoonfin": "Žaisk „Moonfin“.",
+    "playInMoonfin": "Žaisk „EsPlay“.",
     "@playInMoonfin": {
         "description": "Button to play available media in Moonfin"
     },
@@ -4335,7 +4335,7 @@
     "@keep": {
         "description": "Button to keep/dismiss a cancel dialog"
     },
-    "itemNotFoundInLibrary": "Elementas nerastas jūsų Moonfin bibliotekoje",
+    "itemNotFoundInLibrary": "Elementas nerastas jūsų EsPlay bibliotekoje",
     "@itemNotFoundInLibrary": {
         "description": "Snackbar when Seerr item cannot be found in Jellyfin"
     },
@@ -4639,7 +4639,7 @@
         }
     },
     "adminServerRebootInProgress": "Vyksta serverio perkrovimas",
-    "adminServerRebootMessage": "Serveris perkraunamas, iš naujo paleiskite „Moonfin“.",
+    "adminServerRebootMessage": "Serveris perkraunamas, iš naujo paleiskite „EsPlay“.",
     "adminActiveSessions": "Aktyvūs užsiėmimai",
     "adminSessionsLoadFailed": "Nepavyko įkelti seansų",
     "adminNoActiveSessions": "Nėra aktyvių seansų",
@@ -6527,12 +6527,12 @@
     "settingsShowGenresButtonInNavigation": "Rodyti žanrų mygtuką naršymo juostoje",
     "settingsShowFavoritesButtonInNavigation": "Rodyti parankinių mygtuką naršymo juostoje",
     "settingsShowLibrariesButtonInNavigation": "Rodyti bibliotekų mygtuką naršymo juostoje",
-    "settingsLibraryVisibilitySubtitle": "Perjungti pagrindinio puslapio matomumą pagal biblioteką. Iš naujo paleiskite „Moonfin“, kad pakeitimai įsigaliotų.",
+    "settingsLibraryVisibilitySubtitle": "Perjungti pagrindinio puslapio matomumą pagal biblioteką. Iš naujo paleiskite „EsPlay“, kad pakeitimai įsigaliotų.",
     "settingsMediaBarAndLocalPreviews": "Medijos juosta ir vietinės peržiūros",
     "settingsVisualOverlays": "Vaizdinės perdangos",
     "settingsSeasonalSurprise": "Sezoninė staigmena",
     "settingsMetadataAndRatings": "Metaduomenys ir įvertinimai",
-    "settingsPluginScreenDescription": "„Moonbase“ teikia serverio integraciją, įskaitant papildomus įvertinimo šaltinius, „Seerr“ užklausas ir sinchronizuojamas nuostatas.",
+    "settingsPluginScreenDescription": "„EsPlay“ teikia serverio integraciją, įskaitant papildomus įvertinimo šaltinius, „Seerr“ užklausas ir sinchronizuojamas nuostatas.",
     "settingsOfflineDownloads": "Atsisiuntimai neprisijungus",
     "settingsHigh": "Aukštas",
     "settingsLow": "Žemas",
@@ -6546,14 +6546,14 @@
     "settingsJoinDiscord": "Prisijunkite prie „Discord“.",
     "settingsJoinDiscordSubtitle": "Kalbėkitės su bendruomene",
     "settingsJoinTheDiscord": "Prisijunkite prie Discord",
-    "settingsSupportMoonfin": "Palaikykite Moonfin",
+    "settingsSupportMoonfin": "Palaikykite EsPlay",
     "settingsLegal": "TEISINĖ",
     "settingsLicenses": "Licencijos",
     "settingsOpenSourceLicenseNotices": "Atvirojo kodo licencijos pranešimai",
     "settingsPrivacyPolicy": "Privatumo politika",
-    "settingsPrivacyPolicySubtitle": "Kaip Moonfin tvarko jūsų duomenis",
+    "settingsPrivacyPolicySubtitle": "Kaip EsPlay tvarko jūsų duomenis",
     "settingsCheckForUpdates": "Patikrinkite, ar nėra atnaujinimų",
-    "settingsCheckForUpdatesSubtitle": "Patikrinkite naujausią „Moonfin“ leidimą",
+    "settingsCheckForUpdatesSubtitle": "Patikrinkite naujausią „EsPlay“ leidimą",
     "settingsPoweredByFlutter": "Maitinamas Flutter",
     "settingsLicenseNoticesCount": "{count, plural, one {# licencijos pranešimas} few {# licencijos pranešimai} many {# licencijos pranešimo} other {# licencijos pranešimų}}",
     "@settingsLicenseNoticesCount": {
@@ -7023,7 +7023,7 @@
         }
     },
     "savedThemesTitle": "Išsaugotos temos",
-    "savedThemesDescription": "Tai temos, atsisiųstos iš Moonfin įskiepio dabartiniam serveriui. Ištrynus pašalinama tik ši vietinė kopija.",
+    "savedThemesDescription": "Tai temos, atsisiųstos iš EsPlay įskiepio dabartiniam serveriui. Ištrynus pašalinama tik ši vietinė kopija.",
     "savedThemesEmpty": "Šiam serveriui išsaugotų temų nerasta.",
     "savedThemesCurrentThemeId": "{themeId} • Šiuo metu aktyvus",
     "@savedThemesCurrentThemeId": {
@@ -7037,7 +7037,7 @@
     "savedThemesDeleteTooltip": "Ištrinti išsaugotą temą",
     "savedThemesManageSubtitle": "Tvarkykite atsisiųstų papildinių temas šiame įrenginyje",
     "themeEditor": "Temos redaktorius",
-    "themeEditorSubtitle": "Naršyklėje atidarykite Moonfin temų rengyklę",
+    "themeEditorSubtitle": "Naršyklėje atidarykite EsPlay temų rengyklę",
     "homeScreen": "Pagrindinis ekranas",
     "bottomBar": "Apatinė juosta",
     "homeRowsStyleClassic": "Klasikinis",
@@ -7086,12 +7086,12 @@
     "preferSdhSubtitles": "Pirmenybė teikiama SDH subtitrams",
     "preferSdhSubtitlesSubtitle": "Automatinio pasirinkimo metu pirmenybę teikite SDH/CC subtitrų takeliams.",
     "webDiagnostics": "Interneto diagnostika",
-    "webDiagnosticsTitle": "Moonfin Žiniatinklio diagnostika",
+    "webDiagnosticsTitle": "EsPlay Žiniatinklio diagnostika",
     "webDiagnosticsIntro": "Naudokite šį puslapį norėdami diagnozuoti naršyklės ryšio problemas (CORS, mišraus turinio ir atradimo nustatymus).",
     "webDiagnosticsDetectedMixedContentFailure": "Aptiktas mišraus turinio gedimas",
     "webDiagnosticsDetectedCorsPreflightFailure": "Aptiktas CORS / išankstinio skrydžio gedimas",
-    "webDiagnosticsMixedContentFailureBody": "Moonfin aptiko HTTPS puslapį, bandantį iškviesti HTTP serverio URL. Naršyklės blokuoja šią užklausą, kol ji pasiekia jūsų serverį.",
-    "webDiagnosticsCorsFailureBody": "Moonfin aptiko naršyklės lygio užklausos gedimą, kurį dažniausiai sukelia trūkstamos CORS arba išankstinio patikrinimo antraštės medijos serveryje.",
+    "webDiagnosticsMixedContentFailureBody": "EsPlay aptiko HTTPS puslapį, bandantį iškviesti HTTP serverio URL. Naršyklės blokuoja šią užklausą, kol ji pasiekia jūsų serverį.",
+    "webDiagnosticsCorsFailureBody": "EsPlay aptiko naršyklės lygio užklausos gedimą, kurį dažniausiai sukelia trūkstamos CORS arba išankstinio patikrinimo antraštės medijos serveryje.",
     "webDiagnosticsTargetUrl": "Tikslinis URL: {url}",
     "@webDiagnosticsTargetUrl": {
         "description": "Target URL shown in diagnostics summary",
@@ -7121,7 +7121,7 @@
     "notConfigured": "nesukonfigūruotas",
     "webDiagnosticsMixedContent": "Mišrus turinys",
     "webDiagnosticsMixedContentDetected": "Šis puslapis įkeltas per HTTPS, bet vienas ar daugiau sukonfigūruotų URL yra HTTP. Naršyklės blokuoja HTTPS puslapius, kad jie negalėtų iškviesti HTTP API.",
-    "webDiagnosticsMixedContentFix": "Pataisymas: aptarnaukite medijos serverį arba tarpinį serverį per HTTPS arba įkelkite Moonfin per HTTP tik patikimuose vietiniuose tinkluose.",
+    "webDiagnosticsMixedContentFix": "Pataisymas: aptarnaukite medijos serverį arba tarpinį serverį per HTTPS arba įkelkite EsPlay per HTTP tik patikimuose vietiniuose tinkluose.",
     "webDiagnosticsNoMixedContentDetected": "Iš dabartinių vykdymo laiko nustatymų neaptikta jokios akivaizdžios mišraus turinio konfigūracijos.",
     "webDiagnosticsCorsChecklist": "CORS kontrolinis sąrašas",
     "webDiagnosticsCorsChecklistItem1": "• Leisti naršyklės kilmę Access-Control-Allow-Origin.",
@@ -7318,7 +7318,7 @@
     "@detailScreenStyle": {
         "description": "Label for the media detail screen layout style setting"
     },
-    "detailScreenStyleSubtitle": "Klasikinis – originalus centruotas Moonfin išdėstymas. Modernus – prisitaikantis kinematografinis išdėstymas.",
+    "detailScreenStyleSubtitle": "Klasikinis – originalus centruotas EsPlay išdėstymas. Modernus – prisitaikantis kinematografinis išdėstymas.",
     "@detailScreenStyleSubtitle": {
         "description": "Explanation under the detail screen style setting"
     },
@@ -7350,11 +7350,11 @@
     "@recommendationSystem": {
         "description": "Label for the Recommendation System setting"
     },
-    "recommendationSystemSubtitle": "Naudokite Moonfin Recommends vietinės bibliotekos algoritmą arba internetinius TMDB panašumo rodiklius. Pastaba: internetinėms rekomendacijoms reikia Seerr integracijos.",
+    "recommendationSystemSubtitle": "Naudokite EsPlay Recommends vietinės bibliotekos algoritmą arba internetinius TMDB panašumo rodiklius. Pastaba: internetinėms rekomendacijoms reikia Seerr integracijos.",
     "@recommendationSystemSubtitle": {
         "description": "Explanation under the recommendation system setting"
     },
-    "recommendationSystemMoonfin": "Moonfin Recommends",
+    "recommendationSystemMoonfin": "EsPlay Recommends",
     "@recommendationSystemMoonfin": {
         "description": "Recommendation system option: Moonfin Recommends"
     },
@@ -7366,7 +7366,7 @@
     "@recommendationsApplyParentalRatingCap": {
         "description": "Label for the toggle that controls whether similar suggestions are capped by target media parental rating"
     },
-    "recommendationsApplyParentalRatingCapSubtitle": "Riboti Moonfin Recommends pasiūlymus pagal pasirinktos medijos amžiaus cenzą",
+    "recommendationsApplyParentalRatingCapSubtitle": "Riboti EsPlay Recommends pasiūlymus pagal pasirinktos medijos amžiaus cenzą",
     "@recommendationsApplyParentalRatingCapSubtitle": {
         "description": "Explanation under the parental rating cap setting toggle"
     },
@@ -7414,7 +7414,7 @@
     "@customThemeTitle": {
         "description": "Title for the custom theme settings section"
     },
-    "customThemeSubtitle": "Pasirinktinės temos keičia vaizdo elementus visoje Moonfin programoje. Pasirinkite vieną iš šių parinkčių pagal savo stilių.",
+    "customThemeSubtitle": "Pasirinktinės temos keičia vaizdo elementus visoje EsPlay programoje. Pasirinkite vieną iš šių parinkčių pagal savo stilių.",
     "@customThemeSubtitle": {
         "description": "Description under custom themes section"
     },
@@ -7587,7 +7587,7 @@
     "@shuffleAllMusic": {
         "description": "Car browse action that shuffles the whole music library"
     },
-    "carSignInPrompt": "Prisijunkite prie Moonfin telefone",
+    "carSignInPrompt": "Prisijunkite prie EsPlay telefone",
     "@carSignInPrompt": {
         "description": "Shown in the car when no account is signed in"
     },
@@ -8927,7 +8927,7 @@
     "@impellerRendering": {
         "description": "Title of the setting that selects the Flutter rendering engine (Impeller vs. legacy)."
     },
-    "impellerRenderingSubtitle": "Impeller – modernus Flutter GPU atvaizdavimo variklis, užtikrinantis sklandesnes animacijas ir mažiau trūkčiojimų. Kai kuriuose TV priedėliuose ir senesniuose GPU jis gali sukelti trikdžius ar juodą vaizdą; tokiu atveju jį išjunkite. „Automatinis“ parenka geriausią numatytąjį variantą jūsų įrenginiui. Kad pakeitimai įsigaliotų, paleiskite Moonfin iš naujo.",
+    "impellerRenderingSubtitle": "Impeller – modernus Flutter GPU atvaizdavimo variklis, užtikrinantis sklandesnes animacijas ir mažiau trūkčiojimų. Kai kuriuose TV priedėliuose ir senesniuose GPU jis gali sukelti trikdžius ar juodą vaizdą; tokiu atveju jį išjunkite. „Automatinis“ parenka geriausią numatytąjį variantą jūsų įrenginiui. Kad pakeitimai įsigaliotų, paleiskite EsPlay iš naujo.",
     "@impellerRenderingSubtitle": {
         "description": "Explanatory description under the rendering engine setting."
     },
@@ -8938,7 +8938,7 @@
     "@impellerRestartTitle": {
         "description": "Title of the dialog shown after changing the rendering engine."
     },
-    "impellerRestartMessage": "Kad būtų pakeistas atvaizdavimo variklis, Moonfin reikia paleisti iš naujo. Uždarykite programą dabar ir vėl ją atidarykite.",
+    "impellerRestartMessage": "Kad būtų pakeistas atvaizdavimo variklis, EsPlay reikia paleisti iš naujo. Uždarykite programą dabar ir vėl ją atidarykite.",
     "@impellerRestartMessage": {
         "description": "Body of the dialog shown after changing the rendering engine."
     },
