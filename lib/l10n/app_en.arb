@@ -14746,7 +14746,7 @@
   "@readOnTmdb": {
     "description": "Button in an opened review that opens the review on the TMDB website"
   },
-  "addServerButtonSubtitle": "By address, or with a Plex or Emby Connect account",
+  "addServerButtonSubtitle": "By the server address",
   "@addServerButtonSubtitle": {
     "description": "Second line of the Add Server button on the server screen"
   },
@@ -14902,5 +14902,11 @@
   "musicSortMostAlbums": "Most Albums",
   "@musicSortMostAlbums": {
     "description": "Genres screen order: the genres with the most albums first"
-  }
+  },
+  "esplaySignInSubtitle": "Sign in with your EsPlay username and password",
+  "esplayInvalidCredentials": "Incorrect username or password",
+  "esplayTooManyAttempts": "Too many failed attempts. Wait a few minutes and try again.",
+  "esplayAppOutdated": "This version of EsPlay is out of date. Update it to keep using it.",
+  "esplayPanelUnavailable": "Couldn't reach EsPlay. Check your internet connection and try again.",
+  "esplayConnectWithServer": "Connect by entering the server"
 }

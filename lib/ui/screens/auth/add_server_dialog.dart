@@ -244,7 +244,7 @@ class _AddServerButtonState extends State<AddServerButton> {
                       ),
                     ),
                     if (constraints.maxWidth >= 360)
-                      for (final type in ServerType.values)
+                      for (final type in const [ServerType.emby])
                         Padding(
                           padding: const EdgeInsetsDirectional.only(start: 10),
                           child: ServerTypeIcon(
@@ -318,7 +318,8 @@ class _AddServerDialogState extends State<AddServerDialog> {
   @override
   void initState() {
     super.initState();
-    _startedOnAddress = widget.controller.text.trim().isNotEmpty;
+    // EsPlay: straight to the address, no Plex or Emby Connect choice.
+    _startedOnAddress = true;
     _step = _startedOnAddress ? _Step.address : _Step.choose;
     _addressFocus.addListener(_onAddressFocusChanged);
     _focusLater(_startedOnAddress ? _addressFocus : _firstChoiceFocus);

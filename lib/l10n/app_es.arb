@@ -9022,5 +9022,12 @@
     "animeMarkerMangaCanon": "Insignia en un episodio de anime adaptado del manga original",
     "@animeMarkerMangaCanon": {
         "description": "Badge on an anime episode adapted from the source manga"
-    }
+    },
+    "esplaySignInSubtitle": "Entra con tu usuario y contraseña de EsPlay",
+    "esplayInvalidCredentials": "Usuario o contraseña incorrectos",
+    "esplayTooManyAttempts": "Demasiados intentos fallidos. Espera unos minutos y vuelve a probar.",
+    "esplayAppOutdated": "Esta versión de EsPlay está desactualizada. Actualízala para seguir usándola.",
+    "esplayPanelUnavailable": "No se pudo contactar con EsPlay. Comprueba tu conexión a internet y vuelve a probar.",
+    "esplayConnectWithServer": "Conectar indicando el servidor",
+    "addServerButtonSubtitle": "Indicando la dirección del servidor"
 }

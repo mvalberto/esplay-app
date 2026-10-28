@@ -63,6 +63,9 @@ class Destinations {
   static const server = '/server';
   static const login = '/login';
 
+  /// EsPlay sign-in: username and password only, the panel finds the server.
+  static const esplayLogin = '/esplay-login';
+
   /// First-run setup. Sits between login and home the first time a user lands
   /// on a server, and is reachable again from About afterwards.
   static const setup = '/setup';
@@ -424,7 +427,8 @@ class Destinations {
       path == startup ||
       path == serverSelect ||
       path == server ||
-      path == login;
+      path == login ||
+      path == esplayLogin;
 
   static String seerrBrowseWith({
     required String filterId,

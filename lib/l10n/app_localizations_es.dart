@@ -15973,8 +15973,7 @@ class AppLocalizationsEs extends AppLocalizations {
   String get readOnTmdb => 'Read on TMDB';
 
   @override
-  String get addServerButtonSubtitle =>
-      'By address, or with a Plex or Emby Connect account';
+  String get addServerButtonSubtitle => 'Indicando la dirección del servidor';
 
   @override
   String get addServerChooseHow => 'Choose how you\'d like to connect.';
@@ -16110,6 +16109,28 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get musicSortMostAlbums => 'Most Albums';
+
+  @override
+  String get esplaySignInSubtitle =>
+      'Entra con tu usuario y contraseña de EsPlay';
+
+  @override
+  String get esplayInvalidCredentials => 'Usuario o contraseña incorrectos';
+
+  @override
+  String get esplayTooManyAttempts =>
+      'Demasiados intentos fallidos. Espera unos minutos y vuelve a probar.';
+
+  @override
+  String get esplayAppOutdated =>
+      'Esta versión de EsPlay está desactualizada. Actualízala para seguir usándola.';
+
+  @override
+  String get esplayPanelUnavailable =>
+      'No se pudo contactar con EsPlay. Comprueba tu conexión a internet y vuelve a probar.';
+
+  @override
+  String get esplayConnectWithServer => 'Conectar indicando el servidor';
 }
 
 /// The translations for Spanish Castilian, as used in Latin America and the Caribbean (`es_419`).

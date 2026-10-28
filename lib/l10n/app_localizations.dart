@@ -27606,7 +27606,7 @@ abstract class AppLocalizations {
   /// Second line of the Add Server button on the server screen
   ///
   /// In en, this message translates to:
-  /// **'By address, or with a Plex or Emby Connect account'**
+  /// **'By the server address'**
   String get addServerButtonSubtitle;
 
   /// Subtitle of the first step of the Add Server dialog
@@ -27800,6 +27800,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Most Albums'**
   String get musicSortMostAlbums;
+
+  /// No description provided for @esplaySignInSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in with your EsPlay username and password'**
+  String get esplaySignInSubtitle;
+
+  /// No description provided for @esplayInvalidCredentials.
+  ///
+  /// In en, this message translates to:
+  /// **'Incorrect username or password'**
+  String get esplayInvalidCredentials;
+
+  /// No description provided for @esplayTooManyAttempts.
+  ///
+  /// In en, this message translates to:
+  /// **'Too many failed attempts. Wait a few minutes and try again.'**
+  String get esplayTooManyAttempts;
+
+  /// No description provided for @esplayAppOutdated.
+  ///
+  /// In en, this message translates to:
+  /// **'This version of EsPlay is out of date. Update it to keep using it.'**
+  String get esplayAppOutdated;
+
+  /// No description provided for @esplayPanelUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t reach EsPlay. Check your internet connection and try again.'**
+  String get esplayPanelUnavailable;
+
+  /// No description provided for @esplayConnectWithServer.
+  ///
+  /// In en, this message translates to:
+  /// **'Connect by entering the server'**
+  String get esplayConnectWithServer;
 }
 
 class _AppLocalizationsDelegate

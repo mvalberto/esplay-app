@@ -88,6 +88,7 @@ const _authRoutes = {
   Destinations.webDiagnostics,
   Destinations.server,
   Destinations.login,
+  Destinations.esplayLogin,
 };
 
 /// Whether first-run setup still has something to ask about.
@@ -248,6 +249,11 @@ final appRouter = GoRouter(
         final serverId = state.uri.queryParameters['serverId'] ?? '';
         return ServerScreen(serverId: serverId);
       },
+    ),
+    GoRoute(
+      path: Destinations.esplayLogin,
+      builder: (context, state) =>
+          const LoginScreen(serverId: '', esplayMode: true),
     ),
     GoRoute(
       path: Destinations.login,

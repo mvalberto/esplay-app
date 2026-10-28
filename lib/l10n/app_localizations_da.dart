@@ -15853,8 +15853,7 @@ class AppLocalizationsDa extends AppLocalizations {
   String get readOnTmdb => 'Read on TMDB';
 
   @override
-  String get addServerButtonSubtitle =>
-      'By address, or with a Plex or Emby Connect account';
+  String get addServerButtonSubtitle => 'By the server address';
 
   @override
   String get addServerChooseHow => 'Choose how you\'d like to connect.';
@@ -15990,4 +15989,26 @@ class AppLocalizationsDa extends AppLocalizations {
 
   @override
   String get musicSortMostAlbums => 'Most Albums';
+
+  @override
+  String get esplaySignInSubtitle =>
+      'Sign in with your EsPlay username and password';
+
+  @override
+  String get esplayInvalidCredentials => 'Incorrect username or password';
+
+  @override
+  String get esplayTooManyAttempts =>
+      'Too many failed attempts. Wait a few minutes and try again.';
+
+  @override
+  String get esplayAppOutdated =>
+      'This version of EsPlay is out of date. Update it to keep using it.';
+
+  @override
+  String get esplayPanelUnavailable =>
+      'Couldn\'t reach EsPlay. Check your internet connection and try again.';
+
+  @override
+  String get esplayConnectWithServer => 'Connect by entering the server';
 }

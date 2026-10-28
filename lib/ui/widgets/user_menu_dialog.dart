@@ -184,7 +184,7 @@ class _AccountDialogState extends State<_AccountDialog> {
 
     if (!mounted) return;
     Navigator.of(context).pop();
-    context.go(Destinations.serverSelect);
+    context.go(Destinations.esplayLogin);
   }
 
   Future<void> _signOutAll() async {
@@ -200,24 +200,19 @@ class _AccountDialogState extends State<_AccountDialog> {
 
     if (!mounted) return;
     Navigator.of(context).pop();
-    context.go(Destinations.serverSelect);
+    context.go(Destinations.esplayLogin);
   }
 
   void _addUser() {
-    final activeServer = _activeServerId;
     final router = GoRouter.of(context);
     Navigator.of(context).pop();
-    if (activeServer != null && activeServer.isNotEmpty) {
-      router.go('${Destinations.server}?serverId=$activeServer');
-      return;
-    }
-    router.go(Destinations.serverSelect);
+    router.go(Destinations.esplayLogin);
   }
 
   void _changeServer() {
     final router = GoRouter.of(context);
     Navigator.of(context).pop();
-    router.go(Destinations.serverSelect);
+    router.go(Destinations.esplayLogin);
   }
 
   Widget _buildPairedActionButtons({

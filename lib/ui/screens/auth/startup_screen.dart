@@ -104,18 +104,9 @@ class _StartupScreenState extends State<StartupScreen>
     final behavior = authPrefs.loginBehavior;
     String? targetUserId;
 
-    // Always start with the last-used server as a universal fallback so that
-    // any edge case where a behavior-specific ID is not set still lands on
-    // the correct server's user-select page rather than the Add Server screen.
-    String? targetServerId = authPrefs.savedLastServerId.isNotEmpty
-        ? authPrefs.savedLastServerId
-        : null;
-
     if (behavior == UserSelectBehavior.lastUser) {
       targetUserId = authPrefs.savedLastUserId;
     } else if (behavior == UserSelectBehavior.currentUser) {
-      final autoServerId = authPrefs.savedAutoLoginServerId;
-      if (autoServerId.isNotEmpty) targetServerId = autoServerId;
       targetUserId = authPrefs.savedAutoLoginUserId;
     }
 
@@ -151,12 +142,12 @@ class _StartupScreenState extends State<StartupScreen>
           mode: PinEntryMode.verify,
           onVerify: pinUtil.verifyPin,
           onForgotPin: () {
-            if (mounted) context.go(Destinations.serverSelect);
+            if (mounted) context.go(Destinations.esplayLogin);
           },
         );
 
         if (!verified) {
-          if (mounted) context.go(Destinations.serverSelect);
+          if (mounted) context.go(Destinations.esplayLogin);
           return;
         }
       }
@@ -164,15 +155,8 @@ class _StartupScreenState extends State<StartupScreen>
       await _waitForNetworkSettle();
       if (mounted) context.go(Destinations.home);
     } else {
-      if (mounted) {
-        if (targetServerId != null && targetServerId.isNotEmpty) {
-          // A previously-used server is known — go straight to user selection
-          // for that server rather than the Add Server page.
-          context.go('${Destinations.server}?serverId=$targetServerId');
-        } else {
-          context.go(Destinations.serverSelect);
-        }
-      }
+      // EsPlay: username and password only, whatever server was used before.
+      if (mounted) context.go(Destinations.esplayLogin);
     }
   }
 

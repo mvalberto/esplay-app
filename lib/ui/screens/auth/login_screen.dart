@@ -24,6 +24,7 @@ import '../../../auth/store/client_certificate_store.dart';
 import '../../../data/services/media_server_client_factory.dart';
 import '../../../data/services/pin_guard.dart';
 import '../../../data/services/server_pin_service.dart';
+import '../../../esplay/esplay_panel.dart';
 import '../../../preference/user_preferences.dart';
 import '../../../util/focus/dpad_keys.dart';
 import '../../../util/pin_code_util.dart';
@@ -38,6 +39,8 @@ import '../../widgets/pin_entry_dialog.dart';
 import '../../widgets/sign_in_qr_code.dart';
 
 final _kAccent = AppColorScheme.accent;
+
+const _esplayLastUsernameKey = 'esplay_last_username';
 
 /// Asks for the PIN after a sign in when the user set one. A sign in that
 /// proved who this is clears a forgotten PIN instead of asking for it again,
@@ -81,6 +84,9 @@ class LoginScreen extends StatefulWidget {
   /// asking for it again.
   final bool resetPin;
 
+  /// EsPlay sign-in: no server yet, the panel finds it from the credentials.
+  final bool esplayMode;
+
   const LoginScreen({
     super.key,
     required this.serverId,
@@ -88,6 +94,7 @@ class LoginScreen extends StatefulWidget {
     this.hasPassword = true,
     this.backToServerList = false,
     this.resetPin = false,
+    this.esplayMode = false,
   });
 
   @override
@@ -160,6 +167,10 @@ class _LoginScreenState extends State<LoginScreen> {
     super.initState();
     if (widget.prefillUsername != null) {
       _usernameController.text = widget.prefillUsername!;
+    } else if (widget.esplayMode) {
+      _usernameController.text =
+          GetIt.instance<PreferenceStore>().getString(_esplayLastUsernameKey) ??
+          '';
     }
     _setupFocusHandlers();
     _loadRecentUsernames();
@@ -288,6 +299,13 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<void> _initServer() async {
     await _serverRepo.loadStoredServers();
+    if (widget.esplayMode) {
+      setState(() => _showQuickConnect = false);
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _focusCredentialEntry();
+      });
+      return;
+    }
     final server = _serverRepo.getServer(widget.serverId);
     if (server == null) {
       if (mounted) context.go(Destinations.serverSelect);
@@ -495,7 +513,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _navigateBack() {
     final server = _server;
-    if (server == null || widget.backToServerList) {
+    if (server == null || widget.backToServerList || widget.esplayMode) {
       context.go(Destinations.serverSelect);
       return;
     }
@@ -649,13 +667,82 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  /// Points the screen at the server at [address], adding it if it is new.
+  Future<bool> _esplayUseServer(String address) async {
+    final server = await _serverRepo.addServer(address);
+    if (server == null) return false;
+    _server = server;
+    _client = _clientFactory.getClient(
+      serverId: server.id,
+      serverType: server.serverType,
+      baseUrl: server.address,
+    );
+    return true;
+  }
+
+  /// Tries the server that last signed [username] in, then the one the panel
+  /// names. Returns null when it has already put an error on screen.
+  Future<LoginState?> _esplayAuthenticate(
+    String username,
+    String password,
+  ) async {
+    final store = GetIt.instance<PreferenceStore>();
+    final cacheKey = esplayServerCacheKey(username);
+
+    Future<LoginState> signIn() async {
+      final result = await _authRepo.authenticate(
+        client: _client!,
+        serverId: _server!.id,
+        username: username,
+        password: password,
+      );
+      if (result is Authenticated) {
+        await store.setString(cacheKey, _server!.address);
+        await store.setString(_esplayLastUsernameKey, username);
+      }
+      return result;
+    }
+
+    LoginState? cachedResult;
+    final cached = store.getString(cacheKey);
+    if (cached != null && cached.isNotEmpty && await _esplayUseServer(cached)) {
+      cachedResult = await signIn();
+      if (cachedResult is Authenticated) return cachedResult;
+    }
+
+    final panel = await esplayPanelLogin(username, password);
+    if (!mounted) return null;
+    final l10n = AppLocalizations.of(context);
+    switch (panel) {
+      case EsPlayPanelServer(:final address):
+        if (await _esplayUseServer(address)) return signIn();
+        if (mounted) _finishLoginWithError(l10n.serverUnavailable);
+      case EsPlayPanelInvalidCredentials():
+        await store.remove(cacheKey);
+        if (mounted) _finishLoginWithError(l10n.esplayInvalidCredentials);
+      case EsPlayPanelTooManyAttempts():
+        _finishLoginWithError(l10n.esplayTooManyAttempts);
+      case EsPlayPanelOutdatedApp(:final message):
+        _finishLoginWithError(
+          message.isNotEmpty ? message : l10n.esplayAppOutdated,
+        );
+      case EsPlayPanelUnavailable():
+        // With the panel down, what the cached server said is the better
+        // explanation.
+        if (cachedResult != null) return cachedResult;
+        _finishLoginWithError(l10n.esplayPanelUnavailable);
+    }
+    return null;
+  }
+
   Future<void> _login() async {
     // The sign in button goes dead once this is running, but the flag only
     // reaches it on the next build, and the password field submits straight
     // here, so one remote select can sign in twice.
     if (_isLoading) return;
     final username = _usernameController.text.trim();
-    if (username.isEmpty || _client == null || _server == null) return;
+    if (username.isEmpty) return;
+    if (!widget.esplayMode && (_client == null || _server == null)) return;
 
     setState(() {
       _isLoading = true;
@@ -665,12 +752,22 @@ class _LoginScreenState extends State<LoginScreen> {
     });
 
     try {
-      final result = await _authRepo.authenticate(
-        client: _client!,
-        serverId: _server!.id,
-        username: username,
-        password: _passwordController.text,
-      );
+      final LoginState result;
+      if (widget.esplayMode) {
+        final esplayResult = await _esplayAuthenticate(
+          username,
+          _passwordController.text,
+        );
+        if (esplayResult == null) return;
+        result = esplayResult;
+      } else {
+        result = await _authRepo.authenticate(
+          client: _client!,
+          serverId: _server!.id,
+          username: username,
+          password: _passwordController.text,
+        );
+      }
 
       if (!mounted) return;
 
@@ -737,7 +834,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (_server == null) {
+    if (_server == null && !widget.esplayMode) {
       return SignInBackScope(
         onBack: _navigateBack,
         child: const Scaffold(body: Center(child: CircularProgressIndicator())),
@@ -746,50 +843,53 @@ class _LoginScreenState extends State<LoginScreen> {
 
     final l10n = AppLocalizations.of(context);
 
-    return SignInBackScope(
-      onBack: _navigateBack,
-      child: LoginScaffold(
-        maxWidth: _quickConnectQrBeside ? 900 : 600,
-        header: Padding(
-          padding: const EdgeInsets.only(bottom: 24),
-          child: Image.asset('assets/images/logo_and_text.png', height: 64),
-        ),
-        footer: AnimatedContainer(
-          duration: const Duration(milliseconds: 180),
-          height: PlatformDetection.isTV && _tvKeyboardVisible ? 280 : 0,
-        ),
-        child: _withQuickConnectQrBeside(
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                l10n.signIn,
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+    final scaffold = LoginScaffold(
+      maxWidth: _quickConnectQrBeside ? 900 : 600,
+      header: Padding(
+        padding: const EdgeInsets.only(bottom: 24),
+        child: Image.asset('assets/images/logo_and_text.png', height: 64),
+      ),
+      footer: AnimatedContainer(
+        duration: const Duration(milliseconds: 180),
+        height: PlatformDetection.isTV && _tvKeyboardVisible ? 280 : 0,
+      ),
+      child: _withQuickConnectQrBeside(
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              l10n.signIn,
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                fontWeight: FontWeight.bold,
               ),
-              const SizedBox(height: 4),
-              Text(
-                l10n.connectingToServer(_server!.name),
-                style: Theme.of(
-                  context,
-                ).textTheme.bodySmall?.copyWith(color: _loginForeground(0.5)),
-              ),
+            ),
+            const SizedBox(height: 4),
+            Text(
+              widget.esplayMode
+                  ? l10n.esplaySignInSubtitle
+                  : l10n.connectingToServer(_server!.name),
+              style: Theme.of(
+                context,
+              ).textTheme.bodySmall?.copyWith(color: _loginForeground(0.5)),
+            ),
+            const SizedBox(height: 24),
+            if (_supportsQuickConnect) ...[
+              _buildToggleRow(),
               const SizedBox(height: 24),
-              if (_supportsQuickConnect) ...[
-                _buildToggleRow(),
-                const SizedBox(height: 24),
-                if (_showQuickConnect)
-                  _buildQuickConnectContent()
-                else
-                  _buildCredentialsContent(),
-              ] else
+              if (_showQuickConnect)
+                _buildQuickConnectContent()
+              else
                 _buildCredentialsContent(),
-            ],
-          ),
+            ] else
+              _buildCredentialsContent(),
+          ],
         ),
       ),
     );
+    // EsPlay's sign-in is the first page, so Back leaves the app instead of
+    // landing on the add-server screen.
+    if (widget.esplayMode) return scaffold;
+    return SignInBackScope(onBack: _navigateBack, child: scaffold);
   }
 
   Widget _withQuickConnectQrBeside(Widget content) {
@@ -1097,7 +1197,9 @@ class _LoginScreenState extends State<LoginScreen> {
           runSpacing: 12,
           children: [
             _buildActionButton(
-              label: l10n.back,
+              label: widget.esplayMode
+                  ? l10n.esplayConnectWithServer
+                  : l10n.back,
               focusNode: _backFocus,
               onPressed: _navigateBack,
             ),
