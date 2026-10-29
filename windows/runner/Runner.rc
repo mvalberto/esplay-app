@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "org.moonfin" "\0"
-            VALUE "FileDescription", "Moonfin" "\0"
+            VALUE "CompanyName", "EsPlay" "\0"
+            VALUE "FileDescription", "EsPlay" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "moonfin" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2026 org.moonfin. All rights reserved." "\0"
-            VALUE "OriginalFilename", "moonfin.exe" "\0"
-            VALUE "ProductName", "Moonfin" "\0"
+            VALUE "InternalName", "esplay" "\0"
+            VALUE "LegalCopyright", "EsPlay. Basada en Moonfin (GPL-2.0)." "\0"
+            VALUE "OriginalFilename", "esplay.exe" "\0"
+            VALUE "ProductName", "EsPlay" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
