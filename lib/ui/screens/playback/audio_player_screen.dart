@@ -690,7 +690,7 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
                             },
                           ),
                         ChoiceChip(
-                          label: const Text('End of track'),
+                          label: const Text('Fin de la pista'),
                           selected: false,
                           onSelected: (_) {
                             _setSleepTimer(_state.duration - _state.position);
@@ -740,14 +740,14 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
       if (mounted) {
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text('Saved "${name.trim()}"')));
+        ).showSnackBar(SnackBar(content: Text('Guardado "${name.trim()}"')));
       }
     } catch (e) {
       if (mounted) {
         final detail = describeError(e, AppLocalizations.of(context));
         ScaffoldMessenger.of(
           context,
-        ).showSnackBar(SnackBar(content: Text('Could not save playlist: $detail')));
+        ).showSnackBar(SnackBar(content: Text('No se pudo guardar la lista: $detail')));
       }
     }
   }
@@ -768,16 +768,16 @@ class _AudioPlayerScreenState extends State<AudioPlayerScreen> {
           controller: controller,
           autofocus: true,
           style: TextStyle(color: AppColorScheme.onSurface),
-          decoration: const InputDecoration(hintText: 'Playlist name'),
+          decoration: const InputDecoration(hintText: 'Nombre de la lista'),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(),
-            child: const Text('Cancel'),
+            child: const Text('Cancelar'),
           ),
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(controller.text),
-            child: const Text('Save'),
+            child: const Text('Guardar'),
           ),
         ],
       ),

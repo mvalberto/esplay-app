@@ -138,21 +138,21 @@ class ReaderTopBar extends StatelessWidget {
         _ChromeIconButton(
           icon: contentsIcon,
           color: palette.icon,
-          tooltip: 'Contents',
+          tooltip: 'Contenido',
           onPressed: onContents,
         ),
       if (onSearch != null)
         _ChromeIconButton(
           icon: searchIcon,
           color: palette.icon,
-          tooltip: 'Search',
+          tooltip: 'Buscar',
           onPressed: onSearch,
         ),
       if (showSettings) _AaButton(color: palette.icon, onPressed: onSettings),
       _ChromeIconButton(
         icon: bookmarkIcon,
         color: palette.icon,
-        tooltip: 'Bookmark',
+        tooltip: 'Marcador',
         onPressed: onBookmark,
       ),
     ];
@@ -177,7 +177,7 @@ class ReaderTopBar extends StatelessWidget {
               _ChromeIconButton(
                 icon: backIcon,
                 color: palette.icon,
-                tooltip: 'Back',
+                tooltip: 'Atrás',
                 onPressed: onBack,
               ),
               if (apple) ...[
@@ -252,7 +252,7 @@ class _AaButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Tooltip(
-      message: 'Reading settings',
+      message: 'Ajustes de lectura',
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: onPressed,

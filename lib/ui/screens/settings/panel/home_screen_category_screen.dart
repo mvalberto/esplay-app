@@ -90,7 +90,7 @@ class _HomeScreenCategoryScreenState extends State<_HomeScreenCategoryScreen> {
             PopScope(
               canPop: false,
               child: const AlertDialog(
-                title: Text('Refreshing Custom Rows'),
+                title: Text('Actualizando filas personalizadas'),
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -152,7 +152,7 @@ class _HomeScreenCategoryScreenState extends State<_HomeScreenCategoryScreen> {
 
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Refreshed your custom rows.')),
+          const SnackBar(content: Text('Filas personalizadas actualizadas.')),
         );
       }
     } catch (e) {
@@ -162,7 +162,7 @@ class _HomeScreenCategoryScreenState extends State<_HomeScreenCategoryScreen> {
       if (mounted) {
         final detail = describeError(e, AppLocalizations.of(context));
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to refresh custom rows: $detail')),
+          SnackBar(content: Text('No se pudieron actualizar las filas personalizadas: $detail')),
         );
       }
     }
@@ -419,7 +419,7 @@ class _HomeScreenCategoryScreenState extends State<_HomeScreenCategoryScreen> {
               children: [
                 _TvSettingsListTile(
                   leading: const Icon(Icons.movie_outlined),
-                  title: const Text('IMDb Lists'),
+                  title: const Text('Listas de IMDb'),
                   subtitle: const Text(
                     'Configure IMDb Top 250, Popular, and other charts.',
                   ),
@@ -428,7 +428,7 @@ class _HomeScreenCategoryScreenState extends State<_HomeScreenCategoryScreen> {
                 ),
                 _TvSettingsListTile(
                   leading: const Icon(Icons.trending_up),
-                  title: const Text('TMDB Lists'),
+                  title: const Text('Listas de TMDB'),
                   subtitle: Text(
                     tmdbAvailable
                         ? 'Configure Popular, Top Rated, and Trending TMDB lists.'
@@ -448,7 +448,7 @@ class _HomeScreenCategoryScreenState extends State<_HomeScreenCategoryScreen> {
                 if (showUpcomingCalendars)
                   _TvSettingsListTile(
                     leading: const Icon(Icons.calendar_month),
-                    title: const Text('Upcoming Calendars'),
+                    title: const Text('Calendarios de estrenos'),
                     subtitle: const Text(
                       'Toggle Upcoming Calendars from Radarr/Sonarr.',
                     ),
@@ -463,14 +463,14 @@ class _HomeScreenCategoryScreenState extends State<_HomeScreenCategoryScreen> {
                       width: 24,
                       height: 24,
                     ),
-                    title: const Text('Seerr Rows'),
-                    subtitle: const Text('Configure Seerr Discovery Rows.'),
+                    title: const Text('Filas de Seerr'),
+                    subtitle: const Text('Configura las filas de Descubrir de Seerr.'),
                     onTap: () =>
                         context.pushSettingsScreen(const _SeerrListsScreen()),
                   ),
                 _TvSettingsListTile(
                   leading: const Icon(Icons.tune_outlined),
-                  title: const Text('Custom Rows'),
+                  title: const Text('Filas personalizadas'),
                   subtitle: const Text(
                     'ADVANCED: Configure customized home rows from a variety of sources.',
                   ),
@@ -479,7 +479,7 @@ class _HomeScreenCategoryScreenState extends State<_HomeScreenCategoryScreen> {
                 ),
                 EnumPreferenceTile<MediaTypeBadgeBehavior>(
                   preference: UserPreferences.mediaTypeBadgeBehavior,
-                  title: 'Media type badges',
+                  title: 'Etiquetas de tipo de contenido',
                   description:
                       'Show MOVIE / SERIES labels on external home-row cards',
                   icon: Icons.info_outline,
@@ -492,7 +492,7 @@ class _HomeScreenCategoryScreenState extends State<_HomeScreenCategoryScreen> {
                 ),
                 _TvSettingsListTile(
                   leading: const Icon(Icons.refresh),
-                  title: const Text('Refresh Custom Rows'),
+                  title: const Text('Actualizar filas personalizadas'),
                   subtitle: const Text(
                     'Force a full update of the custom row caches.',
                   ),

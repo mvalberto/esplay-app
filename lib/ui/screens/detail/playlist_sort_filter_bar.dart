@@ -333,7 +333,7 @@ class PlaylistSortFilterBar extends StatelessWidget {
           _PlaylistPillButton(
             focusNode: sortFocusNode,
             icon: Icons.sort_rounded,
-            label: 'Sort: ${librarySortLabel(sortBy, l10n)}',
+            label: 'Orden: ${librarySortLabel(sortBy, l10n)}',
             trailing: sortBy != LibrarySortBy.random &&
                     (sortBy != LibrarySortBy.playlistOrder ||
                         sortDirection == SortDirection.descending)
@@ -356,7 +356,7 @@ class PlaylistSortFilterBar extends StatelessWidget {
           _PlaylistPillButton(
             focusNode: filterFocusNode,
             icon: Icons.filter_list_rounded,
-            label: 'Filter: ${_filterSummary(l10n)}',
+            label: 'Filtro: ${_filterSummary(l10n)}',
             trailing: const Icon(
               Icons.arrow_drop_down_rounded,
               size: 16,

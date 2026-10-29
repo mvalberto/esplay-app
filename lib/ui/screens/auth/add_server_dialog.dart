@@ -73,7 +73,7 @@ const _warningText = Color(0xFFFFD27A);
 
 ({Color tile, Color glyph}) _serverTint(ServerType type) => switch (type) {
   ServerType.jellyfin => (
-    tile: const Color(0x29AA5CC3),
+    tile: const Color(0x29BCBCBC),
     glyph: const Color(0xFFC88BE0),
   ),
   ServerType.emby => (

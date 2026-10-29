@@ -134,7 +134,7 @@ String appStateSummary({required String route, required bool screensaver}) {
       ..writeln();
   }
   return (
-    message: 'Previous run ended: $what while $importance',
+    message: 'La ejecución anterior terminó: $what mientras $importance',
     details: details.toString().trimRight(),
     signature: 'exit:$what:${crashThread ?? ''}:${state ?? ''}',
   );

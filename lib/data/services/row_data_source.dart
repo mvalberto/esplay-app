@@ -2651,7 +2651,7 @@ class RowDataSource {
     if (sourceIdx >= baseItems.length) {
       return HomeRow(
         id: 'sinceYouWatched$rowIndex',
-        title: 'Since you watched',
+        title: 'Porque viste',
         rowType: HomeRowType.latestMedia,
         items: const [],
       );
@@ -2720,7 +2720,7 @@ class RowDataSource {
 
     return HomeRow(
       id: rowId,
-      title: 'Since you watched "$baseItemName"',
+      title: 'Porque viste "$baseItemName"',
       rowType: HomeRowType.latestMedia,
       items: recommendedItems.take(15).toList(),
       totalCount: recommendedItems.length,
@@ -3513,7 +3513,7 @@ class RowDataSource {
 
     return HomeRow(
       id: 'rewatch',
-      title: 'Rewatch',
+      title: 'Volver a ver',
       rowType: HomeRowType.latestMedia,
       items: resolvedItems,
     );

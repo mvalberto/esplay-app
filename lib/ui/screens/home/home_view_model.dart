@@ -2142,14 +2142,14 @@ class HomeViewModel extends ChangeNotifier {
       case HomeSectionType.radarrCalendar:
         return HomeRow(
           id: 'radarr_calendar',
-          title: 'Upcoming Movies (Radarr)',
+          title: 'Próximas películas (Radarr)',
           rowType: HomeRowType.pluginDynamic,
           isLoading: true,
         );
       case HomeSectionType.sonarrCalendar:
         return HomeRow(
           id: 'sonarr_calendar',
-          title: 'Upcoming TV Shows (Sonarr)',
+          title: 'Próximas series (Sonarr)',
           rowType: HomeRowType.pluginDynamic,
           isLoading: true,
         );
@@ -2198,91 +2198,91 @@ class HomeViewModel extends ChangeNotifier {
       case HomeSectionType.tmdbPopularMovies:
         return HomeRow(
           id: 'tmdb_popular_movies',
-          title: 'Popular Movies',
+          title: 'Películas populares',
           rowType: HomeRowType.pluginDynamic,
           isLoading: true,
         );
       case HomeSectionType.tmdbTopRatedMovies:
         return HomeRow(
           id: 'tmdb_top_rated_movies',
-          title: 'Top Rated Movies',
+          title: 'Películas mejor valoradas',
           rowType: HomeRowType.pluginDynamic,
           isLoading: true,
         );
       case HomeSectionType.tmdbNowPlayingMovies:
         return HomeRow(
           id: 'tmdb_now_playing_movies',
-          title: 'Now Playing Movies',
+          title: 'Películas en cartelera',
           rowType: HomeRowType.pluginDynamic,
           isLoading: true,
         );
       case HomeSectionType.tmdbUpcomingMovies:
         return HomeRow(
           id: 'tmdb_upcoming_movies',
-          title: 'Upcoming Movies',
+          title: 'Próximas películas',
           rowType: HomeRowType.pluginDynamic,
           isLoading: true,
         );
       case HomeSectionType.tmdbPopularTv:
         return HomeRow(
           id: 'tmdb_popular_tv',
-          title: 'Popular TV',
+          title: 'Series populares',
           rowType: HomeRowType.pluginDynamic,
           isLoading: true,
         );
       case HomeSectionType.tmdbTopRatedTv:
         return HomeRow(
           id: 'tmdb_top_rated_tv',
-          title: 'Top Rated TV',
+          title: 'Series mejor valoradas',
           rowType: HomeRowType.pluginDynamic,
           isLoading: true,
         );
       case HomeSectionType.tmdbAiringTodayTv:
         return HomeRow(
           id: 'tmdb_airing_today_tv',
-          title: 'Airing Today TV',
+          title: 'Series que se emiten hoy',
           rowType: HomeRowType.pluginDynamic,
           isLoading: true,
         );
       case HomeSectionType.tmdbOnTheAirTv:
         return HomeRow(
           id: 'tmdb_on_the_air_tv',
-          title: 'On The Air TV',
+          title: 'Series en emisión',
           rowType: HomeRowType.pluginDynamic,
           isLoading: true,
         );
       case HomeSectionType.tmdbTrendingMovieDaily:
         return HomeRow(
           id: 'tmdb_trending_movie_daily',
-          title: 'Trending Movies (Daily)',
+          title: 'Películas en tendencia (diario)',
           rowType: HomeRowType.pluginDynamic,
           isLoading: true,
         );
       case HomeSectionType.tmdbTrendingMovieWeekly:
         return HomeRow(
           id: 'tmdb_trending_movie_weekly',
-          title: 'Trending Movies (Weekly)',
+          title: 'Películas en tendencia (semanal)',
           rowType: HomeRowType.pluginDynamic,
           isLoading: true,
         );
       case HomeSectionType.tmdbTrendingTvDaily:
         return HomeRow(
           id: 'tmdb_trending_tv_daily',
-          title: 'Trending TV (Daily)',
+          title: 'Series en tendencia (diario)',
           rowType: HomeRowType.pluginDynamic,
           isLoading: true,
         );
       case HomeSectionType.tmdbTrendingTvWeekly:
         return HomeRow(
           id: 'tmdb_trending_tv_weekly',
-          title: 'Trending TV (Weekly)',
+          title: 'Series en tendencia (semanal)',
           rowType: HomeRowType.pluginDynamic,
           isLoading: true,
         );
       case HomeSectionType.tmdbTrendingAllWeekly:
         return HomeRow(
           id: 'tmdb_trending_all_weekly',
-          title: 'Trending All (Weekly)',
+          title: 'Todo en tendencia (semanal)',
           rowType: HomeRowType.pluginDynamic,
           isLoading: true,
         );
@@ -2318,14 +2318,14 @@ class HomeViewModel extends ChangeNotifier {
         final index = section.sinceYouWatchedRow;
         return HomeRow(
           id: 'sinceYouWatched$index',
-          title: 'Since you watched',
+          title: 'Porque viste',
           rowType: HomeRowType.latestMedia,
           isLoading: true,
         );
       case HomeSectionType.rewatch:
         return HomeRow(
           id: 'rewatch',
-          title: 'Rewatch',
+          title: 'Volver a ver',
           rowType: HomeRowType.latestMedia,
           isLoading: true,
         );
@@ -2367,8 +2367,17 @@ class HomeViewModel extends ChangeNotifier {
     HomeSectionType type,
     AppLocalizations l10n,
   ) {
-    final filter = _favoriteFilterForSection(type);
-    return 'Favorite ${filter.displayName}';
+    return switch (_favoriteFilterForSection(type)) {
+      FavoriteTypeFilter.movie => l10n.favoriteMoviesRow,
+      FavoriteTypeFilter.series => l10n.favoriteSeriesRow,
+      FavoriteTypeFilter.episode => l10n.favoriteEpisodesRow,
+      FavoriteTypeFilter.person => l10n.favoritePeopleRow,
+      FavoriteTypeFilter.musicArtist => l10n.favoriteArtistsRow,
+      FavoriteTypeFilter.musicVideo => l10n.favoriteMusicVideosRow,
+      FavoriteTypeFilter.musicAlbum => l10n.favoriteAlbumsRow,
+      FavoriteTypeFilter.audio => l10n.favoriteSongsRow,
+      _ => l10n.favorites,
+    };
   }
 
   Future<void> _loadResumeAndNextUpInBackground() {
@@ -3590,7 +3599,7 @@ class HomeViewModel extends ChangeNotifier {
       return [
         HomeRow(
           id: 'radarr_calendar',
-          title: 'Upcoming Movies (Radarr)',
+          title: 'Próximas películas (Radarr)',
           rowType: HomeRowType.pluginDynamic,
           items: items,
         )
@@ -3644,7 +3653,7 @@ class HomeViewModel extends ChangeNotifier {
       return [
         HomeRow(
           id: 'sonarr_calendar',
-          title: 'Upcoming TV Shows (Sonarr)',
+          title: 'Próximas series (Sonarr)',
           rowType: HomeRowType.pluginDynamic,
           items: items,
         )
@@ -4094,7 +4103,7 @@ class HomeViewModel extends ChangeNotifier {
       return [
         HomeRow(
           id: 'merged_calendar',
-          title: 'Upcoming Releases',
+          title: 'Próximos estrenos',
           rowType: HomeRowType.pluginDynamic,
           items: mergedItems,
         )

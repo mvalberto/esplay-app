@@ -4,9 +4,9 @@ class AppColors {
   const AppColors();
 
   // Semantic colors (backward compat)
-  Color get primary => cyan500;
-  Color get primaryVariant => const Color(0xFF0086B3);
-  Color get secondary => const Color(0xFFAA5CC3);
+  Color get primary => esplayRed;
+  Color get primaryVariant => const Color(0xFFB80F0F);
+  Color get secondary => esplayGrey;
   Color get background => black700;
   Color get surface => black500;
   Color get surfaceVariant => const Color(0xFF252525);
@@ -19,6 +19,10 @@ class AppColors {
   Color get error => const Color(0xFFCF6679);
   Color get success => green500;
   Color get warning => const Color(0xFFFFC107);
+
+  // EsPlay logo colors
+  static const Color esplayRed = Color(0xFFE71414);
+  static const Color esplayGrey = Color(0xFFBCBCBC);
 
   // Black
   static const Color black = Color(0xFF000000);

@@ -190,7 +190,7 @@ class _ContentsHubBodyState extends State<_ContentsHubBody> {
             style: TextStyle(color: _text, fontSize: 14),
             decoration: InputDecoration(
               isDense: true,
-              hintText: 'Search',
+              hintText: 'Buscar',
               hintStyle: TextStyle(color: _muted),
               prefixIcon: Icon(Icons.search, color: _muted, size: 18),
               filled: true,

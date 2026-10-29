@@ -588,7 +588,7 @@ TouchPadLayout touchPadLayoutFor(
       faceCenterOnDpad = false;
       const red = Color(0xFF2A1215);
       L.add(
-        _cross(TouchCluster.left, 0, 0, 144, color: red, label: 'Left D-pad'),
+        _cross(TouchCluster.left, 0, 0, 144, color: red, label: 'Cruceta izquierda'),
       );
       // Beetle VB puts the right pad on L2 (up), L3 (down), R2 (left), R3.
       F.add(
@@ -598,7 +598,7 @@ TouchPadLayout touchPadLayoutFor(
           tall ? 0 : -98,
           112,
           color: red,
-          label: 'Right D-pad',
+          label: 'Cruceta derecha',
           ids: const [
             RetroPadId.l2,
             RetroPadId.l3,
@@ -649,7 +649,7 @@ TouchPadLayout touchPadLayoutFor(
       const TouchControl(
         kind: TouchControlKind.menu,
         cluster: TouchCluster.menu,
-        label: 'Menu',
+        label: 'Menú',
         size: 36,
       ),
     ],

@@ -9,11 +9,11 @@ DioException offlineNotFound(String path) => DioException(
     statusCode: 404,
   ),
   type: DioExceptionType.badResponse,
-  message: 'Not available offline',
+  message: 'No disponible sin conexión',
 );
 
 DioException offlineUnavailable(String path) => DioException(
   requestOptions: RequestOptions(path: path),
   type: DioExceptionType.connectionError,
-  message: 'Not available offline',
+  message: 'No disponible sin conexión',
 );

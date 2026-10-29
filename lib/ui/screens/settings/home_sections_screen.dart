@@ -2821,13 +2821,13 @@ class _HomeSectionsScreenState extends State<HomeSectionsScreen>
             subtitle: section.isPluginDynamic
                 ? Text(_pluginSubtitle(section))
                 : (_isAudioSectionType(section.type)
-                      ? const Text('Audio row')
+                      ? const Text('Fila de audio')
                       : (_isSeerrSectionType(section.type)
-                            ? const Text('Seerr Discovery Rows')
+                            ? const Text('Filas de Descubrir de Seerr')
                             : (_isImdbSectionType(section.type)
-                                  ? const Text('IMDb List')
+                                  ? const Text('Lista de IMDb')
                                   : (_isTmdbSectionType(section.type)
-                                        ? const Text('TMDB Lists')
+                                        ? const Text('Listas de TMDB')
                                         : null)))),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
@@ -3275,21 +3275,21 @@ String homeSectionTypeLabel(HomeSectionType type, AppLocalizations l10n) =>
       HomeSectionType.audioAlbums => l10n.albums,
       HomeSectionType.audioPlaylists => l10n.audioPlaylists,
       HomeSectionType.favoriteMovies =>
-        'Favorite ${FavoriteTypeFilter.movie.displayName}',
+        l10n.favoriteMoviesRow,
       HomeSectionType.favoriteSeries =>
-        'Favorite ${FavoriteTypeFilter.series.displayName}',
+        l10n.favoriteSeriesRow,
       HomeSectionType.favoriteEpisodes =>
-        'Favorite ${FavoriteTypeFilter.episode.displayName}',
+        l10n.favoriteEpisodesRow,
       HomeSectionType.favoritePeople =>
-        'Favorite ${FavoriteTypeFilter.person.displayName}',
+        l10n.favoritePeopleRow,
       HomeSectionType.favoriteArtists =>
-        'Favorite ${FavoriteTypeFilter.musicArtist.displayName}',
+        l10n.favoriteArtistsRow,
       HomeSectionType.favoriteMusicVideos =>
-        'Favorite ${FavoriteTypeFilter.musicVideo.displayName}',
+        l10n.favoriteMusicVideosRow,
       HomeSectionType.favoriteAlbums =>
-        'Favorite ${FavoriteTypeFilter.musicAlbum.displayName}',
+        l10n.favoriteAlbumsRow,
       HomeSectionType.favoriteSongs =>
-        'Favorite ${FavoriteTypeFilter.audio.displayName}',
+        l10n.favoriteSongsRow,
       HomeSectionType.collections => l10n.collections,
       HomeSectionType.genres => l10n.genres,
       HomeSectionType.studios => l10n.studios,

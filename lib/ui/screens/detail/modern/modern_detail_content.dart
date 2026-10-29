@@ -4743,7 +4743,7 @@ class _ModernDetailContentState extends State<ModernDetailContent> {
             final s = item.parentIndexNumber;
             final e = item.indexNumber;
             if (s != null && e != null) {
-              addText('S$s:E$e');
+              addText('T$s:E$e');
             }
           }
           var runtime = _runtimeForItem(item, selectedMediaSource);

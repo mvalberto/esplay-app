@@ -14908,5 +14908,13 @@
   "esplayTooManyAttempts": "Too many failed attempts. Wait a few minutes and try again.",
   "esplayAppOutdated": "This version of EsPlay is out of date. Update it to keep using it.",
   "esplayPanelUnavailable": "Couldn't reach EsPlay. Check your internet connection and try again.",
-  "esplayConnectWithServer": "Connect by entering the server"
+  "esplayConnectWithServer": "Connect by entering the server",
+  "favoriteMoviesRow": "Favorite Movies",
+  "favoriteSeriesRow": "Favorite Series",
+  "favoriteEpisodesRow": "Favorite Episodes",
+  "favoritePeopleRow": "Favorite People",
+  "favoriteArtistsRow": "Favorite Artists",
+  "favoriteMusicVideosRow": "Favorite Music Videos",
+  "favoriteAlbumsRow": "Favorite Albums",
+  "favoriteSongsRow": "Favorite Songs"
 }

@@ -27,14 +27,16 @@ class _PlaybackCategoryScreen extends StatelessWidget {
                     onTap: () =>
                         context.pushSettingsScreen(const _VideoPlaybackScreen()),
                   ),
-                  _TvSettingsListTile(
-                    leading: const Icon(Icons.high_quality_outlined),
-                    title: Text(l10n.qualityAndDecoding),
-                    subtitle: Text(l10n.qualityAndDecodingSubtitle),
-                    onTap: () => context.pushSettingsScreen(
-                      const _QualityDecodingScreen(),
+                  // EsPlay fixes quality at the maximum, so the screen stays hidden
+                  if (!esplayHideQualitySettings)
+                    _TvSettingsListTile(
+                      leading: const Icon(Icons.high_quality_outlined),
+                      title: Text(l10n.qualityAndDecoding),
+                      subtitle: Text(l10n.qualityAndDecodingSubtitle),
+                      onTap: () => context.pushSettingsScreen(
+                        const _QualityDecodingScreen(),
+                      ),
                     ),
-                  ),
                 ],
               ),
               _SectionHeader(l10n.settingsAudioAndSubtitlesSection),

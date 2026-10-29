@@ -1533,7 +1533,7 @@ class _BookReaderScreenState extends State<BookReaderScreen>
     if (mounted) {
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text('Highlight saved')));
+      ).showSnackBar(const SnackBar(content: Text('Resaltado guardado')));
     }
   }
 
@@ -2966,7 +2966,7 @@ class _BookReaderScreenState extends State<BookReaderScreen>
                 textInputAction: TextInputAction.search,
                 decoration: InputDecoration(
                   isDense: true,
-                  hintText: 'Search in document',
+                  hintText: 'Buscar en el documento',
                   hintStyle: TextStyle(
                     color: colors.foreground.withValues(alpha: 0.5),
                   ),
@@ -3273,7 +3273,7 @@ class _BookReaderScreenState extends State<BookReaderScreen>
                   menuItems: [
                     ContextMenuItem(
                       id: 1,
-                      title: 'Highlight',
+                      title: 'Resaltar',
                       action: () async {
                         final selected = await _epubJs.selectedText();
                         if (selected.trim().isNotEmpty) {
@@ -3336,7 +3336,7 @@ class _BookReaderScreenState extends State<BookReaderScreen>
               menuItems: [
                 ContextMenuItem(
                   id: 1,
-                  title: 'Highlight',
+                  title: 'Resaltar',
                   action: () async {
                     final selected = await _webController?.getSelectedText();
                     if (selected != null && selected.trim().isNotEmpty) {

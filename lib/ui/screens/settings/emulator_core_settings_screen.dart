@@ -161,7 +161,7 @@ class _EmulatorCoreSettingsScreenState
     } catch (_) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Could not save these settings.')),
+          const SnackBar(content: Text('No se pudieron guardar estos ajustes.')),
         );
       }
     } finally {
@@ -187,13 +187,13 @@ class _EmulatorCoreSettingsScreenState
         _saving = false;
       });
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Settings reset to defaults.')),
+        const SnackBar(content: Text('Ajustes restablecidos.')),
       );
     } catch (_) {
       if (!mounted) return;
       setState(() => _saving = false);
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Could not reset these settings.')),
+        const SnackBar(content: Text('No se pudieron restablecer estos ajustes.')),
       );
     }
   }
@@ -248,7 +248,7 @@ class _EmulatorCoreSettingsScreenState
                     child: OutlinedButton.icon(
                       onPressed: _saving ? null : _resetToDefaults,
                       icon: const Icon(Icons.settings_backup_restore),
-                      label: const Text('Reset to defaults'),
+                      label: const Text('Restablecer'),
                     ),
                   ),
                 ),

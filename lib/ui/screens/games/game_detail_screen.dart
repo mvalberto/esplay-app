@@ -405,7 +405,7 @@ class _GameDetailScreenState extends State<GameDetailScreen> with RouteAware {
       if (!mounted) return;
       setState(() => _hardwareRenderingEnabled = !next);
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('Could not save hardware rendering setting.'),
+        content: Text('No se pudo guardar el ajuste de renderizado por hardware.'),
       ));
     }
   }
@@ -463,7 +463,7 @@ class _GameDetailScreenState extends State<GameDetailScreen> with RouteAware {
       final detail = describeError(e, AppLocalizations.of(context));
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(SnackBar(content: Text('Could not change player: $detail')));
+      ).showSnackBar(SnackBar(content: Text('No se pudo cambiar el reproductor: $detail')));
     } finally {
       if (didUpdate && mounted) unawaited(_loadSave(games, updated));
     }
@@ -706,7 +706,7 @@ class _PortraitBody extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 30, bottom: 24),
               child: GamePosterRail(
-                title: 'More in ${game.system}',
+                title: 'Más de ${game.system}',
                 games: related,
                 artworkScope: artworkScope,
                 artworkDataSource: artworkDataSource,
@@ -849,7 +849,7 @@ class _LandscapeBody extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 32),
                     child: GamePosterRail(
-                      title: 'More in ${game.system}',
+                      title: 'Más de ${game.system}',
                       games: related,
                       artworkScope: artworkScope,
                       artworkDataSource: artworkDataSource,
@@ -1400,7 +1400,7 @@ class _ActionRow extends StatelessWidget {
                 onPressed: onRestart,
                 child: const _ActionLabel(
                   icon: Icons.refresh,
-                  label: 'Start fresh',
+                  label: 'Empezar de cero',
                   color: Colors.white,
                 ),
               ),
@@ -1439,7 +1439,7 @@ class _ActionRow extends StatelessWidget {
         textStyle: textStyle.copyWith(fontWeight: FontWeight.w500),
       ).copyWith(side: _focusRing),
       icon: const Icon(Icons.refresh),
-      label: const Text('Start fresh'),
+      label: const Text('Empezar de cero'),
     );
 
     if (!landscape) {
@@ -1531,7 +1531,7 @@ class _PlayerButton extends StatelessWidget {
           key: const ValueKey('gameDetailPlayer'),
           autoScroll: true,
           padding: padding,
-          semanticLabel: 'Player, $name. Change',
+          semanticLabel: 'Reproductor, $name. Cambiar',
           onPressed: onPressed,
           child: content,
         ),
@@ -1708,7 +1708,7 @@ class _PlayerCard extends StatelessWidget {
               padding: EdgeInsets.zero,
               borderRadius: 16,
               autoScroll: true,
-              semanticLabel: 'Player, $name. Change',
+              semanticLabel: 'Reproductor, $name. Cambiar',
               onPressed: onSelectCore,
               child: summary,
             )
@@ -1746,7 +1746,7 @@ class _HardwareRenderingToggle extends StatelessWidget {
         ? const Color(0xFFA9F0CC)
         : const Color(0xFFFFC47A);
     return FocusableButton(
-      semanticLabel: 'Experimental hardware rendering: $status',
+      semanticLabel: 'Renderizado por hardware experimental: $status',
       autoScroll: true,
       onPressed: onToggle,
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
@@ -2173,7 +2173,7 @@ class _CorePickerDialog extends StatelessWidget {
     final effectiveNative = _usesNativeBackend(game);
     final rows = _buildCoreRows(game);
     return AlertDialog(
-      title: const Text('Choose player'),
+      title: const Text('Elegir reproductor'),
       content: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 360),
         child: SingleChildScrollView(

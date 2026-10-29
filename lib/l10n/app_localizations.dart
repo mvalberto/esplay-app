@@ -27836,6 +27836,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Connect by entering the server'**
   String get esplayConnectWithServer;
+
+  /// No description provided for @favoriteMoviesRow.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorite Movies'**
+  String get favoriteMoviesRow;
+
+  /// No description provided for @favoriteSeriesRow.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorite Series'**
+  String get favoriteSeriesRow;
+
+  /// No description provided for @favoriteEpisodesRow.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorite Episodes'**
+  String get favoriteEpisodesRow;
+
+  /// No description provided for @favoritePeopleRow.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorite People'**
+  String get favoritePeopleRow;
+
+  /// No description provided for @favoriteArtistsRow.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorite Artists'**
+  String get favoriteArtistsRow;
+
+  /// No description provided for @favoriteMusicVideosRow.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorite Music Videos'**
+  String get favoriteMusicVideosRow;
+
+  /// No description provided for @favoriteAlbumsRow.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorite Albums'**
+  String get favoriteAlbumsRow;
+
+  /// No description provided for @favoriteSongsRow.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorite Songs'**
+  String get favoriteSongsRow;
 }
 
 class _AppLocalizationsDelegate

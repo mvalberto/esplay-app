@@ -257,8 +257,8 @@ class _AudiobookPlayerViewState extends State<AudiobookPlayerView> {
 
         return AlertDialog(
           backgroundColor: AppColorScheme.surface,
-          title: const Text('Sleep Timer Finished'),
-          content: Text('Your sleep timer ($label) has finished. What would you like to do?'),
+          title: const Text('Temporizador terminado'),
+          content: Text('El temporizador ($label) ha terminado. ¿Qué quieres hacer?'),
           actionsPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           actionsAlignment: MainAxisAlignment.center,
           actions: [
@@ -284,14 +284,14 @@ class _AudiobookPlayerViewState extends State<AudiobookPlayerView> {
                     backgroundColor: AppColorScheme.accent,
                     foregroundColor: AppColorScheme.onAccent,
                   ),
-                  child: const Text('Restart Sleep Timer'),
+                  child: const Text('Reiniciar temporizador'),
                 ),
                 const SizedBox(height: 8),
                 TextButton(
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  child: const Text('Stop Playback'),
+                  child: const Text('Detener la reproducción'),
                 ),
                 const SizedBox(height: 8),
                 TextButton(
@@ -299,7 +299,7 @@ class _AudiobookPlayerViewState extends State<AudiobookPlayerView> {
                     Navigator.of(context).pop();
                     _showSleepSheet(chapters, resumeOnSelect: true);
                   },
-                  child: const Text('Add Custom Value to Timer'),
+                  child: const Text('Añadir un valor personalizado al temporizador'),
                 ),
               ],
             ),
@@ -361,7 +361,7 @@ class _AudiobookPlayerViewState extends State<AudiobookPlayerView> {
       events.add(TimelineEvent(
         id: 'bookmark_${b.positionMs}',
         type: TimelineEventType.bookmark,
-        title: 'Bookmark ${i + 1}: ${b.label}',
+        title: 'Marcador ${i + 1}: ${b.label}',
         positionMs: b.positionMs,
         date: b.createdAt,
         originalObject: b,
@@ -372,7 +372,7 @@ class _AudiobookPlayerViewState extends State<AudiobookPlayerView> {
       events.add(TimelineEvent(
         id: 'note_${n.id}',
         type: TimelineEventType.note,
-        title: 'Note: ${n.body}',
+        title: 'Nota: ${n.body}',
         content: n.body,
         positionMs: n.positionMs,
         date: n.updatedAt,
@@ -1077,7 +1077,7 @@ class _AudiobookPlayerViewState extends State<AudiobookPlayerView> {
                 .map((n) => TimelineEvent(
                       id: 'note_${n.id}',
                       type: TimelineEventType.note,
-                      title: 'Note: ${n.body}',
+                      title: 'Nota: ${n.body}',
                       content: n.body,
                       positionMs: n.positionMs,
                       date: n.updatedAt,

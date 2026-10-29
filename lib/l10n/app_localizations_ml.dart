@@ -16131,4 +16131,28 @@ class AppLocalizationsMl extends AppLocalizations {
 
   @override
   String get esplayConnectWithServer => 'Connect by entering the server';
+
+  @override
+  String get favoriteMoviesRow => 'Favorite Movies';
+
+  @override
+  String get favoriteSeriesRow => 'Favorite Series';
+
+  @override
+  String get favoriteEpisodesRow => 'Favorite Episodes';
+
+  @override
+  String get favoritePeopleRow => 'Favorite People';
+
+  @override
+  String get favoriteArtistsRow => 'Favorite Artists';
+
+  @override
+  String get favoriteMusicVideosRow => 'Favorite Music Videos';
+
+  @override
+  String get favoriteAlbumsRow => 'Favorite Albums';
+
+  @override
+  String get favoriteSongsRow => 'Favorite Songs';
 }

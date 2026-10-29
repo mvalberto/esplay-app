@@ -69,6 +69,7 @@ import '../../widgets/progress_snack_bar.dart';
 import '../../../util/remote_subtitle_labels.dart';
 import '../../../util/subtitle_appearance_schedule.dart';
 import '../../../preference/preference_constants.dart';
+import '../../../esplay/esplay_flags.dart';
 import '../../../preference/user_preferences.dart';
 import '../../../preference/seerr_preferences.dart';
 import '../../../ui/mixins/focus_state_mixin.dart';
@@ -8453,7 +8454,7 @@ class DetailActionButtonsState extends State<DetailActionButtons> {
               .trim()
               .isNotEmpty)
         _AdvancedPlaybackOption(
-          label: 'Open in External Player',
+          label: 'Abrir en un reproductor externo',
           icon: Icons.open_in_new,
           onTap: () {
             _play(context, item, resume: resume, openInExternalPlayer: true);
@@ -8469,7 +8470,7 @@ class DetailActionButtonsState extends State<DetailActionButtons> {
           },
         ),
       _AdvancedPlaybackOption(
-        label: 'Transcode Stream: High Quality (1080p)',
+        label: 'Transcodificar: calidad alta (1080p)',
         icon: Icons.high_quality,
         onTap: () {
           _play(
@@ -8482,7 +8483,7 @@ class DetailActionButtonsState extends State<DetailActionButtons> {
         },
       ),
       _AdvancedPlaybackOption(
-        label: 'Transcode Stream: Medium Quality (720p)',
+        label: 'Transcodificar: calidad media (720p)',
         icon: Icons.video_settings,
         onTap: () {
           _play(
@@ -8495,7 +8496,7 @@ class DetailActionButtonsState extends State<DetailActionButtons> {
         },
       ),
       _AdvancedPlaybackOption(
-        label: 'Transcode Stream: Low Quality (480p)',
+        label: 'Transcodificar: calidad baja (480p)',
         icon: Icons.sd,
         onTap: () {
           _play(
@@ -8514,7 +8515,7 @@ class DetailActionButtonsState extends State<DetailActionButtons> {
       context: context,
       useRootNavigator: false,
       builder: (dialogContext) => SimpleDialog(
-        title: const Text('Advanced Playback'),
+        title: const Text('Reproducción avanzada'),
         // Lines the row icons up under the title.
         contentPadding: const EdgeInsets.fromLTRB(4, 12, 4, 16),
         children: options.asMap().entries.map((entry) {
@@ -11950,6 +11951,10 @@ class _DownloadButtonState extends State<_DownloadButton> {
     String? note,
     Widget? header,
   }) {
+    // EsPlay downloads are always the original file, so there is nothing to pick
+    if (esplayHideQualitySettings) {
+      return Future.value(DownloadQuality.original);
+    }
     final isMulti = _isBatchType(item.type);
     final supportsTranscoding = isMulti || _supportsTranscoding(item.type);
     final batchItems = items;

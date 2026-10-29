@@ -47,7 +47,7 @@ abstract final class OverlayColorPalette {
     'dark_green': 0xFF14532D,
     'slate': 0xFF334155,
     'indigo': 0xFF4338CA,
-    'moonfinCyan': 0xFF00A4DC,
+    'moonfinCyan': 0xFFE71414,
     'neonPulseMagenta': 0xFFFF2E92,
   };
 
@@ -82,7 +82,7 @@ abstract final class OverlayColorPalette {
       'dark_green' => const Color(0xFF0B4F0F),
       'slate' => const Color(0xFF475569),
       'indigo' => const Color(0xFF1E3A8A),
-      'moonfinCyan' => const Color(0xFF00A4DC),
+      'moonfinCyan' => const Color(0xFFE71414),
       'neonPulseMagenta' => const Color(0xFFFF2E92),
       _ => const Color(0xFF6B7280),
     };
@@ -102,7 +102,7 @@ abstract final class OverlayColorPalette {
       'dark_green' => l10n.darkGreen,
       'slate' => l10n.slate,
       'indigo' => l10n.indigo,
-      'moonfinCyan' => 'Moonfin Cyan',
+      'moonfinCyan' => 'Rojo EsPlay',
       'neonPulseMagenta' => 'Neon Pulse Magenta',
       _ => normalizeKey(key),
     };

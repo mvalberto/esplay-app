@@ -597,8 +597,10 @@ List<_SettingsSearchEntry> _buildSettingsSearchIndex({
         'blur',
         'performance',
       ]),
-    themeStore.screen(keywords: ['download themes', 'community']),
-    savedThemes.screen(keywords: ['custom themes', 'manage']),
+    if (!esplayHideThemeStoreAndExtras) ...[
+      themeStore.screen(keywords: ['download themes', 'community']),
+      savedThemes.screen(keywords: ['custom themes', 'manage']),
+    ],
     style.leaf('focus_color', l10n.focusBorderColor, keywords: [
       'highlight',
       'accent',
@@ -1050,13 +1052,13 @@ List<_SettingsSearchEntry> _buildSettingsSearchIndex({
     rowToggles.leaf(
       'pref_display_rewatch_row',
       'Display Rewatch Row',
-      subtitle: 'Show Rewatch row in Home Sections',
+      subtitle: 'Muestra la fila Volver a ver en las secciones de inicio',
       keywords: ['watch again'],
     ),
     rowToggles.leaf(
       'pref_display_since_you_watched_rows',
       'Display Since You Watched Rows',
-      subtitle: 'Show and customize Since You Watched rows in Home Sections.',
+      subtitle: 'Muestra y personaliza las filas Porque viste en las secciones de inicio.',
       keywords: ['recommendations'],
     ),
     rowImages.screen(keywords: ['poster', 'thumbnail', 'banner']),
@@ -1505,6 +1507,7 @@ List<_SettingsSearchEntry> _buildSettingsSearchIndex({
         subtitle: l10n.playerTransportPositionDescription,
         keywords: ['docked', 'on screen', 'play button', 'center', 'controls'],
       ),
+    if (!esplayHideQualitySettings) ...[
     quality.screen(keywords: ['bitrate', 'resolution', 'hdr', 'decoder']),
     quality.leaf('pref_max_bitrate', l10n.maxStreamingBitrate, keywords: [
       'quality',
@@ -1595,6 +1598,7 @@ List<_SettingsSearchEntry> _buildSettingsSearchIndex({
           'compatibility',
         ],
       ),
+    ],
 
     audio.screen(keywords: ['sound', 'passthrough']),
     audio.leaf(
@@ -1810,7 +1814,7 @@ List<_SettingsSearchEntry> _buildSettingsSearchIndex({
     automation.leaf(
       'enable_still_watching',
       l10n.stillWatchingPrompt,
-      subtitle: 'Prompt to Continue Watching after X consecutive episodes.',
+      subtitle: 'Pregunta si sigues viendo tras X episodios seguidos.',
       keywords: ['are you still watching'],
     ),
 
@@ -1824,6 +1828,7 @@ List<_SettingsSearchEntry> _buildSettingsSearchIndex({
     ],
     if (PlatformDetection.supportsOfflineDownloads &&
         !PlatformDetection.isWeb) ...[
+      if (!esplayHideQualitySettings)
       downloads.leaf(
         'download_default_quality',
         l10n.defaultDownloadQuality,

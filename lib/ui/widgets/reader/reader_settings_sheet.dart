@@ -302,7 +302,7 @@ class _ReaderSettingsBodyState extends State<_ReaderSettingsBody> {
           children: [
             Expanded(
               child: _pill(
-                label: 'Justify',
+                label: 'Justificar',
                 icon: Icons.format_align_justify,
                 selected: _s.justify,
                 onTap: () => _update(_s.copyWith(justify: !_s.justify)),
@@ -311,7 +311,7 @@ class _ReaderSettingsBodyState extends State<_ReaderSettingsBody> {
             const SizedBox(width: 10),
             Expanded(
               child: _pill(
-                label: 'Bold',
+                label: 'Negrita',
                 icon: Icons.format_bold,
                 selected: _s.bold,
                 onTap: () => _update(_s.copyWith(bold: !_s.bold)),
@@ -321,7 +321,7 @@ class _ReaderSettingsBodyState extends State<_ReaderSettingsBody> {
               const SizedBox(width: 10),
               Expanded(
                 child: _pill(
-                  label: 'Scroll',
+                  label: 'Desplazamiento',
                   icon: Icons.swap_vert,
                   selected: _s.scrolled,
                   onTap: () => _update(_s.copyWith(scrolled: !_s.scrolled)),

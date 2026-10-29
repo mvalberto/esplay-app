@@ -126,20 +126,22 @@ class _AppearanceScreenState extends State<_AppearanceScreen> {
                     icon: Icons.border_color,
                     labelOf: (v) => _formatCamelCaseLabel(v.name),
                   ),
-                  _TvSettingsListTile(
-                    leading: const Icon(Icons.storefront_outlined),
-                    title: Text(l10n.themeStore),
-                    subtitle: Text(l10n.themeStoreSubtitle),
-                    onTap: () =>
-                        context.pushSettingsScreen(const ThemeStoreScreen()),
-                  ),
-                  _TvSettingsListTile(
-                    leading: const Icon(Icons.download_outlined),
-                    title: Text(l10n.savedThemesTitle),
-                    subtitle: Text(l10n.savedThemesManageSubtitle),
-                    onTap: () =>
-                        context.pushSettingsScreen(const SavedThemesScreen()),
-                  ),
+                  if (!esplayHideThemeStoreAndExtras) ...[
+                    _TvSettingsListTile(
+                      leading: const Icon(Icons.storefront_outlined),
+                      title: Text(l10n.themeStore),
+                      subtitle: Text(l10n.themeStoreSubtitle),
+                      onTap: () =>
+                          context.pushSettingsScreen(const ThemeStoreScreen()),
+                    ),
+                    _TvSettingsListTile(
+                      leading: const Icon(Icons.download_outlined),
+                      title: Text(l10n.savedThemesTitle),
+                      subtitle: Text(l10n.savedThemesManageSubtitle),
+                      onTap: () =>
+                          context.pushSettingsScreen(const SavedThemesScreen()),
+                    ),
+                  ],
                   if (_showThemeEditorEntry)
                     _TvSettingsListTile(
                       leading: const Icon(Icons.brush),
@@ -273,8 +275,8 @@ class _AppearanceScreenState extends State<_AppearanceScreen> {
                   ],
                 ),
               ],
-              _SectionHeader(l10n.extras),
-              adaptiveListSection(
+              if (!esplayHideThemeStoreAndExtras) _SectionHeader(l10n.extras),
+              if (!esplayHideThemeStoreAndExtras) adaptiveListSection(
                 children: [
                   _TvSettingsListTile(
                     leading: const Icon(Icons.auto_awesome),

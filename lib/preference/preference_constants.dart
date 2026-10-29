@@ -343,7 +343,7 @@ enum AppTheme {
   darkGreen(0xFF006400),
   slate(0xFF708090),
   indigo(0xFF4B0082),
-  moonfinCyan(0xFF00A4DC),
+  moonfinCyan(0xFFE71414),
   neonPulseMagenta(0xFFFF2E92),
   eightBitGold(0xFFFFCD75);
 

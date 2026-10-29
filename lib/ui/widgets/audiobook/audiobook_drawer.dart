@@ -559,7 +559,7 @@ class _AudiobookBookmarksListState extends State<AudiobookBookmarksList> {
                         return _DenseRow(
                           focused: isTvFocused,
                           highlighted: isPlayFocused,
-                          title: 'Bookmark ${index + 1}: ${b.label}',
+                          title: 'Marcador ${index + 1}: ${b.label}',
                           trailingText: formatAudiobookClock(
                               Duration(milliseconds: b.positionMs)),
                           onTap: () => widget.onJump(b),

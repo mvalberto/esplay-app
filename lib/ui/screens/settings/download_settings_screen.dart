@@ -21,6 +21,7 @@ import '../../../data/services/storage_path_service.dart';
 import '../../../data/services/remove_watched_service.dart';
 import '../../../di/providers.dart';
 import '../../../platform/background_refresh.dart';
+import '../../../esplay/esplay_flags.dart';
 import '../../../preference/user_preferences.dart';
 import '../../../util/download_utils.dart';
 import '../../../util/platform_detection.dart';
@@ -85,19 +86,22 @@ class DownloadSettingsScreen extends ConsumerWidget {
                 ],
               ),
             if (downloads) ...[
-              SettingsSectionHeader(l10n.quality),
-              adaptiveListSection(
-                children: [
-                  DpadListTile(
-                    autofocus: true,
-                    useSettingsIconShell: true,
-                    leading: const Icon(Icons.high_quality),
-                    title: Text(l10n.defaultDownloadQuality),
-                    subtitle: Text(_qualityLabel(qualityName)),
-                    onTap: () => showQualityPicker(context, prefs, qualityName),
-                  ),
-                ],
-              ),
+              // EsPlay always downloads the original file
+              if (!esplayHideQualitySettings) ...[
+                SettingsSectionHeader(l10n.quality),
+                adaptiveListSection(
+                  children: [
+                    DpadListTile(
+                      autofocus: true,
+                      useSettingsIconShell: true,
+                      leading: const Icon(Icons.high_quality),
+                      title: Text(l10n.defaultDownloadQuality),
+                      subtitle: Text(_qualityLabel(qualityName)),
+                      onTap: () => showQualityPicker(context, prefs, qualityName),
+                    ),
+                  ],
+                ),
+              ],
 
               SettingsSectionHeader(l10n.network),
               adaptiveListSection(

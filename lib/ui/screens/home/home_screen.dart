@@ -2236,7 +2236,7 @@ class _ContentRowsState extends State<_ContentRows>
       youTube: true,
       trailer: true,
       audioLanguage: stream.audioLanguage,
-      label: 'YouTube trailer $url for $owner',
+      label: 'Tráiler de YouTube $url de $owner',
     );
   }
 

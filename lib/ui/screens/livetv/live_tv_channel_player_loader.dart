@@ -82,7 +82,7 @@ class _LiveTvChannelPlayerLoaderState extends State<LiveTvChannelPlayerLoader> {
       } catch (_) {
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Unable to open channel')),
+          const SnackBar(content: Text('No se pudo abrir el canal')),
         );
         Navigator.of(context).pop();
         return;

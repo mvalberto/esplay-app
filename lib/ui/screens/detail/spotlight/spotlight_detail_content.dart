@@ -894,7 +894,7 @@ class _SpotlightDetailContentState extends State<SpotlightDetailContent> {
           if (item.type == 'Episode') {
             final s = item.parentIndexNumber;
             final e = item.indexNumber;
-            if (s != null && e != null) addText('S$s:E$e');
+            if (s != null && e != null) addText('T$s:E$e');
           }
           final runtime = item.runtime;
           if (runtime != null && runtime > Duration.zero && item.type != 'Series') {

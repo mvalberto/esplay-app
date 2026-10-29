@@ -488,9 +488,21 @@ class _FavoritesScreenState extends State<FavoritesScreen>
     final isMobile = _isCompact(context);
     final horizontalPadding = isMobile ? 16.0 : _horizontalPadding;
 
+    final l10n = AppLocalizations.of(context);
     final labels = [
       for (final type in visibleTypes)
-        '${type.displayName}: ${_vm.rowTotalCount(type)}',
+        '${switch (type) {
+          FavoriteTypeFilter.movie => l10n.movies,
+          FavoriteTypeFilter.series => l10n.series,
+          FavoriteTypeFilter.episode => l10n.episodes,
+          FavoriteTypeFilter.person => l10n.people,
+          FavoriteTypeFilter.musicVideo => l10n.musicVideos,
+          FavoriteTypeFilter.musicAlbum => l10n.albums,
+          FavoriteTypeFilter.musicArtist => l10n.artists,
+          FavoriteTypeFilter.audio => l10n.songs,
+          FavoriteTypeFilter.collection => l10n.collections,
+          FavoriteTypeFilter.all => l10n.all,
+        }}: ${_vm.rowTotalCount(type)}',
     ];
 
     final selectedType = visibleTypes[_selectedTab];

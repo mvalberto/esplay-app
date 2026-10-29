@@ -59,7 +59,7 @@ class _AboutCategoryScreen extends StatelessWidget {
               ),
               _TvSettingsListTile(
                 leading: const Icon(Icons.troubleshoot),
-                title: const Text('Diagnostics & Logging'),
+                title: const Text('Diagnóstico y registros'),
                 subtitle: const Text(
                   'Capture media, login and network logs and send them to the '
                   'server as a report',

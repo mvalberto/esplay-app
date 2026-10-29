@@ -1382,7 +1382,7 @@ class DownloadService extends ChangeNotifier implements AutoDownloadDownloader {
         throw DioException(
           type: DioExceptionType.unknown,
           requestOptions: RequestOptions(path: url),
-          message: 'Failed to enqueue background download',
+          message: 'No se pudo poner en cola la descarga en segundo plano',
         );
       }
       _armStartWatchdog(ctx);

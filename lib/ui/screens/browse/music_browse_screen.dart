@@ -1384,7 +1384,7 @@ class _MusicRowVisibilityDialogState extends State<MusicRowVisibilityDialog> {
               ),
             ),
             _DialogCheckboxTile(
-              label: 'Name',
+              label: 'Nombre',
               checked: sortOpt == 'name',
               isRadio: true,
               autofocus: true,
@@ -1406,7 +1406,7 @@ class _MusicRowVisibilityDialogState extends State<MusicRowVisibilityDialog> {
               },
             ),
             _DialogCheckboxTile(
-              label: 'Release Year',
+              label: 'Año de estreno',
               checked: sortOpt == 'release_year',
               isRadio: true,
               onChanged: (val) async {
@@ -1418,7 +1418,7 @@ class _MusicRowVisibilityDialogState extends State<MusicRowVisibilityDialog> {
               },
             ),
             _DialogCheckboxTile(
-              label: 'Date Added to Library',
+              label: 'Fecha de incorporación a la biblioteca',
               checked: sortOpt == 'date_added',
               isRadio: true,
               onChanged: (val) async {

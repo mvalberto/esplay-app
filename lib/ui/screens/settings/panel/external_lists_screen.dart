@@ -171,7 +171,7 @@ class _ImdbListsScreenState extends State<_ImdbListsScreen> {
             PopScope(
               canPop: false,
               child: AlertDialog(
-                title: Text('Fetching $title'),
+                title: Text('Obteniendo $title'),
                 content: const Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -286,7 +286,7 @@ class _ImdbListsScreenState extends State<_ImdbListsScreen> {
         child: Scaffold(
           appBar: buildSettingsAppBar(
             context,
-            const Text('IMDb Lists'),
+            const Text('Listas de IMDb'),
           ),
           body: FocusScope(
             node: _scope,
@@ -545,7 +545,7 @@ class _TmdbListsScreenState extends State<_TmdbListsScreen> {
         child: Scaffold(
           appBar: buildSettingsAppBar(
             context,
-            const Text('TMDB Lists'),
+            const Text('Listas de TMDB'),
           ),
           body: FocusScope(
             node: _scope,
@@ -590,7 +590,7 @@ class _TmdbListsScreenState extends State<_TmdbListsScreen> {
                   children: [
                     SwitchPreferenceTile(
                       preference: UserPreferences.tmdbPopularMoviesEnabled,
-                      title: 'Popular Movies',
+                      title: 'Películas populares',
                       icon: Icons.movie_outlined,
                       enabled: !_isFetching,
                       onChangedValue: (isEnabled) async {
@@ -614,7 +614,7 @@ class _TmdbListsScreenState extends State<_TmdbListsScreen> {
                     ),
                     SwitchPreferenceTile(
                       preference: UserPreferences.tmdbTopRatedMoviesEnabled,
-                      title: 'Top Rated Movies',
+                      title: 'Películas mejor valoradas',
                       icon: Icons.star_border,
                       enabled: !_isFetching,
                       onChangedValue: (isEnabled) async {
@@ -638,7 +638,7 @@ class _TmdbListsScreenState extends State<_TmdbListsScreen> {
                     ),
                     SwitchPreferenceTile(
                       preference: UserPreferences.tmdbNowPlayingMoviesEnabled,
-                      title: 'Now Playing Movies',
+                      title: 'Películas en cartelera',
                       icon: Icons.play_arrow_outlined,
                       enabled: !_isFetching,
                       onChangedValue: (isEnabled) async {
@@ -662,7 +662,7 @@ class _TmdbListsScreenState extends State<_TmdbListsScreen> {
                     ),
                     SwitchPreferenceTile(
                       preference: UserPreferences.tmdbUpcomingMoviesEnabled,
-                      title: 'Upcoming Movies',
+                      title: 'Próximas películas',
                       icon: Icons.upcoming,
                       enabled: !_isFetching,
                       onChangedValue: (isEnabled) async {
@@ -686,7 +686,7 @@ class _TmdbListsScreenState extends State<_TmdbListsScreen> {
                     ),
                     SwitchPreferenceTile(
                       preference: UserPreferences.tmdbPopularTvEnabled,
-                      title: 'Popular TV',
+                      title: 'Series populares',
                       icon: Icons.live_tv,
                       enabled: !_isFetching,
                       onChangedValue: (isEnabled) async {
@@ -710,7 +710,7 @@ class _TmdbListsScreenState extends State<_TmdbListsScreen> {
                     ),
                     SwitchPreferenceTile(
                       preference: UserPreferences.tmdbTopRatedTvEnabled,
-                      title: 'Top Rated TV',
+                      title: 'Series mejor valoradas',
                       icon: Icons.live_tv,
                       enabled: !_isFetching,
                       onChangedValue: (isEnabled) async {
@@ -734,7 +734,7 @@ class _TmdbListsScreenState extends State<_TmdbListsScreen> {
                     ),
                     SwitchPreferenceTile(
                       preference: UserPreferences.tmdbAiringTodayTvEnabled,
-                      title: 'Airing Today TV',
+                      title: 'Series que se emiten hoy',
                       icon: Icons.calendar_today,
                       enabled: !_isFetching,
                       onChangedValue: (isEnabled) async {
@@ -758,7 +758,7 @@ class _TmdbListsScreenState extends State<_TmdbListsScreen> {
                     ),
                     SwitchPreferenceTile(
                       preference: UserPreferences.tmdbOnTheAirTvEnabled,
-                      title: 'On The Air TV',
+                      title: 'Series en emisión',
                       icon: Icons.live_tv,
                       enabled: !_isFetching,
                       onChangedValue: (isEnabled) async {
@@ -782,7 +782,7 @@ class _TmdbListsScreenState extends State<_TmdbListsScreen> {
                     ),
                     SwitchPreferenceTile(
                       preference: UserPreferences.tmdbTrendingMovieDailyEnabled,
-                      title: 'Trending Movies (Daily)',
+                      title: 'Películas en tendencia (diario)',
                       icon: Icons.trending_up,
                       enabled: !_isFetching,
                       onChangedValue: (isEnabled) async {
@@ -806,7 +806,7 @@ class _TmdbListsScreenState extends State<_TmdbListsScreen> {
                     ),
                     SwitchPreferenceTile(
                       preference: UserPreferences.tmdbTrendingMovieWeeklyEnabled,
-                      title: 'Trending Movies (Weekly)',
+                      title: 'Películas en tendencia (semanal)',
                       icon: Icons.trending_up,
                       enabled: !_isFetching,
                       onChangedValue: (isEnabled) async {
@@ -830,7 +830,7 @@ class _TmdbListsScreenState extends State<_TmdbListsScreen> {
                     ),
                     SwitchPreferenceTile(
                       preference: UserPreferences.tmdbTrendingTvDailyEnabled,
-                      title: 'Trending TV (Daily)',
+                      title: 'Series en tendencia (diario)',
                       icon: Icons.trending_up,
                       enabled: !_isFetching,
                       onChangedValue: (isEnabled) async {
@@ -854,7 +854,7 @@ class _TmdbListsScreenState extends State<_TmdbListsScreen> {
                     ),
                     SwitchPreferenceTile(
                       preference: UserPreferences.tmdbTrendingTvWeeklyEnabled,
-                      title: 'Trending TV (Weekly)',
+                      title: 'Series en tendencia (semanal)',
                       icon: Icons.trending_up,
                       enabled: !_isFetching,
                       onChangedValue: (isEnabled) async {
@@ -878,7 +878,7 @@ class _TmdbListsScreenState extends State<_TmdbListsScreen> {
                     ),
                     SwitchPreferenceTile(
                       preference: UserPreferences.tmdbTrendingAllWeeklyEnabled,
-                      title: 'Trending All (Weekly)',
+                      title: 'Todo en tendencia (semanal)',
                       icon: Icons.trending_up,
                       enabled: !_isFetching,
                       onChangedValue: (isEnabled) async {
@@ -974,7 +974,7 @@ class _UpcomingCalendarsScreenState extends State<_UpcomingCalendarsScreen> {
         child: Scaffold(
           appBar: buildSettingsAppBar(
             context,
-            const Text('Upcoming Calendars'),
+            const Text('Calendarios de estrenos'),
           ),
           body: FocusScope(
             node: _scope,
@@ -1002,28 +1002,28 @@ class _UpcomingCalendarsScreenState extends State<_UpcomingCalendarsScreen> {
                       SwitchPreferenceTile(
                         key: const ValueKey('radarrCalendarShowCinema'),
                         preference: UserPreferences.radarrCalendarShowCinema,
-                        title: 'Show Upcoming Cinema Releases',
+                        title: 'Mostrar próximos estrenos en cines',
                         icon: Icons.theater_comedy,
                         onChanged: () => setState(() {}),
                       ),
                       SwitchPreferenceTile(
                         key: const ValueKey('radarrCalendarShowDigital'),
                         preference: UserPreferences.radarrCalendarShowDigital,
-                        title: 'Show Upcoming Digital Releases',
+                        title: 'Mostrar próximos estrenos digitales',
                         icon: Icons.tv,
                         onChanged: () => setState(() {}),
                       ),
                       SwitchPreferenceTile(
                         key: const ValueKey('radarrCalendarShowPhysical'),
                         preference: UserPreferences.radarrCalendarShowPhysical,
-                        title: 'Show Upcoming Physical Releases',
+                        title: 'Mostrar próximos estrenos en formato físico',
                         icon: Icons.album,
                         onChanged: () => setState(() {}),
                       ),
                       SwitchPreferenceTile(
                         key: const ValueKey('radarrCalendarShowDate'),
                         preference: UserPreferences.radarrCalendarShowDate,
-                        title: 'Show Release Date on Home Screen',
+                        title: 'Mostrar la fecha de estreno en la pantalla de inicio',
                         icon: Icons.calendar_month,
                         onChanged: () => setState(() {}),
                       ),
@@ -1050,14 +1050,14 @@ class _UpcomingCalendarsScreenState extends State<_UpcomingCalendarsScreen> {
                       SwitchPreferenceTile(
                         key: const ValueKey('sonarrCalendarShowEpisodeInfo'),
                         preference: UserPreferences.sonarrCalendarShowEpisodeInfo,
-                        title: 'Display Episode Information',
+                        title: 'Mostrar información del episodio',
                         icon: Icons.info_outline,
                         onChanged: () => setState(() {}),
                       ),
                       SwitchPreferenceTile(
                         key: const ValueKey('sonarrCalendarShowDate'),
                         preference: UserPreferences.sonarrCalendarShowDate,
-                        title: 'Show Release Date on Home Screen',
+                        title: 'Mostrar la fecha de estreno en la pantalla de inicio',
                         icon: Icons.calendar_month,
                         onChanged: () => setState(() {}),
                       ),
@@ -1069,7 +1069,7 @@ class _UpcomingCalendarsScreenState extends State<_UpcomingCalendarsScreen> {
                     SwitchPreferenceTile(
                       key: const ValueKey('mergeRadarrSonarrCalendars'),
                       preference: UserPreferences.mergeRadarrSonarrCalendars,
-                      title: 'Merge Sonarr and Radarr Calendars',
+                      title: 'Unir los calendarios de Sonarr y Radarr',
                       icon: Icons.merge_type,
                       enabled: calendarsCanMerge,
                       onChanged: () => setState(() {}),
@@ -1202,7 +1202,7 @@ class _SeerrListsScreenState extends State<_SeerrListsScreen> {
         child: Scaffold(
           appBar: buildSettingsAppBar(
             context,
-            const Text('Seerr Rows'),
+            const Text('Filas de Seerr'),
           ),
           body: FocusScope(
             node: _scope,
@@ -1370,16 +1370,16 @@ class _CustomListsScreenState extends State<_CustomListsScreen> {
       builder: (ctx) => withCleanSettingsTypography(
         ctx,
         AlertDialog(
-          title: const Text('Delete Custom Row'),
-          content: Text('Are you sure you want to delete "${config.pluginDisplayText}"?'),
+          title: const Text('Eliminar fila personalizada'),
+          content: Text('¿Seguro que quieres eliminar "${config.pluginDisplayText}"?'),
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(ctx, false),
-              child: const Text('Cancel'),
+              child: const Text('Cancelar'),
             ),
             TextButton(
               onPressed: () => Navigator.pop(ctx, true),
-              child: const Text('Delete', style: TextStyle(color: Colors.red)),
+              child: const Text('Eliminar', style: TextStyle(color: Colors.red)),
             ),
           ],
         ),
@@ -1472,7 +1472,7 @@ class _CustomListsScreenState extends State<_CustomListsScreen> {
         child: Scaffold(
           appBar: buildSettingsAppBar(
             context,
-            const Text('Custom Rows'),
+            const Text('Filas personalizadas'),
           ),
           body: FocusScope(
             node: _scope,
@@ -1484,8 +1484,8 @@ class _CustomListsScreenState extends State<_CustomListsScreen> {
                     _TvSettingsListTile(
                       focusNode: _addFocusNode,
                       leading: const Icon(Icons.add),
-                      title: const Text('Add a New Custom Home Row'),
-                      subtitle: const Text('Create a custom row from TMDB, Letterboxd, or MDBList.'),
+                      title: const Text('Añadir una fila de inicio personalizada'),
+                      subtitle: const Text('Crea una fila personalizada desde TMDB, Letterboxd o MDBList.'),
                       onTap: () => _showAddEditDialog(null),
                     ),
                   ],
@@ -1751,7 +1751,7 @@ class _AddEditCustomRowDialogState extends State<_AddEditCustomRowDialog> {
             ),
             TextButton(
               onPressed: () => Navigator.pop(ctx, true),
-              child: const Text('Yes'),
+              child: const Text('Sí'),
             ),
           ],
         ),
@@ -1996,11 +1996,11 @@ class _AddEditCustomRowDialogState extends State<_AddEditCustomRowDialog> {
                     : [
                         TextButton(
                           onPressed: () => _dismiss(false),
-                          child: const Text('Cancel'),
+                          child: const Text('Cancelar'),
                         ),
                         TextButton(
                           onPressed: _save,
-                          child: const Text('Save'),
+                          child: const Text('Guardar'),
                         ),
                       ],
               );
@@ -2016,7 +2016,7 @@ class _AddEditCustomRowDialogState extends State<_AddEditCustomRowDialog> {
                   mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                   const Text('Source', style: TextStyle(color: Colors.grey, fontSize: 12)),
+                   const Text('Origen', style: TextStyle(color: Colors.grey, fontSize: 12)),
                    const SizedBox(height: 4),
                    ListenableBuilder(
                      listenable: _sourceFocusNode,
@@ -2083,7 +2083,7 @@ class _AddEditCustomRowDialogState extends State<_AddEditCustomRowDialog> {
                    ),
                      if (typeOptions.length > 1) ...[
                        const SizedBox(height: 16),
-                       const Text('Type', style: TextStyle(color: Colors.grey, fontSize: 12)),
+                       const Text('Tipo', style: TextStyle(color: Colors.grey, fontSize: 12)),
                        const SizedBox(height: 4),
                        ListenableBuilder(
                          listenable: _typeFocusNode,
@@ -2151,7 +2151,7 @@ class _AddEditCustomRowDialogState extends State<_AddEditCustomRowDialog> {
                    // Source + Type specific parameters
  
                    if (_source == 'letterboxd') ...[
-                     const Text('Letterboxd Username', style: TextStyle(color: Colors.grey, fontSize: 12)),
+                     const Text('Usuario de Letterboxd', style: TextStyle(color: Colors.grey, fontSize: 12)),
                      const SizedBox(height: 4),
                      _SettingsTextField(
                        controller: _letterboxdUsernameController,
@@ -2188,7 +2188,7 @@ class _AddEditCustomRowDialogState extends State<_AddEditCustomRowDialog> {
  
                    if (_source == 'mdblist') ...[
                      if (_type == 'list_url') ...[
-                       const Text('MDBList URL', style: TextStyle(color: Colors.grey, fontSize: 12)),
+                       const Text('URL de MDBList', style: TextStyle(color: Colors.grey, fontSize: 12)),
                        const SizedBox(height: 4),
                        _SettingsTextField(
                          controller: _mdblistListNameController,
@@ -2196,7 +2196,7 @@ class _AddEditCustomRowDialogState extends State<_AddEditCustomRowDialog> {
                          focusNode: _mdblistListNameFocusNode,
                        ),
                      ] else ...[
-                       const Text('MDBList Username', style: TextStyle(color: Colors.grey, fontSize: 12)),
+                       const Text('Usuario de MDBList', style: TextStyle(color: Colors.grey, fontSize: 12)),
                        const SizedBox(height: 4),
                        _SettingsTextField(
                          controller: _mdblistUsernameController,
@@ -2204,7 +2204,7 @@ class _AddEditCustomRowDialogState extends State<_AddEditCustomRowDialog> {
                          focusNode: _mdblistUsernameFocusNode,
                        ),
                        const SizedBox(height: 16),
-                       const Text('List Name (slug)', style: TextStyle(color: Colors.grey, fontSize: 12)),
+                       const Text('Nombre de la lista (slug)', style: TextStyle(color: Colors.grey, fontSize: 12)),
                        const SizedBox(height: 4),
                        _SettingsTextField(
                          controller: _mdblistListNameController,
@@ -2222,7 +2222,7 @@ class _AddEditCustomRowDialogState extends State<_AddEditCustomRowDialog> {
                    ],
  
                    const SizedBox(height: 16),
-                   const Text('Sort By', style: TextStyle(color: Colors.grey, fontSize: 12)),
+                   const Text('Ordenar por', style: TextStyle(color: Colors.grey, fontSize: 12)),
                    const SizedBox(height: 4),
                    ListenableBuilder(
                      listenable: _sortByFocusNode,
@@ -2271,12 +2271,12 @@ class _AddEditCustomRowDialogState extends State<_AddEditCustomRowDialog> {
                              contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                            ),
                            items: const [
-                             DropdownMenuItem(value: 'none', child: Text('Default (When Added)')),
-                             DropdownMenuItem(value: 'title', child: Text('Film Name')),
-                             DropdownMenuItem(value: 'popularity', child: Text('Film Popularity')),
-                             DropdownMenuItem(value: 'year', child: Text('Release Date')),
-                             DropdownMenuItem(value: 'rating', child: Text('Average Rating')),
-                             DropdownMenuItem(value: 'shuffle', child: Text('Shuffle')),
+                             DropdownMenuItem(value: 'none', child: Text('Predeterminado (al añadirse)')),
+                             DropdownMenuItem(value: 'title', child: Text('Nombre de la película')),
+                             DropdownMenuItem(value: 'popularity', child: Text('Popularidad de la película')),
+                             DropdownMenuItem(value: 'year', child: Text('Fecha de estreno')),
+                             DropdownMenuItem(value: 'rating', child: Text('Puntuación media')),
+                             DropdownMenuItem(value: 'shuffle', child: Text('Aleatorio')),
                            ],
                            onChanged: (val) {
                              if (val != null) {
@@ -2296,7 +2296,7 @@ class _AddEditCustomRowDialogState extends State<_AddEditCustomRowDialog> {
                    ),
                    if (_sortBy != 'none' && _sortBy != 'shuffle') ...[
                      const SizedBox(height: 16),
-                     const Text('Sort Order', style: TextStyle(color: Colors.grey, fontSize: 12)),
+                     const Text('Orden', style: TextStyle(color: Colors.grey, fontSize: 12)),
                      const SizedBox(height: 4),
                      ListenableBuilder(
                        listenable: _sortOrderFocusNode,
@@ -2346,22 +2346,22 @@ class _AddEditCustomRowDialogState extends State<_AddEditCustomRowDialog> {
                              ),
                              items: _sortBy == 'title'
                                  ? const [
-                                     DropdownMenuItem(value: 'asc', child: Text('A to Z')),
-                                     DropdownMenuItem(value: 'desc', child: Text('Z to A')),
+                                     DropdownMenuItem(value: 'asc', child: Text('De la A a la Z')),
+                                     DropdownMenuItem(value: 'desc', child: Text('De la Z a la A')),
                                    ]
                                  : (_sortBy == 'year'
                                      ? const [
-                                         DropdownMenuItem(value: 'desc', child: Text('Newest First')),
-                                         DropdownMenuItem(value: 'asc', child: Text('Earliest First')),
+                                         DropdownMenuItem(value: 'desc', child: Text('Más recientes primero')),
+                                         DropdownMenuItem(value: 'asc', child: Text('Más antiguos primero')),
                                        ]
                                      : (_sortBy == 'popularity'
                                          ? const [
-                                             DropdownMenuItem(value: 'desc', child: Text('Most Popular First')),
-                                             DropdownMenuItem(value: 'asc', child: Text('Least Popular First')),
+                                             DropdownMenuItem(value: 'desc', child: Text('Más populares primero')),
+                                             DropdownMenuItem(value: 'asc', child: Text('Menos populares primero')),
                                            ]
                                          : const [
-                                             DropdownMenuItem(value: 'desc', child: Text('Highest First')),
-                                             DropdownMenuItem(value: 'asc', child: Text('Lowest First')),
+                                             DropdownMenuItem(value: 'desc', child: Text('Más altas primero')),
+                                             DropdownMenuItem(value: 'asc', child: Text('Más bajas primero')),
                                            ])),
                              onChanged: (val) {
                                if (val != null) {
@@ -2415,7 +2415,7 @@ class _AddEditCustomRowDialogState extends State<_AddEditCustomRowDialog> {
                   })(),
 
                   const SizedBox(height: 16),
-                  const Text('Home Row Custom Name', style: TextStyle(color: Colors.grey, fontSize: 12)),
+                  const Text('Nombre personalizado de la fila', style: TextStyle(color: Colors.grey, fontSize: 12)),
                   const SizedBox(height: 4),
                   _SettingsTextField(
                     controller: _nameController,

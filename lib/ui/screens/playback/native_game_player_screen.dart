@@ -2703,12 +2703,12 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
                           FilledButton.icon(
                             onPressed: _openCoreSettings,
                             icon: const Icon(Icons.tune),
-                            label: const Text('Emulator settings'),
+                            label: const Text('Ajustes del emulador'),
                           ),
                           OutlinedButton.icon(
                             onPressed: _retryAfterSettings,
                             icon: const Icon(Icons.refresh),
-                            label: const Text('Try again'),
+                            label: const Text('Reintentar'),
                           ),
                         ],
                       ),

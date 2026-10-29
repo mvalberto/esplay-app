@@ -184,7 +184,7 @@ class _AudioPreferencesScreenState extends State<_AudioPreferencesScreen> {
   Widget _buildRedetectTile() {
     return _TvSettingsListTile(
       leading: const Icon(Icons.refresh),
-      title: const Text('Re-detect & apply recommended'),
+      title: const Text('Volver a detectar y aplicar lo recomendado'),
       subtitle: const Text(
         'Re-run audio detection and reset to the recommended settings.',
       ),
@@ -214,7 +214,7 @@ class _AudioPreferencesScreenState extends State<_AudioPreferencesScreen> {
         : _audioRouteLabel(l10n, profile.activeRouteType);
     ScaffoldMessenger.of(
       context,
-    ).showSnackBar(SnackBar(content: Text('Audio re-detected: $route')));
+    ).showSnackBar(SnackBar(content: Text('Audio detectado de nuevo: $route')));
   }
 
   @override

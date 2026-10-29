@@ -580,16 +580,16 @@ class _HomeRowTogglesScreenState extends State<HomeRowTogglesScreen> {
                 children: [
                   SwitchPreferenceTile(
                     preference: UserPreferences.displayRewatchRow,
-                    title: 'Display Rewatch Row',
-                    subtitle: 'Show Rewatch row in Home Sections',
+                    title: 'Mostrar fila Volver a ver',
+                    subtitle: 'Muestra la fila Volver a ver en las secciones de inicio',
                     icon: Icons.replay,
                     onChanged: _onRewatchRowToggleChanged,
                   ),
                   if (showRewatchRow) ...[
                     EnumPreferenceTile<RewatchSortBy>(
                       preference: UserPreferences.rewatchSortBy,
-                      title: 'Sort By',
-                      description: 'Choose sorting method for completed items',
+                      title: 'Ordenar por',
+                      description: 'Elige cómo ordenar los elementos terminados',
                       icon: Icons.sort,
                       values: RewatchSortBy.values,
                       labelOf: (v) => v.displayName,
@@ -597,22 +597,22 @@ class _HomeRowTogglesScreenState extends State<HomeRowTogglesScreen> {
                     ),
                     SwitchPreferenceTile(
                       preference: UserPreferences.rewatchIncludeMovies,
-                      title: 'Include Movies',
-                      subtitle: 'Show watched movies in the rewatch row',
+                      title: 'Incluir películas',
+                      subtitle: 'Muestra películas vistas en la fila Volver a ver',
                       icon: Icons.movie,
                       onChanged: _onRewatchConfigChanged,
                     ),
                     SwitchPreferenceTile(
                       preference: UserPreferences.rewatchIncludeShows,
-                      title: 'Include Shows',
-                      subtitle: 'Show watched TV shows in the rewatch row',
+                      title: 'Incluir series',
+                      subtitle: 'Muestra series vistas en la fila Volver a ver',
                       icon: Icons.tv,
                       onChanged: _onRewatchConfigChanged,
                     ),
                     SwitchPreferenceTile(
                       preference: UserPreferences.rewatchIncludeCollections,
-                      title: 'Include Collections',
-                      subtitle: 'Show watched collections in the rewatch row',
+                      title: 'Incluir colecciones',
+                      subtitle: 'Muestra colecciones vistas en la fila Volver a ver',
                       icon: Icons.collections,
                       onChanged: _onRewatchConfigChanged,
                     ),
@@ -625,15 +625,15 @@ class _HomeRowTogglesScreenState extends State<HomeRowTogglesScreen> {
                 children: [
                   SwitchPreferenceTile(
                     preference: UserPreferences.displaySinceYouWatchedRows,
-                    title: 'Display Since You Watched Rows',
-                    subtitle: 'Show and customize Since You Watched rows in Home Sections.',
+                    title: 'Mostrar filas Porque viste',
+                    subtitle: 'Muestra y personaliza las filas Porque viste en las secciones de inicio.',
                     icon: Icons.recommend,
                     onChanged: _onSinceYouWatchedRowsToggleChanged,
                   ),
                   if (showSinceYouWatchedRows) ...[
                     EnumPreferenceTile<SinceYouWatchedSource>(
                       preference: UserPreferences.sinceYouWatchedSource,
-                      title: 'Recommendation Source',
+                      title: 'Origen de las recomendaciones',
                       description: "Choose recommendation source (Moonfin Recommends custom local algorithm, Jellyfin Recommends server engine, or TMDb's similarity metrics. Note: Online recommendations require Seerr integration).",
                       icon: Icons.source,
                       values: SinceYouWatchedSource.values,
@@ -642,8 +642,8 @@ class _HomeRowTogglesScreenState extends State<HomeRowTogglesScreen> {
                     ),
                     EnumPreferenceTile<SinceYouWatchedSourceType>(
                       preference: UserPreferences.sinceYouWatchedSourceType,
-                      title: 'Source Type',
-                      description: 'Choose type of items to recommend',
+                      title: 'Tipo de origen',
+                      description: 'Elige el tipo de elementos a recomendar',
                       icon: Icons.merge_type,
                       values: SinceYouWatchedSourceType.values,
                       labelOf: (v) => v.displayName,
@@ -651,8 +651,8 @@ class _HomeRowTogglesScreenState extends State<HomeRowTogglesScreen> {
                     ),
                     EnumPreferenceTile<SinceYouWatchedSourceItem>(
                       preference: UserPreferences.sinceYouWatchedSourceItem,
-                      title: 'Source Item',
-                      description: 'Choose which source item to base recommendations on',
+                      title: 'Elemento de origen',
+                      description: 'Elige en qué elemento basar las recomendaciones',
                       icon: Icons.play_circle_filled,
                       values: SinceYouWatchedSourceItem.values,
                       labelOf: (v) => v.displayName,
@@ -660,8 +660,8 @@ class _HomeRowTogglesScreenState extends State<HomeRowTogglesScreen> {
                     ),
                     EnumPreferenceTile<SinceYouWatchedNumRows>(
                       preference: UserPreferences.sinceYouWatchedNumRows,
-                      title: 'Number of Rows to Add',
-                      description: 'Choose how many Since You Watched rows to display (1-5)',
+                      title: 'Número de filas a añadir',
+                      description: 'Elige cuántas filas Porque viste mostrar (1-5)',
                       icon: Icons.format_list_numbered,
                       values: SinceYouWatchedNumRows.values,
                       labelOf: (v) => v.displayName,
@@ -670,8 +670,8 @@ class _HomeRowTogglesScreenState extends State<HomeRowTogglesScreen> {
                     if (sinceYouWatchedSource != SinceYouWatchedSource.online)
                       SwitchPreferenceTile(
                         preference: UserPreferences.sinceYouWatchedIncludeWatched,
-                        title: 'Include Previously Watched',
-                        subtitle: 'Include watched items in recommendations',
+                        title: 'Incluir lo ya visto',
+                        subtitle: 'Incluye elementos vistos en las recomendaciones',
                         icon: Icons.history,
                         onChanged: _onSinceYouWatchedConfigChanged,
                       ),
@@ -1028,9 +1028,9 @@ class _StudioSelectionDialogState extends State<StudioSelectionDialog> {
           child: _loading
               ? const Center(child: CircularProgressIndicator())
               : _error != null
-                  ? Center(child: Text('Error loading studios: $_error'))
+                  ? Center(child: Text('Error al cargar los estudios: $_error'))
                   : _allStudios.isEmpty
-                      ? const Center(child: Text('No studios found in library.'))
+                      ? const Center(child: Text('No se han encontrado estudios en la biblioteca.'))
                       : Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [

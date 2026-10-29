@@ -782,6 +782,12 @@ class UserPreferences extends ChangeNotifier {
   }
 
   T get<T>(Preference<T> pref) {
+    // EsPlay always streams and downloads at full quality, whatever is stored
+    // or synced, so playback never transcodes for a bitrate cap.
+    if (pref.key == maxBitrate.key) return '200' as T;
+    if (pref.key == maxVideoResolution.key) return MaxVideoResolution.auto as T;
+    if (pref.key == defaultDownloadQuality.key) return 'original' as T;
+
     if (_isScopedPreference(pref)) {
       final scoped = _scopedPreference(pref);
       if (scoped != null && _store.containsKey(scoped.key)) {
@@ -2121,7 +2127,7 @@ class UserPreferences extends ChangeNotifier {
   );
   static final maxBitrate = Preference(
     key: 'pref_max_bitrate',
-    defaultValue: '120',
+    defaultValue: '200',
   );
 
   static final maxVideoResolution = EnumPreference(
