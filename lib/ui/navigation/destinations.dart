@@ -104,6 +104,7 @@ class Destinations {
   static const liveTvRecordings = '/live-tv/recordings';
   static const liveTvSeriesRecordings = '/live-tv/series-recordings';
   static const liveTvPlayer = '/live-tv/player';
+  static const liveTvTag = '/live-tv/tag';
 
   // Playback
   static const videoPlayer = '/player/video';
@@ -335,6 +336,10 @@ class Destinations {
 
   static String liveTvChannel(String channelId) =>
       '$liveTvPlayer?channelId=${Uri.encodeQueryComponent(channelId)}';
+
+  static String liveTvTagChannels(String tagId, String tagName) =>
+      '$liveTvTag?id=${Uri.encodeQueryComponent(tagId)}'
+      '&name=${Uri.encodeQueryComponent(tagName)}';
 
   static String itemOrPhoto(
     String itemId, {

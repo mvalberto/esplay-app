@@ -16244,6 +16244,49 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get favoriteSongsRow => 'Canciones favoritas';
+
+  @override
+  String get esplayLiveTvHome => 'Inicio';
+
+  @override
+  String get esplayLiveTvTags => 'Etiquetas';
+
+  @override
+  String get esplayLiveTvSeeAllTags => 'Ver todas';
+
+  @override
+  String get esplayLiveTvOnNow => 'En directo ahora';
+
+  @override
+  String get esplayLiveTvSeeChannels => 'Ver canales';
+
+  @override
+  String get esplayLiveTvNoGuide => 'Sin información de guía';
+
+  @override
+  String esplayLiveTvMinutesLeft(int minutes) {
+    return 'quedan $minutes min';
+  }
+
+  @override
+  String get esplayLiveTvList => 'Lista';
+
+  @override
+  String get esplayLiveTvGrid => 'Cuadrícula';
+
+  @override
+  String get esplayLiveTvLive => 'EN DIRECTO';
+
+  @override
+  String get esplayLiveTvNoTags =>
+      'Este servidor todavía no tiene etiquetas de canales.';
+
+  @override
+  String get esplayLiveTvNoChannels => 'Esta etiqueta no tiene canales.';
+
+  @override
+  String get esplayLiveTvLoadError =>
+      'No se han podido cargar los canales. Revisa la conexión y vuelve a intentarlo.';
 }
 
 /// The translations for Spanish Castilian, as used in Latin America and the Caribbean (`es_419`).

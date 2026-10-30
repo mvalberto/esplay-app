@@ -1133,8 +1133,8 @@ class _TopToolbarState extends State<TopToolbar> with RouteAware {
                     label: l10n.liveTv,
                     baseColor: nextNavColor(),
                     onPressed: () {
-                      if (_isActive(Destinations.liveTvGuide)) return;
-                      context.navigateTopLevel(Destinations.liveTvGuide);
+                      if (_isActive(Destinations.liveTv)) return;
+                      context.navigateTopLevel(Destinations.liveTv);
                     },
                   ),
                 ),

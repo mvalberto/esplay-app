@@ -61,6 +61,7 @@ import '../../data/viewmodels/live_tv_guide_view_model.dart';
 import '../screens/livetv/live_tv_recordings_screen.dart';
 import '../screens/livetv/live_tv_schedule_screen.dart';
 import '../screens/livetv/live_tv_screen.dart';
+import '../screens/livetv/live_tv_tag_channels_screen.dart';
 import '../screens/livetv/live_tv_series_recordings_screen.dart';
 import '../screens/playback/audio_player_screen.dart';
 import '../screens/playback/book_reader_screen.dart';
@@ -546,6 +547,13 @@ final appRouter = GoRouter(
               currentChannel: extraMap['currentChannel'] as GuideChannel?,
             );
           },
+        ),
+        GoRoute(
+          path: 'tag',
+          builder: (context, state) => LiveTvTagChannelsScreen(
+            tagId: state.uri.queryParameters['id'] ?? '',
+            tagName: state.uri.queryParameters['name'] ?? '',
+          ),
         ),
         GoRoute(
           path: 'schedule',

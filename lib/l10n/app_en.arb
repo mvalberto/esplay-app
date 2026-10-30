@@ -14916,5 +14916,19 @@
   "favoriteArtistsRow": "Favorite Artists",
   "favoriteMusicVideosRow": "Favorite Music Videos",
   "favoriteAlbumsRow": "Favorite Albums",
-  "favoriteSongsRow": "Favorite Songs"
+  "favoriteSongsRow": "Favorite Songs",
+  "esplayLiveTvHome": "Home",
+  "esplayLiveTvTags": "Tags",
+  "esplayLiveTvSeeAllTags": "See all",
+  "esplayLiveTvOnNow": "On now",
+  "esplayLiveTvSeeChannels": "See channels",
+  "esplayLiveTvNoGuide": "No guide information",
+  "esplayLiveTvMinutesLeft": "{minutes} min left",
+  "@esplayLiveTvMinutesLeft": {"placeholders":{"minutes":{"type":"int"}}},
+  "esplayLiveTvList": "List",
+  "esplayLiveTvGrid": "Grid",
+  "esplayLiveTvLive": "LIVE",
+  "esplayLiveTvNoTags": "This server has no channel tags yet.",
+  "esplayLiveTvNoChannels": "This tag has no channels.",
+  "esplayLiveTvLoadError": "Could not load the channels. Check your connection and try again."
 }

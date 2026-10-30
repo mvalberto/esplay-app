@@ -146,7 +146,7 @@ void openBottomNavTab(BuildContext context, BottomNavTab tab) {
     BottomNavTab.search => Destinations.search,
     BottomNavTab.favorites => Destinations.allFavorites,
     BottomNavTab.genres => Destinations.allGenres,
-    BottomNavTab.liveTv => Destinations.liveTvGuide,
+    BottomNavTab.liveTv => Destinations.liveTv,
     BottomNavTab.discover => Destinations.seerrDiscover,
     BottomNavTab.libraries => null,
   };

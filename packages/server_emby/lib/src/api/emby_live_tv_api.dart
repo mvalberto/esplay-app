@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:server_core/server_core.dart';
 
-class EmbyLiveTvApi implements LiveTvApi {
+class EmbyLiveTvApi implements LiveTvApi, LiveTvChannelTagsApi {
   final Dio _dio;
   static const _postChannelIdsThreshold = 1800;
 
@@ -27,6 +27,39 @@ class EmbyLiveTvApi implements LiveTvApi {
       'UserId': ?userId,
     });
     return response.data as Map<String, dynamic>;
+  }
+
+  @override
+  Future<List<Map<String, dynamic>>> getChannelTags({String? userId}) async {
+    final response = await _dio.get(
+      '/LiveTv/ChannelTags',
+      queryParameters: {'UserId': ?userId},
+    );
+    final data = response.data;
+    final items = data is Map ? data['Items'] : data;
+    return ((items as List?) ?? const [])
+        .whereType<Map>()
+        .map((tag) => tag.cast<String, dynamic>())
+        .toList();
+  }
+
+  @override
+  Future<List<Map<String, dynamic>>> getChannelsWithTag(
+    String tagId, {
+    String? userId,
+  }) async {
+    final response = await _dio.get('/LiveTv/Channels', queryParameters: {
+      'TagIds': tagId,
+      'AddCurrentProgram': true,
+      'EnableUserData': true,
+      'Fields': 'ImageTags,UserData',
+      'UserId': ?userId,
+    });
+    final items = (response.data as Map<String, dynamic>)['Items'] as List?;
+    return (items ?? const [])
+        .whereType<Map>()
+        .map((channel) => channel.cast<String, dynamic>())
+        .toList();
   }
 
   @override

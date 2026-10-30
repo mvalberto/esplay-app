@@ -81,3 +81,16 @@ abstract class LiveTvApi {
 
   Future<void> cancelSeriesTimer(String seriesTimerId);
 }
+
+/// Channel tags (Emby). Servers without tags simply don't implement it, so
+/// callers check `liveTvApi is LiveTvChannelTagsApi` first.
+abstract class LiveTvChannelTagsApi {
+  /// The tags in the server's order, as `{Id, Name}` maps.
+  Future<List<Map<String, dynamic>>> getChannelTags({String? userId});
+
+  /// The channels carrying [tagId], each with its `CurrentProgram`.
+  Future<List<Map<String, dynamic>>> getChannelsWithTag(
+    String tagId, {
+    String? userId,
+  });
+}

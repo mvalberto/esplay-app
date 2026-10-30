@@ -16189,4 +16189,46 @@ class AppLocalizationsRo extends AppLocalizations {
 
   @override
   String get favoriteSongsRow => 'Favorite Songs';
+
+  @override
+  String get esplayLiveTvHome => 'Home';
+
+  @override
+  String get esplayLiveTvTags => 'Tags';
+
+  @override
+  String get esplayLiveTvSeeAllTags => 'See all';
+
+  @override
+  String get esplayLiveTvOnNow => 'On now';
+
+  @override
+  String get esplayLiveTvSeeChannels => 'See channels';
+
+  @override
+  String get esplayLiveTvNoGuide => 'No guide information';
+
+  @override
+  String esplayLiveTvMinutesLeft(int minutes) {
+    return '$minutes min left';
+  }
+
+  @override
+  String get esplayLiveTvList => 'List';
+
+  @override
+  String get esplayLiveTvGrid => 'Grid';
+
+  @override
+  String get esplayLiveTvLive => 'LIVE';
+
+  @override
+  String get esplayLiveTvNoTags => 'This server has no channel tags yet.';
+
+  @override
+  String get esplayLiveTvNoChannels => 'This tag has no channels.';
+
+  @override
+  String get esplayLiveTvLoadError =>
+      'Could not load the channels. Check your connection and try again.';
 }

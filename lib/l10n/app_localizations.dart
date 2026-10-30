@@ -27884,6 +27884,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Favorite Songs'**
   String get favoriteSongsRow;
+
+  /// No description provided for @esplayLiveTvHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get esplayLiveTvHome;
+
+  /// No description provided for @esplayLiveTvTags.
+  ///
+  /// In en, this message translates to:
+  /// **'Tags'**
+  String get esplayLiveTvTags;
+
+  /// No description provided for @esplayLiveTvSeeAllTags.
+  ///
+  /// In en, this message translates to:
+  /// **'See all'**
+  String get esplayLiveTvSeeAllTags;
+
+  /// No description provided for @esplayLiveTvOnNow.
+  ///
+  /// In en, this message translates to:
+  /// **'On now'**
+  String get esplayLiveTvOnNow;
+
+  /// No description provided for @esplayLiveTvSeeChannels.
+  ///
+  /// In en, this message translates to:
+  /// **'See channels'**
+  String get esplayLiveTvSeeChannels;
+
+  /// No description provided for @esplayLiveTvNoGuide.
+  ///
+  /// In en, this message translates to:
+  /// **'No guide information'**
+  String get esplayLiveTvNoGuide;
+
+  /// No description provided for @esplayLiveTvMinutesLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'{minutes} min left'**
+  String esplayLiveTvMinutesLeft(int minutes);
+
+  /// No description provided for @esplayLiveTvList.
+  ///
+  /// In en, this message translates to:
+  /// **'List'**
+  String get esplayLiveTvList;
+
+  /// No description provided for @esplayLiveTvGrid.
+  ///
+  /// In en, this message translates to:
+  /// **'Grid'**
+  String get esplayLiveTvGrid;
+
+  /// No description provided for @esplayLiveTvLive.
+  ///
+  /// In en, this message translates to:
+  /// **'LIVE'**
+  String get esplayLiveTvLive;
+
+  /// No description provided for @esplayLiveTvNoTags.
+  ///
+  /// In en, this message translates to:
+  /// **'This server has no channel tags yet.'**
+  String get esplayLiveTvNoTags;
+
+  /// No description provided for @esplayLiveTvNoChannels.
+  ///
+  /// In en, this message translates to:
+  /// **'This tag has no channels.'**
+  String get esplayLiveTvNoChannels;
+
+  /// No description provided for @esplayLiveTvLoadError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load the channels. Check your connection and try again.'**
+  String get esplayLiveTvLoadError;
 }
 
 class _AppLocalizationsDelegate

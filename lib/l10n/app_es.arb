@@ -10909,5 +10909,18 @@
     "favoriteArtistsRow": "Artistas favoritos",
     "favoriteMusicVideosRow": "Videoclips favoritos",
     "favoriteAlbumsRow": "Álbumes favoritos",
-    "favoriteSongsRow": "Canciones favoritas"
+    "favoriteSongsRow": "Canciones favoritas",
+    "esplayLiveTvHome": "Inicio",
+    "esplayLiveTvTags": "Etiquetas",
+    "esplayLiveTvSeeAllTags": "Ver todas",
+    "esplayLiveTvOnNow": "En directo ahora",
+    "esplayLiveTvSeeChannels": "Ver canales",
+    "esplayLiveTvNoGuide": "Sin información de guía",
+    "esplayLiveTvMinutesLeft": "quedan {minutes} min",
+    "esplayLiveTvList": "Lista",
+    "esplayLiveTvGrid": "Cuadrícula",
+    "esplayLiveTvLive": "EN DIRECTO",
+    "esplayLiveTvNoTags": "Este servidor todavía no tiene etiquetas de canales.",
+    "esplayLiveTvNoChannels": "Esta etiqueta no tiene canales.",
+    "esplayLiveTvLoadError": "No se han podido cargar los canales. Revisa la conexión y vuelve a intentarlo."
 }
