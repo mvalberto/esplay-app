@@ -106,6 +106,7 @@ class Destinations {
   static const liveTvSeriesRecordings = '/live-tv/series-recordings';
   static const liveTvPlayer = '/live-tv/player';
   static const liveTvTag = '/live-tv/tag';
+  static const liveTvChannelPage = '/live-tv/channel';
 
   // Playback
   static const videoPlayer = '/player/video';
@@ -349,6 +350,10 @@ class Destinations {
   static String liveTvChannel(String channelId) =>
       '$liveTvPlayer?channelId=${Uri.encodeQueryComponent(channelId)}';
 
+  /// A channel's own page: its schedule, Play, Record and Favorite.
+  static String liveTvChannelInfo(String channelId) =>
+      '$liveTvChannelPage?id=${Uri.encodeQueryComponent(channelId)}';
+
   static String liveTvTagChannels(String tagId, String tagName) =>
       '$liveTvTag?id=${Uri.encodeQueryComponent(tagId)}'
       '&name=${Uri.encodeQueryComponent(tagName)}';
@@ -360,9 +365,8 @@ class Destinations {
     String? channelId,
   }) {
     if (type == 'Photo') return photo(itemId);
-    // Channels have no detail screen worth landing on, so go straight to
-    // the live player, which resolves the lineup from the id.
-    if (isLiveTvChannelType(type)) return liveTvChannel(itemId);
+    // EsPlay opens a channel on its own page with its schedule, as Emby does.
+    if (isLiveTvChannelType(type)) return liveTvChannelInfo(itemId);
     // A program is only its channel's current airing. Its own id carries no
     // media sources, and asking the server for PlaybackInfo on one fails with
     // a 500, so tune the channel instead.

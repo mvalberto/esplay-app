@@ -16270,4 +16270,19 @@ class AppLocalizationsIt extends AppLocalizations {
   @override
   String get esplayLiveTvLoadError =>
       'Could not load the channels. Check your connection and try again.';
+
+  @override
+  String get esplayLiveTvCreateRecording => 'Create recording';
+
+  @override
+  String get esplayLiveTvCancelRecording => 'Cancel recording';
+
+  @override
+  String get esplayLiveTvRecordingScheduled => 'Recording scheduled';
+
+  @override
+  String get esplayLiveTvNoPrograms => 'No upcoming programs for this channel.';
+
+  @override
+  String get esplayLiveTvActionFailed => 'That did not work. Try again.';
 }

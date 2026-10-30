@@ -54,7 +54,7 @@ Future<void> playLiveTvChannel(
 /// Opens the channel's own page, with what it airs next and Play and Record,
 /// the way Emby does, instead of tuning in straight away.
 void openLiveTvChannel(BuildContext context, String channelId) {
-  context.push(Destinations.item(channelId));
+  context.push(Destinations.liveTvChannelInfo(channelId));
 }
 
 String liveTvTimeRange(DateTime start, DateTime end) {
@@ -360,6 +360,132 @@ class LiveTvChip extends StatelessWidget {
           ),
           child: label,
         ),
+      ),
+    );
+  }
+}
+
+/// A program airing now as a poster: the program's own picture (the channel's
+/// logo when it has none), a live badge and its progress, then the program and
+/// its channel underneath. The poster is [width] wide and half as tall again.
+class LiveTvOnNowPoster extends StatelessWidget {
+  final Map<String, dynamic> program;
+  final double width;
+  final bool focused;
+
+  const LiveTvOnNowPoster({
+    super.key,
+    required this.program,
+    required this.width,
+    this.focused = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final channelId = program['ChannelId']?.toString() ?? '';
+    final channelName = program['ChannelName']?.toString() ?? '';
+    final start = DateTime.tryParse(program['StartDate'] as String? ?? '')
+        ?.toLocal();
+    final end = DateTime.tryParse(program['EndDate'] as String? ?? '')
+        ?.toLocal();
+    var progress = 0.0;
+    if (start != null && end != null && end.isAfter(start)) {
+      progress = DateTime.now().difference(start).inSeconds /
+          end.difference(start).inSeconds;
+    }
+    final logo = LiveTvChannelLogo(
+      channelId: channelId,
+      imageTag: program['ChannelPrimaryImageTag'] as String?,
+      name: channelName,
+      fontSize: 14,
+    );
+    final imageTag = (program['ImageTags'] as Map?)?['Primary'] as String?;
+    final picture = imageTag == null
+        ? logo
+        : BoundedNetworkImage(
+            imageUrl: GetIt.instance<MediaServerClient>().imageApi
+                .getPrimaryImageUrl(
+                  program['Id'].toString(),
+                  maxWidth: 400,
+                  tag: imageTag,
+                ),
+            fit: BoxFit.cover,
+            maxWidth: 400,
+            errorBuilder: (context, url, error) => logo,
+          );
+    return SizedBox(
+      width: width,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: width,
+            height: width * 1.5,
+            clipBehavior: Clip.antiAlias,
+            decoration: BoxDecoration(
+              color: liveTvCardColor,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: focused ? liveTvFocus : liveTvCardBorder,
+                width: focused ? 2.5 : 1,
+              ),
+            ),
+            child: Stack(
+              children: [
+                Positioned.fill(child: picture),
+                Positioned(
+                  top: 8,
+                  left: 8,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 6,
+                      vertical: 2,
+                    ),
+                    decoration: BoxDecoration(
+                      color: liveTvRed,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Text(
+                      l10n.esplayLiveTvLive,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  child: LiveTvProgressBar(value: progress, height: 4),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            program['Name']?.toString() ?? '',
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          Text(
+            [
+              if (channelName.isNotEmpty) channelName,
+              if (start != null && end != null) liveTvTimeRange(start, end),
+            ].join(' · '),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(color: liveTvMutedText, fontSize: 12),
+          ),
+        ],
       ),
     );
   }

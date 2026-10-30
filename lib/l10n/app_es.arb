@@ -10926,5 +10926,10 @@
     "bookDiscoverSearchAudiobooks": "Buscar en LibriVox",
     "bookDiscoverFeatured": "Destacados",
     "bookReaderControlsAutoHide": "Los controles se ocultan solos",
-    "bookReaderControlsStayVisible": "Los controles siempre visibles"
+    "bookReaderControlsStayVisible": "Los controles siempre visibles",
+    "esplayLiveTvCreateRecording": "Crear grabación",
+    "esplayLiveTvCancelRecording": "Cancelar grabación",
+    "esplayLiveTvRecordingScheduled": "Grabación programada",
+    "esplayLiveTvNoPrograms": "No hay programación próxima para este canal.",
+    "esplayLiveTvActionFailed": "No ha funcionado. Vuelve a intentarlo."
 }

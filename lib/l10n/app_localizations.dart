@@ -28124,6 +28124,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not load the channels. Check your connection and try again.'**
   String get esplayLiveTvLoadError;
+
+  /// No description provided for @esplayLiveTvCreateRecording.
+  ///
+  /// In en, this message translates to:
+  /// **'Create recording'**
+  String get esplayLiveTvCreateRecording;
+
+  /// No description provided for @esplayLiveTvCancelRecording.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel recording'**
+  String get esplayLiveTvCancelRecording;
+
+  /// No description provided for @esplayLiveTvRecordingScheduled.
+  ///
+  /// In en, this message translates to:
+  /// **'Recording scheduled'**
+  String get esplayLiveTvRecordingScheduled;
+
+  /// No description provided for @esplayLiveTvNoPrograms.
+  ///
+  /// In en, this message translates to:
+  /// **'No upcoming programs for this channel.'**
+  String get esplayLiveTvNoPrograms;
+
+  /// No description provided for @esplayLiveTvActionFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'That did not work. Try again.'**
+  String get esplayLiveTvActionFailed;
 }
 
 class _AppLocalizationsDelegate

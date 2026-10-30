@@ -232,8 +232,15 @@ class _HomeViewState extends State<_HomeView> {
 
   Future<List<Map<String, dynamic>>> _loadOnNow() async {
     try {
-      final response = await GetIt.instance<MediaServerClient>().liveTvApi
-          .getRecommendedPrograms(limit: 12, isAiring: true);
+      final client = GetIt.instance<MediaServerClient>();
+      final api = client.liveTvApi;
+      // Emby's call also brings each program's channel name and logo.
+      final response = api is LiveTvChannelTagsApi
+          ? await (api as LiveTvChannelTagsApi).getAiringPrograms(
+              limit: 12,
+              userId: client.userId,
+            )
+          : await api.getRecommendedPrograms(limit: 12, isAiring: true);
       return ((response['Items'] as List?) ?? const [])
           .whereType<Map>()
           .map((item) => item.cast<String, dynamic>())
@@ -297,7 +304,7 @@ class _HomeViewState extends State<_HomeView> {
                   children: [
                     _SectionTitle(side: side, title: Text(l10n.esplayLiveTvOnNow)),
                     SizedBox(
-                      height: isTV ? 250 : 200,
+                      height: isTV ? 360 : 290,
                       child: ListView.separated(
                         scrollDirection: Axis.horizontal,
                         padding: EdgeInsets.symmetric(horizontal: side),
@@ -305,7 +312,7 @@ class _HomeViewState extends State<_HomeView> {
                         separatorBuilder: (context, index) =>
                             const SizedBox(width: 12),
                         itemBuilder: (context, index) => SizedBox(
-                          width: isTV ? 320 : 240,
+                          width: isTV ? 200 : 160,
                           child: _OnNowCard(program: items[index]),
                         ),
                       ),
@@ -323,8 +330,7 @@ class _HomeViewState extends State<_HomeView> {
   }
 }
 
-/// A program airing now, from the server's recommendations. Select opens its
-/// channel.
+/// A program airing now as a poster. Select opens its channel's page.
 class _OnNowCard extends StatelessWidget {
   final Map<String, dynamic> program;
 
@@ -332,97 +338,17 @@ class _OnNowCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    final channelId = program['ChannelId'].toString();
-    final channelName = program['ChannelName']?.toString() ?? '';
-    final start = DateTime.tryParse(program['StartDate'] as String? ?? '')
-        ?.toLocal();
-    final end = DateTime.tryParse(program['EndDate'] as String? ?? '')
-        ?.toLocal();
-    final now = DateTime.now();
-    double progress = 0;
-    if (start != null && end != null && end.isAfter(start)) {
-      progress =
-          now.difference(start).inSeconds / end.difference(start).inSeconds;
-    }
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        LiveTvFocusable(
-          onTap: () => openLiveTvChannel(context, channelId),
-          builder: (focused) => AspectRatio(
-            aspectRatio: 16 / 9,
-            child: Container(
-              clipBehavior: Clip.antiAlias,
-              decoration: BoxDecoration(
-                color: liveTvCardColor,
-                borderRadius: BorderRadius.circular(12),
-                border: Border.all(color: liveTvCardBorder),
-              ),
-              child: Stack(
-                children: [
-                  Positioned.fill(
-                    child: LiveTvChannelLogo(
-                      channelId: channelId,
-                      imageTag: program['ChannelPrimaryImageTag'] as String?,
-                      name: channelName,
-                      fontSize: 18,
-                    ),
-                  ),
-                  Positioned(
-                    top: 10,
-                    left: 10,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 7,
-                        vertical: 3,
-                      ),
-                      decoration: BoxDecoration(
-                        color: liveTvRed,
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: Text(
-                        l10n.esplayLiveTvLive,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 11,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    child: LiveTvProgressBar(value: progress, height: 4),
-                  ),
-                ],
-              ),
-            ),
-          ),
+    return LayoutBuilder(
+      builder: (context, constraints) => LiveTvFocusable(
+        onTap: () => openLiveTvChannel(
+          context,
+          program['ChannelId'].toString(),
         ),
-        const SizedBox(height: 8),
-        Text(
-          program['Name']?.toString() ?? '',
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 15,
-            fontWeight: FontWeight.w500,
-          ),
+        builder: (focused) => LiveTvOnNowPoster(
+          program: program,
+          width: constraints.maxWidth,
         ),
-        Text(
-          [
-            if (channelName.isNotEmpty) channelName,
-            if (start != null && end != null) liveTvTimeRange(start, end),
-          ].join(' · '),
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-          style: const TextStyle(color: liveTvMutedText, fontSize: 13),
-        ),
-      ],
+      ),
     );
   }
 }

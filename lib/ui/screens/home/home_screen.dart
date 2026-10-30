@@ -5213,9 +5213,8 @@ class _ContentRowsState extends State<_ContentRows>
     );
   }
 
-  /// EsPlay's "On now": each program with its channel's logo, a live badge and
-  /// its progress, since the guide rarely has art for a program. Select opens
-  /// the channel's page.
+  /// EsPlay's "On now": each program's poster (its channel's logo when it has
+  /// none) with a live badge and its progress. Select opens the channel's page.
   Widget _buildLiveTvOnNowRow(
     HomeRow row, {
     required PosterSize posterSize,
@@ -5226,7 +5225,8 @@ class _ContentRowsState extends State<_ContentRows>
     final metadataScale = _desktopUiScaleFactor();
     final squarePosterSide = _squarePosterSide(posterSize);
     final rowHeight = squarePosterSide + (56 * metadataScale);
-    final cardWidth = squarePosterSide * 1.6;
+    // A poster as tall as the other rows' square cards.
+    final cardWidth = squarePosterSide * 2 / 3;
     return _buildTitledRow(
       key: _rowContainerKey(rowIndex),
       title: _localizedRowTitle(row, l10n),
@@ -5257,7 +5257,7 @@ class _ContentRowsState extends State<_ContentRows>
         onTap: (_, item) => _openOnNowChannel(item),
         itemBuilder: (ctx, item, idx, isFocused) => GestureDetector(
           onTap: () => _openOnNowChannel(item),
-          child: _EsplayOnNowCard(
+          child: LiveTvOnNowPoster(
             program: item.rawData,
             width: cardWidth,
             focused: isFocused,
@@ -7273,117 +7273,6 @@ class _EsplayTagCard extends StatelessWidget {
               fontSize: (side * 0.1).clamp(12.0, 18.0),
               fontWeight: FontWeight.w700,
             ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-/// A program airing now: the channel's logo with a live badge and progress,
-/// the program and channel underneath.
-class _EsplayOnNowCard extends StatelessWidget {
-  final Map<String, dynamic> program;
-  final double width;
-  final bool focused;
-
-  const _EsplayOnNowCard({
-    required this.program,
-    required this.width,
-    required this.focused,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    final channelId = program['ChannelId']?.toString() ?? '';
-    final channelName = program['ChannelName']?.toString() ?? '';
-    final start = DateTime.tryParse(program['StartDate'] as String? ?? '')
-        ?.toLocal();
-    final end = DateTime.tryParse(program['EndDate'] as String? ?? '')
-        ?.toLocal();
-    var progress = 0.0;
-    if (start != null && end != null && end.isAfter(start)) {
-      progress = DateTime.now().difference(start).inSeconds /
-          end.difference(start).inSeconds;
-    }
-    return SizedBox(
-      width: width,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: width,
-            height: width * 9 / 16,
-            clipBehavior: Clip.antiAlias,
-            decoration: BoxDecoration(
-              color: liveTvCardColor,
-              borderRadius: BorderRadius.circular(12),
-              border: Border.all(
-                color: focused ? liveTvFocus : liveTvCardBorder,
-                width: focused ? 2.5 : 1,
-              ),
-            ),
-            child: Stack(
-              children: [
-                Positioned.fill(
-                  child: LiveTvChannelLogo(
-                    channelId: channelId,
-                    imageTag: program['ChannelPrimaryImageTag'] as String?,
-                    name: channelName,
-                    fontSize: 16,
-                  ),
-                ),
-                Positioned(
-                  top: 8,
-                  left: 8,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 6,
-                      vertical: 2,
-                    ),
-                    decoration: BoxDecoration(
-                      color: liveTvRed,
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-                    child: Text(
-                      l10n.esplayLiveTvLive,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 10,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  left: 0,
-                  right: 0,
-                  bottom: 0,
-                  child: LiveTvProgressBar(value: progress, height: 4),
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 6),
-          Text(
-            program['Name']?.toString() ?? '',
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          Text(
-            [
-              if (channelName.isNotEmpty) channelName,
-              if (start != null && end != null) liveTvTimeRange(start, end),
-            ].join(' · '),
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: const TextStyle(color: liveTvMutedText, fontSize: 12),
           ),
         ],
       ),

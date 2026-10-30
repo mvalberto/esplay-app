@@ -181,10 +181,17 @@ class RowDataSource {
   }
 
   Future<HomeRow> loadOnNow(String serverId) async {
-    final response = await _client.liveTvApi.getRecommendedPrograms(
-      limit: _defaultLimit,
-      isAiring: true,
-    );
+    // EsPlay's Emby call also brings each program's channel name and logo.
+    final api = _client.liveTvApi;
+    final response = api is LiveTvChannelTagsApi
+        ? await (api as LiveTvChannelTagsApi).getAiringPrograms(
+            limit: _defaultLimit,
+            userId: _client.userId,
+          )
+        : await api.getRecommendedPrograms(
+            limit: _defaultLimit,
+            isAiring: true,
+          );
     return _buildRow(
       id: 'liveTvOnNow',
       title: _l10n.onNow,

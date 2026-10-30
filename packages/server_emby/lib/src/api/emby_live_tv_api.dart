@@ -44,6 +44,24 @@ class EmbyLiveTvApi implements LiveTvApi, LiveTvChannelTagsApi {
   }
 
   @override
+  Future<Map<String, dynamic>> getAiringPrograms({
+    int? limit,
+    String? userId,
+  }) async {
+    final response = await _dio.get(
+      '/LiveTv/Programs/Recommended',
+      queryParameters: {
+        'IsAiring': true,
+        'Limit': ?limit,
+        'Fields': 'ChannelInfo',
+        'EnableImages': true,
+        'UserId': ?userId,
+      },
+    );
+    return response.data as Map<String, dynamic>;
+  }
+
+  @override
   Future<List<Map<String, dynamic>>> getChannelsWithTag(
     String tagId, {
     String? userId,

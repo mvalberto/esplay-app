@@ -16391,6 +16391,23 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get esplayLiveTvLoadError =>
       'No se han podido cargar los canales. Revisa la conexión y vuelve a intentarlo.';
+
+  @override
+  String get esplayLiveTvCreateRecording => 'Crear grabación';
+
+  @override
+  String get esplayLiveTvCancelRecording => 'Cancelar grabación';
+
+  @override
+  String get esplayLiveTvRecordingScheduled => 'Grabación programada';
+
+  @override
+  String get esplayLiveTvNoPrograms =>
+      'No hay programación próxima para este canal.';
+
+  @override
+  String get esplayLiveTvActionFailed =>
+      'No ha funcionado. Vuelve a intentarlo.';
 }
 
 /// The translations for Spanish Castilian, as used in Latin America and the Caribbean (`es_419`).
