@@ -19,6 +19,8 @@ library;
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 
+import '../esplay/esplay_flags.dart';
+
 enum DistributionChannel {
   apk,
   aab,
@@ -79,6 +81,7 @@ class AppDistribution {
   /// Returns false for store/managed distributions (AAB, AUR, PKG, Microsoft
   /// Store, signed IPA), which update through their store.
   static bool get supportsInAppUpdates {
+    if (esplayUpdateRepo.isEmpty) return false;
     switch (channel) {
       case DistributionChannel.apk:
       case DistributionChannel.androidTvApk:
