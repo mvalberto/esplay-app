@@ -84,6 +84,7 @@ class Destinations {
   static const musicBrowse = '/music/:libraryId';
   static const musicCategoryBrowse = '/music/:libraryId/:category';
   static const bookBrowse = '/books/:libraryId';
+  static const bookCategoryBrowse = '/books/:libraryId/:category';
   static const genreBrowse = '/genre/:genreName';
   static const studioBrowse = '/studio/:studioName';
 
@@ -307,6 +308,17 @@ class Destinations {
     return collectionType != null && collectionType.isNotEmpty
         ? '$base?collectionType=${Uri.encodeComponent(collectionType)}'
         : base;
+  }
+
+  /// A book library's [category] screen. Titles take the format to show as
+  /// [scope].
+  static String bookCategory(
+    String libraryId,
+    String category, {
+    String? scope,
+  }) {
+    final base = '/books/$libraryId/$category';
+    return scope == null ? base : '$base?scope=${Uri.encodeQueryComponent(scope)}';
   }
 
   static String photo(String itemId) => '/player/photo/$itemId';

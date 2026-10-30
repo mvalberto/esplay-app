@@ -1804,12 +1804,6 @@ abstract class AppLocalizations {
   /// **'Discovery Subjects'**
   String get discoverySubjects;
 
-  /// Instruction text in discovery subject picker
-  ///
-  /// In en, this message translates to:
-  /// **'Pick which subject feeds to show in Discover.'**
-  String get pickDiscoverySubjects;
-
   /// Button label to apply selected options
   ///
   /// In en, this message translates to:
@@ -1833,30 +1827,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Audiobook Genres'**
   String get audiobookGenres;
-
-  /// Instruction text in audiobook genre picker
-  ///
-  /// In en, this message translates to:
-  /// **'Pick which genres to show in Audiobook Discover.'**
-  String get pickAudiobookGenres;
-
-  /// Section title for audiobook discovery
-  ///
-  /// In en, this message translates to:
-  /// **'Discover Audiobooks'**
-  String get discoverAudiobooks;
-
-  /// Subtitle for audiobook discovery section
-  ///
-  /// In en, this message translates to:
-  /// **'Popular public domain titles from LibriVox.'**
-  String get librivoxDescription;
-
-  /// Label showing number of titles
-  ///
-  /// In en, this message translates to:
-  /// **'{count} titles'**
-  String titlesCount(int count);
 
   /// Tooltip for scroll left button
   ///
@@ -2097,12 +2067,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Discover'**
   String get discover;
-
-  /// Subtitle for book discovery section
-  ///
-  /// In en, this message translates to:
-  /// **'Trending titles by subject from Open Library.'**
-  String get trendingTitlesOpenLibrary;
 
   /// Empty state for bookmarks grid
   ///
@@ -5770,6 +5734,24 @@ abstract class AppLocalizations {
   /// **'Heavy'**
   String get seasonalDensityHeavy;
 
+  /// Setting title: shows the holiday piece, like Halloween's planchette, that follows the selected item on Home
+  ///
+  /// In en, this message translates to:
+  /// **'Focus Follower'**
+  String get seasonalFollower;
+
+  /// Subtitle for the Focus Follower setting in the TV layout
+  ///
+  /// In en, this message translates to:
+  /// **'A holiday piece, like Halloween\'s planchette, follows what you select on Home'**
+  String get seasonalFollowerDescription;
+
+  /// Subtitle for the Focus Follower setting in the desktop layout, where the piece takes the place of the mouse pointer
+  ///
+  /// In en, this message translates to:
+  /// **'A holiday piece, like Halloween\'s planchette, replaces the mouse pointer on Home'**
+  String get seasonalFollowerPointerDescription;
+
   /// Name of the Home row that shows holiday movies
   ///
   /// In en, this message translates to:
@@ -8103,6 +8085,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Show Libraries in Toolbar'**
   String get showLibrariesInToolbar;
+
+  /// Setting that puts each library in the navigation bar as its own button instead of grouping them under the Libraries menu
+  ///
+  /// In en, this message translates to:
+  /// **'Show Libraries Individually'**
+  String get showLibrariesIndividually;
+
+  /// Subtitle for the Show Libraries Individually setting
+  ///
+  /// In en, this message translates to:
+  /// **'Show each library as its own button in the navigation bar instead of in the Libraries menu'**
+  String get showLibrariesIndividuallySubtitle;
 
   /// Setting to keep every top navbar heading's text label visible at all times, tvOS-style
   ///
@@ -21100,6 +21094,18 @@ abstract class AppLocalizations {
   /// **'Skip the profile 8 conversion and strip Dolby Vision profile 7 streams to HDR10-compatible HEVC. Use this if converted streams look wrong.'**
   String get mapDolbyVisionP7Subtitle;
 
+  /// Setting title: drop the Dolby Vision layer from videos that carry both Dolby Vision and HDR10+
+  ///
+  /// In en, this message translates to:
+  /// **'Play Dolby Vision with HDR10+ as HDR10+'**
+  String get stripDolbyVisionHdr10PlusTitle;
+
+  /// Setting subtitle for dropping Dolby Vision from Dolby Vision plus HDR10+ videos
+  ///
+  /// In en, this message translates to:
+  /// **'Drop the Dolby Vision layer from videos that also have HDR10+. Turn this on if those videos play with sound but a black screen.'**
+  String get stripDolbyVisionHdr10PlusSubtitle;
+
   /// Setting title: apply colours/positioning from the subtitle track
   ///
   /// In en, this message translates to:
@@ -23956,12 +23962,6 @@ abstract class AppLocalizations {
   /// **'CB7 extraction plugin is not available on this platform.'**
   String get cb7ExtractionPluginUnavailable;
 
-  /// No description provided for @closeGenrePanel.
-  ///
-  /// In en, this message translates to:
-  /// **'Close genre panel'**
-  String get closeGenrePanel;
-
   /// No description provided for @loadingShuffle.
   ///
   /// In en, this message translates to:
@@ -25837,6 +25837,84 @@ abstract class AppLocalizations {
   /// **'And plenty more'**
   String get setupTourBulletMore;
 
+  /// Progress label at the top of each setup wizard step
+  ///
+  /// In en, this message translates to:
+  /// **'Step {current} of {total}'**
+  String setupStepOf(int current, int total);
+
+  /// Tag beside the option that is chosen right now in a setup wizard list
+  ///
+  /// In en, this message translates to:
+  /// **'Current'**
+  String get setupCurrent;
+
+  /// Remote control hint at the bottom of the setup wizard on TVs
+  ///
+  /// In en, this message translates to:
+  /// **'Up and down to preview · OK to choose · Back twice to skip'**
+  String get setupTvHint;
+
+  /// What the Top Bar navigation position gives you
+  ///
+  /// In en, this message translates to:
+  /// **'Tabs across the top of the screen.'**
+  String get setupNavbarTopHint;
+
+  /// What the Left Sidebar navigation position gives you
+  ///
+  /// In en, this message translates to:
+  /// **'A slim rail of icons down the left side.'**
+  String get setupNavbarLeftHint;
+
+  /// What the Bottom Bar navigation position gives you on phones
+  ///
+  /// In en, this message translates to:
+  /// **'Tabs along the bottom edge, in easy reach of your thumb.'**
+  String get setupNavbarBottomHint;
+
+  /// What the Moonfin media bar style looks like
+  ///
+  /// In en, this message translates to:
+  /// **'Large artwork with the title, details and overview laid over it.'**
+  String get setupMediaBarMoonfinHint;
+
+  /// What the MakD media bar style looks like
+  ///
+  /// In en, this message translates to:
+  /// **'Large artwork led by a big title logo.'**
+  String get setupMediaBarMakdHint;
+
+  /// What the Bookshelf media bar style looks like
+  ///
+  /// In en, this message translates to:
+  /// **'Titles shelved as book spines, with the featured one face out.'**
+  String get setupMediaBarBookshelfHint;
+
+  /// What the Gallery media bar style looks like
+  ///
+  /// In en, this message translates to:
+  /// **'The featured title opened up, with the next few lined up beside it.'**
+  String get setupMediaBarGalleryHint;
+
+  /// What the Banner media bar style looks like
+  ///
+  /// In en, this message translates to:
+  /// **'A shorter banner above your rows, so more of them fit on screen.'**
+  String get setupMediaBarBannerHint;
+
+  /// What the Aya media bar style looks like
+  ///
+  /// In en, this message translates to:
+  /// **'Artwork first in a framed panel, with your rows right underneath.'**
+  String get setupMediaBarAyaHint;
+
+  /// What turning the media bar off does to the Home screen
+  ///
+  /// In en, this message translates to:
+  /// **'No featured area. Home opens straight onto your rows.'**
+  String get setupMediaBarOffHint;
+
   /// Starts the first-run setup wizard again from settings
   ///
   /// In en, this message translates to:
@@ -26891,6 +26969,12 @@ abstract class AppLocalizations {
   /// **'Corner'**
   String get homeScreenBackdropCorner;
 
+  /// Home Screen Backdrop option that shows the focused item's backdrop across the top half of the screen, fading into the background toward the bottom
+  ///
+  /// In en, this message translates to:
+  /// **'Top'**
+  String get homeScreenBackdropTop;
+
   /// Setting to show or hide the backdrop image behind the item details screen
   ///
   /// In en, this message translates to:
@@ -27800,6 +27884,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Most Albums'**
   String get musicSortMostAlbums;
+
+  /// Series screen: where the reader is in a series, the next unread book's number and how many books it has
+  ///
+  /// In en, this message translates to:
+  /// **'Book {index} of {total}'**
+  String bookSeriesPosition(int index, int total);
+
+  /// Book library Favorites screen header count
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 favorite} other{{count} favorites}}'**
+  String bookFavoriteCount(int count);
+
+  /// Authors screen order, from Z back to A
+  ///
+  /// In en, this message translates to:
+  /// **'Z to A'**
+  String get bookSortZToA;
+
+  /// Book genres screen order: the genres with the most titles first
+  ///
+  /// In en, this message translates to:
+  /// **'Most Titles'**
+  String get bookSortMostTitles;
+
+  /// Button on a book genre that opens a random unread title from it
+  ///
+  /// In en, this message translates to:
+  /// **'Surprise Me'**
+  String get bookSurpriseMe;
+
+  /// Button on an author that plays one of their audiobooks at random
+  ///
+  /// In en, this message translates to:
+  /// **'Shuffle Audiobooks'**
+  String get bookShuffleAudiobooks;
+
+  /// Button on an author that opens their first unread book
+  ///
+  /// In en, this message translates to:
+  /// **'Start Reading'**
+  String get bookStartReading;
+
+  /// Heading over an author's books that aren't part of a series
+  ///
+  /// In en, this message translates to:
+  /// **'Other Books'**
+  String get bookOtherBooks;
+
+  /// Placeholder in the Discover search field for books
+  ///
+  /// In en, this message translates to:
+  /// **'Search Open Library'**
+  String get bookDiscoverSearchBooks;
+
+  /// Placeholder in the Discover search field for audiobooks
+  ///
+  /// In en, this message translates to:
+  /// **'Search LibriVox'**
+  String get bookDiscoverSearchAudiobooks;
+
+  /// Label over the highlighted title at the top of Discover
+  ///
+  /// In en, this message translates to:
+  /// **'Featured'**
+  String get bookDiscoverFeatured;
+
+  /// Comic reader toggle while its bars fade out on their own
+  ///
+  /// In en, this message translates to:
+  /// **'Controls hide automatically'**
+  String get bookReaderControlsAutoHide;
+
+  /// Comic reader toggle while its bars stay on screen
+  ///
+  /// In en, this message translates to:
+  /// **'Controls stay visible'**
+  String get bookReaderControlsStayVisible;
 
   /// No description provided for @esplaySignInSubtitle.
   ///

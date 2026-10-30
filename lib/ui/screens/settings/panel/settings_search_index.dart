@@ -861,6 +861,11 @@ List<_SettingsSearchEntry> _buildSettingsSearchIndex({
       subtitle: l10n.settingsShowLibrariesButtonInNavigation,
     ),
     navigation.leaf(
+      'pref_show_libraries_individually',
+      l10n.showLibrariesIndividually,
+      subtitle: l10n.showLibrariesIndividuallySubtitle,
+    ),
+    navigation.leaf(
       'pref_show_syncplay_button',
       l10n.settingsSyncplayButton,
       subtitle: l10n.settingsSyncplayButtonSubtitle,
@@ -975,6 +980,37 @@ List<_SettingsSearchEntry> _buildSettingsSearchIndex({
       'gap',
     ]),
     home.leaf('poster_size', l10n.cardSize, keywords: ['poster size']),
+    home.leaf(
+      'homeRowsEnableAdditionalRatings',
+      l10n.additionalRatings,
+      subtitle: l10n.showMdbListAndTmdbRatings,
+      keywords: ['imdb', 'rotten tomatoes'],
+      header: l10n.ratings,
+    ),
+    home.leaf(
+      'homeRowsEnabledRatings',
+      l10n.ratingSources,
+      subtitle: l10n.ratingSourcesDescription,
+      header: l10n.ratings,
+    ),
+    home.leaf(
+      'homeRowsEnableEpisodeRatings',
+      l10n.episodeRatings,
+      subtitle: l10n.showRatingsOnEpisodes,
+      header: l10n.ratings,
+    ),
+    home.leaf(
+      'homeRowsShowRatingLabels',
+      l10n.ratingLabels,
+      subtitle: l10n.showLabelsNextToIcons,
+      header: l10n.ratings,
+    ),
+    home.leaf(
+      'homeRowsShowRatingBadges',
+      l10n.ratingBadges,
+      subtitle: l10n.showDecorativeBadges,
+      header: l10n.ratings,
+    ),
     if (PlatformDetection.isAppleTV)
       home.leaf(
         'pref_top_shelf_content',
@@ -1265,6 +1301,31 @@ List<_SettingsSearchEntry> _buildSettingsSearchIndex({
         keywords: ['peek', 'first row'],
       ),
     mediaBar.leaf('mediaBarItemCount', l10n.itemCount),
+    mediaBar.leaf(
+      'mediaBarEnableAdditionalRatings',
+      l10n.additionalRatings,
+      subtitle: l10n.showMdbListAndTmdbRatings,
+      keywords: ['imdb', 'rotten tomatoes'],
+      header: l10n.ratings,
+    ),
+    mediaBar.leaf(
+      'mediaBarEnabledRatings',
+      l10n.ratingSources,
+      subtitle: l10n.ratingSourcesDescription,
+      header: l10n.ratings,
+    ),
+    mediaBar.leaf(
+      'mediaBarShowRatingLabels',
+      l10n.ratingLabels,
+      subtitle: l10n.showLabelsNextToIcons,
+      header: l10n.ratings,
+    ),
+    mediaBar.leaf(
+      'mediaBarShowRatingBadges',
+      l10n.ratingBadges,
+      subtitle: l10n.showDecorativeBadges,
+      header: l10n.ratings,
+    ),
     mediaBar.leaf('mediaBarLibraryIds', l10n.sourceLibraries),
     mediaBar.leaf('mediaBarCollectionIds', l10n.sourceCollections),
     mediaBar.leaf('mediaBarExcludedGenres', l10n.excludedGenres),
@@ -1321,6 +1382,15 @@ List<_SettingsSearchEntry> _buildSettingsSearchIndex({
       l10n.seasonalDensity,
       keywords: ['particles', 'amount', 'light', 'heavy'],
     ),
+    if (PlatformDetection.isTV || PlatformDetection.isDesktop)
+      seasonal.leaf(
+        'seasonalFollower',
+        l10n.seasonalFollower,
+        subtitle: PlatformDetection.isTV
+            ? l10n.seasonalFollowerDescription
+            : l10n.seasonalFollowerPointerDescription,
+        keywords: ['planchette', 'cursor', 'pointer', 'mouse'],
+      ),
     loadingAnimation.screen(keywords: ['spinner', 'runner', 'moon', 'logo', 'loading']),
     loadingAnimation.leaf(
       'loadingAnimationImage',

@@ -977,9 +977,6 @@ class AppLocalizationsKo extends AppLocalizations {
   String get discoverySubjects => '둘러보기 주제';
 
   @override
-  String get pickDiscoverySubjects => '둘러보기에 표시할 주제 피드를 선택하세요.';
-
-  @override
   String get apply => '적용';
 
   @override
@@ -990,20 +987,6 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get audiobookGenres => '오디오북 장르';
-
-  @override
-  String get pickAudiobookGenres => '오디오북 둘러보기에 표시할 장르를 선택하세요.';
-
-  @override
-  String get discoverAudiobooks => '오디오북 둘러보기';
-
-  @override
-  String get librivoxDescription => 'LibriVox의 인기 공개 도메인 타이틀.';
-
-  @override
-  String titlesCount(int count) {
-    return '$count개 작품';
-  }
 
   @override
   String get scrollLeft => '왼쪽으로 스크롤';
@@ -1132,9 +1115,6 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get discover => '둘러보기';
-
-  @override
-  String get trendingTitlesOpenLibrary => 'Open Library의 주제별 인기 도서.';
 
   @override
   String get noBookmarkedItems => '아직 북마크한 항목이 없습니다';
@@ -3253,6 +3233,17 @@ class AppLocalizationsKo extends AppLocalizations {
   String get seasonalDensityHeavy => '많이';
 
   @override
+  String get seasonalFollower => 'Focus Follower';
+
+  @override
+  String get seasonalFollowerDescription =>
+      'A holiday piece, like Halloween\'s planchette, follows what you select on Home';
+
+  @override
+  String get seasonalFollowerPointerDescription =>
+      'A holiday piece, like Halloween\'s planchette, replaces the mouse pointer on Home';
+
+  @override
   String get seasonalRow => '시즌 테마 행';
 
   @override
@@ -4492,6 +4483,13 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get showLibrariesInToolbar => '툴바에 라이브러리 표시';
+
+  @override
+  String get showLibrariesIndividually => 'Show Libraries Individually';
+
+  @override
+  String get showLibrariesIndividuallySubtitle =>
+      'Show each library as its own button in the navigation bar instead of in the Libraries menu';
 
   @override
   String get navbarAlwaysExpanded => '탐색 바 라벨 항상 표시';
@@ -11607,6 +11605,14 @@ class AppLocalizationsKo extends AppLocalizations {
       '프로필 8 변환을 건너뛰고 Dolby Vision 프로필 7 스트림을 HDR10 호환 HEVC로 변환합니다. 변환된 스트림이 이상하게 보일 때 사용하세요.';
 
   @override
+  String get stripDolbyVisionHdr10PlusTitle =>
+      'Play Dolby Vision with HDR10+ as HDR10+';
+
+  @override
+  String get stripDolbyVisionHdr10PlusSubtitle =>
+      'Drop the Dolby Vision layer from videos that also have HDR10+. Turn this on if those videos play with sound but a black screen.';
+
+  @override
   String get subtitlesUseEmbeddedStyles => '내장 자막 스타일 사용';
 
   @override
@@ -13229,9 +13235,6 @@ class AppLocalizationsKo extends AppLocalizations {
       '이 플랫폼에서는 CB7 압축 해제 플러그인을 사용할 수 없습니다.';
 
   @override
-  String get closeGenrePanel => '장르 패널 닫기';
-
-  @override
   String get loadingShuffle => '셔플을 불러오는 중...';
 
   @override
@@ -14267,6 +14270,55 @@ class AppLocalizationsKo extends AppLocalizations {
   String get setupTourBulletMore => '그 외 다양한 기능';
 
   @override
+  String setupStepOf(int current, int total) {
+    return 'Step $current of $total';
+  }
+
+  @override
+  String get setupCurrent => 'Current';
+
+  @override
+  String get setupTvHint =>
+      'Up and down to preview · OK to choose · Back twice to skip';
+
+  @override
+  String get setupNavbarTopHint => 'Tabs across the top of the screen.';
+
+  @override
+  String get setupNavbarLeftHint => 'A slim rail of icons down the left side.';
+
+  @override
+  String get setupNavbarBottomHint =>
+      'Tabs along the bottom edge, in easy reach of your thumb.';
+
+  @override
+  String get setupMediaBarMoonfinHint =>
+      'Large artwork with the title, details and overview laid over it.';
+
+  @override
+  String get setupMediaBarMakdHint => 'Large artwork led by a big title logo.';
+
+  @override
+  String get setupMediaBarBookshelfHint =>
+      'Titles shelved as book spines, with the featured one face out.';
+
+  @override
+  String get setupMediaBarGalleryHint =>
+      'The featured title opened up, with the next few lined up beside it.';
+
+  @override
+  String get setupMediaBarBannerHint =>
+      'A shorter banner above your rows, so more of them fit on screen.';
+
+  @override
+  String get setupMediaBarAyaHint =>
+      'Artwork first in a framed panel, with your rows right underneath.';
+
+  @override
+  String get setupMediaBarOffHint =>
+      'No featured area. Home opens straight onto your rows.';
+
+  @override
   String get runSetupAgain => '초기 설정 다시 실행';
 
   @override
@@ -14909,6 +14961,9 @@ class AppLocalizationsKo extends AppLocalizations {
   String get homeScreenBackdropCorner => 'Corner';
 
   @override
+  String get homeScreenBackdropTop => 'Top';
+
+  @override
   String get detailsScreenBackdrop => 'Details Screen Backdrop';
 
   @override
@@ -15524,6 +15579,55 @@ class AppLocalizationsKo extends AppLocalizations {
 
   @override
   String get musicSortMostAlbums => 'Most Albums';
+
+  @override
+  String bookSeriesPosition(int index, int total) {
+    return 'Book $index of $total';
+  }
+
+  @override
+  String bookFavoriteCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count favorites',
+      one: '1 favorite',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get bookSortZToA => 'Z to A';
+
+  @override
+  String get bookSortMostTitles => 'Most Titles';
+
+  @override
+  String get bookSurpriseMe => 'Surprise Me';
+
+  @override
+  String get bookShuffleAudiobooks => 'Shuffle Audiobooks';
+
+  @override
+  String get bookStartReading => 'Start Reading';
+
+  @override
+  String get bookOtherBooks => 'Other Books';
+
+  @override
+  String get bookDiscoverSearchBooks => 'Search Open Library';
+
+  @override
+  String get bookDiscoverSearchAudiobooks => 'Search LibriVox';
+
+  @override
+  String get bookDiscoverFeatured => 'Featured';
+
+  @override
+  String get bookReaderControlsAutoHide => 'Controls hide automatically';
+
+  @override
+  String get bookReaderControlsStayVisible => 'Controls stay visible';
 
   @override
   String get esplaySignInSubtitle =>

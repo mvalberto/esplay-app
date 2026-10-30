@@ -998,10 +998,6 @@ class AppLocalizationsFr extends AppLocalizations {
   String get discoverySubjects => 'Sujets de découverte';
 
   @override
-  String get pickDiscoverySubjects =>
-      'Choisissez quels flux de sujets afficher dans Découvrir.';
-
-  @override
   String get apply => 'Appliquer';
 
   @override
@@ -1012,22 +1008,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get audiobookGenres => 'Genres de livres audio';
-
-  @override
-  String get pickAudiobookGenres =>
-      'Choisissez quels genres afficher dans Découvrir pour les livres audio.';
-
-  @override
-  String get discoverAudiobooks => 'Découvrir des livres audio';
-
-  @override
-  String get librivoxDescription =>
-      'Titres populaires du domaine public de LibriVox.';
-
-  @override
-  String titlesCount(int count) {
-    return '$count titres';
-  }
 
   @override
   String get scrollLeft => 'Faire défiler vers la gauche';
@@ -1164,10 +1144,6 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get discover => 'Découvrir';
-
-  @override
-  String get trendingTitlesOpenLibrary =>
-      'Titres tendance par sujet depuis Open Library.';
 
   @override
   String get noBookmarkedItems =>
@@ -3342,6 +3318,17 @@ class AppLocalizationsFr extends AppLocalizations {
   String get seasonalDensityHeavy => 'Dense';
 
   @override
+  String get seasonalFollower => 'Focus Follower';
+
+  @override
+  String get seasonalFollowerDescription =>
+      'A holiday piece, like Halloween\'s planchette, follows what you select on Home';
+
+  @override
+  String get seasonalFollowerPointerDescription =>
+      'A holiday piece, like Halloween\'s planchette, replaces the mouse pointer on Home';
+
+  @override
   String get seasonalRow => 'Rangée saisonnière';
 
   @override
@@ -4632,6 +4619,13 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get showLibrariesInToolbar =>
       'Afficher les bibliothèques dans la barre d’outils';
+
+  @override
+  String get showLibrariesIndividually => 'Show Libraries Individually';
+
+  @override
+  String get showLibrariesIndividuallySubtitle =>
+      'Show each library as its own button in the navigation bar instead of in the Libraries menu';
 
   @override
   String get navbarAlwaysExpanded =>
@@ -12141,6 +12135,14 @@ class AppLocalizationsFr extends AppLocalizations {
       'Ignore la conversion vers le profil 8 et convertit les flux Dolby Vision profil 7 en HEVC compatible HDR10. À utiliser si les flux convertis s\'affichent mal.';
 
   @override
+  String get stripDolbyVisionHdr10PlusTitle =>
+      'Play Dolby Vision with HDR10+ as HDR10+';
+
+  @override
+  String get stripDolbyVisionHdr10PlusSubtitle =>
+      'Drop the Dolby Vision layer from videos that also have HDR10+. Turn this on if those videos play with sound but a black screen.';
+
+  @override
   String get subtitlesUseEmbeddedStyles =>
       'Utiliser les styles intégrés aux sous-titres';
 
@@ -13835,9 +13837,6 @@ class AppLocalizationsFr extends AppLocalizations {
       'Le plugin d\'extraction CB7 n\'est pas disponible sur cette plateforme.';
 
   @override
-  String get closeGenrePanel => 'Fermer le panneau des genres';
-
-  @override
   String get loadingShuffle => 'Chargement de la lecture aléatoire…';
 
   @override
@@ -14917,6 +14916,55 @@ class AppLocalizationsFr extends AppLocalizations {
   String get setupTourBulletMore => 'Et bien plus encore';
 
   @override
+  String setupStepOf(int current, int total) {
+    return 'Step $current of $total';
+  }
+
+  @override
+  String get setupCurrent => 'Current';
+
+  @override
+  String get setupTvHint =>
+      'Up and down to preview · OK to choose · Back twice to skip';
+
+  @override
+  String get setupNavbarTopHint => 'Tabs across the top of the screen.';
+
+  @override
+  String get setupNavbarLeftHint => 'A slim rail of icons down the left side.';
+
+  @override
+  String get setupNavbarBottomHint =>
+      'Tabs along the bottom edge, in easy reach of your thumb.';
+
+  @override
+  String get setupMediaBarMoonfinHint =>
+      'Large artwork with the title, details and overview laid over it.';
+
+  @override
+  String get setupMediaBarMakdHint => 'Large artwork led by a big title logo.';
+
+  @override
+  String get setupMediaBarBookshelfHint =>
+      'Titles shelved as book spines, with the featured one face out.';
+
+  @override
+  String get setupMediaBarGalleryHint =>
+      'The featured title opened up, with the next few lined up beside it.';
+
+  @override
+  String get setupMediaBarBannerHint =>
+      'A shorter banner above your rows, so more of them fit on screen.';
+
+  @override
+  String get setupMediaBarAyaHint =>
+      'Artwork first in a framed panel, with your rows right underneath.';
+
+  @override
+  String get setupMediaBarOffHint =>
+      'No featured area. Home opens straight onto your rows.';
+
+  @override
   String get runSetupAgain => 'Relancer la configuration';
 
   @override
@@ -15587,6 +15635,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get homeScreenBackdropCorner => 'Corner';
 
   @override
+  String get homeScreenBackdropTop => 'Top';
+
+  @override
   String get detailsScreenBackdrop => 'Details Screen Backdrop';
 
   @override
@@ -16202,6 +16253,55 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get musicSortMostAlbums => 'Most Albums';
+
+  @override
+  String bookSeriesPosition(int index, int total) {
+    return 'Book $index of $total';
+  }
+
+  @override
+  String bookFavoriteCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count favorites',
+      one: '1 favorite',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get bookSortZToA => 'Z to A';
+
+  @override
+  String get bookSortMostTitles => 'Most Titles';
+
+  @override
+  String get bookSurpriseMe => 'Surprise Me';
+
+  @override
+  String get bookShuffleAudiobooks => 'Shuffle Audiobooks';
+
+  @override
+  String get bookStartReading => 'Start Reading';
+
+  @override
+  String get bookOtherBooks => 'Other Books';
+
+  @override
+  String get bookDiscoverSearchBooks => 'Search Open Library';
+
+  @override
+  String get bookDiscoverSearchAudiobooks => 'Search LibriVox';
+
+  @override
+  String get bookDiscoverFeatured => 'Featured';
+
+  @override
+  String get bookReaderControlsAutoHide => 'Controls hide automatically';
+
+  @override
+  String get bookReaderControlsStayVisible => 'Controls stay visible';
 
   @override
   String get esplaySignInSubtitle =>

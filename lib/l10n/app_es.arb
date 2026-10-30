@@ -528,10 +528,6 @@
     "@discoverySubjects": {
         "description": "Title for the book discovery subject picker panel"
     },
-    "pickDiscoverySubjects": "Elige qué temas mostrar en Descubrir.",
-    "@pickDiscoverySubjects": {
-        "description": "Instruction text in discovery subject picker"
-    },
     "apply": "Aplicar",
     "@apply": {
         "description": "Button label to apply selected options"
@@ -539,27 +535,6 @@
     "audiobookGenres": "Géneros de audiolibros",
     "@audiobookGenres": {
         "description": "Title for audiobook genre picker panel"
-    },
-    "pickAudiobookGenres": "Elige qué géneros mostrar en Descubrir audiolibros.",
-    "@pickAudiobookGenres": {
-        "description": "Instruction text in audiobook genre picker"
-    },
-    "discoverAudiobooks": "Descubrir audiolibros",
-    "@discoverAudiobooks": {
-        "description": "Section title for audiobook discovery"
-    },
-    "librivoxDescription": "Títulos populares de dominio público de LibriVox.",
-    "@librivoxDescription": {
-        "description": "Subtitle for audiobook discovery section"
-    },
-    "titlesCount": "{count} títulos",
-    "@titlesCount": {
-        "description": "Label showing number of titles",
-        "placeholders": {
-            "count": {
-                "type": "int"
-            }
-        }
     },
     "scrollLeft": "Desplazar a la izquierda",
     "@scrollLeft": {
@@ -736,10 +711,6 @@
     "discover": "Descubrir",
     "@discover": {
         "description": "Section title for book discovery"
-    },
-    "trendingTitlesOpenLibrary": "Títulos en tendencia por tema de Open Library.",
-    "@trendingTitlesOpenLibrary": {
-        "description": "Subtitle for book discovery section"
     },
     "noBookmarkedItems": "Aún no hay elementos marcados",
     "@noBookmarkedItems": {
@@ -7288,7 +7259,6 @@
     "failedToExtractCbrArchive": "No se pudo extraer el archivo .cbr.",
     "cb7ExtractionUnavailable": "La extracción CB7 no está disponible en esta plataforma.",
     "cb7ExtractionPluginUnavailable": "El complemento de extracción CB7 no está disponible en esta plataforma.",
-    "closeGenrePanel": "Cerrar panel de género",
     "loadingShuffle": "Cargando reproducción aleatoria...",
     "libraryShuffleLabel": "ALEATORIO POR BIBLIOTECA",
     "randomShuffleLabel": "ALEATORIO TOTAL",
@@ -9028,7 +8998,7 @@
     "esplayTooManyAttempts": "Demasiados intentos fallidos. Espera unos minutos y vuelve a probar.",
     "esplayAppOutdated": "Esta versión de EsPlay está desactualizada. Actualízala para seguir usándola.",
     "esplayPanelUnavailable": "No se pudo contactar con EsPlay. Comprueba tu conexión a internet y vuelve a probar.",
-    "esplayConnectWithServer": "Conectar indicando el servidor",
+    "esplayConnectWithServer": "Conectar indicando el servidor",
     "addServerButtonSubtitle": "Indicando la dirección del servidor",
     "animeMarkerSubbed": "Subtitulado",
     "animeMarkerDubbed": "Doblado",
@@ -10922,5 +10892,39 @@
     "esplayLiveTvLive": "EN DIRECTO",
     "esplayLiveTvNoTags": "Este servidor todavía no tiene etiquetas de canales.",
     "esplayLiveTvNoChannels": "Esta etiqueta no tiene canales.",
-    "esplayLiveTvLoadError": "No se han podido cargar los canales. Revisa la conexión y vuelve a intentarlo."
+    "esplayLiveTvLoadError": "No se han podido cargar los canales. Revisa la conexión y vuelve a intentarlo.",
+    "seasonalFollower": "Seguidor del foco",
+    "seasonalFollowerDescription": "Un adorno de temporada, como la plancheta de Halloween, sigue lo que seleccionas en Inicio",
+    "seasonalFollowerPointerDescription": "Un adorno de temporada, como la plancheta de Halloween, sustituye al puntero del ratón en Inicio",
+    "showLibrariesIndividually": "Mostrar bibliotecas por separado",
+    "showLibrariesIndividuallySubtitle": "Mostrar cada biblioteca como un botón propio en la barra de navegación en lugar de dentro del menú Bibliotecas",
+    "stripDolbyVisionHdr10PlusTitle": "Reproducir Dolby Vision con HDR10+ como HDR10+",
+    "stripDolbyVisionHdr10PlusSubtitle": "Quita la capa Dolby Vision de los vídeos que también tienen HDR10+. Actívalo si esos vídeos se oyen pero la pantalla se queda en negro.",
+    "setupStepOf": "Paso {current} de {total}",
+    "setupCurrent": "Actual",
+    "setupTvHint": "Arriba y abajo para previsualizar · OK para elegir · Atrás dos veces para saltar",
+    "setupNavbarTopHint": "Pestañas en la parte superior de la pantalla.",
+    "setupNavbarLeftHint": "Una barra estrecha de iconos en el lado izquierdo.",
+    "setupNavbarBottomHint": "Pestañas en el borde inferior, al alcance del pulgar.",
+    "setupMediaBarMoonfinHint": "Imagen grande con el título, los detalles y la sinopsis encima.",
+    "setupMediaBarMakdHint": "Imagen grande encabezada por un logo de título grande.",
+    "setupMediaBarBookshelfHint": "Títulos colocados como lomos de libros, con el destacado de frente.",
+    "setupMediaBarGalleryHint": "El título destacado abierto, con los siguientes alineados a su lado.",
+    "setupMediaBarBannerHint": "Un banner más bajo encima de tus filas, para que quepan más en pantalla.",
+    "setupMediaBarAyaHint": "Primero la imagen en un panel enmarcado, con tus filas justo debajo.",
+    "setupMediaBarOffHint": "Sin zona destacada. Inicio abre directamente en tus filas.",
+    "homeScreenBackdropTop": "Arriba",
+    "bookSeriesPosition": "Libro {index} de {total}",
+    "bookFavoriteCount": "{count, plural, =1{1 favorito} other{{count} favoritos}}",
+    "bookSortZToA": "De la Z a la A",
+    "bookSortMostTitles": "Más títulos",
+    "bookSurpriseMe": "Sorpréndeme",
+    "bookShuffleAudiobooks": "Audiolibros aleatorios",
+    "bookStartReading": "Empezar a leer",
+    "bookOtherBooks": "Otros libros",
+    "bookDiscoverSearchBooks": "Buscar en Open Library",
+    "bookDiscoverSearchAudiobooks": "Buscar en LibriVox",
+    "bookDiscoverFeatured": "Destacados",
+    "bookReaderControlsAutoHide": "Los controles se ocultan solos",
+    "bookReaderControlsStayVisible": "Los controles siempre visibles"
 }

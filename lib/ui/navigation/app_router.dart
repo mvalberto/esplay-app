@@ -8,7 +8,6 @@ import '../../auth/repositories/server_repository.dart';
 import '../../auth/repositories/session_repository.dart';
 import '../../auth/repositories/user_repository.dart';
 import '../../data/services/connectivity_service.dart';
-import '../../data/services/media_server_client_factory.dart';
 import '../../data/services/remote_search_session.dart';
 import '../../data/services/retro_artwork/retro_artwork_activity_gate.dart';
 import '../../di/injection.dart';
@@ -35,9 +34,11 @@ import '../screens/browse/library_browse_screen.dart';
 import '../screens/browse/library_genres_screen.dart';
 import '../screens/browse/library_letters_screen.dart';
 import '../screens/browse/library_suggestions_screen.dart';
+import '../screens/browse/book_category_screen.dart';
 import '../screens/browse/book_library_screen.dart';
 import '../screens/browse/music_category_screen.dart';
 import '../screens/browse/music_library_screen.dart';
+import '../widgets/book/book_navigation.dart';
 import '../widgets/music/music_navigation.dart';
 import '../../data/models/tmdb_item_ref.dart';
 import '../screens/detail/item_detail_screen.dart';
@@ -57,6 +58,7 @@ import '../screens/seerr/seerr_requests_screen.dart';
 import '../screens/livetv/live_tv_channel_player_loader.dart';
 import '../screens/livetv/live_tv_guide_screen.dart';
 import '../screens/livetv/live_tv_player_screen.dart';
+import '../../data/viewmodels/book_browse_view_model.dart' show BookScope;
 import '../../data/viewmodels/live_tv_guide_view_model.dart';
 import '../screens/livetv/live_tv_recordings_screen.dart';
 import '../screens/livetv/live_tv_schedule_screen.dart';
@@ -99,7 +101,8 @@ const _authRoutes = {
 /// through to Home costs nothing next to stranding them outside it.
 bool _shouldRunSetupWizard() {
   try {
-    final client = GetIt.instance<MediaServerClientFactory>().getActiveClient();
+    final client = SetupWizardGate.activeClient();
+    if (client == null) return false;
     return GetIt.instance<SetupWizardGate>().shouldRun(client);
   } catch (_) {
     return false;
@@ -384,6 +387,18 @@ final appRouter = GoRouter(
         libraryId: state.pathParameters['libraryId']!,
         kind: MusicCategoryKind.parse(state.pathParameters['category'])!,
         show: state.uri.queryParameters['show'],
+      ),
+    ),
+    GoRoute(
+      path: Destinations.bookCategoryBrowse,
+      redirect: (context, state) =>
+          BookCategoryKind.parse(state.pathParameters['category']) == null
+          ? Destinations.bookLibrary(state.pathParameters['libraryId']!)
+          : null,
+      builder: (context, state) => BookCategoryScreen(
+        libraryId: state.pathParameters['libraryId']!,
+        kind: BookCategoryKind.parse(state.pathParameters['category'])!,
+        scope: BookScope.values.asNameMap()[state.uri.queryParameters['scope']],
       ),
     ),
     GoRoute(

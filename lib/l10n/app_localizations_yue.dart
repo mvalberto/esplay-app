@@ -974,9 +974,6 @@ class AppLocalizationsYue extends AppLocalizations {
   String get discoverySubjects => '發現主題';
 
   @override
-  String get pickDiscoverySubjects => '選擇要在「發現」中顯示的主題來源。';
-
-  @override
   String get apply => '套用';
 
   @override
@@ -987,20 +984,6 @@ class AppLocalizationsYue extends AppLocalizations {
 
   @override
   String get audiobookGenres => '有聲書流派';
-
-  @override
-  String get pickAudiobookGenres => '選擇要在有聲書探索中顯示的流派。';
-
-  @override
-  String get discoverAudiobooks => '發現有聲書';
-
-  @override
-  String get librivoxDescription => '來自 LibriVox 的熱門公共領域標題。';
-
-  @override
-  String titlesCount(int count) {
-    return '$count 部作品';
-  }
 
   @override
   String get scrollLeft => '向左滾動';
@@ -1129,9 +1112,6 @@ class AppLocalizationsYue extends AppLocalizations {
 
   @override
   String get discover => '發現';
-
-  @override
-  String get trendingTitlesOpenLibrary => 'Open Library 中按主題劃分的熱門標題。';
 
   @override
   String get noBookmarkedItems => '還沒有加書籤的項目';
@@ -3255,6 +3235,17 @@ class AppLocalizationsYue extends AppLocalizations {
   String get seasonalDensityHeavy => 'Heavy';
 
   @override
+  String get seasonalFollower => 'Focus Follower';
+
+  @override
+  String get seasonalFollowerDescription =>
+      'A holiday piece, like Halloween\'s planchette, follows what you select on Home';
+
+  @override
+  String get seasonalFollowerPointerDescription =>
+      'A holiday piece, like Halloween\'s planchette, replaces the mouse pointer on Home';
+
+  @override
   String get seasonalRow => 'Seasonal Row';
 
   @override
@@ -4500,6 +4491,13 @@ class AppLocalizationsYue extends AppLocalizations {
 
   @override
   String get showLibrariesInToolbar => '在工具列中顯示庫';
+
+  @override
+  String get showLibrariesIndividually => 'Show Libraries Individually';
+
+  @override
+  String get showLibrariesIndividuallySubtitle =>
+      'Show each library as its own button in the navigation bar instead of in the Libraries menu';
 
   @override
   String get navbarAlwaysExpanded => '永遠展開導覽列標籤';
@@ -11665,6 +11663,14 @@ class AppLocalizationsYue extends AppLocalizations {
       '喺唔支援 Dolby Vision 嘅裝置度，將 Dolby Vision profile 7 串流當做 HDR10 相容嘅 HEVC 嚟播。';
 
   @override
+  String get stripDolbyVisionHdr10PlusTitle =>
+      'Play Dolby Vision with HDR10+ as HDR10+';
+
+  @override
+  String get stripDolbyVisionHdr10PlusSubtitle =>
+      'Drop the Dolby Vision layer from videos that also have HDR10+. Turn this on if those videos play with sound but a black screen.';
+
+  @override
   String get subtitlesUseEmbeddedStyles => '用內嵌嘅字幕樣式';
 
   @override
@@ -13299,9 +13305,6 @@ class AppLocalizationsYue extends AppLocalizations {
   String get cb7ExtractionPluginUnavailable => '呢個平台冇 CB7 解壓縮外掛程式。';
 
   @override
-  String get closeGenrePanel => '關閉類型面板';
-
-  @override
   String get loadingShuffle => '載入緊隨機播放...';
 
   @override
@@ -14351,6 +14354,55 @@ class AppLocalizationsYue extends AppLocalizations {
   String get setupTourBulletMore => 'And plenty more';
 
   @override
+  String setupStepOf(int current, int total) {
+    return 'Step $current of $total';
+  }
+
+  @override
+  String get setupCurrent => 'Current';
+
+  @override
+  String get setupTvHint =>
+      'Up and down to preview · OK to choose · Back twice to skip';
+
+  @override
+  String get setupNavbarTopHint => 'Tabs across the top of the screen.';
+
+  @override
+  String get setupNavbarLeftHint => 'A slim rail of icons down the left side.';
+
+  @override
+  String get setupNavbarBottomHint =>
+      'Tabs along the bottom edge, in easy reach of your thumb.';
+
+  @override
+  String get setupMediaBarMoonfinHint =>
+      'Large artwork with the title, details and overview laid over it.';
+
+  @override
+  String get setupMediaBarMakdHint => 'Large artwork led by a big title logo.';
+
+  @override
+  String get setupMediaBarBookshelfHint =>
+      'Titles shelved as book spines, with the featured one face out.';
+
+  @override
+  String get setupMediaBarGalleryHint =>
+      'The featured title opened up, with the next few lined up beside it.';
+
+  @override
+  String get setupMediaBarBannerHint =>
+      'A shorter banner above your rows, so more of them fit on screen.';
+
+  @override
+  String get setupMediaBarAyaHint =>
+      'Artwork first in a framed panel, with your rows right underneath.';
+
+  @override
+  String get setupMediaBarOffHint =>
+      'No featured area. Home opens straight onto your rows.';
+
+  @override
   String get runSetupAgain => 'Run setup again';
 
   @override
@@ -15011,6 +15063,9 @@ class AppLocalizationsYue extends AppLocalizations {
   String get homeScreenBackdropCorner => 'Corner';
 
   @override
+  String get homeScreenBackdropTop => 'Top';
+
+  @override
   String get detailsScreenBackdrop => 'Details Screen Backdrop';
 
   @override
@@ -15628,6 +15683,55 @@ class AppLocalizationsYue extends AppLocalizations {
   String get musicSortMostAlbums => 'Most Albums';
 
   @override
+  String bookSeriesPosition(int index, int total) {
+    return 'Book $index of $total';
+  }
+
+  @override
+  String bookFavoriteCount(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count favorites',
+      one: '1 favorite',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get bookSortZToA => 'Z to A';
+
+  @override
+  String get bookSortMostTitles => 'Most Titles';
+
+  @override
+  String get bookSurpriseMe => 'Surprise Me';
+
+  @override
+  String get bookShuffleAudiobooks => 'Shuffle Audiobooks';
+
+  @override
+  String get bookStartReading => 'Start Reading';
+
+  @override
+  String get bookOtherBooks => 'Other Books';
+
+  @override
+  String get bookDiscoverSearchBooks => 'Search Open Library';
+
+  @override
+  String get bookDiscoverSearchAudiobooks => 'Search LibriVox';
+
+  @override
+  String get bookDiscoverFeatured => 'Featured';
+
+  @override
+  String get bookReaderControlsAutoHide => 'Controls hide automatically';
+
+  @override
+  String get bookReaderControlsStayVisible => 'Controls stay visible';
+
+  @override
   String get esplaySignInSubtitle =>
       'Sign in with your EsPlay username and password';
 
@@ -16094,9 +16198,6 @@ class AppLocalizationsYueCn extends AppLocalizationsYue {
   String get discoverySubjects => '发现主题';
 
   @override
-  String get pickDiscoverySubjects => '选择要在“发现”中显示的主题源。';
-
-  @override
   String get apply => '申请';
 
   @override
@@ -16107,20 +16208,6 @@ class AppLocalizationsYueCn extends AppLocalizationsYue {
 
   @override
   String get audiobookGenres => '有声读物流派';
-
-  @override
-  String get pickAudiobookGenres => '选择要在有声读物探索中显示的流派。';
-
-  @override
-  String get discoverAudiobooks => '发现有声读物';
-
-  @override
-  String get librivoxDescription => '来自 LibriVox 的热门公共领域标题。';
-
-  @override
-  String titlesCount(int count) {
-    return '$count 标题';
-  }
 
   @override
   String get scrollLeft => '向左滚动';
@@ -16246,9 +16333,6 @@ class AppLocalizationsYueCn extends AppLocalizationsYue {
 
   @override
   String get discover => '发现';
-
-  @override
-  String get trendingTitlesOpenLibrary => 'Open Library 中按主题划分的热门标题。';
 
   @override
   String get noBookmarkedItems => '还没有添加书签的项目';
@@ -22599,9 +22683,6 @@ class AppLocalizationsYueCn extends AppLocalizationsYue {
       'CB7 extraction plugin is not available on this platform.';
 
   @override
-  String get closeGenrePanel => 'Close genre panel';
-
-  @override
   String get loadingShuffle => 'Loading shuffle...';
 
   @override
@@ -23005,9 +23086,6 @@ class AppLocalizationsYueHk extends AppLocalizationsYue {
   String get discoverySubjects => '發現主題';
 
   @override
-  String get pickDiscoverySubjects => '選擇要在「發現」中顯示的主題來源。';
-
-  @override
   String get apply => '申請';
 
   @override
@@ -23018,20 +23096,6 @@ class AppLocalizationsYueHk extends AppLocalizationsYue {
 
   @override
   String get audiobookGenres => '有聲書流派';
-
-  @override
-  String get pickAudiobookGenres => '選擇要在有聲書探索中顯示的流派。';
-
-  @override
-  String get discoverAudiobooks => '發現有聲書';
-
-  @override
-  String get librivoxDescription => '來自 LibriVox 的熱門公共領域標題。';
-
-  @override
-  String titlesCount(int count) {
-    return '$count titles';
-  }
 
   @override
   String get scrollLeft => '向左滾動';
@@ -23157,9 +23221,6 @@ class AppLocalizationsYueHk extends AppLocalizationsYue {
 
   @override
   String get discover => '發現';
-
-  @override
-  String get trendingTitlesOpenLibrary => 'Open Library 中按主題劃分的熱門標題。';
 
   @override
   String get noBookmarkedItems => '還沒有加書籤的項目';
@@ -29507,9 +29568,6 @@ class AppLocalizationsYueHk extends AppLocalizationsYue {
   @override
   String get cb7ExtractionPluginUnavailable =>
       'CB7 extraction plugin is not available on this platform.';
-
-  @override
-  String get closeGenrePanel => 'Close genre panel';
 
   @override
   String get loadingShuffle => 'Loading shuffle...';

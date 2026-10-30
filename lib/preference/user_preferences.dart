@@ -134,6 +134,7 @@ class UserPreferences extends ChangeNotifier {
   static const homeBackdropOff = 'off';
   static const homeBackdropFullScreen = 'fullScreen';
   static const homeBackdropCorner = 'corner';
+  static const homeBackdropTop = 'top';
 
   // How a phone sizes the details backdrop: zoomed to fill the screen, or the
   // whole picture across the top.
@@ -655,6 +656,7 @@ class UserPreferences extends ChangeNotifier {
     'pref_show_syncplay_button',
     'pref_show_downloads_button',
     'pref_show_libraries_in_toolbar',
+    'pref_show_libraries_individually',
     'pref_navbar_always_expanded',
     'pref_shuffle_content_type',
     'pref_merge_continue_watching_next_up',
@@ -663,6 +665,7 @@ class UserPreferences extends ChangeNotifier {
     'pref_merge_recent_rows_by_type',
     'seasonal_surprise',
     'seasonal_density',
+    'seasonal_follower',
     'seasonal_row_enabled',
     'seasonal_row_country',
     'seasonal_row_hidden_holidays',
@@ -714,6 +717,15 @@ class UserPreferences extends ChangeNotifier {
     'seerrBlockNsfw',
     'seerrShowMissingCollectionItems',
     'enabledRatings',
+    'homeRowsEnableAdditionalRatings',
+    'homeRowsEnabledRatings',
+    'homeRowsEnableEpisodeRatings',
+    'homeRowsShowRatingLabels',
+    'homeRowsShowRatingBadges',
+    'mediaBarEnableAdditionalRatings',
+    'mediaBarEnabledRatings',
+    'mediaBarShowRatingLabels',
+    'mediaBarShowRatingBadges',
     'home_sections_config',
     'pref_audio_display_latest',
     'pref_audio_display_last_played',
@@ -888,13 +900,15 @@ class UserPreferences extends ChangeNotifier {
     return _store.containsKey(pref.key);
   }
 
-  bool isRatingSourceEnabled(String source) =>
-      get(enabledRatings).split(',').map((s) => s.trim()).contains(source);
+  bool get canFetchEpisodeRatings => canFetchEpisodeRatingsFor(detailsRatings);
 
-  bool get canFetchEpisodeRatings =>
-      get(enableAdditionalRatings) &&
-      get(enableEpisodeRatings) &&
-      isRatingSourceEnabled('tmdb');
+  bool canFetchEpisodeRatingsFor(RatingSettings settings) {
+    final episodes = settings.episodeRatings;
+    return episodes != null &&
+        get(settings.additionalRatings) &&
+        get(episodes) &&
+        get(settings.sources).split(',').map((s) => s.trim()).contains('tmdb');
+  }
 
   /// What this device can afford, taking the user's choice over the probe.
   DevicePerformanceTier resolveDevicePerformanceTier() =>
@@ -1302,9 +1316,11 @@ class UserPreferences extends ChangeNotifier {
   /// How the home screen draws the backdrop, off when the switch is off.
   String resolveHomeBackdropStyle() {
     if (!get(homeBackdropEnabled)) return homeBackdropOff;
-    return get(homeBackdropStyle) == homeBackdropCorner
-        ? homeBackdropCorner
-        : homeBackdropFullScreen;
+    return switch (get(homeBackdropStyle)) {
+      homeBackdropCorner => homeBackdropCorner,
+      homeBackdropTop => homeBackdropTop,
+      _ => homeBackdropFullScreen,
+    };
   }
 
   /// Brings the stored style in line with the switch, so the picker shows what
@@ -1974,6 +1990,11 @@ class UserPreferences extends ChangeNotifier {
     defaultValue: true,
   );
 
+  static final showLibrariesIndividually = Preference(
+    key: 'pref_show_libraries_individually',
+    defaultValue: false,
+  );
+
   static final navbarAlwaysExpanded = Preference(
     key: 'pref_navbar_always_expanded',
     defaultValue: false,
@@ -2337,6 +2358,11 @@ class UserPreferences extends ChangeNotifier {
 
   static final media3MapDolbyVisionProfile7ToHevc = Preference(
     key: 'media3_map_dolby_vision_profile7_to_hevc',
+    defaultValue: false,
+  );
+
+  static final media3StripDolbyVisionWithHdr10Plus = Preference(
+    key: 'media3_strip_dolby_vision_with_hdr10_plus',
     defaultValue: false,
   );
 
@@ -3167,6 +3193,85 @@ class UserPreferences extends ChangeNotifier {
     defaultValue: 'stars,imdb,tmdb,tomatoes,metacritic',
   );
 
+  static final homeRowsEnableAdditionalRatings = Preference(
+    key: 'homeRowsEnableAdditionalRatings',
+    defaultValue: false,
+  );
+
+  static final homeRowsEnabledRatings = Preference(
+    key: 'homeRowsEnabledRatings',
+    defaultValue: 'stars,imdb,tmdb,tomatoes,metacritic',
+  );
+
+  static final homeRowsEnableEpisodeRatings = Preference(
+    key: 'homeRowsEnableEpisodeRatings',
+    defaultValue: true,
+  );
+
+  // Off unlike the Details Page one, so the home info area stays compact.
+  static final homeRowsShowRatingLabels = Preference(
+    key: 'homeRowsShowRatingLabels',
+    defaultValue: false,
+  );
+
+  static final homeRowsShowRatingBadges = Preference(
+    key: 'homeRowsShowRatingBadges',
+    defaultValue: true,
+  );
+
+  static final mediaBarEnableAdditionalRatings = Preference(
+    key: 'mediaBarEnableAdditionalRatings',
+    defaultValue: false,
+  );
+
+  static final mediaBarEnabledRatings = Preference(
+    key: 'mediaBarEnabledRatings',
+    defaultValue: 'stars,imdb,tmdb,tomatoes,metacritic',
+  );
+
+  static final mediaBarShowRatingLabels = Preference(
+    key: 'mediaBarShowRatingLabels',
+    defaultValue: true,
+  );
+
+  static final mediaBarShowRatingBadges = Preference(
+    key: 'mediaBarShowRatingBadges',
+    defaultValue: true,
+  );
+
+  /// The Details Page set, which every surface without its own set follows.
+  static final detailsRatings = RatingSettings(
+    additionalRatings: enableAdditionalRatings,
+    sources: enabledRatings,
+    episodeRatings: enableEpisodeRatings,
+    labels: showRatingLabels,
+    badges: showRatingBadges,
+  );
+
+  static final homeRowsRatings = RatingSettings(
+    additionalRatings: homeRowsEnableAdditionalRatings,
+    sources: homeRowsEnabledRatings,
+    episodeRatings: homeRowsEnableEpisodeRatings,
+    labels: homeRowsShowRatingLabels,
+    badges: homeRowsShowRatingBadges,
+  );
+
+  // The media bar only shows movies and series, so it has no episode switch.
+  static final mediaBarRatings = RatingSettings(
+    additionalRatings: mediaBarEnableAdditionalRatings,
+    sources: mediaBarEnabledRatings,
+    labels: mediaBarShowRatingLabels,
+    badges: mediaBarShowRatingBadges,
+  );
+
+  static bool mediaBarModeDrawsRatings(String? mode) =>
+      const {
+        mediaBarModeMoonfin,
+        mediaBarModeMakd,
+        mediaBarModeGallery,
+        mediaBarModeBanner,
+      }.contains(normalizeMediaBarMode(mode));
+
   /// Content ratings the viewer has blocked, as an upper cased CSV. Blocked
   /// means hidden from every list and refused on open and on play, not just
   /// filtered out of the home rows. Scoped but deliberately not synced: a
@@ -3596,6 +3701,11 @@ class UserPreferences extends ChangeNotifier {
   static final seasonalDensity = Preference(
     key: 'seasonal_density',
     defaultValue: seasonalDensityNormal,
+  );
+
+  static final seasonalFollower = Preference(
+    key: 'seasonal_follower',
+    defaultValue: true,
   );
 
   static final seasonalRowEnabled = Preference(
@@ -4411,4 +4521,29 @@ class UserPreferences extends ChangeNotifier {
 
     return result;
   }
+}
+
+/// The ratings settings one surface reads.
+class RatingSettings {
+  const RatingSettings({
+    required this.additionalRatings,
+    required this.sources,
+    this.episodeRatings,
+    required this.labels,
+    required this.badges,
+  });
+
+  final Preference<bool> additionalRatings;
+  final Preference<String> sources;
+  final Preference<bool>? episodeRatings;
+  final Preference<bool> labels;
+  final Preference<bool> badges;
+
+  List<Preference<dynamic>> get all => [
+    sources,
+    additionalRatings,
+    ?episodeRatings,
+    labels,
+    badges,
+  ];
 }
