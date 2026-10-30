@@ -79,6 +79,61 @@ Future<void> showAppUpdateDialog(
   await launchUrl(uri, mode: LaunchMode.externalApplication);
 }
 
+/// The panel no longer allows this version: a dialog with its message that
+/// can't be dismissed, offering the download.
+Future<void> showMandatoryUpdateDialog(
+  BuildContext context,
+  DesktopUpdateInfo update,
+) {
+  final l10n = AppLocalizations.of(context);
+  return showStyledPlayerDialog<void>(
+    context,
+    title: l10n.updateAvailableTitle(update.version),
+    barrierDismissible: false,
+    builder: (dialogContext) => PopScope(
+      canPop: false,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (update.message != null && update.message!.isNotEmpty)
+              Text(
+                update.message!,
+                style: const TextStyle(color: Colors.white, fontSize: 15),
+              ),
+            const SizedBox(height: 12),
+            // A TV usually has no browser, so it gets the address to type in
+            // another device or a downloader app.
+            if (PlatformDetection.isTV)
+              SelectableText(
+                update.downloadUri.toString(),
+                style: const TextStyle(color: Colors.white70, fontSize: 14),
+              )
+            else
+              _UpdateOption(
+                icon: Icons.download_rounded,
+                label: l10n.download,
+                value: 'download',
+                onTap: () {
+                  if (Platform.isWindows && update.downloadUri.isScheme('https')) {
+                    _downloadAndInstallWindowsUpdate(context, update);
+                  } else {
+                    launchUrl(
+                      update.downloadUri,
+                      mode: LaunchMode.externalApplication,
+                    );
+                  }
+                },
+              ),
+          ],
+        ),
+      ),
+    ),
+  );
+}
+
 Future<void> _downloadAndInstallWindowsUpdate(
   BuildContext context,
   DesktopUpdateInfo update,
@@ -147,7 +202,7 @@ Future<void> _downloadAndInstallWindowsUpdate(
 
   try {
     final tempDir = await getTemporaryDirectory();
-    final file = File('${tempDir.path}${Platform.pathSeparator}moonfin_updater.exe');
+    final file = File('${tempDir.path}${Platform.pathSeparator}esplay_updater.exe');
     if (await file.exists()) {
       await file.delete();
     }
@@ -196,17 +251,19 @@ class _UpdateOption extends StatelessWidget {
   final IconData icon;
   final String label;
   final String value;
+  final VoidCallback? onTap;
 
   const _UpdateOption({
     required this.icon,
     required this.label,
     required this.value,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Navigator.of(context).pop(value),
+      onTap: onTap ?? () => Navigator.of(context).pop(value),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
         child: Row(

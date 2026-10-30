@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:get_it/get_it.dart';
 import 'package:jellyfin_preference/jellyfin_preference.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:server_core/server_core.dart' show DeviceInfo;
 
 import '../../esplay/esplay_flags.dart';
 import '../../preference/user_preferences.dart';
@@ -37,19 +39,27 @@ class DesktopUpdateInfo {
   final Uri downloadUri;
   final String releaseNotesUrl;
 
+  /// The panel's policy says this version may no longer be used.
+  final bool mandatory;
+
+  /// The panel's own words for the user, when it sends any.
+  final String? message;
+
   const DesktopUpdateInfo({
     required this.version,
     required this.downloadUri,
     required this.releaseNotesUrl,
+    this.mandatory = false,
+    this.message,
   });
 }
 
 class AppUpdateService {
   AppUpdateService(this._store, this._userPreferences);
 
-  static const _latestReleaseHost = 'api.github.com';
-  static const _latestReleasePath = '/repos/$esplayUpdateRepo/releases/latest';
-  static const _checkCooldown = Duration(hours: 24);
+  // EsPlay asks its own panel, which is cheap and cached, on every start so a
+  // blocked version is caught straight away.
+  static const _checkCooldown = Duration.zero;
 
   static const _lastCheckMsKey = 'app_update_last_check_ms';
   static const _lastNotifiedVersionKey = 'app_update_last_notified_version';
@@ -115,15 +125,6 @@ class AppUpdateService {
       );
     }
 
-    if (respectNotificationPreference) {
-      final notificationsEnabled = _userPreferences.get(UserPreferences.updateNotificationsEnabled);
-      if (!notificationsEnabled) {
-        return const DesktopUpdateCheckResult(
-          status: DesktopUpdateCheckStatus.disabledByPreference,
-        );
-      }
-    }
-
     final now = DateTime.now().toUtc();
     final lastCheckMs = _store.getInt(_lastCheckMsKey);
     if (enforceCooldown && lastCheckMs != null && lastCheckMs > 0) {
@@ -144,6 +145,8 @@ class AppUpdateService {
       );
     }
 
+    // The panel gives the lowest version still allowed, so an update is due
+    // when this one is below it.
     final currentVersion = await _currentAppVersion();
     if (!_isNewerVersion(release.version, currentVersion)) {
       return const DesktopUpdateCheckResult(
@@ -151,8 +154,19 @@ class AppUpdateService {
       );
     }
 
+    // A blocked version is shown every time, whatever the user turned off.
+    if (respectNotificationPreference && !release.mandatory) {
+      final notificationsEnabled = _userPreferences.get(UserPreferences.updateNotificationsEnabled);
+      if (!notificationsEnabled) {
+        return const DesktopUpdateCheckResult(
+          status: DesktopUpdateCheckStatus.disabledByPreference,
+        );
+      }
+    }
+
     final lastNotified = _store.getString(_lastNotifiedVersionKey);
     if (suppressIfAlreadyNotified &&
+        !release.mandatory &&
         _normalizeVersion(lastNotified) == _normalizeVersion(release.version)) {
       return const DesktopUpdateCheckResult(
         status: DesktopUpdateCheckStatus.alreadyNotified,
@@ -170,6 +184,8 @@ class AppUpdateService {
             ? Uri.parse(asset.downloadUrl)
             : Uri.parse(release.releaseNotesUrl),
         releaseNotesUrl: release.releaseNotesUrl,
+        mandatory: release.mandatory,
+        message: release.message,
       ),
     );
   }
@@ -202,14 +218,17 @@ class AppUpdateService {
     return '0.0.0';
   }
 
+  /// This app's rule in the panel's version policy: the lowest version still
+  /// allowed and where to get a newer one. Null when the panel has no rule for
+  /// this app or can't be reached.
   Future<_LatestRelease?> _fetchLatestRelease() async {
     final client = HttpClient()
       ..userAgent = 'EsPlayUpdateChecker/1.0'
       ..connectionTimeout = const Duration(seconds: 10);
 
     try {
-      final request = await client.getUrl(Uri.https(_latestReleaseHost, _latestReleasePath));
-      request.headers.set(HttpHeaders.acceptHeader, 'application/vnd.github+json');
+      final request = await client.getUrl(Uri.parse(esplayVersionPolicyUrl));
+      request.headers.set(HttpHeaders.acceptHeader, 'application/json');
 
       final response = await request.close().timeout(const Duration(seconds: 10));
       if (response.statusCode < 200 || response.statusCode >= 300) {
@@ -223,31 +242,31 @@ class AppUpdateService {
         return null;
       }
 
-      final tagName = decoded['tag_name']?.toString();
-      if (tagName == null || tagName.trim().isEmpty) {
+      // Rules are keyed by the client name the app reports to Emby.
+      final appName = GetIt.instance<DeviceInfo>().appName;
+      final rules = decoded['rules'];
+      final rule = rules is List
+          ? rules.whereType<Map>().where((r) => r['app'] == appName).firstOrNull
+          : null;
+      final minVersion = rule?['minVersion']?.toString();
+      final updateUrl = rule?['updateUrl']?.toString();
+      if (minVersion == null || minVersion.trim().isEmpty ||
+          updateUrl == null || updateUrl.isEmpty) {
         return null;
       }
 
-      final htmlUrl = decoded['html_url']?.toString() ??
-          'https://github.com/$esplayUpdateRepo/releases/latest';
-
-      final assetsJson = decoded['assets'];
-      final assets = <_ReleaseAsset>[];
-      if (assetsJson is List) {
-        for (final asset in assetsJson) {
-          if (asset is! Map) {
-            continue;
-          }
-          final name = asset['name']?.toString();
-          final downloadUrl = asset['browser_download_url']?.toString();
-          if (name == null || name.isEmpty || downloadUrl == null || downloadUrl.isEmpty) {
-            continue;
-          }
-          assets.add(_ReleaseAsset(name: name, downloadUrl: downloadUrl));
-        }
-      }
-
-      return _LatestRelease(version: tagName, assets: assets, releaseNotesUrl: htmlUrl);
+      return _LatestRelease(
+        version: minVersion,
+        assets: [
+          _ReleaseAsset(
+            name: Uri.parse(updateUrl).pathSegments.lastOrNull ?? updateUrl,
+            downloadUrl: updateUrl,
+          ),
+        ],
+        releaseNotesUrl: updateUrl,
+        mandatory: decoded['mode'] == 'block',
+        message: decoded['message']?.toString(),
+      );
     } catch (_) {
       return null;
     } finally {
@@ -368,11 +387,15 @@ class _LatestRelease {
   final String version;
   final List<_ReleaseAsset> assets;
   final String releaseNotesUrl;
+  final bool mandatory;
+  final String? message;
 
   const _LatestRelease({
     required this.version,
     required this.assets,
     required this.releaseNotesUrl,
+    this.mandatory = false,
+    this.message,
   });
 }
 

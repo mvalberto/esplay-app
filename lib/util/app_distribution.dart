@@ -19,8 +19,6 @@ library;
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 
-import '../esplay/esplay_flags.dart';
-
 enum DistributionChannel {
   apk,
   aab,
@@ -73,6 +71,11 @@ class AppDistribution {
         if (!kIsWeb && Platform.isWindows) {
           return DistributionChannel.windows;
         }
+        // EsPlay only ships the Android app as a sideloaded APK, so a build
+        // made without the define still checks the panel for updates.
+        if (!kIsWeb && Platform.isAndroid) {
+          return DistributionChannel.apk;
+        }
         return DistributionChannel.unknown;
     }
   }
@@ -81,7 +84,6 @@ class AppDistribution {
   /// Returns false for store/managed distributions (AAB, AUR, PKG, Microsoft
   /// Store, signed IPA), which update through their store.
   static bool get supportsInAppUpdates {
-    if (esplayUpdateRepo.isEmpty) return false;
     switch (channel) {
       case DistributionChannel.apk:
       case DistributionChannel.androidTvApk:

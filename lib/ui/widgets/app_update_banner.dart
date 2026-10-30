@@ -8,9 +8,11 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../data/services/app_update_service.dart';
 import '../../l10n/app_localizations.dart';
 import '../../util/platform_detection.dart';
+import '../navigation/app_router.dart';
+import 'app_update_dialog.dart';
 import 'status_banner_pill.dart';
 
-/// Floating glass pill announcing a newer GitHub release. Mirrors the offline
+/// Floating glass pill announcing a newer version from the EsPlay panel. Mirrors the offline
 /// banner: slides in, auto-dismisses on a countdown, and stays non-focusable
 /// on TV so it never steals d-pad focus from the content underneath.
 class AppUpdateBanner extends StatefulWidget {
@@ -71,6 +73,14 @@ class _AppUpdateBannerState extends State<AppUpdateBanner>
           GetIt.instance<AppUpdateService>().checkForUpdateIfDue;
       final update = await check();
       if (!mounted || update == null) return;
+      // A version the panel blocks gets a dialog that can't be dismissed.
+      if (update.mandatory) {
+        final navContext = appRouter.routerDelegate.navigatorKey.currentContext;
+        if (navContext != null && navContext.mounted) {
+          unawaited(showMandatoryUpdateDialog(navContext, update));
+        }
+        return;
+      }
       setState(() => _update = update);
       _entrance.forward();
       _autoDismissTimer = Timer(_autoDismissDuration, _dismiss);

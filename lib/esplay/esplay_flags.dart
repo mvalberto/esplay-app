@@ -6,7 +6,7 @@ const esplayHideThemeStoreAndExtras = true;
 /// Decoding screen and the download quality pickers are not offered.
 const esplayHideQualitySettings = true;
 
-/// GitHub `owner/repo` whose releases the in-app updater checks. Empty until
-/// the EsPlay fork is published, which turns the updater off so it never
-/// offers Moonfin's own releases.
-const esplayUpdateRepo = '';
+/// The panel's version policy, which the in-app updater reads instead of
+/// Moonfin's GitHub releases: per app, the lowest version still allowed and
+/// where to download a newer one.
+const esplayVersionPolicyUrl = 'https://panel.esplay.es/api/app/version-policy';
