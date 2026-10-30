@@ -151,7 +151,6 @@ class LiveTvChannelGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final channels = [for (final item in items) item.channel];
     final large = PlatformDetection.isTV;
     return GridView.builder(
       padding: const EdgeInsets.only(bottom: 32),
@@ -166,7 +165,7 @@ class LiveTvChannelGrid extends StatelessWidget {
         item: items[index],
         large: large,
         autofocus: autofocusFirst && index == 0,
-        onTap: () => playLiveTvChannel(context, channels, index),
+        onTap: () => openLiveTvChannel(context, items[index].channel.id),
       ),
     );
   }
@@ -190,7 +189,7 @@ class _ChannelList extends StatelessWidget {
         final item = items[index];
         return LiveTvFocusable(
           autofocus: index == 0,
-          onTap: () => playLiveTvChannel(context, channels, index),
+          onTap: () => openLiveTvChannel(context, item.channel.id),
           builder: (focused) => Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 10),
             decoration: BoxDecoration(
@@ -263,8 +262,18 @@ class _ChannelList extends StatelessWidget {
                     ],
                   ),
                 ),
-                const SizedBox(width: 8),
-                const Icon(Icons.play_arrow_rounded, color: Colors.white, size: 30),
+                const SizedBox(width: 4),
+                // Play straight away from the list; the row itself opens the
+                // channel's page.
+                IconButton(
+                  tooltip: l10n.play,
+                  icon: const Icon(
+                    Icons.play_arrow_rounded,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                  onPressed: () => playLiveTvChannel(context, channels, index),
+                ),
               ],
             ),
           ),

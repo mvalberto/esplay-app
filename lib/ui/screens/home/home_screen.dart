@@ -89,6 +89,8 @@ import '../../../util/game_library.dart';
 import 'home_row_prefetch.dart';
 import 'home_row_shift.dart';
 import 'home_view_model.dart';
+import '../../../esplay/live_tv_tags.dart';
+import '../livetv/live_tv_tag_widgets.dart';
 import '../../widgets/seerr/seerr_genre_label.dart';
 import '../../widgets/skeleton/skeleton_home_row.dart';
 import '../../widgets/skeleton/skeleton_shimmer.dart';
@@ -850,6 +852,18 @@ class _ContentRowsState extends State<_ContentRows>
     implements AudioOwnable {
   static const double _kHomeRowLabelInset = 16.0;
   static const double _kHomeRowTrailingInset = 20.0;
+
+  // EsPlay channel tags for the live TV row, asked for once.
+  List<LiveTvTag> _esplayTags = const [];
+  bool _esplayTagsRequested = false;
+
+  void _loadEsplayTags() {
+    if (_esplayTagsRequested) return;
+    _esplayTagsRequested = true;
+    LiveTvTagsRepository.instance.tags().then((tags) {
+      if (mounted && tags.isNotEmpty) setState(() => _esplayTags = tags);
+    }, onError: (_) {});
+  }
   static const double _focusedRowExtraSpacing = 20.0;
   static const Duration _focusedRowSpacingDuration = Duration(
     milliseconds: 200,
@@ -3225,6 +3239,7 @@ class _ContentRowsState extends State<_ContentRows>
     double childHeight = 0.0;
     if (row.isLoading) {
       if (row.rowType == HomeRowType.liveTv ||
+          row.rowType == HomeRowType.liveTvOnNow ||
           row.rowType == HomeRowType.libraryTilesSmall) {
         final squarePosterSide = _squarePosterSide(posterSize);
         childHeight = squarePosterSide + (56 * metadataScale);
@@ -3245,6 +3260,7 @@ class _ContentRowsState extends State<_ContentRows>
             headroom;
       }
     } else if (row.rowType == HomeRowType.liveTv ||
+        row.rowType == HomeRowType.liveTvOnNow ||
         row.rowType == HomeRowType.libraryTilesSmall) {
       final squarePosterSide = _squarePosterSide(posterSize);
       final headroom = _focusHeadroom(
@@ -3292,6 +3308,7 @@ class _ContentRowsState extends State<_ContentRows>
     final subtitle = _rowSubtitle(row, AppLocalizations.of(context));
     final hasSubtitle = subtitle != null &&
         (row.rowType != HomeRowType.liveTv &&
+            row.rowType != HomeRowType.liveTvOnNow &&
             row.rowType != HomeRowType.libraryTilesSmall);
     final headerPaddingTop = _rowHeaderPaddingTop(isRowsV2);
     final headerPaddingBottom = isRowsV2 ? 1.0 : 8.0;
@@ -4238,6 +4255,7 @@ class _ContentRowsState extends State<_ContentRows>
         metadataScale: metadataScale,
       );
     } else if (row.rowType == HomeRowType.liveTv ||
+        row.rowType == HomeRowType.liveTvOnNow ||
         row.rowType == HomeRowType.libraryTilesSmall) {
       final squarePosterSide = _squarePosterSide(posterSize);
       final rowHeight = squarePosterSide + (56 * metadataScale);
@@ -4931,6 +4949,13 @@ class _ContentRowsState extends State<_ContentRows>
                         rowIndex: rowIndex,
                         rows: rows,
                       );
+                    } else if (row.rowType == HomeRowType.liveTvOnNow) {
+                      rowChild = _buildLiveTvOnNowRow(
+                        row,
+                        posterSize: posterSize,
+                        rowIndex: rowIndex,
+                        rows: rows,
+                      );
                     } else if (row.rowType == HomeRowType.libraryTilesSmall) {
                       rowChild = _buildLibraryButtonsRow(
                         row,
@@ -5105,22 +5130,23 @@ class _ContentRowsState extends State<_ContentRows>
     final metadataScale = _desktopUiScaleFactor();
     final squarePosterSide = _squarePosterSide(posterSize);
     final rowHeight = squarePosterSide + (56 * metadataScale);
+    _loadEsplayTags();
+    // EsPlay: the live TV page first, then a card per Emby channel tag, then
+    // the guide and recordings.
     final actions = <_LiveTvAction>[
+      _LiveTvAction(Icons.live_tv_rounded, l10n.liveTv, Destinations.liveTv),
+      for (final tag in _esplayTags)
+        _LiveTvAction(
+          Icons.label_rounded,
+          tag.name,
+          Destinations.liveTvTagChannels(tag.id, tag.name),
+          tag: tag,
+        ),
       _LiveTvAction(Icons.tv_rounded, l10n.guide, Destinations.liveTvGuide),
       _LiveTvAction(
         Icons.fiber_manual_record_rounded,
         l10n.recordings,
         Destinations.liveTvRecordings,
-      ),
-      _LiveTvAction(
-        Icons.schedule_rounded,
-        l10n.schedule,
-        Destinations.liveTvSchedule,
-      ),
-      _LiveTvAction(
-        Icons.movie_creation,
-        l10n.series,
-        Destinations.liveTvSeriesRecordings,
       ),
     ];
     return _buildTitledRow(
@@ -5152,6 +5178,20 @@ class _ContentRowsState extends State<_ContentRows>
           onLeftEdge: _onRowLeftEdge,
           onTap: (_, action) => context.push(action.destination),
           itemBuilder: (ctx, action, idx, isFocused) {
+            final tag = action.tag;
+            if (tag != null) {
+              return Align(
+                alignment: Alignment.topCenter,
+                child: GestureDetector(
+                  onTap: () => context.push(action.destination),
+                  child: _EsplayTagCard(
+                    tag: tag,
+                    side: squarePosterSide,
+                    focused: isFocused,
+                  ),
+                ),
+              );
+            }
             return Align(
               alignment: Alignment.topCenter,
               child: SizedBox.square(
@@ -5171,6 +5211,66 @@ class _ContentRowsState extends State<_ContentRows>
           },
         ),
     );
+  }
+
+  /// EsPlay's "On now": each program with its channel's logo, a live badge and
+  /// its progress, since the guide rarely has art for a program. Select opens
+  /// the channel's page.
+  Widget _buildLiveTvOnNowRow(
+    HomeRow row, {
+    required PosterSize posterSize,
+    required int rowIndex,
+    required List<HomeRow> rows,
+  }) {
+    final l10n = AppLocalizations.of(context);
+    final metadataScale = _desktopUiScaleFactor();
+    final squarePosterSide = _squarePosterSide(posterSize);
+    final rowHeight = squarePosterSide + (56 * metadataScale);
+    final cardWidth = squarePosterSide * 1.6;
+    return _buildTitledRow(
+      key: _rowContainerKey(rowIndex),
+      title: _localizedRowTitle(row, l10n),
+      rowIndex: rowIndex,
+      hasItems: row.items.isNotEmpty,
+      height: rowHeight,
+      child: LockedFocusRow<AggregatedItem>(
+        key: _rowKey(rowIndex),
+        items: row.items,
+        hubKey: _hubKeyForRow(row),
+        controller: _rowHorizontalController(rowIndex),
+        height: rowHeight,
+        itemExtent: cardWidth,
+        itemSpacing: 14,
+        leadingPadding: _isHomeRowsStyleV2() ? _kHomeRowLabelInset : 0,
+        clipBehavior: Clip.hardEdge,
+        padding: const EdgeInsets.fromLTRB(_kHomeRowLabelInset, 5, 20, 5),
+        onIndexChanged: (_, _) {
+          _onHomeRowTileFocused(null);
+        },
+        onFocusChange: (has) => _onRowFocusTracked(rowIndex, has),
+        onVerticalNavigation: (isUp) => _onRowVerticalNavigation(
+          rowIndex: rowIndex,
+          rows: rows,
+          isUp: isUp,
+        ),
+        onLeftEdge: _onRowLeftEdge,
+        onTap: (_, item) => _openOnNowChannel(item),
+        itemBuilder: (ctx, item, idx, isFocused) => GestureDetector(
+          onTap: () => _openOnNowChannel(item),
+          child: _EsplayOnNowCard(
+            program: item.rawData,
+            width: cardWidth,
+            focused: isFocused,
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _openOnNowChannel(AggregatedItem item) {
+    final channelId = item.rawData['ChannelId']?.toString();
+    if (channelId == null || channelId.isEmpty) return;
+    openLiveTvChannel(context, channelId);
   }
 
   Widget _buildLibraryButtonsRow(
@@ -6581,6 +6681,7 @@ class _ContentRowsState extends State<_ContentRows>
         !row.isLoading &&
         row.items.isNotEmpty &&
         row.rowType != HomeRowType.liveTv &&
+        row.rowType != HomeRowType.liveTvOnNow &&
         row.rowType != HomeRowType.libraryTilesSmall;
 
     ({String? url, double width, double aspectRatio}) imageOf(
@@ -6984,7 +7085,10 @@ class _LiveTvAction {
   final String label;
   final String destination;
 
-  const _LiveTvAction(this.icon, this.label, this.destination);
+  /// Set for an EsPlay channel tag, drawn with its number in red.
+  final LiveTvTag? tag;
+
+  const _LiveTvAction(this.icon, this.label, this.destination, {this.tag});
 }
 
 class _OverlayTopClipper extends CustomClipper<Rect> {
@@ -7117,3 +7221,172 @@ typedef _PreviewSource = ({
   String? audioLanguage,
   String label,
 });
+
+/// A channel tag on the home live TV row: its number big and red, the name
+/// underneath.
+class _EsplayTagCard extends StatelessWidget {
+  final LiveTvTag tag;
+  final double side;
+  final bool focused;
+
+  const _EsplayTagCard({
+    required this.tag,
+    required this.side,
+    required this.focused,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final number = tag.number;
+    return Container(
+      width: side,
+      height: side,
+      padding: EdgeInsets.all(side * 0.1),
+      decoration: BoxDecoration(
+        color: liveTvCardColor,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(
+          color: focused ? liveTvFocus : liveTvCardBorder,
+          width: focused ? 2.5 : 1,
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          if (number != null)
+            Text(
+              number,
+              style: TextStyle(
+                color: liveTvRed,
+                fontSize: side * 0.28,
+                height: 1,
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+          Text(
+            tag.label,
+            maxLines: 3,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: (side * 0.1).clamp(12.0, 18.0),
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// A program airing now: the channel's logo with a live badge and progress,
+/// the program and channel underneath.
+class _EsplayOnNowCard extends StatelessWidget {
+  final Map<String, dynamic> program;
+  final double width;
+  final bool focused;
+
+  const _EsplayOnNowCard({
+    required this.program,
+    required this.width,
+    required this.focused,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final channelId = program['ChannelId']?.toString() ?? '';
+    final channelName = program['ChannelName']?.toString() ?? '';
+    final start = DateTime.tryParse(program['StartDate'] as String? ?? '')
+        ?.toLocal();
+    final end = DateTime.tryParse(program['EndDate'] as String? ?? '')
+        ?.toLocal();
+    var progress = 0.0;
+    if (start != null && end != null && end.isAfter(start)) {
+      progress = DateTime.now().difference(start).inSeconds /
+          end.difference(start).inSeconds;
+    }
+    return SizedBox(
+      width: width,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: width,
+            height: width * 9 / 16,
+            clipBehavior: Clip.antiAlias,
+            decoration: BoxDecoration(
+              color: liveTvCardColor,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: focused ? liveTvFocus : liveTvCardBorder,
+                width: focused ? 2.5 : 1,
+              ),
+            ),
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  child: LiveTvChannelLogo(
+                    channelId: channelId,
+                    imageTag: program['ChannelPrimaryImageTag'] as String?,
+                    name: channelName,
+                    fontSize: 16,
+                  ),
+                ),
+                Positioned(
+                  top: 8,
+                  left: 8,
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 6,
+                      vertical: 2,
+                    ),
+                    decoration: BoxDecoration(
+                      color: liveTvRed,
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Text(
+                      l10n.esplayLiveTvLive,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  child: LiveTvProgressBar(value: progress, height: 4),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 6),
+          Text(
+            program['Name']?.toString() ?? '',
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          Text(
+            [
+              if (channelName.isNotEmpty) channelName,
+              if (start != null && end != null) liveTvTimeRange(start, end),
+            ].join(' · '),
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: const TextStyle(color: liveTvMutedText, fontSize: 12),
+          ),
+        ],
+      ),
+    );
+  }
+}

@@ -349,7 +349,7 @@ class _OnNowCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         LiveTvFocusable(
-          onTap: () => context.push(Destinations.liveTvChannel(channelId)),
+          onTap: () => openLiveTvChannel(context, channelId),
           builder: (focused) => AspectRatio(
             aspectRatio: 16 / 9,
             child: Container(
@@ -457,7 +457,6 @@ class _TagRowState extends State<_TagRow> {
         }
         final items = snapshot.data ?? const [];
         if (items.isEmpty) return const SizedBox.shrink();
-        final channels = [for (final item in items) item.channel];
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -485,7 +484,7 @@ class _TagRowState extends State<_TagRow> {
                   width: isTV ? 240 : 150,
                   child: LiveTvChannelCard(
                     item: items[index],
-                    onTap: () => playLiveTvChannel(context, channels, index),
+                    onTap: () => openLiveTvChannel(context, items[index].channel.id),
                   ),
                 ),
               ),

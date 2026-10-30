@@ -51,6 +51,12 @@ Future<void> playLiveTvChannel(
   );
 }
 
+/// Opens the channel's own page, with what it airs next and Play and Record,
+/// the way Emby does, instead of tuning in straight away.
+void openLiveTvChannel(BuildContext context, String channelId) {
+  context.push(Destinations.item(channelId));
+}
+
 String liveTvTimeRange(DateTime start, DateTime end) {
   String hm(DateTime t) =>
       '${t.hour.toString().padLeft(2, '0')}:${t.minute.toString().padLeft(2, '0')}';
