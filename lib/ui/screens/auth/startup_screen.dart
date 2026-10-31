@@ -32,8 +32,12 @@ class StartupScreen extends StatefulWidget {
 }
 
 class _StartupScreenState extends State<StartupScreen>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   late final AnimationController _fadeController;
+  late final AnimationController _barController = AnimationController(
+    vsync: this,
+    duration: const Duration(milliseconds: 1300),
+  )..repeat();
   late final Animation<double> _fadeAnimation;
 
   @override
@@ -54,6 +58,7 @@ class _StartupScreenState extends State<StartupScreen>
   @override
   void dispose() {
     _fadeController.dispose();
+    _barController.dispose();
     super.dispose();
   }
 
@@ -185,8 +190,8 @@ class _StartupScreenState extends State<StartupScreen>
 
   Widget _buildContent(BuildContext context) {
     // EsPlay: the same black and wordmark, at the same size and spot, as the
-    // Android launch splash, so the hand-over can't be seen. Only the spinner
-    // fades in, below the logo.
+    // Android launch splash, so the hand-over can't be seen. Below the logo a red
+    // bar runs along its track, as on the TV app.
     return Scaffold(
       backgroundColor: Colors.black,
       body: Stack(
@@ -199,15 +204,29 @@ class _StartupScreenState extends State<StartupScreen>
           ),
           Center(
             child: Padding(
-              padding: const EdgeInsets.only(top: 120),
+              padding: const EdgeInsets.only(top: 90),
               child: FadeTransition(
                 opacity: _fadeAnimation,
-                child: SizedBox(
-                  height: 24,
-                  width: 24,
-                  child: CircularProgressIndicator(
-                    strokeWidth: 2,
-                    color: AppColorScheme.accent.withValues(alpha: 0.7),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(2),
+                  child: Container(
+                    width: 100,
+                    height: 3,
+                    color: const Color(0xFF1C1C20),
+                    child: AnimatedBuilder(
+                      animation: _barController,
+                      builder: (context, _) => Stack(
+                        children: [
+                          Positioned(
+                            left: -40 + 140 * _barController.value,
+                            top: 0,
+                            bottom: 0,
+                            width: 40,
+                            child: ColoredBox(color: AppColorScheme.accent),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               ),
