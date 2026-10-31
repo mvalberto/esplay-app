@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
@@ -180,44 +179,30 @@ class _StartupScreenState extends State<StartupScreen>
     );
   }
 
-  bool get _isLargeScreen {
-    final platform = defaultTargetPlatform;
-    return platform == TargetPlatform.linux ||
-        platform == TargetPlatform.macOS ||
-        platform == TargetPlatform.windows;
-  }
-
   @override
   Widget build(BuildContext context) =>
       RequestInitialFocus(child: _buildContent(context));
 
   Widget _buildContent(BuildContext context) {
-    final gradientColors = [
-      AppColorScheme.background,
-      AppColorScheme.surfaceVariant,
-      AppColorScheme.surface,
-    ];
+    // EsPlay: the same black and wordmark, at the same size and spot, as the
+    // Android launch splash, so the hand-over can't be seen. Only the spinner
+    // fades in, below the logo.
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: gradientColors,
+      backgroundColor: Colors.black,
+      body: Stack(
+        children: [
+          Center(
+            child: Image.asset(
+              'assets/images/esplay_splash_wordmark.png',
+              width: 180,
+            ),
           ),
-        ),
-        child: Center(
-          child: FadeTransition(
-            opacity: _fadeAnimation,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Image.asset(
-                  'assets/images/logo_and_text.png',
-                  height: _isLargeScreen ? 80 : 56,
-                ),
-                const SizedBox(height: 32),
-                SizedBox(
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 120),
+              child: FadeTransition(
+                opacity: _fadeAnimation,
+                child: SizedBox(
                   height: 24,
                   width: 24,
                   child: CircularProgressIndicator(
@@ -225,10 +210,10 @@ class _StartupScreenState extends State<StartupScreen>
                     color: AppColorScheme.accent.withValues(alpha: 0.7),
                   ),
                 ),
-              ],
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }

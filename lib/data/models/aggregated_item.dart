@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:server_core/server_core.dart';
 
 import '../database/offline_database.dart';
+import '../../esplay/genre_merge.dart';
 
 class AggregatedItem {
   final String id;
@@ -63,7 +64,9 @@ class AggregatedItem {
   Duration? get runtime =>
       runTimeTicks != null ? Duration(microseconds: runTimeTicks! ~/ 10) : null;
 
-  List<String> get genres => _toListOfStrings(rawData['Genres']);
+  // EsPlay shows English genres under their Spanish names, once each.
+  List<String> get genres =>
+      _toListOfStrings(rawData['Genres']).map(esplayGenreName).toSet().toList();
 
   String? get primaryImageTag =>
       (rawData['ImageTags'] as Map?)?['Primary'] as String?;

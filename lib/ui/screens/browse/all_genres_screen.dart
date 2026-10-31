@@ -25,6 +25,7 @@ import '../../widgets/focus/context_menu_sheet.dart';
 import '../../widgets/quick_return_wrapper.dart';
 import '../../widgets/skeleton/skeleton_library_grid.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../esplay/genre_merge.dart';
 
 Color get _navyBackground => AppColorScheme.background;
 const _horizontalPadding = 60.0;
@@ -134,9 +135,10 @@ class _AllGenresScreenState extends State<AllGenresScreen> {
         if (total != null && startIndex >= total) break;
       }
 
-      final temp = items
+      // EsPlay: Action and Acción are one genre, under its Spanish name.
+      final temp = mergeGenresBySpanishName(items)
           .map((g) {
-            final data = g as Map<String, dynamic>;
+            final data = g;
             final itemCount = browsableGenreCount(
               data,
               normalizedItemTypes: _videoGenreItemTypes,
@@ -158,7 +160,7 @@ class _AllGenresScreenState extends State<AllGenresScreen> {
         );
 
         return GenreCardData(
-          id: data['Id']?.toString() ?? '',
+          id: esplayGenreIds(data),
           name: data['Name'] as String? ?? '',
           itemCount: x.itemCount,
           imageUrl: imageUrl,

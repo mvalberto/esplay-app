@@ -34,6 +34,7 @@ import '../../../util/game_core_licenses.dart';
 import '../../../util/game_cores.dart';
 import '../../../util/game_library.dart';
 import '../../../util/platform_detection.dart';
+import '../../../esplay/romote_games.dart';
 import '../../../util/tv_image_cache_stub.dart'
     if (dart.library.io) '../../../util/tv_image_cache_io.dart';
 
@@ -285,6 +286,14 @@ class _GameDetailScreenState extends State<GameDetailScreen> with RouteAware {
         _saveReadiness = _SaveReadiness.checking;
         _loading = false;
       });
+      // EsPlay: ROMote's box art and description for this game, from Emby.
+      unawaited(
+        RomoteGames.instance
+            .match(fileName: game.fileName, title: game.title)
+            .then((found) {
+              if (found != null && mounted) setState(() {});
+            }, onError: (_) {}),
+      );
 
       // Land on Play/Continue. The button's own autofocus only wins when
       // nothing else holds focus by the time it is built, which depends on how
@@ -689,10 +698,10 @@ class _PortraitBody extends StatelessWidget {
               onToggleHardwareRendering: onToggleHardwareRendering,
             ),
           ),
-          if (game.overview != null && game.overview!.isNotEmpty)
+          if (_esplayOverview(game) != null && _esplayOverview(game)!.isNotEmpty)
             Padding(
               padding: const EdgeInsets.fromLTRB(20, 28, 20, 0),
-              child: _OverviewBlock(text: game.overview!, maxLines: 4),
+              child: _OverviewBlock(text: _esplayOverview(game)!, maxLines: 4),
             ),
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 22, 20, 0),
@@ -820,11 +829,11 @@ class _LandscapeBody extends StatelessWidget {
                       ),
                       const SizedBox(height: 12),
                       _SaveStatus(readiness: saveReadiness, large: true),
-                      if (game.overview != null &&
-                          game.overview!.isNotEmpty) ...[
+                      if (_esplayOverview(game) != null &&
+                          _esplayOverview(game)!.isNotEmpty) ...[
                         const SizedBox(height: 20),
                         _OverviewBlock(
-                          text: game.overview!,
+                          text: _esplayOverview(game)!,
                           maxLines: 3,
                           large: true,
                         ),
@@ -1135,7 +1144,12 @@ class _Poster extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final reference = artworkDataSource?.imageFor(game.id, role: 'boxart');
+    final romoteUrl = RomoteGames.instance
+        .cachedMatch(fileName: game.fileName, title: game.title)
+        ?.imageUrl(maxWidth: 512);
+    final reference = romoteUrl != null
+        ? null
+        : artworkDataSource?.imageFor(game.id, role: 'boxart');
     final source = reference?.source;
     final transport = retroArtworkTransport;
     final gate = retroArtworkActivityGate;
@@ -1169,10 +1183,10 @@ class _Poster extends StatelessWidget {
               return fallback;
             },
           )
-        : reference?.legacyUrl == null
+        : (romoteUrl ?? reference?.legacyUrl) == null
         ? fallback
         : BoundedNetworkImage(
-            imageUrl: reference!.legacyUrl!,
+            imageUrl: romoteUrl ?? reference!.legacyUrl!,
             cacheManager: gameArtworkCacheManagerForScope(artworkScope),
             fit: BoxFit.cover,
             maxWidth: 512,
@@ -2295,4 +2309,14 @@ String _formatBytes(int bytes) {
   }
   final rounded = (size >= 10 || unit == 0) ? size.toStringAsFixed(0) : size.toStringAsFixed(1);
   return '$rounded ${units[unit]}';
+}
+
+/// The game's description, or ROMote's when the plugin that reads the ROMs
+/// has none.
+String? _esplayOverview(GameDetail game) {
+  final own = game.overview;
+  if (own != null && own.isNotEmpty) return own;
+  return RomoteGames.instance
+      .cachedMatch(fileName: game.fileName, title: game.title)
+      ?.overview;
 }

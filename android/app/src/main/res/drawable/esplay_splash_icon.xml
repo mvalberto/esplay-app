@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- EsPlay: the wordmark as the Android 12+ splash icon. The 288dp canvas is the
+     splash icon size; the wordmark stays inside its 192dp visible circle and
+     matches the logo the app's own start screen draws, 180dp wide. -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:width="288dp" android:height="288dp">
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/transparent" />
+        </shape>
+    </item>
+    <item
+        android:width="180dp"
+        android:height="44dp"
+        android:gravity="center"
+        android:drawable="@drawable/esplay_splash_wordmark" />
+</layer-list>

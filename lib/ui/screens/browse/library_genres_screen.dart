@@ -21,6 +21,7 @@ import '../../widgets/genre_grid_card.dart';
 import '../../widgets/focus/context_menu_sheet.dart';
 import '../../widgets/skeleton/skeleton_library_grid.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../esplay/genre_merge.dart';
 
 Color get _navyBackground => AppColorScheme.background;
 const _horizontalPadding = 60.0;
@@ -118,7 +119,11 @@ class _LibraryGenresScreenState extends State<LibraryGenresScreen> {
         fields: 'ItemCounts,PrimaryImageTag,ImageTags,BackdropImageTags,PrimaryImageAspectRatio',
       );
 
-      final items = (response['Items'] as List?) ?? [];
+      final rawItems = (response['Items'] as List?) ?? [];
+      // EsPlay: Action and Acción are one genre, under its Spanish name.
+      final items = _collectionType == 'music'
+          ? rawItems
+          : mergeGenresBySpanishName(rawItems);
       final temp = items.map((g) {
         final data = g as Map<String, dynamic>;
         final count = data['ChildCount'] as int? ??
@@ -146,7 +151,7 @@ class _LibraryGenresScreenState extends State<LibraryGenresScreen> {
         );
 
         return GenreCardData(
-          id: data['Id']?.toString() ?? '',
+          id: esplayGenreIds(data),
           name: data['Name'] as String? ?? '',
           itemCount: x.itemCount,
           imageUrl: imageUrl,

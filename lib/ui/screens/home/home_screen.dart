@@ -5131,8 +5131,8 @@ class _ContentRowsState extends State<_ContentRows>
     final squarePosterSide = _squarePosterSide(posterSize);
     final rowHeight = squarePosterSide + (56 * metadataScale);
     _loadEsplayTags();
-    // EsPlay: the live TV page first, then a card per Emby channel tag, then
-    // the guide and recordings.
+    // EsPlay: the live TV page first, then a card per Emby channel tag. The
+    // guide and recordings are tabs on the live TV page.
     final actions = <_LiveTvAction>[
       _LiveTvAction(Icons.live_tv_rounded, l10n.liveTv, Destinations.liveTv),
       for (final tag in _esplayTags)
@@ -5142,12 +5142,6 @@ class _ContentRowsState extends State<_ContentRows>
           Destinations.liveTvTagChannels(tag.id, tag.name),
           tag: tag,
         ),
-      _LiveTvAction(Icons.tv_rounded, l10n.guide, Destinations.liveTvGuide),
-      _LiveTvAction(
-        Icons.fiber_manual_record_rounded,
-        l10n.recordings,
-        Destinations.liveTvRecordings,
-      ),
     ];
     return _buildTitledRow(
       key: _rowContainerKey(rowIndex),
@@ -5178,33 +5172,16 @@ class _ContentRowsState extends State<_ContentRows>
           onLeftEdge: _onRowLeftEdge,
           onTap: (_, action) => context.push(action.destination),
           itemBuilder: (ctx, action, idx, isFocused) {
-            final tag = action.tag;
-            if (tag != null) {
-              return Align(
-                alignment: Alignment.topCenter,
-                child: GestureDetector(
-                  onTap: () => context.push(action.destination),
-                  child: _EsplayTagCard(
-                    tag: tag,
-                    side: squarePosterSide,
-                    focused: isFocused,
-                  ),
-                ),
-              );
-            }
             return Align(
               alignment: Alignment.topCenter,
-              child: SizedBox.square(
-                dimension: squarePosterSide,
-                child: GridButtonCard(
+              child: GestureDetector(
+                onTap: () => context.push(action.destination),
+                child: _EsplayTagCard(
+                  tag: action.tag,
                   icon: action.icon,
                   label: action.label,
-                  width: squarePosterSide,
-                  height: squarePosterSide,
-                  focusColor: focusColor,
-                  cardFocusExpansion: cardExpansion,
-                  externalIsFocused: isFocused,
-                  onTap: () => context.push(action.destination),
+                  side: squarePosterSide,
+                  focused: isFocused,
                 ),
               ),
             );
@@ -7222,22 +7199,26 @@ typedef _PreviewSource = ({
   String label,
 });
 
-/// A channel tag on the home live TV row: its number big and red, the name
-/// underneath.
+/// A card on the home live TV row: a channel tag with its number big and red
+/// and the name underneath, or, without a tag, [icon] in red over [label].
 class _EsplayTagCard extends StatelessWidget {
-  final LiveTvTag tag;
+  final LiveTvTag? tag;
+  final IconData icon;
+  final String label;
   final double side;
   final bool focused;
 
   const _EsplayTagCard({
     required this.tag,
+    required this.icon,
+    required this.label,
     required this.side,
     required this.focused,
   });
 
   @override
   Widget build(BuildContext context) {
-    final number = tag.number;
+    final number = tag?.number;
     return Container(
       width: side,
       height: side,
@@ -7254,7 +7235,9 @@ class _EsplayTagCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          if (number != null)
+          if (tag == null)
+            Icon(icon, color: liveTvRed, size: side * 0.28)
+          else if (number != null)
             Text(
               number,
               style: TextStyle(
@@ -7265,7 +7248,7 @@ class _EsplayTagCard extends StatelessWidget {
               ),
             ),
           Text(
-            tag.label,
+            tag?.label ?? label,
             maxLines: 3,
             overflow: TextOverflow.ellipsis,
             style: TextStyle(

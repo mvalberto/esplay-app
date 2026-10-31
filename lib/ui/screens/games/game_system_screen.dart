@@ -42,6 +42,7 @@ import '../../widgets/game/retro_artwork_shape.dart';
 import '../../widgets/media_card.dart';
 
 import '../../widgets/local_search_field.dart';
+import '../../../esplay/romote_games.dart';
 
 /// Rows either side of the anchor named in the server priority hint. Wider
 /// than the viewport so thumbnailing starts before a row is scrolled into it.
@@ -113,6 +114,20 @@ class _GameSystemScreenState extends State<GameSystemScreen>
   // Only used to avoid re-sending an identical priority hint. Nothing about
   // what renders depends on these.
   List<GameSummary>? _artworkPlanGames;
+
+  // EsPlay: box art the ROMote plugin scraped into Emby, by file name.
+  Map<String, RomoteGame> _romoteArt = const {};
+  List<GameSummary>? _romoteRequestedFor;
+
+  void _loadRomoteArt(List<GameSummary> games) {
+    if (identical(_romoteRequestedFor, games)) return;
+    _romoteRequestedFor = games;
+    RomoteGames.instance
+        .matchAll([for (final g in games) (fileName: g.fileName, title: g.title)])
+        .then((art) {
+          if (mounted && art.isNotEmpty) setState(() => _romoteArt = art);
+        }, onError: (_) {});
+  }
   int? _artworkPlanAnchorRow;
   int _priorityGeneration = 0;
   late String _artworkScope;
@@ -1052,6 +1067,7 @@ class _GameSystemScreenState extends State<GameSystemScreen>
     required bool showDetails,
     required bool showBackdrop,
   }) {
+    _loadRomoteArt(games);
     return LayoutBuilder(
       builder: (context, constraints) {
         const captionGap = 6.0;
@@ -1173,10 +1189,17 @@ class _GameSystemScreenState extends State<GameSystemScreen>
                           artAspect,
                           cell.aspectRatio,
                         ));
+                final romoteUrl = _romoteArt[game.fileName]?.imageUrl(
+                  maxWidth: BoundedNetworkImage.cacheWidthFor(
+                    cardWidth,
+                    MediaQuery.devicePixelRatioOf(context),
+                  ),
+                );
                 return GamePosterCard(
-                  imageUrl: reference?.legacyUrl,
+                  imageUrl: romoteUrl ?? reference?.legacyUrl,
                   artwork:
-                      source == null ||
+                      romoteUrl != null ||
+                          source == null ||
                           _retroArtworkTransport == null ||
                           _retroArtworkActivityGate == null
                       ? null
