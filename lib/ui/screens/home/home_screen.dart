@@ -5916,11 +5916,7 @@ class _ContentRowsState extends State<_ContentRows>
                       card: previewWrappedCard,
                       prefs: prefs,
                       open: glide != null ? v2Open : null,
-                      // EsPlay: a phone row only has room for the title and one line,
-                      // so a tapped card grows without the ratings and overview, which
-                      // ran over the next row.
-                      details: v2Open >= modernDetailsStart &&
-                              !PlatformDetection.useMobileUi
+                      details: v2Open >= modernDetailsStart
                           ? ModernHoverBuilder(
                               expansion: _v2Expansion,
                               cardKey: previewKey,

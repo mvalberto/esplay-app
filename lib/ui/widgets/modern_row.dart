@@ -20,9 +20,13 @@ double modernImageHeight(PosterSize posterSize, double platformScale) =>
     posterSize.portraitHeight * platformScale;
 
 /// Room under a Modern poster for the title, the metadata line, the ratings
-/// and three lines of overview. Phones only show the title and one line.
+/// and three lines of overview.
 double modernMetadataBudget(UserPreferences prefs, RatingSettings ratings) {
-  if (PlatformDetection.useMobileUi) return 50.0;
+  // EsPlay: phones also keep room for a tapped card's ratings and overview,
+  // which otherwise ran over the next row. Hiding the description frees it.
+  if (PlatformDetection.useMobileUi) {
+    return prefs.get(UserPreferences.hideHomeMediaDescription) ? 90.0 : 130.0;
+  }
   final ratingsPadding = prefs.get(ratings.additionalRatings) ? 8.0 : 0.0;
   return 175.0 + ratingsPadding;
 }
