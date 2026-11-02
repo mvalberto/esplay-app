@@ -262,7 +262,7 @@ class _GameDetailScreenState extends State<GameDetailScreen> with RouteAware {
     if (games == null) {
       setState(() {
         _loading = false;
-        _error = 'This server does not support games.';
+        _error = 'Este servidor no tiene juegos.';
       });
       return;
     }
@@ -273,7 +273,7 @@ class _GameDetailScreenState extends State<GameDetailScreen> with RouteAware {
       if (game == null) {
         setState(() {
           _loading = false;
-          _error = 'Game not found.';
+          _error = 'No se ha encontrado el juego.';
         });
         return;
       }
@@ -314,7 +314,7 @@ class _GameDetailScreenState extends State<GameDetailScreen> with RouteAware {
       final detail = describeError(e, AppLocalizations.of(context));
       setState(() {
         _loading = false;
-        _error = 'Failed to load game: $detail';
+        _error = 'No se pudo cargar el juego: $detail';
       });
     }
   }
@@ -1315,7 +1315,7 @@ String? _metaSummary(GameDetail game) {
     if (game.year != null) '${game.year}',
     if (game.genre != null && game.genre!.isNotEmpty) game.genre!,
     if (game.players != null && game.players! > 0)
-      game.players == 1 ? '1 player' : '${game.players} players',
+      game.players == 1 ? '1 jugador' : '${game.players} jugadores',
   ];
   return parts.isEmpty ? null : parts.join(' · ');
 }
@@ -1351,10 +1351,10 @@ class _ActionRow extends StatelessWidget {
     final checking = saveReadiness == _SaveReadiness.checking;
     final failed = saveReadiness == _SaveReadiness.failed;
     final primaryLabel = switch (saveReadiness) {
-      _SaveReadiness.checking => 'Checking for save…',
-      _SaveReadiness.failed => 'Retry save check',
-      _SaveReadiness.available => 'Continue',
-      _SaveReadiness.absent => 'Play',
+      _SaveReadiness.checking => 'Buscando partida guardada…',
+      _SaveReadiness.failed => 'Volver a buscar la partida',
+      _SaveReadiness.available => 'Continuar',
+      _SaveReadiness.absent => 'Jugar',
     };
     final primaryIcon = checking
         ? Icons.hourglass_top
@@ -1510,7 +1510,7 @@ class _PlayerButton extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              native ? 'Native core' : 'EmulatorJS',
+              native ? 'Núcleo nativo' : 'EmulatorJS',
               style: TextStyle(
                 color: Colors.white.withValues(alpha: 0.6),
                 fontSize: 12,
@@ -1630,8 +1630,8 @@ class _SaveStatus extends StatelessWidget {
         Flexible(
           child: Text(
             found
-                ? 'Save found. Continue picks up from it.'
-                : 'No save on this server yet',
+                ? 'Hay una partida guardada. Continuar sigue desde ahí.'
+                : 'Todavía no hay partida guardada en este servidor',
             style: TextStyle(
               color: Colors.white.withValues(alpha: 0.65),
               fontSize: large ? 15 : 13,
@@ -1685,8 +1685,8 @@ class _PlayerCard extends StatelessWidget {
                 const SizedBox(height: 2),
                 Text(
                   native
-                      ? 'Native core · runs on this device'
-                      : 'EmulatorJS · runs in a web view',
+                      ? 'Núcleo nativo · se ejecuta en este dispositivo'
+                      : 'EmulatorJS · se ejecuta en una vista web',
                   style: TextStyle(
                     color: Colors.white.withValues(alpha: 0.62),
                     fontSize: 12.5,
@@ -1697,7 +1697,7 @@ class _PlayerCard extends StatelessWidget {
           ),
           if (canSelect) ...[
             Text(
-              'Change',
+              'Cambiar',
               style: TextStyle(
                 color: accent,
                 fontSize: 14,
@@ -1773,7 +1773,7 @@ class _HardwareRenderingToggle extends StatelessWidget {
               const SizedBox(width: 9),
               const Flexible(
                 child: Text(
-                  'Hardware rendering',
+                  'Renderizado por hardware',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 15,
@@ -1808,7 +1808,7 @@ class _HardwareRenderingToggle extends StatelessWidget {
           ),
           const SizedBox(height: 4),
           const Text(
-            'EXPERIMENTAL · OFF disables the EGL hardware path. Hardware-only cores may not start.',
+            'EXPERIMENTAL · Desactivado no usa la aceleración EGL. Los núcleos que la necesitan pueden no arrancar.',
             style: TextStyle(color: Colors.white70, fontSize: 12, height: 1.25),
           ),
         ],
@@ -1897,7 +1897,7 @@ class _OverviewBlockState extends State<_OverviewBlock> {
               const Padding(
                 padding: EdgeInsets.only(bottom: 8),
                 child: Text(
-                  'About',
+                  'Sinopsis',
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 17,
@@ -1922,7 +1922,7 @@ class _OverviewBlockState extends State<_OverviewBlock> {
                   autoScroll: true,
                   onPressed: () => setState(() => _expanded = !_expanded),
                   child: Text(
-                    _expanded ? 'Show less' : 'Read more',
+                    _expanded ? 'Ver menos' : 'Leer más',
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.primary,
                       fontSize: widget.large ? 15 : 14,
@@ -1954,12 +1954,12 @@ class _Facts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final facts = <(String, String)>[
-      if (game.developer case final v? when v.isNotEmpty) ('Developer', v),
-      if (game.publisher case final v? when v.isNotEmpty) ('Publisher', v),
-      if (game.franchise case final v? when v.isNotEmpty) ('Franchise', v),
-      if (game.region case final v? when v.isNotEmpty) ('Region', v),
-      if (game.rating case final v?) ('Rating', '${v.toStringAsFixed(1)} / 5'),
-      if (game.sizeBytes > 0) ('Size', _formatBytes(game.sizeBytes)),
+      if (game.developer case final v? when v.isNotEmpty) ('Desarrollador', v),
+      if (game.publisher case final v? when v.isNotEmpty) ('Editor', v),
+      if (game.franchise case final v? when v.isNotEmpty) ('Saga', v),
+      if (game.region case final v? when v.isNotEmpty) ('Región', v),
+      if (game.rating case final v?) ('Valoración', '${v.toStringAsFixed(1)} / 5'),
+      if (game.sizeBytes > 0) ('Tamaño', _formatBytes(game.sizeBytes)),
       if (game.bios.isNotEmpty)
         ('BIOS', game.bios.map((b) => b.fileName).join(', ')),
     ];
@@ -2124,7 +2124,7 @@ List<_CoreRow> _buildCoreRows(GameDetail game) {
     required bool isRecommended,
   }) {
     return _CoreRow(
-      label: isEmulatorJs ? 'EmulatorJS (WebView)' : 'Native core',
+      label: isEmulatorJs ? 'EmulatorJS (WebView)' : 'Núcleo nativo',
       core: core,
       isEmulatorJs: isEmulatorJs,
       recommended: isRecommended,
@@ -2174,7 +2174,7 @@ String? _notValidatedWarning(GameDetail game, String core) {
   if (game.availableCores.isEmpty || game.availableCores.contains(core)) {
     return null;
   }
-  return 'This archive is not validated for ${_coreLabel(core)} and may not launch correctly.';
+  return 'Este archivo no está comprobado con ${_coreLabel(core)} y puede que no arranque bien.';
 }
 
 class _CorePickerDialog extends StatelessWidget {
@@ -2198,7 +2198,7 @@ class _CorePickerDialog extends StatelessWidget {
                 _CorePickerOption(
                   label: row.label,
                   subtitle: row.recommended
-                      ? '${_coreLabel(row.core)} (Recommended)'
+                      ? '${_coreLabel(row.core)} (recomendado)'
                       : _coreLabel(row.core),
                   detail: row.detail,
                   selected:

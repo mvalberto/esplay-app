@@ -121,9 +121,9 @@ String gamePlaybackOrientationLabel(
   GamePlaybackOrientation o,
   AppLocalizations? l10n,
 ) => switch (o) {
-  GamePlaybackOrientation.landscape => l10n?.landscape ?? 'Landscape',
-  GamePlaybackOrientation.portrait => l10n?.portrait ?? 'Portrait',
-  GamePlaybackOrientation.auto => l10n?.auto ?? 'Auto',
+  GamePlaybackOrientation.landscape => l10n?.landscape ?? 'Horizontal',
+  GamePlaybackOrientation.portrait => l10n?.portrait ?? 'Vertical',
+  GamePlaybackOrientation.auto => l10n?.auto ?? 'Automático',
 };
 
 /// Shared full-screen system UI lifecycle for game players.

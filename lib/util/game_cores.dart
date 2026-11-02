@@ -150,7 +150,7 @@ const List<GameCore> gameCoreCatalog = [
   ),
   GameCore(
     coreId: 'gambatte',
-    system: 'Game Boy and Game Boy Color',
+    system: 'Game Boy y Game Boy Color',
     approxSizeMb: 1,
     emulatorJsSystemCores: {'gb'},
     bundledOnApple: true,
@@ -166,7 +166,7 @@ const List<GameCore> gameCoreCatalog = [
   ),
   GameCore(
     coreId: 'genesis_plus_gx',
-    system: 'Sega Genesis, Master System, and Game Gear',
+    system: 'Sega Mega Drive, Master System y Game Gear',
     approxSizeMb: 2,
     emulatorJsSystemCores: {'segaMD', 'segaMS', 'segaGG'},
     bundledOnApple: true,
@@ -212,7 +212,7 @@ const List<GameCore> gameCoreCatalog = [
   ),
   GameCore(
     coreId: 'mednafen_pce_fast',
-    system: 'PC Engine and TurboGrafx-16',
+    system: 'PC Engine y TurboGrafx-16',
     approxSizeMb: 2,
     emulatorJsSystemCores: {'pce'},
     bundledOnMacOS: true,

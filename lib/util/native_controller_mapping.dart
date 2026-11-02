@@ -11,10 +11,10 @@ enum RetroPadButton {
   x(1, 'X'),
   select(2, 'Select'),
   start(3, 'Start'),
-  up(4, 'D-pad Up'),
-  down(5, 'D-pad Down'),
-  left(6, 'D-pad Left'),
-  right(7, 'D-pad Right'),
+  up(4, 'Cruceta arriba'),
+  down(5, 'Cruceta abajo'),
+  left(6, 'Cruceta izquierda'),
+  right(7, 'Cruceta derecha'),
   b(8, 'B'),
   y(9, 'Y'),
   l1(10, 'L1'),
@@ -51,7 +51,7 @@ class CoreControllerType {
     return CoreControllerType(
       port: (map['port'] as num?)?.toInt() ?? -1,
       id: (map['id'] as num?)?.toInt() ?? retroDeviceJoypad,
-      label: map['label']?.toString() ?? 'Unknown controller type',
+      label: map['label']?.toString() ?? 'Tipo de mando desconocido',
     );
   }
 

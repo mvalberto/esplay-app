@@ -62,10 +62,10 @@ class ControllerTestPanel extends StatelessWidget {
     return found;
   }
 
-  String get _portTag => port != null ? 'P${port! + 1}' : 'Unassigned';
+  String get _portTag => port != null ? 'P${port! + 1}' : 'Sin asignar';
 
   static String _verdictLabel(DiagnosticVerdict verdict) => switch (verdict) {
-    DiagnosticVerdict.analog => 'ANALOG',
+    DiagnosticVerdict.analog => 'ANALÓGICO',
     DiagnosticVerdict.digital => 'DIGITAL',
     DiagnosticVerdict.unknown => '--',
   };
@@ -87,7 +87,7 @@ class ControllerTestPanel extends StatelessWidget {
           Row(
             children: [
               const Text(
-                'Controller test',
+                'Prueba del mando',
                 style: TextStyle(
                   color: _bright,
                   fontSize: 20,
@@ -108,11 +108,11 @@ class ControllerTestPanel extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
-                child: _StickField(label: 'Left stick', stick: left),
+                child: _StickField(label: 'Stick izquierdo', stick: left),
               ),
               const SizedBox(width: 24),
               Expanded(
-                child: _StickField(label: 'Right stick', stick: right),
+                child: _StickField(label: 'Stick derecho', stick: right),
               ),
             ],
           ),
@@ -132,7 +132,7 @@ class ControllerTestPanel extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           const Text(
-            'Last button',
+            'Último botón',
             style: TextStyle(color: _bright, fontSize: 16),
           ),
           const SizedBox(height: 4),
@@ -167,12 +167,12 @@ class ControllerTestPanel extends StatelessWidget {
                   ),
                   const SizedBox(width: 8),
                   Text(
-                    'Keep holding B to go back...',
+                    'Sigue pulsando B para volver…',
                     style: const TextStyle(color: _bright, fontSize: 12),
                   ),
                 ] else
                   const Text(
-                    'Hold B to go back      [ unsupported: paddle / lightgun ]',
+                    'Mantén B para volver      [ no admitido: paddle / pistola ]',
                     style: TextStyle(color: _dim, fontSize: 12),
                   ),
               ],
@@ -278,10 +278,10 @@ class _DpadRow extends StatelessWidget {
     if (hat == null) {
       return const Row(
         children: [
-          Text('D-pad', style: TextStyle(color: Colors.white70, fontSize: 14)),
+          Text('Cruceta', style: TextStyle(color: Colors.white70, fontSize: 14)),
           SizedBox(width: 12),
           Text(
-            'reported as buttons',
+            'detectada como botones',
             style: TextStyle(
               color: ControllerTestPanel._dim,
               fontSize: 13,
@@ -305,7 +305,7 @@ class _DpadRow extends StatelessWidget {
       children: [
         // There might be a better graphical display option here but this works.
         const Text(
-          'D-pad',
+          'Cruceta',
           style: TextStyle(color: Colors.white70, fontSize: 14),
         ),
         const SizedBox(width: 12),
@@ -381,7 +381,7 @@ class _LastButton extends StatelessWidget {
     final b = button;
     if (b == null) {
       return const Text(
-        'No button pressed yet.',
+        'Aún no se ha pulsado ningún botón.',
         style: TextStyle(color: ControllerTestPanel._dim, fontSize: 14),
       );
     }
@@ -389,7 +389,7 @@ class _LastButton extends StatelessWidget {
     final lines = <String>[];
     if (b.rawCode != null || b.rawName != null) {
       final parts = <String>[
-        if (b.rawCode != null) 'key ${b.rawCode}',
+        if (b.rawCode != null) 'tecla ${b.rawCode}',
         if (b.rawName != null) '(${b.rawName})',
       ];
       lines.add(parts.join(' '));
@@ -400,8 +400,8 @@ class _LastButton extends StatelessWidget {
     if (b.retroPad != null) {
       lines.add(
         b.label != null
-            ? 'Button ${b.retroPad} (${b.label})'
-            : 'Button ${b.retroPad}',
+            ? 'Botón ${b.retroPad} (${b.label})'
+            : 'Botón ${b.retroPad}',
       );
     } else if (b.label != null) {
       lines.add('(${b.label})');
@@ -409,7 +409,7 @@ class _LastButton extends StatelessWidget {
 
     if (lines.isEmpty) {
       return const Text(
-        'No button pressed yet.',
+        'Aún no se ha pulsado ningún botón.',
         style: TextStyle(color: ControllerTestPanel._dim, fontSize: 14),
       );
     }

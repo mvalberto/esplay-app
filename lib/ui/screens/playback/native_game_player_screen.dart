@@ -216,7 +216,7 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
   bool _controllerMappingOpen = false;
   bool _confirmingExit = false;
   bool _confirmingControllerMappingExit = false;
-  String _controllerMappingExitLeaveLabel = 'Leave anyway';
+  String _controllerMappingExitLeaveLabel = 'Salir de todos modos';
   String _controllerMappingExitWarning = '';
   int _selected = 0;
   int _settingsSelected = 0;
@@ -323,7 +323,7 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
     claimGameAudio();
     _events = _player.events.listen(
       _onEvent,
-      onError: (Object error) => _setFatalError('Playback error: $error'),
+      onError: (Object error) => _setFatalError('Error de reproducción: $error'),
     );
     if (_readsGamepadsInDart) {
       _gamepadEvents = Gamepads.normalizedEvents.listen(_onGamepadEvent);
@@ -441,7 +441,7 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
             !usesOnScreenControls) {
           _notifiedNavigationOnly = true;
           _showInputNotice(
-            'No game controller connected — playing with the remote.',
+            'No hay ningún mando conectado: se juega con el mando a distancia.',
           );
         }
       case 'menuPressed':
@@ -802,14 +802,14 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
     }
     if (_controllerDevices.any((d) => d.port == 0)) {
       _showTransientMessage(
-        'Saved. A connected controller holds port 1, so its type stays.',
+        'Guardado. Hay un mando conectado en el puerto 1, así que su tipo no cambia.',
       );
       return;
     }
     try {
       await _player.setControllerType(0, next);
     } catch (_) {
-      _showTransientMessage('Controller type not supported by this core.');
+      _showTransientMessage('Este núcleo no admite ese tipo de mando.');
       return;
     }
     if (!mounted) return;
@@ -935,13 +935,13 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
     final games = _client.gamesApi;
     if (games == null) {
       _releaseGameplayArtworkBlock();
-      setState(() => _error = 'This server does not support games.');
+      setState(() => _error = 'Este servidor no tiene juegos.');
       return;
     }
     final coreId = libretroCoreId(widget.core);
     if (coreId == null || !nativeCanPlay(widget.core)) {
       _releaseGameplayArtworkBlock();
-      setState(() => _error = 'This system is not supported yet.');
+      setState(() => _error = 'Este sistema todavía no está disponible.');
       return;
     }
     try {
@@ -967,7 +967,7 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
           _releaseGameplayArtworkBlock();
           if (mounted) {
             setState(
-              () => _error = 'This system is not supported on this device.',
+              () => _error = 'Este sistema no funciona en este dispositivo.',
             );
           }
           return;
@@ -978,7 +978,7 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
           if (mounted) {
             setState(
               () => _error =
-                  'The core for this system is not installed. Add it in Settings > Playback > Emulator Cores.',
+                  'El núcleo de este sistema no está instalado. Añádelo en Ajustes > Reproducción > Núcleos del emulador.',
             );
           }
           return;
@@ -988,7 +988,7 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
       final detail = await games.getGame(widget.libraryId, widget.gameId);
       if (detail == null || !mounted) {
         _releaseGameplayArtworkBlock();
-        if (mounted) setState(() => _error = 'Game not found.');
+        if (mounted) setState(() => _error = 'No se ha encontrado el juego.');
         return;
       }
 
@@ -1007,7 +1007,7 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
       // torn-down screen.
       if (!mounted) return;
 
-      setState(() => _status = 'Downloading...');
+      setState(() => _status = 'Descargando…');
       // The server names these files; a traversal or absolute path here means
       // the server is hostile or compromised. Reject rather than sanitize
       // (same decision as the native host's lh_load game_id guard) and
@@ -1018,7 +1018,7 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
         romFileName = sanitizeDownloadFileName(detail.fileName);
       } on FormatException catch (e) {
         _setFatalError(
-          'This game has an invalid file name and cannot be downloaded. (${e.message})',
+          'El nombre del archivo de este juego no es válido y no se puede descargar. (${e.message})',
         );
         return;
       }
@@ -1042,7 +1042,7 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
           biosFileName = sanitizeDownloadFileName(bios.fileName);
         } on FormatException catch (e) {
           _setFatalError(
-            'A required BIOS file has an invalid name and cannot be downloaded. (${e.message})',
+            'Un archivo de BIOS necesario tiene un nombre no válido y no se puede descargar. (${e.message})',
           );
           return;
         }
@@ -1054,7 +1054,7 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
       if (!mounted) return;
 
       setState(() {
-        _status = 'Starting...';
+        _status = 'Iniciando…';
         _progress = null;
       });
       final contentPath = await _extractIfArchive(
@@ -1067,7 +1067,7 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
         _releaseGameplayArtworkBlock();
         // Extraction may already have reported something more specific than this.
         if (mounted && _error == null) {
-          setState(() => _error = 'This archive format is not supported.');
+          setState(() => _error = 'Este formato de archivo no está admitido.');
         }
         return;
       }
@@ -1156,7 +1156,7 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
     if (await coreSupportFilesInstalled(coreId)) return true;
     if (!mounted) return false;
     setState(() {
-      _status = 'Installing system files...';
+      _status = 'Instalando archivos del sistema…';
       _progress = 0;
     });
     try {
@@ -1170,7 +1170,7 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
       if (mounted) {
         setState(
           () => _error =
-              'The system files for this core could not be installed. Check your connection and try again.',
+              'No se pudieron instalar los archivos del sistema de este núcleo. Revisa la conexión y vuelve a intentarlo.',
         );
       }
       return false;
@@ -1247,12 +1247,12 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
     switch (GameLoadError.of(error)) {
       case GameLoadError.coreMissing:
         // TODO: Localize this.
-        return 'The core for this system is not included in this build.';
+        return 'El núcleo de este sistema no viene en esta versión de la app.';
       case GameLoadError.loadFailed:
         // TODO: Localize this.
-        return 'The native emulator core for this game is not starting.';
+        return 'El núcleo nativo del emulador no arranca con este juego.';
       case GameLoadError.unknown:
-        return 'Could not start this game. ($error)';
+        return 'No se pudo iniciar este juego. ($error)';
     }
   }
 
@@ -1302,7 +1302,7 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
             .toList();
         if (discs.isEmpty) {
           _setFatalError(
-            "This archive doesn't hold a PlayStation disc image. Use a .chd, .pbp, or .cue with its .bin files.",
+            'Este archivo no contiene una imagen de disco de PlayStation. Usa un .chd, un .pbp o un .cue con sus .bin.',
           );
           return null;
         }
@@ -1327,7 +1327,7 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
           );
         } on FormatException {
           _setFatalError(
-            'The downloaded archive contains an unusable file name.',
+            'El archivo descargado contiene un nombre de archivo que no se puede usar.',
           );
           return null;
         }
@@ -1426,7 +1426,7 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
     if (_confirmingControllerMappingExit) {
       return [
         _OverlayAction(
-          'Keep editing',
+          'Seguir editando',
           _cancelControllerMappingExitConfirmation,
         ),
         _OverlayAction(
@@ -1440,37 +1440,37 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
   }
 
   List<_OverlayAction> _mainActions() => [
-    _OverlayAction('Resume', _closeOverlay),
-    _OverlayAction('Press Start', () => _pressButton(3)),
-    _OverlayAction('Press Select', () => _pressButton(2)),
-    _OverlayAction('Save state', _saveState),
-    _OverlayAction('Load state', _loadState),
+    _OverlayAction('Reanudar', _closeOverlay),
+    _OverlayAction('Pulsar Start', () => _pressButton(3)),
+    _OverlayAction('Pulsar Select', () => _pressButton(2)),
+    _OverlayAction('Guardar estado', _saveState),
+    _OverlayAction('Cargar estado', _loadState),
     _OverlayAction(
-      _fastForward > 1 ? 'Fast-forward: On' : 'Fast-forward: Off',
+      _fastForward > 1 ? 'Avance rápido: sí' : 'Avance rápido: no',
       _toggleFastForward,
     ),
-    _OverlayAction('Restart', _restart),
+    _OverlayAction('Reiniciar', _restart),
     // Hidden when nothing was found to remap, which covers both the Apple
     // platforms (no remapping at all) and a desktop session with no controller
     // plugged in, where the panel would open onto an empty list.
     if (_controllerDevices.isNotEmpty)
-      _OverlayAction('Controller mapping', _openControllerMapping),
-    _OverlayAction('Emulator settings', _openSettings),
-    _OverlayAction('Reset emulator settings', _resetEmulatorSettings),
+      _OverlayAction('Botones del mando', _openControllerMapping),
+    _OverlayAction('Ajustes del emulador', _openSettings),
+    _OverlayAction('Restablecer ajustes del emulador', _resetEmulatorSettings),
     // Phone-only rows go last so the rows above keep their index on every
     // platform.
     if (usesOnScreenControls)
       _OverlayAction(
-        'Orientation: ${gamePlaybackOrientationLabel(_orientation, null)}',
+        'Orientación: ${gamePlaybackOrientationLabel(_orientation, null)}',
         _cycleOrientation,
       ),
     if (_hasTouchPadType)
       _OverlayAction(
-        'Touch pad type: '
-        '${_touchPadType == pcsxDualShockDeviceType ? 'DualShock' : 'Standard'}',
+        'Tipo de panel táctil: '
+        '${_touchPadType == pcsxDualShockDeviceType ? 'DualShock' : 'Estándar'}',
         _cycleTouchPadType,
       ),
-    _OverlayAction('Exit', _requestExit),
+    _OverlayAction('Salir', _requestExit),
   ];
 
   /// Asks before ending a running session.
@@ -1742,7 +1742,7 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
     if (games == null || coreId == null || _options.isEmpty) return;
     if (!_coreOptionsReadable) {
       _showTransientMessage(
-        'Saved settings could not be read; not overwriting them.',
+        'No se pudieron leer los ajustes guardados; no se sobrescriben.',
       );
       return;
     }
@@ -1755,7 +1755,7 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
     } catch (_) {
       // The option is live in the core either way, but it will be back to its
       // old value next launch, and only the user can decide to redo it.
-      _showTransientMessage('Setting applied for now, but not saved.');
+      _showTransientMessage('Ajuste aplicado por ahora, pero no guardado.');
     }
   }
 
@@ -1772,7 +1772,7 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
     try {
       await _persistState();
     } catch (_) {
-      _showTransientMessage('Could not save state.');
+      _showTransientMessage('No se pudo guardar el estado.');
     } finally {
       if (mounted) _closeOverlay();
     }
@@ -1811,7 +1811,7 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
         await _player.loadState(Uint8List.fromList(save));
       }
     } catch (_) {
-      _showTransientMessage('Could not load state.');
+      _showTransientMessage('No se pudo cargar el estado.');
     } finally {
       if (mounted) _closeOverlay();
     }
@@ -1830,11 +1830,11 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
     } on PlatformException catch (e) {
       _showTransientMessage(
         e.code == 'restart_unavailable'
-            ? 'Restart is not available for this core.'
-            : 'Could not restart.',
+            ? 'Este núcleo no permite reiniciar.'
+            : 'No se pudo reiniciar.',
       );
     } catch (_) {
-      _showTransientMessage('Could not restart.');
+      _showTransientMessage('No se pudo reiniciar.');
     } finally {
       if (mounted) _closeOverlay();
     }
@@ -1865,7 +1865,7 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
       await _persistOptions();
       await _player.restart();
     } catch (_) {
-      _showTransientMessage('Could not reset emulator settings.');
+      _showTransientMessage('No se pudieron restablecer los ajustes del emulador.');
     } finally {
       if (mounted) _closeOverlay();
     }
@@ -1892,7 +1892,7 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
     try {
       options = await _player.getOptions();
     } catch (_) {
-      if (mounted) _showTransientMessage('Could not load emulator settings.');
+      if (mounted) _showTransientMessage('No se pudieron cargar los ajustes del emulador.');
       return;
     }
     if (!mounted) return;
@@ -1925,7 +1925,7 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
         .map(
           (pad) => NativeControllerDevice(
             id: desktopControllerDeviceId(pad.id),
-            name: pad.name.isEmpty ? 'Gamepad ${pad.id}' : pad.name,
+            name: pad.name.isEmpty ? 'Mando ${pad.id}' : pad.name,
             connectionId: desktopControllerDeviceId(pad.id),
           ),
         )
@@ -2001,7 +2001,7 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
         // An empty fallback after a failed read is not the stored truth. Keep
         // the native assignment live, but never replace pins we could not see.
         _showTransientMessage(
-          'Saved player assignments could not be read; not overwriting them.',
+          'No se pudo leer qué mando tiene cada jugador; no se sobrescribe.',
         );
       } else {
         try {
@@ -2015,7 +2015,7 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
             '[NativeGamePlayerScreen] Could not save player assignment: $error',
           );
           _showTransientMessage(
-            'Player assignment applied for now, but not saved to the server.',
+            'Jugador asignado por ahora, pero no guardado en el servidor.',
           );
         }
       }
@@ -2051,8 +2051,7 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
       );
       if (!mounted || !_controllerMappingOpen) return;
       _showControllerMappingExitConfirmation(
-        'Could not verify whether Player 1 currently has a connected '
-        'controller.',
+        'No se pudo comprobar si el jugador 1 tiene un mando conectado.',
       );
       return;
     }
@@ -2080,32 +2079,31 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
     // Say what WILL happen, not only what is missing: a remote does play as
     // Player 1, just poorly, and that is the part worth knowing.
     final fallback = switch ((hasRemote, hasKeyboard)) {
-      (true, _) => 'The remote will play as Player 1, which is very limited.',
+      (true, _) => 'El mando a distancia jugará como jugador 1, y es muy limitado.',
       (false, true) =>
-        'The keyboard will play as Player 1, which is very limited.',
-      (false, false) => 'Player 1 will have no input at all.',
+        'El teclado jugará como jugador 1, y es muy limitado.',
+      (false, false) => 'El jugador 1 no tendrá ningún control.',
     };
     _controllerDevices = devices;
     final warning = switch (reason) {
       PlayerOneWarning.assignedControllerMissing =>
-        "Player 1's assigned controller is not connected, but another "
-            'gamepad is.',
+        'El mando del jugador 1 no está conectado, pero hay otro mando.',
       PlayerOneWarning.gamepadNotAssigned =>
-        'You have a gamepad connected, but none is assigned to Player 1.',
+        'Hay un mando conectado, pero ninguno está asignado al jugador 1.',
     };
     _showControllerMappingExitConfirmation(
       '$warning $fallback',
       leaveLabel: hasRemote
-          ? 'Use the remote for Player 1'
+          ? 'Usar el mando a distancia como jugador 1'
           : hasKeyboard
-          ? 'Use the keyboard for Player 1'
-          : 'Leave with Player 1 vacant',
+          ? 'Usar el teclado como jugador 1'
+          : 'Salir sin jugador 1',
     );
   }
 
   void _showControllerMappingExitConfirmation(
     String warning, {
-    String leaveLabel = 'Leave anyway',
+    String leaveLabel = 'Salir de todos modos',
   }) {
     if (!mounted) return;
     setState(() {
@@ -2351,7 +2349,7 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
       !_unreadableMappingProfiles.contains(deviceId);
 
   static const String _unreadableMappingMessage =
-      'Saved mapping could not be read; not overwriting it.';
+      'No se pudieron leer los botones guardados; no se sobrescriben.';
 
   Future<void> _updateControllerMapping(
     String deviceId,
@@ -2379,7 +2377,7 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
     } catch (_) {
       // The mapping is active for this session, but it will not survive the
       // exit, and only the user can decide whether to redo it later.
-      _showTransientMessage('Button saved for now, but not to the server.');
+      _showTransientMessage('Botón guardado por ahora, pero no en el servidor.');
     }
   }
 
@@ -2394,7 +2392,7 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
       try {
         await _player.setControllerType(device!.port!, deviceType);
       } catch (_) {
-        _showTransientMessage('Controller type not supported by this core.');
+        _showTransientMessage('Este núcleo no admite ese tipo de mando.');
         return;
       }
     }
@@ -2419,7 +2417,7 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
       // The layout stays applied for this session; say so rather than let the
       // user find it reverted at the next launch.
       _showTransientMessage(
-        'Controller type applied for now, but not saved to the server.',
+        'Tipo de mando aplicado por ahora, pero no guardado en el servidor.',
       );
     }
   }
@@ -2503,9 +2501,9 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
     if (failed > 0) {
       _showTransientMessage(
         failed == writable.length
-            ? 'Copied for now, but not saved to the server.'
-            : 'Copied, but $failed of ${writable.length} pads were not saved '
-                  'to the server.',
+            ? 'Copiado por ahora, pero no guardado en el servidor.'
+            : 'Copiado, pero $failed de ${writable.length} mandos no se guardaron '
+                  'en el servidor.',
       );
     }
   }
@@ -2713,8 +2711,8 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
                     if (_coreOptionsAvailable == true) ...[
                       const SizedBox(height: 16),
                       const Text(
-                        'The emulator settings may be reached below. You can reset to defaults and/or '
-                        'change them to try and fix it (e.g. RDP Plugin setting).',
+                        'Abajo tienes los ajustes del emulador. Puedes restablecerlos o '
+                        'cambiarlos para intentar arreglarlo (por ejemplo, el ajuste RDP Plugin).',
                         textAlign: TextAlign.center,
                         style: _errorAdviceStyle,
                       ),
@@ -2741,8 +2739,8 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
                       if (emulatorJsAvailable) ...[
                         const SizedBox(height: 20),
                         const Text(
-                          'If that does not help, open the game\'s details '
-                          'screen and switch it to "EmulatorJS (WebView)".',
+                          'Si no se arregla, abre la ficha del juego '
+                          'y cambia el reproductor a "EmulatorJS (WebView)".',
                           textAlign: TextAlign.center,
                           style: _errorAdviceStyle,
                         ),
@@ -2751,12 +2749,12 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
                       const SizedBox(height: 16),
                       Text(
                         emulatorJsAvailable
-                            ? 'This core\'s settings cannot be changed on this '
-                                'device. Open the game\'s details screen and '
-                                'switch it to "EmulatorJS (WebView)".'
-                            : 'This core\'s settings cannot be changed on this '
-                                'device, and this game has no other player '
-                                'here.',
+                            ? 'Los ajustes de este núcleo no se pueden cambiar en este '
+                                'dispositivo. Abre la ficha del juego y cambia '
+                                'el reproductor a "EmulatorJS (WebView)".'
+                            : 'Los ajustes de este núcleo no se pueden cambiar en este '
+                                'dispositivo, y este juego no tiene otro reproductor '
+                                'aquí.',
                         textAlign: TextAlign.center,
                         style: _errorAdviceStyle,
                       ),
@@ -2766,8 +2764,8 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
                       // to load.
                       const SizedBox(height: 16),
                       const Text(
-                        'Open the game\'s details screen and switch it to '
-                        '"EmulatorJS (WebView)" if this keeps failing.',
+                        'Si sigue fallando, abre la ficha del juego y cambia el '
+                        'reproductor a "EmulatorJS (WebView)".',
                         textAlign: TextAlign.center,
                         style: _errorAdviceStyle,
                       ),
@@ -2785,7 +2783,7 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
               color: Colors.black87,
               alignment: Alignment.center,
               child: const Text(
-                'Connect a Bluetooth game controller to play.',
+                'Conecta un mando Bluetooth para jugar.',
                 style: TextStyle(color: Colors.white, fontSize: 26),
               ),
             ),
@@ -2964,9 +2962,9 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
     final showBack = _settingsOpen || _pickerOpen || _controllerMappingOpen;
     final String title;
     if (_confirmingControllerMappingExit) {
-      title = 'Player 1 unavailable';
+      title = 'Jugador 1 sin mando';
     } else if (_controllerMappingOpen) {
-      title = 'Controller mapping';
+      title = 'Botones del mando';
     } else if (_pickerOpen) {
       title = _options[_pickerOption!].label;
     } else if (_settingsOpen) {
@@ -3126,7 +3124,7 @@ class _NativeGamePlayerScreenState extends State<NativeGamePlayerScreen>
             const Padding(
               padding: EdgeInsets.fromLTRB(16, 4, 16, 12),
               child: Text(
-                'Exit this game? Progress since the last save will be lost.',
+                '¿Salir del juego? Se perderá lo jugado desde la última vez que guardaste.',
                 style: TextStyle(color: Colors.white70, fontSize: 18),
               ),
             ),

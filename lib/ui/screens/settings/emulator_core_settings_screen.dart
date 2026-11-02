@@ -63,7 +63,7 @@ class _EmulatorCoreSettingsScreenState
         if (!mounted) return;
         setState(() {
           _loading = false;
-          _error = 'This core is not downloaded yet.';
+          _error = 'Este núcleo aún no está descargado.';
         });
         return;
       }
@@ -94,15 +94,15 @@ class _EmulatorCoreSettingsScreenState
         // works either way, so point at that rather than dead-ending.
         // TODO: Localize this.
         _error = probed.isEmpty
-            ? 'This core\'s settings cannot be read on this device. '
-                'You can still reset them to defaults below.'
+            ? 'Los ajustes de este núcleo no se pueden leer en este dispositivo. '
+                'Aun así puedes restablecerlos más abajo.'
             : null;
       });
     } catch (e) {
       if (!mounted) return;
       setState(() {
         _loading = false;
-        _error = 'Could not read this core\'s settings.';
+        _error = 'No se pudieron leer los ajustes de este núcleo.';
       });
     }
   }
@@ -203,7 +203,7 @@ class _EmulatorCoreSettingsScreenState
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('${widget.system} settings'),
+        title: Text('Ajustes de ${widget.system}'),
         actions: [
           if (_saving)
             const Padding(
@@ -282,9 +282,9 @@ class _WarningBanner extends StatelessWidget {
           const SizedBox(width: 12),
           Expanded(
             child: Text(
-              'These are the emulator core\'s own settings. Some combinations '
-              'can stop a game from starting, or close the app while it runs. '
-              'If something breaks, use Reset to defaults below.',
+              'Son los ajustes propios del núcleo del emulador. Algunas combinaciones '
+              'pueden impedir que un juego arranque o cerrar la app mientras se juega. '
+              'Si algo deja de funcionar, usa Restablecer más abajo.',
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: theme.colorScheme.onTertiaryContainer,
               ),

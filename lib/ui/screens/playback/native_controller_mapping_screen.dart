@@ -46,8 +46,8 @@ class NativeControllerDevice {
   String get runtimeId => connectionId ?? id;
 
   String get portLabel {
-    if (!supported || port == null || port! < 0) return 'Unassigned';
-    return 'Player ${port! + 1}';
+    if (!supported || port == null || port! < 0) return 'Sin asignar';
+    return 'Jugador ${port! + 1}';
   }
 
   /// The device's live role, as shown to the user.
@@ -55,10 +55,10 @@ class NativeControllerDevice {
     if (!supported || port == null || port! < 0) {
       // A remote or unpinned keyboard holds no port but still drives menus.
       return deviceClass == NativeControllerDeviceClass.gamepad
-          ? 'Unassigned'
-          : 'Menu & navigation';
+          ? 'Sin asignar'
+          : 'Menú y navegación';
     }
-    return pinned ? 'Player ${port! + 1} · pinned' : 'Player ${port! + 1}';
+    return pinned ? 'Jugador ${port! + 1} · fijo' : 'Jugador ${port! + 1}';
   }
 
   factory NativeControllerDevice.fromMap(Map<String, dynamic> map) {
@@ -69,7 +69,7 @@ class NativeControllerDevice {
     };
     return NativeControllerDevice(
       id: map['id']?.toString() ?? '',
-      name: map['name']?.toString() ?? 'Android gamepad',
+      name: map['name']?.toString() ?? 'Mando Android',
       connectionId: map['connectionId']?.toString(),
       port: (map['port'] as num?)?.toInt(),
       supported: map['supported'] is bool ? map['supported'] as bool : true,
@@ -689,10 +689,10 @@ class NativeControllerMappingScreenState
   ];
 
   String _playerChoiceLabel(int? player) {
-    if (player != null) return 'Player $player';
+    if (player != null) return 'Jugador $player';
     return _device?.deviceClass == NativeControllerDeviceClass.gamepad
-        ? 'Unassigned'
-        : 'Menu & navigation';
+        ? 'Sin asignar'
+        : 'Menú y navegación';
   }
 
   void _beginPlayerSelection() {
@@ -736,7 +736,7 @@ class NativeControllerMappingScreenState
             .where((type) => type.id == selected)
             .firstOrNull
             ?.label ??
-        'Auto (Core default)';
+        'Automático (el del núcleo)';
   }
 
   void _beginControllerTypeSelection() {
@@ -760,17 +760,17 @@ class NativeControllerMappingScreenState
   }
 
   static const _snapLabels = {
-    StickSnapMode.off: 'Off (analog)',
-    StickSnapMode.eightWay: '8-way',
-    StickSnapMode.fourWay: '4-way',
+    StickSnapMode.off: 'No (analógico)',
+    StickSnapMode.eightWay: '8 direcciones',
+    StickSnapMode.fourWay: '4 direcciones',
   };
 
   String get _snapSubtitle {
     final mode = _mapping.snapForGame(widget.gameId);
-    final label = _snapLabels[mode] ?? 'Off (analog)';
+    final label = _snapLabels[mode] ?? 'No (analógico)';
     return mode == StickSnapMode.off
-        ? '$label - this game only'
-        : '$label - this game and controller';
+        ? '$label - solo este juego'
+        : '$label - este juego y este mando';
   }
 
   /// What resetting this game would change the buttons from.
@@ -779,10 +779,10 @@ class NativeControllerMappingScreenState
   /// reset moves its buttons too. Saying which scope those came from is the
   /// difference between a reset that does something and one that does not.
   String get _bindingScopeSubtitle {
-    if (_mapping.bindingsForGame(widget.gameId).isEmpty) return 'Default layout';
+    if (_mapping.bindingsForGame(widget.gameId).isEmpty) return 'Distribución por defecto';
     return _mapping.hasGameOverride(widget.gameId)
-        ? 'Customised for this game'
-        : 'Customised for every game';
+        ? 'Personalizado para este juego'
+        : 'Personalizado para todos los juegos';
   }
 
   void _cycleSnap() {
@@ -825,78 +825,78 @@ class NativeControllerMappingScreenState
   /// TV-remote media keys are now bindable alongside gamepad buttons, and a
   /// bare "Key code 85" means nothing to a user holding a remote.
   static const Map<int, String> _androidKeycodeNames = {
-    19: 'D-pad up',
-    20: 'D-pad down',
-    21: 'D-pad left',
-    22: 'D-pad right',
-    23: 'D-pad centre',
-    66: 'Enter',
-    111: 'Escape',
-    82: 'Menu',
-    85: 'Play/Pause',
-    86: 'Stop',
-    87: 'Next',
-    88: 'Previous',
-    89: 'Rewind',
-    90: 'Fast forward',
-    126: 'Play',
-    127: 'Pause',
-    130: 'Record',
-    165: 'Info',
-    166: 'Channel up',
-    167: 'Channel down',
+    19: 'Cruceta arriba',
+    20: 'Cruceta abajo',
+    21: 'Cruceta izquierda',
+    22: 'Cruceta derecha',
+    23: 'Cruceta centro',
+    66: 'Intro',
+    111: 'Esc',
+    82: 'Menú',
+    85: 'Reproducir/Pausa',
+    86: 'Detener',
+    87: 'Siguiente',
+    88: 'Anterior',
+    89: 'Retroceder',
+    90: 'Avanzar',
+    126: 'Reproducir',
+    127: 'Pausa',
+    130: 'Grabar',
+    165: 'Información',
+    166: 'Canal +',
+    167: 'Canal -',
     170: 'TV',
-    172: 'Guide',
+    172: 'Guía',
     173: 'DVR',
-    174: 'Bookmark',
-    175: 'Captions',
-    176: 'Settings',
+    174: 'Marcador',
+    175: 'Subtítulos',
+    176: 'Ajustes',
     // Prefixed, because the row above already carries the bare RetroPad name
     // and "A / A" reads as a mistake.
-    96: 'Button A',
-    97: 'Button B',
-    99: 'Button X',
-    100: 'Button Y',
-    102: 'Button L1',
-    103: 'Button R1',
-    104: 'Button L2',
-    105: 'Button R2',
-    106: 'Button L3',
-    107: 'Button R3',
-    108: 'Button Start',
-    109: 'Button Select',
+    96: 'Botón A',
+    97: 'Botón B',
+    99: 'Botón X',
+    100: 'Botón Y',
+    102: 'Botón L1',
+    103: 'Botón R1',
+    104: 'Botón L2',
+    105: 'Botón R2',
+    106: 'Botón L3',
+    107: 'Botón R3',
+    108: 'Botón Start',
+    109: 'Botón Select',
   };
 
   String _bindingLabel(int? code) {
-    if (code == null) return 'Default layout';
-    if (code == _syntheticL2) return 'Left trigger (L2)';
-    if (code == _syntheticR2) return 'Right trigger (R2)';
+    if (code == null) return 'Distribución por defecto';
+    if (code == _syntheticL2) return 'Gatillo izquierdo (L2)';
+    if (code == _syntheticR2) return 'Gatillo derecho (R2)';
     final button = desktopGamepadButtonsByCode[code];
     if (button != null) return _desktopButtonLabel(button);
     final keycodeName = _androidKeycodeNames[code];
     if (keycodeName != null) return keycodeName;
-    return 'Key code $code';
+    return 'Código de tecla $code';
   }
 
   String _desktopButtonLabel(GamepadButton button) => switch (button) {
-    GamepadButton.a => 'A / Cross',
-    GamepadButton.b => 'B / Circle',
-    GamepadButton.x => 'X / Square',
-    GamepadButton.y => 'Y / Triangle',
-    GamepadButton.leftBumper => 'Left bumper',
-    GamepadButton.rightBumper => 'Right bumper',
-    GamepadButton.leftTrigger => 'Left trigger',
-    GamepadButton.rightTrigger => 'Right trigger',
-    GamepadButton.back => 'Back / Select',
-    GamepadButton.start => 'Start / Menu',
-    GamepadButton.home => 'Guide',
-    GamepadButton.leftStick => 'Left stick click',
-    GamepadButton.rightStick => 'Right stick click',
-    GamepadButton.dpadUp => 'D-pad Up',
-    GamepadButton.dpadDown => 'D-pad Down',
-    GamepadButton.dpadLeft => 'D-pad Left',
-    GamepadButton.dpadRight => 'D-pad Right',
-    GamepadButton.touchpad => 'Touchpad',
+    GamepadButton.a => 'A / Cruz',
+    GamepadButton.b => 'B / Círculo',
+    GamepadButton.x => 'X / Cuadrado',
+    GamepadButton.y => 'Y / Triángulo',
+    GamepadButton.leftBumper => 'Botón superior izquierdo',
+    GamepadButton.rightBumper => 'Botón superior derecho',
+    GamepadButton.leftTrigger => 'Gatillo izquierdo',
+    GamepadButton.rightTrigger => 'Gatillo derecho',
+    GamepadButton.back => 'Atrás / Select',
+    GamepadButton.start => 'Start / Menú',
+    GamepadButton.home => 'Botón central',
+    GamepadButton.leftStick => 'Pulsar stick izquierdo',
+    GamepadButton.rightStick => 'Pulsar stick derecho',
+    GamepadButton.dpadUp => 'Cruceta arriba',
+    GamepadButton.dpadDown => 'Cruceta abajo',
+    GamepadButton.dpadLeft => 'Cruceta izquierda',
+    GamepadButton.dpadRight => 'Cruceta derecha',
+    GamepadButton.touchpad => 'Panel táctil',
   };
 
   /// What the running core calls this button, or null if it says nothing
@@ -946,7 +946,7 @@ class NativeControllerMappingScreenState
           .where((device) => device.id == profileId)
           .firstOrNull
           ?.name ??
-      'a disconnected controller';
+      'un mando desconectado';
 
   int? _keycodeFor(RetroPadButton button) {
     for (final entry in _mapping.bindingsForGame(widget.gameId).entries) {
@@ -961,7 +961,7 @@ class NativeControllerMappingScreenState
       return const Padding(
         padding: EdgeInsets.all(16),
         child: Text(
-          'Connect a physical controller to change its mapping.',
+          'Conecta un mando para cambiar sus botones.',
           style: TextStyle(color: Colors.white70, fontSize: 18),
         ),
       );
@@ -981,7 +981,7 @@ class NativeControllerMappingScreenState
             width: 520,
             child: ControllerTestPanel(
               snapshot: _diagnosticsSnapshot,
-              deviceName: device?.name ?? 'Controller',
+              deviceName: device?.name ?? 'Mando',
               port: device?.port,
               exitHoldProgress: _testExitProgress,
             ),
@@ -1000,19 +1000,19 @@ class NativeControllerMappingScreenState
             Padding(
               padding: const EdgeInsets.all(20),
               child: Text(
-                'Copy ${source?.portLabel ?? 'selected controller'} mapping and core controller type to ${_copyTargets.length} other controller profile${_copyTargets.length == 1 ? '' : 's'}?\n\nThis copies Android button keycodes and this core\'s selected layout. Use only with compatible controller layouts; analog axes are not copied.',
+                '¿Copiar los botones y el tipo de mando de ${source?.portLabel ?? 'el mando elegido'} a ${_copyTargets.length} ${_copyTargets.length == 1 ? 'mando más' : 'mandos más'}?\n\nSe copian los códigos de botón de Android y la distribución elegida para este núcleo. Úsalo solo con mandos de distribución compatible; los ejes analógicos no se copian.',
                 style: const TextStyle(color: Colors.white, fontSize: 18),
                 textAlign: TextAlign.center,
               ),
             ),
             _row(
-              'Copy mappings',
+              'Copiar botones',
               _copyConfirmRow,
               trailing: Icons.check,
               onTap: _confirmCopy,
             ),
             _row(
-              'Cancel',
+              'Cancelar',
               _copyCancelRow,
               trailing: Icons.close,
               onTap: () => setState(() => _confirmingCopy = false),
@@ -1032,23 +1032,23 @@ class NativeControllerMappingScreenState
             Padding(
               padding: const EdgeInsets.all(20),
               child: Text(
-                'Reset ${device?.name ?? 'this controller'} to the default '
-                'button layout for this game?\n\n'
-                'Only this game and this controller change. Your other '
-                'games keep their buttons, and this core\'s controller '
-                'type and stick snap are not touched.',
+                '¿Devolver ${device?.name ?? 'este mando'} a la distribución '
+                'por defecto en este juego?\n\n'
+                'Solo cambian este juego y este mando. Tus otros '
+                'juegos mantienen sus botones, y no se tocan el tipo de mando '
+                'ni el ajuste del stick de este núcleo.',
                 style: const TextStyle(color: Colors.white, fontSize: 18),
                 textAlign: TextAlign.center,
               ),
             ),
             _row(
-              'Reset buttons',
+              'Restablecer botones',
               _resetConfirmRow,
               trailing: Icons.restart_alt,
               onTap: _confirmReset,
             ),
             _row(
-              'Cancel',
+              'Cancelar',
               _resetCancelRow,
               trailing: Icons.close,
               onTap: _cancelReset,
@@ -1064,8 +1064,8 @@ class NativeControllerMappingScreenState
         padding: const EdgeInsets.all(20),
         child: Text(
           description == null
-              ? 'Press the physical button to bind to ${button.label}.'
-              : 'Press the physical button to bind to $description (${button.label}).',
+              ? 'Pulsa en el mando el botón que quieres para ${button.label}.'
+              : 'Pulsa en el mando el botón que quieres para $description (${button.label}).',
           textAlign: TextAlign.center,
           style: const TextStyle(color: Colors.white, fontSize: 20),
         ),
@@ -1092,7 +1092,7 @@ class NativeControllerMappingScreenState
               _playerChoiceLabel(player),
               index,
               subtitle: occupant != null && occupant != _device?.id
-                  ? 'Currently ${_nameForProfile(occupant)} — they will swap'
+                  ? 'Ahora es ${_nameForProfile(occupant)}: se intercambian'
                   : null,
               trailing: player == assigned ? Icons.check : null,
               onTap: () {
@@ -1116,10 +1116,10 @@ class NativeControllerMappingScreenState
           itemBuilder: (context, index) {
             final type = choices[index];
             return _row(
-              type?.label ?? 'Auto (Core default)',
+              type?.label ?? 'Automático (el del núcleo)',
               index,
               subtitle: type == null
-                  ? 'Let the core choose its default layout'
+                  ? 'El núcleo elige su distribución por defecto'
                   : null,
               trailing: index == _controllerTypeSelected ? Icons.check : null,
               onTap: () {
@@ -1142,8 +1142,8 @@ class NativeControllerMappingScreenState
           if (index == 0) {
             final device = _device!;
             final assignment = device.playerLabel.replaceFirst(
-              ' · pinned',
-              ', pinned',
+              ' · fijo',
+              ', fijo',
             );
             return _row(
               '${device.name} - ($assignment)',
@@ -1166,7 +1166,7 @@ class NativeControllerMappingScreenState
           }
           if (_showsPlayerSelector && index == _playerRow) {
             return _row(
-              'Player assignment',
+              'Jugador asignado',
               index,
               subtitle: _device!.playerLabel,
               trailing: Icons.chevron_right,
@@ -1178,7 +1178,7 @@ class NativeControllerMappingScreenState
           }
           if (_showsControllerTypeSelector && index == _controllerTypeRow) {
             return _row(
-              'Core controller type',
+              'Tipo de mando del núcleo',
               index,
               subtitle: _controllerTypeLabel,
               trailing: Icons.chevron_right,
@@ -1193,11 +1193,11 @@ class NativeControllerMappingScreenState
             final canCopy = _canCopy;
             return _row(
               !canCopy
-                  ? 'Copy mapping to all controllers (none)'
-                  : 'Copy mapping to all controllers',
+                  ? 'Copiar botones a todos los mandos (no hay)'
+                  : 'Copiar botones a todos los mandos',
               index,
               subtitle: !canCopy
-                  ? 'Select a controller that holds a player slot'
+                  ? 'Elige un mando que tenga jugador asignado'
                   : '$targets other profile${targets == 1 ? '' : 's'}',
               trailing: Icons.copy,
               onTap: () {
@@ -1208,9 +1208,9 @@ class NativeControllerMappingScreenState
           }
           if (_showsTestRow && index == _testRow) {
             return _row(
-              'Test controller',
+              'Probar mando',
               index,
-              subtitle: 'Live axis and button readout',
+              subtitle: 'Ejes y botones en directo',
               trailing: Icons.chevron_right,
               onTap: () {
                 setState(() => _selected = index);
@@ -1220,7 +1220,7 @@ class NativeControllerMappingScreenState
           }
           if (index == _snapRow) {
             return _row(
-              'Stick snap',
+              'Ajuste del stick',
               index,
               subtitle: _snapSubtitle,
               trailing: Icons.swap_horiz,
@@ -1232,7 +1232,7 @@ class NativeControllerMappingScreenState
           }
           if (index == _resetRow) {
             return _row(
-              'Reset this game to defaults',
+              'Restablecer este juego',
               index,
               subtitle: _bindingScopeSubtitle,
               trailing: Icons.restart_alt,

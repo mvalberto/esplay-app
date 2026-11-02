@@ -143,7 +143,7 @@ class RomoteGames {
           id: item['Id']?.toString() ?? '',
           name: item['Name']?.toString() ?? '',
           imageTag: (item['ImageTags'] as Map?)?['Primary'] as String?,
-          overview: item['Overview'] as String?,
+          overview: _withoutPlayHint(item['Overview'] as String?),
           year: item['ProductionYear'] as int?,
           genres: ((item['Genres'] as List?) ?? const [])
               .map((g) => g.toString())
@@ -160,6 +160,11 @@ class RomoteGames {
     }
     return _loaded = _Index(byFile, byTitle);
   }
+
+  /// ROMote opens each description with "🎮 To play, open the Play Game
+  /// link on this page.", meant for Emby's web page, not for the app.
+  static String? _withoutPlayHint(String? overview) =>
+      overview?.replaceFirst(RegExp(r'^\s*🎮[^\n]*\n*'), '');
 
   static String _baseName(String path) =>
       path.split(RegExp(r'[\\/]')).last.toLowerCase();

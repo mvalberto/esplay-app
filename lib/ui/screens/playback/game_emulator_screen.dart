@@ -177,7 +177,7 @@ class _GameEmulatorScreenState extends State<GameEmulatorScreen>
       _prepare().catchError((Object error, StackTrace stackTrace) {
         _releaseGameplayArtworkBlock();
         if (mounted) {
-          setState(() => _error = 'Could not start this game. ($error)');
+          setState(() => _error = 'No se pudo iniciar este juego. ($error)');
         }
       }),
     );
@@ -262,7 +262,7 @@ class _GameEmulatorScreenState extends State<GameEmulatorScreen>
     final games = _client.gamesApi;
     if (games == null) {
       _releaseGameplayArtworkBlock();
-      setState(() => _error = 'This server does not support games.');
+      setState(() => _error = 'Este servidor no tiene juegos.');
       return;
     }
 
@@ -701,70 +701,70 @@ class _GameEmulatorScreenState extends State<GameEmulatorScreen>
         // Back, not Resume: this returns to the pause menu and stays paused.
         _OverlayItem(
           Icons.arrow_back,
-          l?.back ?? 'Back',
+          l?.back ?? 'Atrás',
           null,
           _cancelExitConfirmation,
         ),
         // Not localized yet: adding an .arb key regenerates every locale file,
         // so this matches the native player's untranslated exit actions.
-        _OverlayItem(Icons.save_outlined, 'Save & exit', null, _saveAndExit),
-        _OverlayItem(Icons.close, l?.exit ?? 'Exit', null, _exit, danger: true),
+        _OverlayItem(Icons.save_outlined, 'Guardar y salir', null, _saveAndExit),
+        _OverlayItem(Icons.close, l?.exit ?? 'Salir', null, _exit, danger: true),
       ];
     }
     return [
       _OverlayItem(
         Icons.play_arrow,
-        l?.resume ?? 'Resume',
+        l?.resume ?? 'Reanudar',
         null,
         _closeOverlay,
       ),
       _OverlayItem(
         Icons.save_outlined,
-        l?.gameSaveState ?? 'Save state',
+        l?.gameSaveState ?? 'Guardar estado',
         null,
         _saveAction,
       ),
       if (_hasSave)
         _OverlayItem(
           Icons.download_outlined,
-          l?.gameLoadState ?? 'Load state',
+          l?.gameLoadState ?? 'Cargar estado',
           null,
           _loadAction,
         ),
       _OverlayItem(
         Icons.refresh,
-        l?.restart ?? 'Restart',
+        l?.restart ?? 'Reiniciar',
         null,
         _restartAction,
       ),
       _OverlayItem(
         Icons.fast_forward,
-        l?.gameFastForward ?? 'Fast-forward',
-        _fastForward ? 'On' : 'Off',
+        l?.gameFastForward ?? 'Avance rápido',
+        _fastForward ? 'Sí' : 'No',
         _toggleFastForward,
       ),
       if (usesOnScreenControls)
         _OverlayItem(
           Icons.screen_rotation_outlined,
-          l?.gameOrientation ?? 'Orientation',
+          l?.gameOrientation ?? 'Orientación',
           gamePlaybackOrientationLabel(_orientation, l),
           _cycleOrientation,
         ),
       _OverlayItem(
         Icons.gamepad_outlined,
-        'Controller settings',
+        'Ajustes del mando',
         null,
         _openControllerSettings,
       ),
       _OverlayItem(
         Icons.tune,
-        l?.gameEmulatorSettings ?? 'Emulator settings',
+        l?.gameEmulatorSettings ?? 'Ajustes del emulador',
         null,
         _openSettings,
       ),
       _OverlayItem(
         Icons.close,
-        l?.exit ?? 'Exit',
+        l?.exit ?? 'Salir',
         null,
         _requestExit,
         danger: true,
@@ -818,8 +818,8 @@ class _GameEmulatorScreenState extends State<GameEmulatorScreen>
       // page answered. Only the second is actually a stale server.
       _showTransientMessage(
         result == null
-            ? 'Could not reach the game to open controller settings.'
-            : 'Controller settings need a newer version of the server emulator player.',
+            ? 'No se pudo llegar al juego para abrir los ajustes del mando.'
+            : 'Los ajustes del mando necesitan una versión más nueva del reproductor del servidor.',
       );
       return;
     }
@@ -1113,7 +1113,7 @@ class _GameEmulatorScreenState extends State<GameEmulatorScreen>
     try {
       await _saveState();
     } catch (_) {
-      _showTransientMessage('Could not save state.');
+      _showTransientMessage('No se pudo guardar el estado.');
     }
     _closeOverlay();
   }
@@ -1132,7 +1132,7 @@ class _GameEmulatorScreenState extends State<GameEmulatorScreen>
       await _exit(stateAlreadySaved: true);
       return;
     }
-    if (mounted) _showTransientMessage('Could not save state. Still playing.');
+    if (mounted) _showTransientMessage('No se pudo guardar el estado. Sigues jugando.');
   }
 
   Future<void> _loadAction() async {
@@ -1157,7 +1157,7 @@ class _GameEmulatorScreenState extends State<GameEmulatorScreen>
           );
         }
       } catch (_) {
-        _showTransientMessage('Could not load state.');
+        _showTransientMessage('No se pudo cargar el estado.');
       }
     }
     _closeOverlay();
@@ -1176,7 +1176,7 @@ class _GameEmulatorScreenState extends State<GameEmulatorScreen>
         ),
       );
     } catch (_) {
-      _showTransientMessage('Could not restart.');
+      _showTransientMessage('No se pudo reiniciar.');
     }
     _closeOverlay();
   }
@@ -1451,11 +1451,11 @@ class _GameEmulatorScreenState extends State<GameEmulatorScreen>
                     onRenderProcessGone: (controller, detail) {
                       _setFatalError(
                         detail.didCrash == true
-                            ? 'The emulator stopped unexpectedly. This game may '
-                                  'be too demanding for this device.'
-                            : 'The emulator ran out of memory on this device. '
-                                  'Try a less demanding system, or close other '
-                                  'apps and retry.',
+                            ? 'El emulador se ha parado de repente. Puede que este juego '
+                                  'sea demasiado exigente para este dispositivo.'
+                            : 'El emulador se ha quedado sin memoria en este dispositivo. '
+                                  'Prueba un sistema menos exigente o cierra otras '
+                                  'apps y vuelve a intentarlo.',
                       );
                     },
                     onReceivedError: (controller, request, error) {
@@ -1463,14 +1463,14 @@ class _GameEmulatorScreenState extends State<GameEmulatorScreen>
                       // main-frame failure means the player itself never came up.
                       if (request.isForMainFrame == true) {
                         _setFatalError(
-                          'Could not load the emulator. (${error.description})',
+                          'No se pudo cargar el emulador. (${error.description})',
                         );
                       }
                     },
                     onReceivedHttpError: (controller, request, response) {
                       if (request.isForMainFrame == true) {
                         _setFatalError(
-                          'Could not load the emulator. '
+                          'No se pudo cargar el emulador. '
                           '(HTTP ${response.statusCode})',
                         );
                       }
@@ -1500,7 +1500,7 @@ class _GameEmulatorScreenState extends State<GameEmulatorScreen>
                     shape: const CircleBorder(),
                     child: IconButton(
                       icon: const Icon(Icons.menu, color: Colors.white),
-                      tooltip: _l10n?.gameMenu ?? 'Menu',
+                      tooltip: _l10n?.gameMenu ?? 'Menú',
                       onPressed: _openOverlay,
                     ),
                   ),
@@ -1582,7 +1582,7 @@ class _GameEmulatorScreenState extends State<GameEmulatorScreen>
               children: [
                 Expanded(
                   child: Text(
-                    _l10n?.gameEmulatorSettings ?? 'Emulator settings',
+                    _l10n?.gameEmulatorSettings ?? 'Ajustes del emulador',
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -1609,7 +1609,7 @@ class _GameEmulatorScreenState extends State<GameEmulatorScreen>
                           ? Colors.white
                           : Colors.white54,
                       size: 22,
-                      semanticLabel: _l10n?.close ?? 'Close',
+                      semanticLabel: _l10n?.close ?? 'Cerrar',
                     ),
                   ),
                 ),
@@ -1623,7 +1623,7 @@ class _GameEmulatorScreenState extends State<GameEmulatorScreen>
                     padding: const EdgeInsets.all(24),
                     child: Text(
                       _l10n?.gameNoCoreOptions ??
-                          'This core has no adjustable options.',
+                          'Este núcleo no tiene opciones que ajustar.',
                       style: const TextStyle(
                         color: Colors.white54,
                         fontSize: 13,
@@ -1824,7 +1824,7 @@ class _GameEmulatorScreenState extends State<GameEmulatorScreen>
               ),
               const SizedBox(width: 10),
               Text(
-                _l10n?.gameHoldToOpenMenu ?? 'Hold to open menu',
+                _l10n?.gameHoldToOpenMenu ?? 'Mantén pulsado para abrir el menú',
                 style: const TextStyle(color: Colors.white, fontSize: 13),
               ),
             ],
@@ -1850,7 +1850,7 @@ class _GameEmulatorScreenState extends State<GameEmulatorScreen>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  widget.gameName ?? 'Game',
+                  widget.gameName ?? 'Juego',
                   style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,
@@ -1859,7 +1859,7 @@ class _GameEmulatorScreenState extends State<GameEmulatorScreen>
                 ),
                 const SizedBox(height: 2),
                 Text(
-                  _l10n?.gamePaused ?? 'Paused',
+                  _l10n?.gamePaused ?? 'En pausa',
                   style: const TextStyle(color: Colors.white54, fontSize: 12),
                 ),
               ],
