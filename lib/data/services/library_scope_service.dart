@@ -32,6 +32,12 @@ class LibraryScopeService {
     'Series': 'tvshows',
     'Episode': 'tvshows',
     'BoxSet': 'boxsets',
+    // EsPlay: without these, a favorite songs row asked every movie and
+    // series library too.
+    'MusicArtist': 'music',
+    'MusicAlbum': 'music',
+    'Audio': 'music',
+    'MusicVideo': 'musicvideos',
   };
 
   Set<String>? _permitted;

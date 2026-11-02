@@ -6,6 +6,7 @@ import 'package:playback_core/playback_core.dart';
 import 'package:server_core/server_core.dart';
 import 'package:dio/dio.dart';
 
+import '../../esplay/collection_index.dart';
 import '../../l10n/current_app_localizations.dart';
 import '../../preference/detail_section_layout.dart';
 import '../../preference/preference_constants.dart';
@@ -1511,6 +1512,7 @@ class ItemDetailViewModel extends ChangeNotifier {
   /// prior lists and rethrows, so the caller can say it didn't take.
   Future<void> removeFromCollection(AggregatedItem item) async {
     if (_item?.type != 'BoxSet') return;
+    CollectionIndex.instance.forget();
 
     final previousCollectionItems = _collectionItems;
     final previousPlaylistItems = _playlistItems;
@@ -2122,7 +2124,7 @@ class ItemDetailViewModel extends ChangeNotifier {
         }
       }
 
-      final scannedCollections = await _findParentCollectionsByScanningBoxSets(item.id);
+      final scannedCollections = await CollectionIndex.instance.collectionsOf(item.id);
       boxSetInfo.addAll(scannedCollections);
 
       if (boxSetInfo.isEmpty) {
@@ -2194,72 +2196,6 @@ class ItemDetailViewModel extends ChangeNotifier {
     } catch (_) {
       return false;
     }
-  }
-
-  Future<Map<String, ({String name, Map<String, dynamic> rawData})>> _findParentCollectionsByScanningBoxSets(String itemId) async {
-    final Map<String, ({String name, Map<String, dynamic> rawData})> result = {};
-    try {
-      const pageSize = 200;
-      var startIndex = 0;
-
-      while (true) {
-        final data = await _client.itemsApi.getItems(
-          includeItemTypes: ['BoxSet'],
-          recursive: true,
-          sortBy: 'SortName',
-          fields: 'BasicSyncInfo,PrimaryImageAspectRatio,ImageTags,ProviderIds',
-          startIndex: startIndex,
-          limit: pageSize,
-          enableTotalRecordCount: true,
-        );
-        final boxSets = (data['Items'] as List?) ?? const [];
-        if (boxSets.isEmpty) {
-          break;
-        }
-
-        final candidates = <({String id, String name, Map<String, dynamic> rawData})>[];
-        for (final raw in boxSets.whereType<Map>()) {
-          final boxSet = raw.cast<String, dynamic>();
-          final boxSetId = boxSet['Id']?.toString();
-          final boxSetName = boxSet['Name']?.toString();
-          if (boxSetId == null || boxSetId.isEmpty || boxSetName == null) {
-            continue;
-          }
-          candidates.add((id: boxSetId, name: boxSetName, rawData: boxSet));
-        }
-
-        // Cap how many membership lookups run at once so a large library
-        // doesn't fire a whole page of requests in one burst.
-        const maxConcurrent = 12;
-        for (var i = 0; i < candidates.length; i += maxConcurrent) {
-          final batch = candidates.skip(i).take(maxConcurrent);
-          await Future.wait(batch.map((candidate) async {
-            final membership = await _client.itemsApi.getItems(
-              parentId: candidate.id,
-              fields: 'BasicSyncInfo',
-            );
-            final members = (membership['Items'] as List?) ?? const [];
-            final hasItem = members.whereType<Map>().any((entry) {
-              final map = entry.cast<String, dynamic>();
-              return map['Id'] == itemId;
-            });
-            if (hasItem) {
-              result[candidate.id] = (
-                name: candidate.name,
-                rawData: candidate.rawData,
-              );
-            }
-          }));
-        }
-
-        if (boxSets.length < pageSize) {
-          break;
-        }
-        startIndex += boxSets.length;
-      }
-    } catch (_) {}
-
-    return result;
   }
 
   List<AggregatedItem> _sortCollectionByReleaseOrder(

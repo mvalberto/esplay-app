@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:server_core/server_core.dart';
 
+import '../../esplay/collection_index.dart';
 import '../../preference/user_preferences.dart';
 import '../services/user_data_sync.dart';
 
@@ -67,12 +68,14 @@ class ItemMutationRepository {
 
   Future<void> addToCollection(String collectionId, List<String> itemIds) async {
     await _client.itemsApi.addToCollection(collectionId, itemIds);
+    CollectionIndex.instance.forget();
   }
 
   Future<Map<String, dynamic>> createCollection({
     required String name,
     List<String>? itemIds,
   }) async {
+    CollectionIndex.instance.forget();
     return _client.itemsApi.createCollection(name: name, itemIds: itemIds);
   }
 
