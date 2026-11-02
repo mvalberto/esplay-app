@@ -17,6 +17,9 @@ class GenreCardData {
   String? backdropUrl;
   bool isGenreFallback;
 
+  /// EsPlay: called once when the picture doesn't load, so another is picked.
+  VoidCallback? onImageFailed;
+
   GenreCardData({
     required this.id,
     required this.name,
@@ -168,9 +171,18 @@ class _GenreGridCardState extends State<GenreGridCard> with FocusStateMixin {
                         BoundedNetworkImage(
                           imageUrl: imageUrl,
                           fadeInDuration: Duration.zero,
-                          errorBuilder: (_, _, _) => Container(
-                            color: AppColorScheme.surface.withValues(alpha: 0.35),
-                          ),
+                          errorBuilder: (_, _, _) {
+                            final onImageFailed = widget.genre.onImageFailed;
+                            if (onImageFailed != null) {
+                              widget.genre.onImageFailed = null;
+                              WidgetsBinding.instance.addPostFrameCallback(
+                                (_) => onImageFailed(),
+                              );
+                            }
+                            return Container(
+                              color: AppColorScheme.surface.withValues(alpha: 0.35),
+                            );
+                          },
                         )
                       else
                         Container(

@@ -276,6 +276,14 @@ class _AllGenresScreenState extends State<AllGenresScreen> {
         genre.imageUrl = keptArt.imageUrl;
         genre.backdropUrl = keptArt.backdropUrl;
         if (keptArt.itemId != null) _usedArtworkIds.add(keptArt.itemId!);
+        // Its title may be gone from the server: then this genre picks again.
+        genre.onImageFailed = () async {
+          await GenreArt.instance.forget(artKey);
+          _usedArtworkIds.remove(keptArt.itemId);
+          genre.imageUrl = null;
+          genre.backdropUrl = null;
+          unawaited(_loadGenreItems(genre, _loadToken));
+        };
         if (!_disposed && mounted) setState(() {});
       }
 

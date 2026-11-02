@@ -41,6 +41,16 @@ class GenreArt {
 
   Future<void> remember(String key, GenreArtEntry entry) async {
     (await _load())[key] = entry;
+    _saveSoon();
+  }
+
+  /// For a picture the server no longer has, because its title was deleted.
+  Future<void> forget(String key) async {
+    (await _load()).remove(key);
+    _saveSoon();
+  }
+
+  void _saveSoon() {
     _save?.cancel();
     _save = Timer(const Duration(seconds: 2), _store);
   }
