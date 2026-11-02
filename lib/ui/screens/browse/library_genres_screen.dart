@@ -21,6 +21,7 @@ import '../../widgets/genre_grid_card.dart';
 import '../../widgets/focus/context_menu_sheet.dart';
 import '../../widgets/skeleton/skeleton_library_grid.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../esplay/genre_art.dart';
 import '../../../esplay/genre_merge.dart';
 
 Color get _navyBackground => AppColorScheme.background;
@@ -266,6 +267,25 @@ class _LibraryGenresScreenState extends State<LibraryGenresScreen> {
         return;
       }
 
+      // EsPlay: the picture this genre got before, so it comes off the device.
+      final artKey =
+          '${_client.baseUrl}|${_client.userId}|${widget.libraryId}|${genre.id}|${_genreCardRequestMaxWidth()}';
+      final keptArt = await GenreArt.instance.recall(artKey);
+      if (keptArt != null) {
+        genre.imageUrl = keptArt.imageUrl;
+        genre.backdropUrl = keptArt.backdropUrl;
+        if (keptArt.itemId != null) _usedArtworkIds.add(keptArt.itemId!);
+        if (!_disposed && mounted) setState(() {});
+      }
+      void keepArt(String? usedId) {
+        if (genre.imageUrl == null) return;
+        unawaited(GenreArt.instance.remember(artKey, (
+          imageUrl: genre.imageUrl,
+          backdropUrl: genre.backdropUrl,
+          itemId: usedId,
+        )));
+      }
+
       final response = await _client.itemsApi.getItems(
         parentId: widget.libraryId,
         genreIds: [genre.id],
@@ -294,6 +314,11 @@ class _LibraryGenresScreenState extends State<LibraryGenresScreen> {
 
       genre.itemCount = totalCount;
 
+      if (keptArt != null) {
+        if (!_disposed && mounted) setState(() {});
+        return;
+      }
+
       if (_collectionType == 'music') {
         for (final raw in items) {
           final item = raw as Map<String, dynamic>;
@@ -309,6 +334,7 @@ class _LibraryGenresScreenState extends State<LibraryGenresScreen> {
             );
             genre.imageUrl = primaryUrl;
             genre.backdropUrl ??= primaryUrl;
+            keepArt(item['Id']?.toString());
             if (!_disposed && mounted) setState(() {});
             return;
           }
@@ -322,6 +348,7 @@ class _LibraryGenresScreenState extends State<LibraryGenresScreen> {
           );
           genre.imageUrl = primaryUrl;
           genre.backdropUrl ??= primaryUrl;
+          keepArt(first['Id']?.toString());
           if (!_disposed && mounted) setState(() {});
           return;
         }
@@ -342,6 +369,7 @@ class _LibraryGenresScreenState extends State<LibraryGenresScreen> {
           genre.imageUrl = imageUrl;
           genre.backdropUrl = backdropUrl;
           if (usedId != null) _usedArtworkIds.add(usedId);
+          keepArt(usedId);
         }
       }
       if (!_disposed && mounted) setState(() {});

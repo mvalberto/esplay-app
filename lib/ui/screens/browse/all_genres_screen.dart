@@ -25,6 +25,7 @@ import '../../widgets/focus/context_menu_sheet.dart';
 import '../../widgets/quick_return_wrapper.dart';
 import '../../widgets/skeleton/skeleton_library_grid.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../esplay/genre_art.dart';
 import '../../../esplay/genre_merge.dart';
 
 Color get _navyBackground => AppColorScheme.background;
@@ -267,6 +268,17 @@ class _AllGenresScreenState extends State<AllGenresScreen> {
         return;
       }
 
+      // EsPlay: the picture this genre got before, so it comes off the device.
+      final artKey =
+          '${_client.baseUrl}|${_client.userId}|${genre.id}|${_genreCardRequestMaxWidth()}';
+      final keptArt = await GenreArt.instance.recall(artKey);
+      if (keptArt != null) {
+        genre.imageUrl = keptArt.imageUrl;
+        genre.backdropUrl = keptArt.backdropUrl;
+        if (keptArt.itemId != null) _usedArtworkIds.add(keptArt.itemId!);
+        if (!_disposed && mounted) setState(() {});
+      }
+
       // Four random items to build the tile from, since this genre has none.
       final response = await _client.itemsApi.getItems(
         genreIds: [genre.id],
@@ -296,21 +308,30 @@ class _AllGenresScreenState extends State<AllGenresScreen> {
 
       genre.itemCount = totalCount;
 
-      final maps = List<Map<String, dynamic>>.from(
-        items.whereType<Map>().map((item) => item.cast<String, dynamic>()),
-      );
-      maps.shuffle();
+      if (keptArt == null) {
+        final maps = List<Map<String, dynamic>>.from(
+          items.whereType<Map>().map((item) => item.cast<String, dynamic>()),
+        );
+        maps.shuffle();
 
-      final (imageUrl, backdropUrl, usedId) = resolveGenreFallbackArtwork(
-        items: maps,
-        imageApi: _client.imageApi,
-        maxWidth: _genreCardRequestMaxWidth(),
-        avoidIds: _usedArtworkIds,
-      );
+        final (imageUrl, backdropUrl, usedId) = resolveGenreFallbackArtwork(
+          items: maps,
+          imageApi: _client.imageApi,
+          maxWidth: _genreCardRequestMaxWidth(),
+          avoidIds: _usedArtworkIds,
+        );
 
-      genre.imageUrl = imageUrl;
-      genre.backdropUrl = backdropUrl;
-      if (usedId != null) _usedArtworkIds.add(usedId);
+        genre.imageUrl = imageUrl;
+        genre.backdropUrl = backdropUrl;
+        if (usedId != null) _usedArtworkIds.add(usedId);
+        if (imageUrl != null) {
+          unawaited(GenreArt.instance.remember(artKey, (
+            imageUrl: imageUrl,
+            backdropUrl: backdropUrl,
+            itemId: usedId,
+          )));
+        }
+      }
 
       if (!_disposed && mounted) setState(() {});
     } catch (_) {}
