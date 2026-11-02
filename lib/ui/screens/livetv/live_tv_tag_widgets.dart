@@ -199,6 +199,7 @@ class LiveTvChannelLogo extends StatelessWidget {
       padding: const EdgeInsets.all(8),
       child: BoundedNetworkImage(
         imageUrl: url,
+        cacheManager: liveTvLogoCache,
         fit: BoxFit.contain,
         fadeInDuration: Duration.zero,
         maxWidth: 320,

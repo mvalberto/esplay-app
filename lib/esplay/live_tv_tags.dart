@@ -1,5 +1,10 @@
+import 'dart:async';
+import 'dart:convert';
+
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get_it/get_it.dart';
 import 'package:server_core/server_core.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../data/viewmodels/live_tv_guide_view_model.dart';
 
@@ -59,70 +64,196 @@ class LiveTvTagChannel {
       hasGuide ? end!.difference(now).inMinutes.clamp(0, 24 * 60) : 0;
 }
 
-/// Reads tags and their channels from the server, keeping each answer for a
-/// minute so moving between the screens doesn't ask again.
+/// Reads tags and their channels from the server. Screens asking at once share
+/// one request. An answer under a minute old is used as it is; an older one
+/// still shows at once while a fresh copy loads behind it for the next visit.
+/// The tags, which rarely change, are also stored on the device so the page
+/// has them as soon as it opens.
 class LiveTvTagsRepository {
   LiveTvTagsRepository._();
 
   static final instance = LiveTvTagsRepository._();
 
-  static const _maxAge = Duration(minutes: 1);
+  /// Channels a start page row shows before "See channels".
+  static const rowSize = 20;
 
-  String? _serverUrl;
-  ({DateTime at, List<LiveTvTag> tags})? _tags;
-  final _channels = <String, ({DateTime at, List<LiveTvTagChannel> list})>{};
+  static const _fresh = Duration(minutes: 1);
+  static const _channelsUsable = Duration(minutes: 5);
+  static const _tagsUsable = Duration(days: 7);
+  static const _storedTagsKey = 'esplay_live_tv_tags';
+
+  String? _owner;
+  final _entries = <String, ({DateTime at, Future<Object> value})>{};
+  final _refreshing = <String>{};
 
   MediaServerClient get _client => GetIt.instance<MediaServerClient>();
 
   /// False on servers without channel tags (Jellyfin, Plex).
   bool get isSupported => _client.liveTvApi is LiveTvChannelTagsApi;
 
-  void _resetIfServerChanged() {
-    final url = _client.baseUrl;
-    if (_serverUrl == url) return;
-    _serverUrl = url;
-    _tags = null;
-    _channels.clear();
+  LiveTvChannelTagsApi? get _api {
+    final api = _client.liveTvApi;
+    return api is LiveTvChannelTagsApi ? api as LiveTvChannelTagsApi : null;
+  }
+
+  void _resetIfAccountChanged() {
+    final owner = '${_client.baseUrl}|${_client.userId}';
+    if (_owner == owner) return;
+    _owner = owner;
+    _entries.clear();
+    _refreshing.clear();
+  }
+
+  Future<T> _load<T extends Object>(
+    String key,
+    Duration usable,
+    Future<T> Function() fetch, {
+    bool refresh = false,
+  }) {
+    final entry = _entries[key];
+    if (entry != null && !refresh) {
+      final age = DateTime.now().difference(entry.at);
+      if (age < usable) {
+        if (age >= _fresh) _refreshBehind(key, fetch);
+        return entry.value.then((value) => value as T);
+      }
+    }
+    final value = fetch();
+    _entries[key] = (at: DateTime.now(), value: value);
+    // A failed answer isn't kept, so the next visit asks again.
+    value.then<void>((_) {}, onError: (Object _) {
+      if (identical(_entries[key]?.value, value)) _entries.remove(key);
+    });
+    return value;
+  }
+
+  void _refreshBehind<T extends Object>(
+    String key,
+    Future<T> Function() fetch,
+  ) {
+    if (!_refreshing.add(key)) return;
+    final owner = _owner;
+    fetch().then<void>((value) {
+      if (_owner == owner) {
+        _entries[key] = (at: DateTime.now(), value: Future.value(value));
+      }
+    }, onError: (Object _) {}).whenComplete(() => _refreshing.remove(key));
   }
 
   Future<List<LiveTvTag>> tags({bool refresh = false}) async {
-    _resetIfServerChanged();
-    final api = _client.liveTvApi;
-    if (api is! LiveTvChannelTagsApi) return const [];
-    final cached = _tags;
-    if (!refresh && cached != null && _fresh(cached.at)) return cached.tags;
-    final raw = await (api as LiveTvChannelTagsApi).getChannelTags(
-      userId: _client.userId,
-    );
-    final tags = [
-      for (final tag in raw)
-        if ((tag['Id']?.toString() ?? '').isNotEmpty)
-          LiveTvTag(
-            id: tag['Id'].toString(),
-            name: tag['Name']?.toString() ?? '',
-          ),
-    ];
-    _tags = (at: DateTime.now(), tags: tags);
-    return tags;
+    _resetIfAccountChanged();
+    final api = _api;
+    if (api == null) return const [];
+    if (!refresh && !_entries.containsKey('tags')) await _restoreTags();
+    return _load('tags', _tagsUsable, () async {
+      final raw = await api.getChannelTags(userId: _client.userId);
+      final tags = [
+        for (final tag in raw)
+          if ((tag['Id']?.toString() ?? '').isNotEmpty)
+            LiveTvTag(
+              id: tag['Id'].toString(),
+              name: tag['Name']?.toString() ?? '',
+            ),
+      ];
+      unawaited(_storeTags(tags));
+      return tags;
+    }, refresh: refresh);
   }
 
+  /// Every channel of a tag.
   Future<List<LiveTvTagChannel>> channels(
     String tagId, {
     bool refresh = false,
-  }) async {
-    _resetIfServerChanged();
-    final api = _client.liveTvApi;
-    if (api is! LiveTvChannelTagsApi) return const [];
-    final cached = _channels[tagId];
-    if (!refresh && cached != null && _fresh(cached.at)) return cached.list;
-    final raw = await (api as LiveTvChannelTagsApi).getChannelsWithTag(
-      tagId,
-      userId: _client.userId,
+  }) {
+    _resetIfAccountChanged();
+    final api = _api;
+    if (api == null) return Future.value(const []);
+    return _load(
+      'tag:$tagId',
+      _channelsUsable,
+      () => _fetchChannels(api, tagId),
+      refresh: refresh,
     );
-    final list = raw.map(LiveTvTagChannel.fromRawItem).toList();
-    _channels[tagId] = (at: DateTime.now(), list: list);
-    return list;
   }
 
-  bool _fresh(DateTime at) => DateTime.now().difference(at) < _maxAge;
+  /// A tag's first [rowSize] channels, for a row or a card that shows a few.
+  Future<List<LiveTvTagChannel>> rowChannels(String tagId) {
+    _resetIfAccountChanged();
+    final api = _api;
+    if (api == null) return Future.value(const []);
+    final whole = _entries['tag:$tagId'];
+    if (whole != null &&
+        DateTime.now().difference(whole.at) < _channelsUsable) {
+      return whole.value.then(
+        (list) => (list as List<LiveTvTagChannel>).take(rowSize).toList(),
+      );
+    }
+    return _load(
+      'row:$tagId',
+      _channelsUsable,
+      () => _fetchChannels(api, tagId, limit: rowSize),
+    );
+  }
+
+  Future<List<LiveTvTagChannel>> _fetchChannels(
+    LiveTvChannelTagsApi api,
+    String tagId, {
+    int? limit,
+  }) async {
+    final raw = await api.getChannelsWithTag(
+      tagId,
+      userId: _client.userId,
+      limit: limit,
+    );
+    return raw.map(LiveTvTagChannel.fromRawItem).toList();
+  }
+
+  Future<void> _restoreTags() async {
+    final owner = _owner;
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final raw = prefs.getString(_storedTagsKey);
+      if (raw == null || _owner != owner || _entries.containsKey('tags')) {
+        return;
+      }
+      final stored = jsonDecode(raw) as Map<String, dynamic>;
+      if (stored['owner'] != owner) return;
+      final at = DateTime.fromMillisecondsSinceEpoch(stored['at'] as int);
+      final tags = [
+        for (final tag in (stored['tags'] as List).cast<Map>())
+          LiveTvTag(id: tag['id'] as String, name: tag['name'] as String),
+      ];
+      _entries['tags'] = (at: at, value: Future.value(tags));
+    } catch (_) {
+      // Nothing usable stored: the server answers instead.
+    }
+  }
+
+  Future<void> _storeTags(List<LiveTvTag> tags) async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString(
+        _storedTagsKey,
+        jsonEncode({
+          'owner': _owner,
+          'at': DateTime.now().millisecondsSinceEpoch,
+          'tags': [
+            for (final tag in tags) {'id': tag.id, 'name': tag.name},
+          ],
+        }),
+      );
+    } catch (_) {
+      // The tags just aren't kept for the next start.
+    }
+  }
 }
+
+/// Channel logos rarely change and there are well over a thousand, more than
+/// the shared image cache keeps, so they get a store of their own on the device.
+final liveTvLogoCache = CacheManager(
+  Config(
+    'esplayLiveTvLogos',
+    stalePeriod: const Duration(days: 60),
+    maxNrOfCacheObjects: 3000,
+  ),
+);

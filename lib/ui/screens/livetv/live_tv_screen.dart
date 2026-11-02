@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
@@ -368,7 +370,7 @@ class _TagRow extends StatefulWidget {
 class _TagRowState extends State<_TagRow> {
   late final Future<List<LiveTvTagChannel>> _channels = LiveTvTagsRepository
       .instance
-      .channels(widget.tag.id)
+      .rowChannels(widget.tag.id)
       .catchError((_) => <LiveTvTagChannel>[]);
 
   @override
@@ -484,7 +486,7 @@ class _TagCard extends StatefulWidget {
 class _TagCardState extends State<_TagCard> {
   late final Future<List<LiveTvTagChannel>> _channels = LiveTvTagsRepository
       .instance
-      .channels(widget.tag.id)
+      .rowChannels(widget.tag.id)
       .catchError((_) => <LiveTvTagChannel>[]);
 
   @override
@@ -558,13 +560,29 @@ class _TvTagsViewState extends State<_TvTagsView> {
       .tags();
   LiveTvTag? _selected;
   Future<List<LiveTvTagChannel>>? _channels;
+  Timer? _settle;
 
   void _select(LiveTvTag tag) {
+    _settle?.cancel();
     if (_selected?.id == tag.id) return;
     setState(() {
       _selected = tag;
       _channels = LiveTvTagsRepository.instance.channels(tag.id);
     });
+  }
+
+  /// Running down the rail only loads the tag focus stops on.
+  void _focusTag(LiveTvTag tag) {
+    _settle?.cancel();
+    _settle = Timer(const Duration(milliseconds: 350), () {
+      if (mounted) _select(tag);
+    });
+  }
+
+  @override
+  void dispose() {
+    _settle?.cancel();
+    super.dispose();
   }
 
   @override
@@ -607,7 +625,7 @@ class _TvTagsViewState extends State<_TvTagsView> {
                       autofocus: index == 0,
                       radius: BorderRadius.circular(10),
                       onFocusChange: (focused) {
-                        if (focused) _select(tag);
+                        if (focused) _focusTag(tag);
                       },
                       onTap: () => _openTag(context, tag),
                       builder: (focused) => Container(

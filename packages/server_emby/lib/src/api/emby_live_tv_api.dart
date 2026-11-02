@@ -65,12 +65,17 @@ class EmbyLiveTvApi implements LiveTvApi, LiveTvChannelTagsApi {
   Future<List<Map<String, dynamic>>> getChannelsWithTag(
     String tagId, {
     String? userId,
+    int? limit,
   }) async {
     final response = await _dio.get('/LiveTv/Channels', queryParameters: {
       'TagIds': tagId,
       'AddCurrentProgram': true,
       'EnableUserData': true,
       'Fields': 'ImageTags,UserData',
+      'EnableImageTypes': 'Primary',
+      'ImageTypeLimit': 1,
+      'EnableTotalRecordCount': false,
+      'Limit': ?limit,
       'UserId': ?userId,
     });
     final items = (response.data as Map<String, dynamic>)['Items'] as List?;
