@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- EsPlay: black with the wordmark, where the app's start screen draws it. -->
+<!-- EsPlay: plain black, so the app's start screen animates the logo in from nothing. -->
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:drawable="@color/ic_launcher_background" />
-    <item
-        android:width="180dp"
-        android:height="44dp"
-        android:gravity="center"
-        android:drawable="@drawable/esplay_splash_wordmark" />
 </layer-list>

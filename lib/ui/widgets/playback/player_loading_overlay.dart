@@ -33,12 +33,6 @@ class PlayerLoadingOverlay extends StatefulWidget {
 
 class _PlayerLoadingOverlayState extends State<PlayerLoadingOverlay>
     with SingleTickerProviderStateMixin {
-  static const _labelGradient = LinearGradient(
-    begin: Alignment.centerLeft,
-    end: Alignment.centerRight,
-    colors: [Color(0xFFBCBCBC), Color(0xFFE71414)],
-  );
-
   late final AnimationController _labelController;
   late final Animation<double> _labelOpacity;
   late final Animation<double> _labelScale;
@@ -125,19 +119,15 @@ class _PlayerLoadingOverlayState extends State<PlayerLoadingOverlay>
             opacity: _labelOpacity,
             child: ScaleTransition(
               scale: _labelScale,
-              child: ShaderMask(
-                blendMode: BlendMode.srcIn,
-                shaderCallback: (bounds) {
-                  return _labelGradient.createShader(bounds);
-                },
-                child: Text(
-                  uppercaseLabel!,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: fontSize,
-                    fontWeight: FontWeight.w700,
-                    letterSpacing: letterSpacing,
-                  ),
+              // EsPlay: plain white, without the grey-to-red gradient.
+              child: Text(
+                uppercaseLabel!,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: fontSize,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: letterSpacing,
                 ),
               ),
             ),

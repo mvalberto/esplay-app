@@ -2,7 +2,6 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../preference/preference_constants.dart';
 
@@ -244,7 +243,8 @@ class LoadingAnimationWidget extends StatelessWidget {
   }
 }
 
-/// 3D Y-axis spinning gradient Moonfin logo animation.
+/// EsPlay: the slanted button of the logo, empty, with a red band running
+/// through it again and again.
 class MoonfinLogoAnimation extends StatefulWidget {
   final double size;
   final LoadingAnimationSpeed speed;
@@ -264,7 +264,7 @@ class _MoonfinLogoAnimationState extends State<MoonfinLogoAnimation>
   late final AnimationController _controller;
 
   Duration get _duration =>
-      Duration(milliseconds: (8000 / widget.speed.multiplier).round());
+      Duration(milliseconds: (1300 / widget.speed.multiplier).round());
 
   @override
   void initState() {
@@ -294,24 +294,80 @@ class _MoonfinLogoAnimationState extends State<MoonfinLogoAnimation>
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _controller,
-      builder: (context, child) {
-        return Transform(
-          alignment: Alignment.center,
-          transform: Matrix4.identity()
-            ..setEntry(3, 2, 0.001)
-            ..rotateY(_controller.value * 2 * math.pi),
-          child: child,
-        );
-      },
-      child: SvgPicture.asset(
-        'assets/icons/moonfin_logo.svg',
-        width: widget.size,
-        height: widget.size,
+    return SizedBox(
+      width: widget.size,
+      height: widget.size * 44 / 124,
+      child: CustomPaint(
+        painter: _EsPlayButtonPainter(
+          CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+        ),
       ),
     );
   }
+}
+
+/// The button drawn on a 120 x 44 grid, slanted 10 degrees like the logo.
+class _EsPlayButtonPainter extends CustomPainter {
+  final Animation<double> progress;
+
+  _EsPlayButtonPainter(this.progress) : super(repaint: progress);
+
+  static const _red = Color(0xFFE71414);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    canvas.save();
+    canvas.translate(size.width / 2, size.height / 2);
+    canvas.scale(size.width / 124);
+    canvas.skew(-math.tan(10 * math.pi / 180), 0);
+    canvas.translate(-60, -22);
+
+    final button = RRect.fromRectAndRadius(
+      const Rect.fromLTWH(2, 2, 116, 40),
+      const Radius.circular(9),
+    );
+    canvas.drawRRect(button, Paint()..color = const Color(0x14FFFFFF));
+    canvas.save();
+    canvas.clipRRect(button);
+    canvas.drawRect(
+      Rect.fromLTWH(-50 + 170 * progress.value, 2, 50, 40),
+      Paint()..color = _red,
+    );
+    canvas.restore();
+    canvas.drawRRect(
+      button,
+      Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 2
+        ..color = const Color(0x38FFFFFF),
+    );
+    final play = Path()
+      ..moveTo(90, 15)
+      ..lineTo(90, 29)
+      ..lineTo(102, 22)
+      ..close();
+    canvas.drawPath(
+      play,
+      Paint()
+        ..strokeWidth = 3
+        ..strokeJoin = StrokeJoin.round
+        ..style = PaintingStyle.fill
+        ..color = Colors.white,
+    );
+    canvas.drawPath(
+      play,
+      Paint()
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = 3
+        ..strokeJoin = StrokeJoin.round
+        ..color = Colors.white,
+    );
+    canvas.restore();
+  }
+
+  @override
+  bool shouldRepaint(_EsPlayButtonPainter oldDelegate) =>
+      oldDelegate.progress != progress;
 }
 
 /// Sleek gradient circular progress spinner.

@@ -150,7 +150,7 @@ class VideoPlayerScreen extends StatefulWidget {
 
 class _VideoPlayerScreenState extends State<VideoPlayerScreen>
     with WidgetsBindingObserver, WindowListener, ImmersiveSystemUi {
-  static const _streamLoadingLabel = 'Cargando vídeo...';
+  static const _streamLoadingLabel = 'Cargando contenido';
 
   /// How long away counts as having moved on rather than stepped out.
   static const _staleSuspendExit = Duration(minutes: 30);
