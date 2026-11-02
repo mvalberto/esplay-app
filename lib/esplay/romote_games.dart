@@ -1,5 +1,38 @@
+import 'dart:convert';
+
 import 'package:get_it/get_it.dart';
 import 'package:server_core/server_core.dart';
+
+import '../ui/navigation/destinations.dart';
+
+/// The game page for an Emby Game item, or null when its ROM isn't in a
+/// Moonbase game library. Moonbase names a game by its ROM's path in base64url
+/// without padding, and the ROMote item points at that same file.
+Future<String?> moonbaseGameRoute(String itemId) async {
+  final client = GetIt.instance<MediaServerClient>();
+  final games = client.gamesApi;
+  if (games == null) return null;
+  final List<GameLibrary> libraries;
+  final String gameId;
+  try {
+    final item = await client.itemsApi.getItem(itemId, fields: 'Path');
+    final path = item['Path']?.toString() ?? '';
+    if (path.isEmpty) return null;
+    gameId = base64Url.encode(utf8.encode(path)).replaceAll('=', '');
+    libraries = await games.getLibraries();
+  } catch (_) {
+    return null;
+  }
+  for (final library in libraries) {
+    try {
+      // A ROM outside this library answers 404.
+      if (await games.getGame(library.id, gameId) != null) {
+        return Destinations.gameDetailOf(library.id, gameId);
+      }
+    } catch (_) {}
+  }
+  return null;
+}
 
 /// A game as Emby holds it, with the metadata and box art the ROMote plugin
 /// scraped for it.

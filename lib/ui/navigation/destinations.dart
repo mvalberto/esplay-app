@@ -96,6 +96,7 @@ class Destinations {
   static const gameSystem = '/games/:libraryId/system/:systemId';
   static const gameDetail = '/game/:libraryId/:gameId';
   static const gamePlayer = '/game-player/:libraryId/:gameId';
+  static const gameItem = '/game-item/:itemId';
   static const rommAccount = '/romm-account';
 
   // Live TV
@@ -365,6 +366,12 @@ class Destinations {
     String? channelId,
   }) {
     if (type == 'Photo') return photo(itemId);
+    // EsPlay opens an Emby game (Home rows, favorites, search) on its game
+    // page with Play, not on the video details.
+    if (type == 'Game') {
+      final base = '/game-item/${Uri.encodeComponent(itemId)}';
+      return serverId == null ? base : '$base?serverId=$serverId';
+    }
     // EsPlay opens a channel on its own page with its schedule, as Emby does.
     if (isLiveTvChannelType(type)) return liveTvChannelInfo(itemId);
     // A program is only its channel's current airing. Its own id carries no
