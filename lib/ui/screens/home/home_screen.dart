@@ -3279,6 +3279,7 @@ class _ContentRowsState extends State<_ContentRows>
         prefs.get(UserPreferences.cardFocusExpansion),
       );
       childHeight = squarePosterSide + (56 * metadataScale) + headroom;
+      if (row.rowType == HomeRowType.liveTvOnNow) childHeight += _onNowBottomGap;
     } else {
       final isSeerrRowOverride = _isSeerrFilterRow(row);
       final rowImageType = isSeerrRowOverride
@@ -4269,7 +4270,8 @@ class _ContentRowsState extends State<_ContentRows>
         row.rowType == HomeRowType.liveTvOnNow ||
         row.rowType == HomeRowType.libraryTilesSmall) {
       final squarePosterSide = _squarePosterSide(posterSize);
-      final rowHeight = squarePosterSide + (56 * metadataScale);
+      var rowHeight = squarePosterSide + (56 * metadataScale);
+      if (row.rowType == HomeRowType.liveTvOnNow) rowHeight += _onNowBottomGap;
       return _libraryRowExtent(rowHeight, metadataScale: metadataScale);
     } else {
       final maxImageHeight = _rowImageHeight(row, posterSize, prefs);
@@ -5261,7 +5263,8 @@ class _ContentRowsState extends State<_ContentRows>
     final l10n = AppLocalizations.of(context);
     final metadataScale = _desktopUiScaleFactor();
     final squarePosterSide = _squarePosterSide(posterSize);
-    final rowHeight = squarePosterSide + (56 * metadataScale);
+    final rowHeight =
+        squarePosterSide + (56 * metadataScale) + _onNowBottomGap;
     // A poster as tall as the other rows' square cards.
     final cardWidth = squarePosterSide * 2 / 3;
     return _buildTitledRow(
@@ -5308,6 +5311,10 @@ class _ContentRowsState extends State<_ContentRows>
   // program under the remote over small 16:9 cards, and the channel tags sit
   // right below as compact cards. Sizes are a 1920-wide screen's pixels.
   bool get _esplayTvShowcase => PlatformDetection.isTV;
+
+  /// EsPlay: On now's posters end on their channel line, so without this the
+  /// next row's title sits right under them. A TV lays On now out apart.
+  double get _onNowBottomGap => _esplayTvShowcase ? 0 : 28;
 
   double _esplayUnit() => MediaQuery.sizeOf(context).width / 1920;
 
