@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 85.05 40">
-<g transform="translate(3.53 20) skewX(-10) translate(0 -20)">
+<g transform="matrix(1 0 -0.176327 1 7.0565 0)">
 <rect x="0" y="0" width="78" height="40" rx="9" fill="#E71414"/>
 <path d="M32 11 L32 29 L48 20 Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="3" stroke-linejoin="round"/>
 </g>

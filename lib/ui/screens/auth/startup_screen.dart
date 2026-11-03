@@ -317,7 +317,7 @@ class _StartupScreenState extends State<StartupScreen>
           return Stack(
             clipBehavior: Clip.none,
             children: [
-              ClipRect(
+              ClipPath(
                 clipper: _FromLeft((_pillLeft + hidden) * _logoWidth),
                 child: layer('pill'),
               ),
@@ -349,14 +349,24 @@ class _StartupScreenState extends State<StartupScreen>
   }
 }
 
-/// Shows everything right of [left].
-class _FromLeft extends CustomClipper<Rect> {
+/// Shows everything right of a line through [left] at the bottom, slanted
+/// like the logo.
+class _FromLeft extends CustomClipper<Path> {
   final double left;
 
   const _FromLeft(this.left);
 
   @override
-  Rect getClip(Size size) => Rect.fromLTRB(left, 0, size.width, size.height);
+  Path getClip(Size size) {
+    // The logo leans 10 degrees: across its height that is this much of its width.
+    final slant = size.width * 0.04367;
+    return Path()
+      ..moveTo(left + slant, 0)
+      ..lineTo(size.width + slant, 0)
+      ..lineTo(size.width + slant, size.height)
+      ..lineTo(left, size.height)
+      ..close();
+  }
 
   @override
   bool shouldReclip(_FromLeft oldClipper) => oldClipper.left != left;
