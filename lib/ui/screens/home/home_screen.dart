@@ -575,9 +575,11 @@ class _HomeShellState extends State<_HomeShell>
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  // EsPlay: on a TV the showcase at the top stands in for it.
+                  // EsPlay: on a TV and on Windows the showcase at the top
+                  // stands in for it.
                   if (backdropStyle != UserPreferences.homeBackdropOff &&
-                      !PlatformDetection.isTV)
+                      !PlatformDetection.isTV &&
+                      !PlatformDetection.isWindows)
                     ValueListenableBuilder<String?>(
                       valueListenable: _backdropUrlNotifier,
                       builder: (context, url, _) {
@@ -5310,7 +5312,10 @@ class _ContentRowsState extends State<_ContentRows>
   // EsPlay on a TV, the same as on Samsung: On Now opens with a showcase of the
   // program under the remote over small 16:9 cards, and the channel tags sit
   // right below as compact cards. Sizes are a 1920-wide screen's pixels.
-  bool get _esplayTvShowcase => PlatformDetection.isTV;
+  // The Windows app shares the design, with the mouse standing in for the
+  // remote.
+  bool get _esplayTvShowcase =>
+      PlatformDetection.isTV || PlatformDetection.isWindows;
 
   /// EsPlay: On now's posters end on their channel line, so without this the
   /// next row's title sits right under them. A TV lays On now out apart.
@@ -5415,12 +5420,16 @@ class _ContentRowsState extends State<_ContentRows>
         ),
         onLeftEdge: _onRowLeftEdge,
         onTap: (_, item) => _openOnNowChannel(item),
-        itemBuilder: (ctx, item, idx, isFocused) => GestureDetector(
-          onTap: () => _openOnNowChannel(item),
-          child: LiveTvOnNowCard(
-            program: item.rawData,
-            unit: u,
-            focused: isFocused,
+        itemBuilder: (ctx, item, idx, isFocused) => MouseRegion(
+          cursor: SystemMouseCursors.click,
+          onEnter: (_) => widget.onItemSelected(item),
+          child: GestureDetector(
+            onTap: () => _openOnNowChannel(item),
+            child: LiveTvOnNowCard(
+              program: item.rawData,
+              unit: u,
+              focused: isFocused,
+            ),
           ),
         ),
       ),
