@@ -69,9 +69,27 @@ class HomeViewModel extends ChangeNotifier {
   final TvChannelsService _tvChannels = TvChannelsService();
 
   List<HomeRow> _rows = [];
-  List<HomeRow> get rows => _emptySectionIds.isEmpty
-      ? _rows
-      : _rows.where((row) => !_isEmptySectionPlaceholder(row)).toList();
+  List<HomeRow> get rows {
+    final shown = _emptySectionIds.isEmpty
+        ? _rows
+        : _rows.where((row) => !_isEmptySectionPlaceholder(row)).toList();
+    return PlatformDetection.isTV ? _onNowThenTags(shown) : shown;
+  }
+
+  /// EsPlay on a TV, as on Samsung: the channel tags sit right below On Now,
+  /// which takes the earlier of the two places.
+  static List<HomeRow> _onNowThenTags(List<HomeRow> rows) {
+    final onNow = rows.indexWhere((r) => r.rowType == HomeRowType.liveTvOnNow);
+    final tags = rows.indexWhere((r) => r.rowType == HomeRowType.liveTv);
+    if (onNow < 0 || tags < 0 || tags == onNow + 1) return rows;
+    final onNowRow = rows[onNow];
+    final tagsRow = rows[tags];
+    final first = onNow < tags ? onNow : tags;
+    return List.of(rows)
+      ..remove(onNowRow)
+      ..remove(tagsRow)
+      ..insertAll(first, [onNowRow, tagsRow]);
+  }
 
   /// Placeholder ids of sections expected to come back empty, because their
   /// last load did or a cold start found nothing cached for them. Their

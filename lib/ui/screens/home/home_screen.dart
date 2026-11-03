@@ -1532,6 +1532,7 @@ class _ContentRowsState extends State<_ContentRows>
     HardwareKeyboard.instance.removeHandler(_handleGlobalHardwareKey);
     _rowPrefetchDebounce?.cancel();
     _v2Expansion.dispose();
+    _esplayHeroIndex.dispose();
     _audioArbiter.unregister(this);
     appRouter.routerDelegate.removeListener(_onRouteChanged);
     _resizeCheckDebounce?.cancel();
@@ -3237,7 +3238,11 @@ class _ContentRowsState extends State<_ContentRows>
     final platformScale = _rowPlatformScale(desktopScale);
 
     double childHeight = 0.0;
-    if (row.isLoading) {
+    if (_esplayTvShowcase && row.rowType == HomeRowType.liveTvOnNow) {
+      childHeight = _esplayOnNowHeight();
+    } else if (_esplayTvShowcase && row.rowType == HomeRowType.liveTv) {
+      childHeight = _esplayTagsHeight();
+    } else if (row.isLoading) {
       if (row.rowType == HomeRowType.liveTv ||
           row.rowType == HomeRowType.liveTvOnNow ||
           row.rowType == HomeRowType.libraryTilesSmall) {
@@ -4949,6 +4954,13 @@ class _ContentRowsState extends State<_ContentRows>
                         rowIndex: rowIndex,
                         rows: rows,
                       );
+                    } else if (row.rowType == HomeRowType.liveTvOnNow &&
+                        _esplayTvShowcase) {
+                      rowChild = _buildEsplayOnNowShowcase(
+                        row,
+                        rowIndex: rowIndex,
+                        rows: rows,
+                      );
                     } else if (row.rowType == HomeRowType.liveTvOnNow) {
                       rowChild = _buildLiveTvOnNowRow(
                         row,
@@ -5128,8 +5140,12 @@ class _ContentRowsState extends State<_ContentRows>
   }) {
     final l10n = AppLocalizations.of(context);
     final metadataScale = _desktopUiScaleFactor();
+    final compact = _esplayTvShowcase;
+    final u = _esplayUnit();
     final squarePosterSide = _squarePosterSide(posterSize);
-    final rowHeight = squarePosterSide + (56 * metadataScale);
+    final rowHeight = compact
+        ? _esplayTagsHeight()
+        : squarePosterSide + (56 * metadataScale);
     _loadEsplayTags();
     // EsPlay: the live TV page first, then a card per Emby channel tag. The
     // guide and recordings are tabs on the live TV page.
@@ -5145,7 +5161,7 @@ class _ContentRowsState extends State<_ContentRows>
     ];
     return _buildTitledRow(
       key: _rowContainerKey(rowIndex),
-      title: _localizedRowTitle(row, l10n),
+      title: compact ? l10n.esplayLiveTvTags : _localizedRowTitle(row, l10n),
       rowIndex: rowIndex,
       hasItems: actions.isNotEmpty,
       height: rowHeight,
@@ -5155,8 +5171,10 @@ class _ContentRowsState extends State<_ContentRows>
           hubKey: _hubKeyForRow(row),
           controller: _rowHorizontalController(rowIndex),
           height: rowHeight,
-          itemExtent: squarePosterSide,
-          itemSpacing: _rowItemSpacing(squarePosterSide, cardExpansion),
+          itemExtent: compact ? 300 * u : squarePosterSide,
+          itemSpacing: compact
+              ? 24 * u
+              : _rowItemSpacing(squarePosterSide, cardExpansion),
           leadingPadding: _isHomeRowsStyleV2() ? _kHomeRowLabelInset : 0,
           clipBehavior: cardExpansion ? Clip.none : Clip.hardEdge,
           padding: const EdgeInsets.fromLTRB(_kHomeRowLabelInset, 5, 20, 5),
@@ -5176,13 +5194,21 @@ class _ContentRowsState extends State<_ContentRows>
               alignment: Alignment.topCenter,
               child: GestureDetector(
                 onTap: () => context.push(action.destination),
-                child: _EsplayTagCard(
-                  tag: action.tag,
-                  icon: action.icon,
-                  label: action.label,
-                  side: squarePosterSide,
-                  focused: isFocused,
-                ),
+                child: compact
+                    ? _EsplayCompactTagCard(
+                        tag: action.tag,
+                        icon: action.icon,
+                        label: action.label,
+                        unit: u,
+                        focused: isFocused,
+                      )
+                    : _EsplayTagCard(
+                        tag: action.tag,
+                        icon: action.icon,
+                        label: action.label,
+                        side: squarePosterSide,
+                        focused: isFocused,
+                      ),
               ),
             );
           },
@@ -5234,18 +5260,87 @@ class _ContentRowsState extends State<_ContentRows>
         onTap: (_, item) => _openOnNowChannel(item),
         itemBuilder: (ctx, item, idx, isFocused) => GestureDetector(
           onTap: () => _openOnNowChannel(item),
-          // On a TV the program under the remote opens wide, like Samsung's.
-          child: isFocused && PlatformDetection.isTV
-              ? LiveTvOnNowShowcase(
-                  program: item.rawData,
-                  width: squarePosterSide * 16 / 9,
-                  height: cardWidth * 1.5,
-                )
-              : LiveTvOnNowPoster(
-                  program: item.rawData,
-                  width: cardWidth,
-                  focused: isFocused,
-                ),
+          child: LiveTvOnNowPoster(
+            program: item.rawData,
+            width: cardWidth,
+            focused: isFocused,
+          ),
+        ),
+      ),
+    );
+  }
+
+  // EsPlay on a TV, the same as on Samsung: On Now opens with a showcase of the
+  // program under the remote over small 16:9 cards, and the channel tags sit
+  // right below as compact cards. Sizes are a 1920-wide screen's pixels.
+  bool get _esplayTvShowcase => PlatformDetection.isTV;
+
+  double _esplayUnit() => MediaQuery.sizeOf(context).width / 1920;
+
+  double _esplayOnNowHeight() {
+    final u = _esplayUnit();
+    return LiveTvOnNowHero.heightFor(u) + LiveTvOnNowCard.heightFor(u) + 10;
+  }
+
+  double _esplayTagsHeight() => 110 * _esplayUnit() + 10;
+
+  final ValueNotifier<int> _esplayHeroIndex = ValueNotifier<int>(0);
+
+  Widget _buildEsplayOnNowShowcase(
+    HomeRow row, {
+    required int rowIndex,
+    required List<HomeRow> rows,
+  }) {
+    final l10n = AppLocalizations.of(context);
+    final u = _esplayUnit();
+    final cardsHeight = LiveTvOnNowCard.heightFor(u) + 10;
+    return _buildTitledRow(
+      key: _rowContainerKey(rowIndex),
+      title: _localizedRowTitle(row, l10n),
+      rowIndex: rowIndex,
+      hasItems: row.items.isNotEmpty,
+      height: cardsHeight,
+      header: ValueListenableBuilder<int>(
+        valueListenable: _esplayHeroIndex,
+        builder: (context, index, _) => row.items.isEmpty
+            ? const SizedBox.shrink()
+            : LiveTvOnNowHero(
+                program: row.items[index.clamp(0, row.items.length - 1)]
+                    .rawData,
+                unit: u,
+                textInset: _kHomeRowLabelInset * 2,
+              ),
+      ),
+      child: LockedFocusRow<AggregatedItem>(
+        key: _rowKey(rowIndex),
+        items: row.items,
+        hubKey: _hubKeyForRow(row),
+        controller: _rowHorizontalController(rowIndex),
+        height: cardsHeight,
+        itemExtent: LiveTvOnNowCard.widthFor(u),
+        itemSpacing: 24 * u,
+        leadingPadding: _isHomeRowsStyleV2() ? _kHomeRowLabelInset : 0,
+        clipBehavior: Clip.hardEdge,
+        padding: const EdgeInsets.fromLTRB(_kHomeRowLabelInset, 5, 20, 5),
+        onIndexChanged: (index, _) {
+          _esplayHeroIndex.value = index;
+          _onHomeRowTileFocused(null);
+        },
+        onFocusChange: (has) => _onRowFocusTracked(rowIndex, has),
+        onVerticalNavigation: (isUp) => _onRowVerticalNavigation(
+          rowIndex: rowIndex,
+          rows: rows,
+          isUp: isUp,
+        ),
+        onLeftEdge: _onRowLeftEdge,
+        onTap: (_, item) => _openOnNowChannel(item),
+        itemBuilder: (ctx, item, idx, isFocused) => GestureDetector(
+          onTap: () => _openOnNowChannel(item),
+          child: LiveTvOnNowCard(
+            program: item.rawData,
+            unit: u,
+            focused: isFocused,
+          ),
         ),
       ),
     );
@@ -6084,6 +6179,7 @@ class _ContentRowsState extends State<_ContentRows>
     required bool hasItems,
     required double height,
     required Widget child,
+    Widget? header,
   }) {
     final isRowsV2 = _isHomeRowsStyleV2();
     final showHeaderControls =
@@ -6097,6 +6193,7 @@ class _ContentRowsState extends State<_ContentRows>
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
+          ?header,
           Padding(
             padding: EdgeInsets.fromLTRB(
               _kHomeRowLabelInset,
@@ -7208,6 +7305,73 @@ typedef _PreviewSource = ({
 
 /// A card on the home live TV row: a channel tag with its number big and red
 /// and the name underneath, or, without a tag, [icon] in red over [label].
+/// A channel tag on a TV's Home, as on Samsung: its number in red beside its
+/// name, or the live TV page's icon. [unit] is a 1920-wide screen's pixel.
+class _EsplayCompactTagCard extends StatelessWidget {
+  final LiveTvTag? tag;
+  final IconData icon;
+  final String label;
+  final double unit;
+  final bool focused;
+
+  const _EsplayCompactTagCard({
+    required this.tag,
+    required this.icon,
+    required this.label,
+    required this.unit,
+    required this.focused,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final u = unit;
+    final number = tag?.number;
+    return Container(
+      width: 300 * u,
+      height: 110 * u,
+      padding: EdgeInsets.symmetric(horizontal: 22 * u),
+      decoration: BoxDecoration(
+        color: const Color(0xFF1C1C20),
+        borderRadius: BorderRadius.circular(14 * u),
+        border: Border.all(
+          color: focused ? liveTvFocus : Colors.transparent,
+          width: 4 * u,
+        ),
+      ),
+      child: Row(
+        children: [
+          if (tag == null)
+            Icon(icon, color: liveTvRed, size: 54 * u)
+          else if (number != null)
+            Text(
+              number,
+              style: TextStyle(
+                color: liveTvRed,
+                fontSize: 46 * u,
+                height: 1,
+                fontWeight: FontWeight.w900,
+              ),
+            ),
+          if (tag == null || number != null) SizedBox(width: 16 * u),
+          Expanded(
+            child: Text(
+              tag?.label ?? label,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: (22 * u).clamp(11.0, 18.0),
+                height: 1.2,
+                fontWeight: FontWeight.w800,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class _EsplayTagCard extends StatelessWidget {
   final LiveTvTag? tag;
   final IconData icon;

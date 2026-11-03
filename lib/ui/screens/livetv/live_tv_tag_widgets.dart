@@ -493,77 +493,106 @@ class LiveTvOnNowPoster extends StatelessWidget {
   }
 }
 
-/// A program airing now, open under the remote: its picture on the right
-/// fading into the dark behind what it is, how long is left and how far along
-/// it is. Without a picture its channel's logo stands on the right instead.
-class LiveTvOnNowShowcase extends StatelessWidget {
-  final Map<String, dynamic> program;
-  final double width;
-  final double height;
+/// What a program airing now has to show: its time and how far along it is.
+class _Airing {
+  final DateTime start;
+  final DateTime end;
 
-  const LiveTvOnNowShowcase({
-    super.key,
-    required this.program,
-    required this.width,
-    required this.height,
-  });
+  _Airing(this.start, this.end);
 
-  @override
-  Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
-    final channelId = program['ChannelId']?.toString() ?? '';
-    final channelName = program['ChannelName']?.toString() ?? '';
-    final overview = program['Overview']?.toString().trim() ?? '';
+  static _Airing? of(Map<String, dynamic> program) {
     final start = DateTime.tryParse(program['StartDate'] as String? ?? '')
         ?.toLocal();
     final end = DateTime.tryParse(program['EndDate'] as String? ?? '')
         ?.toLocal();
-    final airing = start != null && end != null && end.isAfter(start);
-    final now = DateTime.now();
-    final progress = airing
-        ? now.difference(start).inSeconds / end.difference(start).inSeconds
-        : 0.0;
-    final minutesLeft = airing
-        ? math.max(0, (end.difference(now).inSeconds / 60).round())
-        : 0;
-    // Type and spacing follow the card's height, so it reads the same at
-    // every poster size.
-    final scale = (height / 300).clamp(0.7, 1.4);
+    if (start == null || end == null || !end.isAfter(start)) return null;
+    return _Airing(start, end);
+  }
+
+  double get progress =>
+      DateTime.now().difference(start).inSeconds /
+      end.difference(start).inSeconds;
+
+  int get minutesLeft =>
+      math.max(0, (end.difference(DateTime.now()).inSeconds / 60).round());
+}
+
+/// A program's own picture, wide where the guide has one, else its poster
+/// cropped to fit; null when it has neither.
+String? _programPictureUrl(Map<String, dynamic> program, int maxWidth) {
+  final tags = program['ImageTags'] as Map?;
+  final id = program['Id']?.toString();
+  final thumb = tags?['Thumb'] as String?;
+  final primary = tags?['Primary'] as String?;
+  if (id == null || (thumb == null && primary == null)) return null;
+  final images = GetIt.instance<MediaServerClient>().imageApi;
+  return thumb != null
+      ? images.getThumbImageUrl(id, maxWidth: maxWidth, tag: thumb)
+      : images.getPrimaryImageUrl(id, maxWidth: maxWidth, tag: primary);
+}
+
+/// The program at the top of On Now on a TV, as on Samsung: the one under the
+/// remote, its picture on the right fading into the background towards the
+/// text and the row below. Without a picture its channel's logo stands there.
+/// [unit] is a 1920-wide screen's pixel, [textInset] where Home's row titles
+/// start.
+class LiveTvOnNowHero extends StatelessWidget {
+  final Map<String, dynamic> program;
+  final double unit;
+  final double textInset;
+
+  const LiveTvOnNowHero({
+    super.key,
+    required this.program,
+    required this.unit,
+    required this.textInset,
+  });
+
+  static double heightFor(double unit) => 400 * unit;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    final u = unit;
+    final width = MediaQuery.sizeOf(context).width;
+    final channelId = program['ChannelId']?.toString() ?? '';
+    final channelName = program['ChannelName']?.toString() ?? '';
+    final overview = program['Overview']?.toString().trim() ?? '';
+    final airing = _Airing.of(program);
     final logo = Align(
-      alignment: Alignment.centerRight,
+      alignment: const Alignment(0.75, 0),
       child: FractionallySizedBox(
         widthFactor: 0.4,
-        heightFactor: 0.55,
+        heightFactor: 0.56,
         child: LiveTvChannelLogo(
           channelId: channelId,
           imageTag: program['ChannelPrimaryImageTag'] as String?,
           name: channelName,
-          fontSize: 18 * scale,
+          fontSize: 40 * u,
         ),
       ),
     );
-    final imageTag = (program['ImageTags'] as Map?)?['Primary'] as String?;
-    final picture = imageTag == null
-        ? logo
-        : BoundedNetworkImage(
-            imageUrl: GetIt.instance<MediaServerClient>().imageApi
-                .getPrimaryImageUrl(
-                  program['Id'].toString(),
-                  maxWidth: 800,
-                  tag: imageTag,
-                ),
-            fit: BoxFit.cover,
-            maxWidth: 800,
-            errorBuilder: (context, url, error) => logo,
-          );
+    final url = _programPictureUrl(program, 1280);
+    // Fades [child] to nothing from the [from] edge, solid from [solidAt] on.
+    Widget fade(Widget child, Alignment from, double solidAt) => ShaderMask(
+          blendMode: BlendMode.dstIn,
+          shaderCallback: (rect) => LinearGradient(
+            begin: from,
+            end: -from,
+            colors: const [
+              Color(0x00000000),
+              Color(0x99000000),
+              Color(0xFF000000),
+            ],
+            stops: [0, solidAt / 2, solidAt],
+          ).createShader(rect),
+          child: child,
+        );
     Widget badge(String text, Color color) => Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: 8 * scale,
-            vertical: 3 * scale,
-          ),
+          padding: EdgeInsets.symmetric(horizontal: 14 * u, vertical: 7 * u),
           decoration: BoxDecoration(
             color: color,
-            borderRadius: BorderRadius.circular(5),
+            borderRadius: BorderRadius.circular(8 * u),
           ),
           child: Text(
             text,
@@ -571,112 +600,193 @@ class LiveTvOnNowShowcase extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
             style: TextStyle(
               color: Colors.white,
-              fontSize: 12 * scale,
+              fontSize: 20 * u,
               fontWeight: FontWeight.w800,
             ),
           ),
         );
-    return Container(
-      width: width,
-      height: height,
-      clipBehavior: Clip.antiAlias,
-      decoration: BoxDecoration(
-        color: liveTvCardColor,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: liveTvFocus, width: 2.5),
-      ),
+    return SizedBox(
+      height: heightFor(u),
       child: Stack(
         children: [
-          Positioned.fill(child: picture),
-          const Positioned.fill(
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    Color(0xF00E0E10),
-                    Color(0xBF0E0E10),
-                    Color(0x000E0E10),
-                  ],
-                  stops: [0, 0.45, 0.8],
-                ),
-              ),
-            ),
-          ),
-          const Positioned.fill(
-            child: DecoratedBox(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.bottomCenter,
-                  end: Alignment.topCenter,
-                  colors: [Color(0xD90E0E10), Color(0x000E0E10)],
-                  stops: [0, 0.55],
-                ),
-              ),
-            ),
+          Positioned(
+            top: 0,
+            right: 0,
+            bottom: 0,
+            width: width * 0.66,
+            child: url == null
+                ? logo
+                : fade(
+                    fade(
+                      BoundedNetworkImage(
+                        key: ValueKey(url),
+                        imageUrl: url,
+                        fit: BoxFit.cover,
+                        maxWidth: 1280,
+                        errorBuilder: (context, url, error) => logo,
+                      ),
+                      Alignment.bottomCenter,
+                      0.42,
+                    ),
+                    Alignment.centerLeft,
+                    0.48,
+                  ),
           ),
           Positioned(
-            left: 20 * scale,
-            right: width * 0.36,
-            bottom: 18 * scale,
+            left: textInset,
+            bottom: 26 * u,
+            width: width * 0.46,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   children: [
-                    badge(l10n.esplayLiveTvLive, liveTvRed),
                     if (channelName.isNotEmpty) ...[
-                      SizedBox(width: 8 * scale),
                       Flexible(
-                        child: badge(channelName, const Color(0xE626262B)),
+                        child: badge(channelName, const Color(0xFF26262B)),
                       ),
+                      SizedBox(width: 12 * u),
                     ],
+                    badge(l10n.esplayLiveTvLive, liveTvRed),
                   ],
                 ),
-                SizedBox(height: 10 * scale),
+                SizedBox(height: 16 * u),
                 Text(
                   program['Name']?.toString() ?? '',
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 28 * scale,
-                    height: 1.1,
+                    fontSize: 56 * u,
+                    height: 1.05,
                     fontWeight: FontWeight.w800,
                   ),
                 ),
-                if (airing) ...[
-                  SizedBox(height: 8 * scale),
+                if (airing != null) ...[
+                  SizedBox(height: 14 * u),
                   Text(
-                    '${liveTvTimeRange(start, end)} · '
-                    '${l10n.esplayLiveTvMinutesLeft(minutesLeft)}',
+                    '${liveTvTimeRange(airing.start, airing.end)} · '
+                    '${l10n.esplayLiveTvMinutesLeft(airing.minutesLeft)}',
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       color: const Color(0xFFC4C4CA),
-                      fontSize: 15 * scale,
+                      fontSize: 24 * u,
                     ),
                   ),
-                  SizedBox(height: 10 * scale),
-                  FractionallySizedBox(
-                    widthFactor: 0.8,
-                    child: LiveTvProgressBar(value: progress, height: 5),
+                  SizedBox(height: 14 * u),
+                  SizedBox(
+                    width: 520 * u,
+                    child: LiveTvProgressBar(
+                      value: airing.progress,
+                      height: 8 * u,
+                    ),
                   ),
                 ],
                 if (overview.isNotEmpty) ...[
-                  SizedBox(height: 8 * scale),
+                  SizedBox(height: 14 * u),
                   Text(
                     overview,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                      color: liveTvMutedText,
-                      fontSize: 14 * scale,
-                      height: 1.3,
+                      color: const Color(0xFFA8A8B0),
+                      fontSize: 22 * u,
+                      height: 1.4,
                     ),
                   ),
                 ],
               ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+/// A program airing now as a small 16:9 card under the hero: its picture (its
+/// channel's logo, then its name, when it has none) with its progress, and the
+/// channel underneath. [unit] is a 1920-wide screen's pixel.
+class LiveTvOnNowCard extends StatelessWidget {
+  final Map<String, dynamic> program;
+  final double unit;
+  final bool focused;
+
+  const LiveTvOnNowCard({
+    super.key,
+    required this.program,
+    required this.unit,
+    this.focused = false,
+  });
+
+  static double widthFor(double unit) => 320 * unit;
+  static double heightFor(double unit) => 180 * unit + 8 * unit + 40 * unit;
+
+  @override
+  Widget build(BuildContext context) {
+    final u = unit;
+    final channelName = program['ChannelName']?.toString() ?? '';
+    final airing = _Airing.of(program);
+    final logo = LiveTvChannelLogo(
+      channelId: program['ChannelId']?.toString() ?? '',
+      imageTag: program['ChannelPrimaryImageTag'] as String?,
+      name: channelName,
+      fontSize: (26 * u).clamp(11.0, 20.0),
+    );
+    final url = _programPictureUrl(program, 480);
+    return SizedBox(
+      width: widthFor(u),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: widthFor(u),
+            height: 180 * u,
+            clipBehavior: Clip.antiAlias,
+            decoration: BoxDecoration(
+              color: const Color(0xFF1C1C20),
+              borderRadius: BorderRadius.circular(14 * u),
+              border: Border.all(
+                color: focused ? liveTvFocus : Colors.transparent,
+                width: 4 * u,
+              ),
+            ),
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  child: url == null
+                      ? logo
+                      : BoundedNetworkImage(
+                          imageUrl: url,
+                          fit: BoxFit.cover,
+                          maxWidth: 480,
+                          errorBuilder: (context, url, error) => logo,
+                        ),
+                ),
+                if (airing != null)
+                  Positioned(
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    child: LiveTvProgressBar(
+                      value: airing.progress,
+                      height: 5 * u,
+                    ),
+                  ),
+              ],
+            ),
+          ),
+          SizedBox(height: 8 * u),
+          Text(
+            channelName,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: (22 * u).clamp(11.0, 18.0),
+              fontWeight: FontWeight.w700,
             ),
           ),
         ],
