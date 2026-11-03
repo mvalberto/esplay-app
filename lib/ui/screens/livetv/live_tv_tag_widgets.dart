@@ -548,7 +548,7 @@ class LiveTvOnNowHero extends StatelessWidget {
     required this.textInset,
   });
 
-  static double heightFor(double unit) => 400 * unit;
+  static double heightFor(double unit) => 370 * unit;
 
   @override
   Widget build(BuildContext context) {
@@ -573,18 +573,19 @@ class LiveTvOnNowHero extends StatelessWidget {
       ),
     );
     final url = _programPictureUrl(program, 1280);
-    // Fades [child] to nothing from the [from] edge, solid from [solidAt] on.
-    Widget fade(Widget child, Alignment from, double solidAt) => ShaderMask(
+    // Fades [child] to nothing from the [from] edge, solid from the last stop on.
+    Widget fade(Widget child, Alignment from, List<double> stops) => ShaderMask(
           blendMode: BlendMode.dstIn,
           shaderCallback: (rect) => LinearGradient(
             begin: from,
             end: -from,
             colors: const [
               Color(0x00000000),
-              Color(0x99000000),
+              Color(0x00000000),
+              Color(0x80000000),
               Color(0xFF000000),
             ],
-            stops: [0, solidAt / 2, solidAt],
+            stops: stops,
           ).createShader(rect),
           child: child,
         );
@@ -626,10 +627,10 @@ class LiveTvOnNowHero extends StatelessWidget {
                         errorBuilder: (context, url, error) => logo,
                       ),
                       Alignment.bottomCenter,
-                      0.42,
+                      const [0.0, 0.06, 0.30, 0.55],
                     ),
                     Alignment.centerLeft,
-                    0.48,
+                    const [0.0, 0.10, 0.34, 0.62],
                   ),
           ),
           Positioned(

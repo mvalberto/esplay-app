@@ -3082,14 +3082,16 @@ class UserPreferences extends ChangeNotifier {
     defaultValue: '',
   );
 
+  // EsPlay: on a TV the title under the remote plays its trailer at the top
+  // of Home.
   static final episodePreviewEnabled = Preference(
     key: 'episodePreviewEnabled',
-    defaultValue: false,
+    defaultValue: PlatformDetection.isTV,
   );
 
   static final mediaPreviewMode = Preference(
     key: 'mediaPreviewMode',
-    defaultValue: mediaPreviewMedia,
+    defaultValue: PlatformDetection.isTV ? mediaPreviewTrailer : mediaPreviewMedia,
   );
 
   /// The preview a focused home card plays, off when the switch is off.

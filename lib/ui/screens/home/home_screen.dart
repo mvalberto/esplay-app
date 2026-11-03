@@ -91,6 +91,7 @@ import 'home_row_shift.dart';
 import 'home_view_model.dart';
 import '../../../esplay/live_tv_tags.dart';
 import '../livetv/live_tv_tag_widgets.dart';
+import 'esplay_home_hero.dart';
 import '../../widgets/seerr/seerr_genre_label.dart';
 import '../../widgets/skeleton/skeleton_home_row.dart';
 import '../../widgets/skeleton/skeleton_shimmer.dart';
@@ -574,7 +575,9 @@ class _HomeShellState extends State<_HomeShell>
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  if (backdropStyle != UserPreferences.homeBackdropOff)
+                  // EsPlay: on a TV the showcase at the top stands in for it.
+                  if (backdropStyle != UserPreferences.homeBackdropOff &&
+                      !PlatformDetection.isTV)
                     ValueListenableBuilder<String?>(
                       valueListenable: _backdropUrlNotifier,
                       builder: (context, url, _) {
@@ -1124,6 +1127,10 @@ class _ContentRowsState extends State<_ContentRows>
     if (!_scrollController.hasClients) return 0.0;
     final viewportHeight = _scrollController.position.viewportDimension;
     if (viewportHeight <= 0.0) return 0.0;
+    if (_esplayHomeHero) {
+      return EsplayMediaHero.heightFor(_esplayUnit())
+          .clamp(0.0, viewportHeight * 0.85);
+    }
     if (_showHomeRowInfoOverlay()) {
       return _overlayBottom.clamp(0.0, viewportHeight * 0.85);
     }
@@ -1532,7 +1539,6 @@ class _ContentRowsState extends State<_ContentRows>
     HardwareKeyboard.instance.removeHandler(_handleGlobalHardwareKey);
     _rowPrefetchDebounce?.cancel();
     _v2Expansion.dispose();
-    _esplayHeroIndex.dispose();
     _audioArbiter.unregister(this);
     appRouter.routerDelegate.removeListener(_onRouteChanged);
     _resizeCheckDebounce?.cancel();
@@ -4755,9 +4761,14 @@ class _ContentRowsState extends State<_ContentRows>
       // rows drift higher in the viewport as the user navigates downward.
       final viewportHeight = MediaQuery.of(context).size.height;
       final lastRowExtent = rowExtents.isEmpty ? 0.0 : rowExtents.last;
+      final rowsTop = _esplayHomeHero
+          ? (overlayBottom > EsplayMediaHero.heightFor(_esplayUnit())
+              ? overlayBottom
+              : EsplayMediaHero.heightFor(_esplayUnit()))
+          : overlayBottom;
       neededBottomPadding =
           (viewportHeight -
-                  (overlayBottom + (_isHomeRowsStyleV2() ? 4.0 : 8.0)) -
+                  (rowsTop + (_isHomeRowsStyleV2() ? 4.0 : 8.0)) -
                   lastRowExtent)
               .clamp(minBottomPadding, double.infinity);
     }
@@ -5096,6 +5107,29 @@ class _ContentRowsState extends State<_ContentRows>
                 )),
               ),
             ),
+        if (_esplayHomeHero)
+          ValueListenableBuilder<bool>(
+            valueListenable: _mediaBarVisibleNotifier,
+            builder: (context, mediaBarVisible, _) =>
+                ValueListenableBuilder<int?>(
+              valueListenable: _activeFocusedRowNotifier,
+              builder: (context, focusedRow, _) {
+                if (focusedRow == null || (includeMediaBar && mediaBarVisible)) {
+                  return const SizedBox.shrink();
+                }
+                return Positioned(
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  child: IgnorePointer(
+                    child: _buildEsplayHomeHero(
+                      textInset: rowLeftInset + _kHomeRowLabelInset,
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
         ValueListenableBuilder<bool>(
           valueListenable: _infoRevealedNotifier,
           builder: (context, infoRevealed, _) {
@@ -5277,14 +5311,68 @@ class _ContentRowsState extends State<_ContentRows>
 
   double _esplayUnit() => MediaQuery.sizeOf(context).width / 1920;
 
-  double _esplayOnNowHeight() {
-    final u = _esplayUnit();
-    return LiveTvOnNowHero.heightFor(u) + LiveTvOnNowCard.heightFor(u) + 10;
-  }
+  double _esplayOnNowHeight() => LiveTvOnNowCard.heightFor(_esplayUnit()) + 10;
 
   double _esplayTagsHeight() => 110 * _esplayUnit() + 10;
 
-  final ValueNotifier<int> _esplayHeroIndex = ValueNotifier<int>(0);
+  /// The showcase at the top of Home while the rows have focus, on a TV with
+  /// the plain rows.
+  bool get _esplayHomeHero =>
+      _esplayTvShowcase &&
+      !_showHomeRowInfoOverlay() &&
+      !widget.prefs.get(UserPreferences.fullScreenRows);
+
+  /// The title under the remote: a live program as on the live TV page, else
+  /// its picture or, once it plays, its preview.
+  Widget _buildEsplayHomeHero({required double textInset}) {
+    final u = _esplayUnit();
+    return ValueListenableBuilder<AggregatedItem?>(
+      valueListenable: widget.selectedItemNotifier,
+      builder: (context, item, _) {
+        if (item == null) {
+          return ColoredBox(
+            color: AppColorScheme.background,
+            child: SizedBox(height: EsplayMediaHero.heightFor(u)),
+          );
+        }
+        if (item.type == 'Program' && item.channelId != null) {
+          return ColoredBox(
+            color: AppColorScheme.background,
+            child: LiveTvOnNowHero(
+              program: item.rawData,
+              unit: u,
+              textInset: textInset,
+            ),
+          );
+        }
+        return ValueListenableBuilder<String?>(
+          valueListenable: _activePreviewKeyNotifier,
+          builder: (context, activeKey, _) => ValueListenableBuilder<bool>(
+            valueListenable: _previewReadyNotifier,
+            builder: (context, ready, _) {
+              final playing = ready &&
+                  activeKey != null &&
+                  activeKey.startsWith('${_previewKeyFor(item)}:');
+              return EsplayMediaHero(
+                item: item,
+                unit: u,
+                textInset: textInset,
+                video: playing
+                    ? _previewSurface(
+                        useMedia3: _previewUsingMedia3,
+                        controller: _previewController,
+                        appleTvTextureId: _previewUsingAppleTv
+                            ? _appleTvPreviewPlayer?.textureId
+                            : null,
+                      )
+                    : null,
+              );
+            },
+          ),
+        );
+      },
+    );
+  }
 
   Widget _buildEsplayOnNowShowcase(
     HomeRow row, {
@@ -5300,17 +5388,6 @@ class _ContentRowsState extends State<_ContentRows>
       rowIndex: rowIndex,
       hasItems: row.items.isNotEmpty,
       height: cardsHeight,
-      header: ValueListenableBuilder<int>(
-        valueListenable: _esplayHeroIndex,
-        builder: (context, index, _) => row.items.isEmpty
-            ? const SizedBox.shrink()
-            : LiveTvOnNowHero(
-                program: row.items[index.clamp(0, row.items.length - 1)]
-                    .rawData,
-                unit: u,
-                textInset: _kHomeRowLabelInset * 2,
-              ),
-      ),
       child: LockedFocusRow<AggregatedItem>(
         key: _rowKey(rowIndex),
         items: row.items,
@@ -5322,10 +5399,7 @@ class _ContentRowsState extends State<_ContentRows>
         leadingPadding: _isHomeRowsStyleV2() ? _kHomeRowLabelInset : 0,
         clipBehavior: Clip.hardEdge,
         padding: const EdgeInsets.fromLTRB(_kHomeRowLabelInset, 5, 20, 5),
-        onIndexChanged: (index, _) {
-          _esplayHeroIndex.value = index;
-          _onHomeRowTileFocused(null);
-        },
+        onIndexChanged: (index, _) => _onHomeRowTileFocused(row.items[index]),
         onFocusChange: (has) => _onRowFocusTracked(rowIndex, has),
         onVerticalNavigation: (isUp) => _onRowVerticalNavigation(
           rowIndex: rowIndex,
@@ -5772,7 +5846,9 @@ class _ContentRowsState extends State<_ContentRows>
               return ValueListenableBuilder<bool>(
                 valueListenable: _previewReadyNotifier,
                 builder: (context, previewReady, _) {
-                  final showPreviewVideo = activePreviewKey == previewKey && previewReady;
+                  final showPreviewVideo = activePreviewKey == previewKey &&
+                      previewReady &&
+                      !_esplayHomeHero;
 
                   void navigateToItem() {
                     if (_playedOnSelect(row, item)) return;
@@ -6179,7 +6255,6 @@ class _ContentRowsState extends State<_ContentRows>
     required bool hasItems,
     required double height,
     required Widget child,
-    Widget? header,
   }) {
     final isRowsV2 = _isHomeRowsStyleV2();
     final showHeaderControls =
@@ -6193,7 +6268,6 @@ class _ContentRowsState extends State<_ContentRows>
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-          ?header,
           Padding(
             padding: EdgeInsets.fromLTRB(
               _kHomeRowLabelInset,
@@ -7185,6 +7259,38 @@ class _OverlayTopClipper extends CustomClipper<Rect> {
   bool shouldReclip(_OverlayTopClipper oldClipper) => oldClipper.top != top;
 }
 
+/// What a home preview plays into, whichever player runs it.
+Widget? _previewSurface({
+  required bool useMedia3,
+  required VideoController? controller,
+  int? appleTvTextureId,
+}) {
+  if (useMedia3) {
+    return const Media3VideoView(fill: Colors.black, role: 'preview');
+  }
+  if (appleTvTextureId != null) {
+    return FittedBox(
+      fit: BoxFit.cover,
+      clipBehavior: Clip.hardEdge,
+      child: SizedBox(
+        width: 1920,
+        height: 1080,
+        child: Texture(textureId: appleTvTextureId),
+      ),
+    );
+  }
+  if (controller != null) {
+    return Video(
+      controller: controller,
+      controls: NoVideoControls,
+      fit: BoxFit.cover,
+      pauseUponEnteringBackgroundMode: false,
+      fill: Colors.black,
+    );
+  }
+  return null;
+}
+
 class _PreviewCardShell extends StatelessWidget {
   final Widget card;
   final double width;
@@ -7214,30 +7320,11 @@ class _PreviewCardShell extends StatelessWidget {
       return card;
     }
 
-    final Widget? previewSurface;
-    if (useMedia3) {
-      previewSurface = const Media3VideoView(fill: Colors.black, role: 'preview');
-    } else if (appleTvTextureId != null) {
-      previewSurface = FittedBox(
-        fit: BoxFit.cover,
-        clipBehavior: Clip.hardEdge,
-        child: SizedBox(
-          width: 1920,
-          height: 1080,
-          child: Texture(textureId: appleTvTextureId!),
-        ),
-      );
-    } else if (controller != null) {
-      previewSurface = Video(
-        controller: controller!,
-        controls: NoVideoControls,
-        fit: BoxFit.cover,
-        pauseUponEnteringBackgroundMode: false,
-        fill: Colors.black,
-      );
-    } else {
-      previewSurface = null;
-    }
+    final previewSurface = _previewSurface(
+      useMedia3: useMedia3,
+      controller: controller,
+      appleTvTextureId: appleTvTextureId,
+    );
 
     if (previewSurface == null) {
       return card;
