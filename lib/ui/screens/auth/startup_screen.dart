@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -43,14 +44,18 @@ class _StartupScreenState extends State<StartupScreen>
   )..repeat();
   late final Animation<double> _fadeAnimation;
   // EsPlay: the logo builds itself, the play rolls in and the button grows
-  // from it. The app moves on only once it has finished.
+  // from it. The app moves on only once it has finished and the whole logo
+  // has stayed on screen for a moment.
   late final AnimationController _intro = AnimationController(
     vsync: this,
     duration: _introLength,
   );
-  final Future<void> _introDone = Future.delayed(_introLength);
+  final Completer<void> _introCompleter = Completer<void>();
+  Future<void> get _introDone => _introCompleter.future;
 
-  static const _introLength = Duration(milliseconds: 2100);
+  static const _introLength = Duration(milliseconds: 2800);
+  static const _introHold = Duration(milliseconds: 700);
+  static const _logoLayers = ['pill', 'play', 'tri', 'es'];
   static const _logoWidth = 180.0;
   // From the logo artwork (C:\esplay\brand\gen.js): its shape and where its
   // parts sit, as fractions of its width and height.
@@ -71,10 +76,23 @@ class _StartupScreenState extends State<StartupScreen>
       parent: _fadeController,
       curve: Curves.easeIn,
     );
-    _intro.forward().whenCompleteOrCancel(() {
-      if (mounted) _fadeController.forward();
-    });
+    _playIntro();
     _initialize();
+  }
+
+  /// Loads the logo layers before starting, so a slow cold start doesn't eat
+  /// the beginning of the animation.
+  Future<void> _playIntro() async {
+    try {
+      await Future.wait([
+        for (final name in _logoLayers)
+          SvgAssetLoader('assets/images/esplay_logo_$name.svg').loadBytes(null),
+      ]).timeout(const Duration(seconds: 2));
+    } catch (_) {}
+    if (mounted) await _intro.forward().orCancel.catchError((_) {});
+    await Future.delayed(_introHold);
+    _introCompleter.complete();
+    if (mounted) _fadeController.forward();
   }
 
   @override
@@ -271,7 +289,7 @@ class _StartupScreenState extends State<StartupScreen>
           width: _logoWidth,
           height: height,
         );
-    // The same timings as the mockup, as parts of the 2.1 s run.
+    // The same timings as the mockup, as parts of the whole run.
     final roll = CurvedAnimation(
       parent: _intro,
       curve: const Interval(0, 0.43, curve: Cubic(0.2, 0.8, 0.2, 1)),
@@ -295,7 +313,9 @@ class _StartupScreenState extends State<StartupScreen>
         animation: _intro,
         builder: (context, _) {
           final hidden = (1 - grow.value) * 0.7 * (_pillRight - _pillLeft);
+          // The play and "es" slide in from outside the logo's box.
           return Stack(
+            clipBehavior: Clip.none,
             children: [
               ClipRect(
                 clipper: _FromLeft((_pillLeft + hidden) * _logoWidth),
