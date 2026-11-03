@@ -96,7 +96,10 @@ private class RendererLoader :
         val metaData = context.packageManager
             .getApplicationInfo(context.packageName, PackageManager.GET_META_DATA)
             .metaData
-        if (metaData?.getBoolean(ENABLE_IMPELLER_KEY, false) == true) {
+        val manifestImpeller = metaData?.getBoolean(ENABLE_IMPELLER_KEY, false) == true
+        // EsPlay: one APK for phones and TVs, so on a TV the mobile build
+        // follows the TV rule below instead of its manifest's Impeller.
+        if (manifestImpeller && !isTelevision(context)) {
             report("Impeller (manifest)")
             return null
         }
@@ -113,7 +116,11 @@ private class RendererLoader :
         val allowed = ImpellerPolicy.gpuStaysOnVulkan(renderer)
         val reason = if (qualifies) "GPU ${renderer ?: "unknown"}" else "device doesn't qualify"
         report("${if (allowed) "Impeller" else "Skia"} (auto, $reason)")
-        return if (allowed) "--enable-impeller=true" else null
+        return when {
+            allowed -> "--enable-impeller=true"
+            manifestImpeller -> "--enable-impeller=false"
+            else -> null
+        }
     }
 
     private fun report(summary: String) {
