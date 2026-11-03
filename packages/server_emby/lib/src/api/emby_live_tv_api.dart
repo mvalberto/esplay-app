@@ -48,17 +48,34 @@ class EmbyLiveTvApi implements LiveTvApi, LiveTvChannelTagsApi {
     int? limit,
     String? userId,
   }) async {
-    final response = await _dio.get(
-      '/LiveTv/Programs/Recommended',
-      queryParameters: {
-        'IsAiring': true,
-        'Limit': ?limit,
-        'Fields': 'ChannelInfo',
-        'EnableImages': true,
-        'UserId': ?userId,
-      },
-    );
-    return response.data as Map<String, dynamic>;
+    // In channel order, like Emby's own apps. /LiveTv/Programs/Recommended
+    // ranks by what each user watches most instead.
+    final response = await _dio.get('/LiveTv/Channels', queryParameters: {
+      'AddCurrentProgram': true,
+      'EnableImageTypes': 'Primary',
+      'ImageTypeLimit': 1,
+      'EnableTotalRecordCount': false,
+      // Some channels have no guide, so ask for more than will be shown.
+      'Limit': ?(limit == null ? null : limit * 4),
+      'UserId': ?userId,
+    });
+    final channels = (response.data as Map<String, dynamic>)['Items'] as List?;
+    final programs = <Map<String, dynamic>>[];
+    for (final channel in (channels ?? const []).whereType<Map>()) {
+      final program = channel['CurrentProgram'];
+      if (program is! Map) continue;
+      programs.add({
+        ...program.cast<String, dynamic>(),
+        'ChannelId': program['ChannelId'] ?? channel['Id'],
+        'ChannelName': program['ChannelName'] ?? channel['Name'],
+        'ChannelNumber': ?(program['ChannelNumber'] ?? channel['ChannelNumber']),
+        'ChannelPrimaryImageTag':
+            ?(program['ChannelPrimaryImageTag'] ??
+                (channel['ImageTags'] as Map?)?['Primary']),
+      });
+      if (limit != null && programs.length >= limit) break;
+    }
+    return {'Items': programs, 'TotalRecordCount': programs.length};
   }
 
   @override

@@ -88,7 +88,8 @@ abstract class LiveTvChannelTagsApi {
   /// The tags in the server's order, as `{Id, Name}` maps.
   Future<List<Map<String, dynamic>>> getChannelTags({String? userId});
 
-  /// What is airing now, each program with its channel's name and logo tag.
+  /// What is airing now in channel order, each program with its channel's
+  /// name and logo tag.
   Future<Map<String, dynamic>> getAiringPrograms({int? limit, String? userId});
 
   /// The channels carrying [tagId], each with its `CurrentProgram`. A tag can
