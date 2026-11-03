@@ -5234,11 +5234,18 @@ class _ContentRowsState extends State<_ContentRows>
         onTap: (_, item) => _openOnNowChannel(item),
         itemBuilder: (ctx, item, idx, isFocused) => GestureDetector(
           onTap: () => _openOnNowChannel(item),
-          child: LiveTvOnNowPoster(
-            program: item.rawData,
-            width: cardWidth,
-            focused: isFocused,
-          ),
+          // On a TV the program under the remote opens wide, like Samsung's.
+          child: isFocused && PlatformDetection.isTV
+              ? LiveTvOnNowShowcase(
+                  program: item.rawData,
+                  width: squarePosterSide * 16 / 9,
+                  height: cardWidth * 1.5,
+                )
+              : LiveTvOnNowPoster(
+                  program: item.rawData,
+                  width: cardWidth,
+                  focused: isFocused,
+                ),
         ),
       ),
     );

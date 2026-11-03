@@ -155,6 +155,14 @@ class LiveTvTagsRepository {
               name: tag['Name']?.toString() ?? '',
             ),
       ];
+      // By their number: Emby doesn't return them in that order. Ones without
+      // a number go last, by name.
+      int numberOf(LiveTvTag tag) =>
+          int.tryParse(tag.number ?? '') ?? 1 << 30;
+      tags.sort((a, b) {
+        final byNumber = numberOf(a).compareTo(numberOf(b));
+        return byNumber != 0 ? byNumber : a.name.compareTo(b.name);
+      });
       unawaited(_storeTags(tags));
       return tags;
     }, refresh: refresh);
