@@ -901,6 +901,7 @@ class _ContentRowsState extends State<_ContentRows>
   bool? _cachedExtentShowInfoOverlay;
   NavbarPosition? _cachedExtentNavbarPosition;
   double? _cachedExtentViewportHeight;
+  double? _cachedExtentViewportWidth;
   int _cachedExtentPrefsVersion = -1;
   List<double>? _cachedRowExtents;
   int _layoutPrefsVersion = 0;
@@ -3328,7 +3329,16 @@ class _ContentRowsState extends State<_ContentRows>
     final headerPaddingBottom = isRowsV2 ? 1.0 : 8.0;
     final titleHeight = 20.0 * metadataScale;
     final subtitleHeight = hasSubtitle ? (18.0 * metadataScale) : 0.0;
-    final headerHeight = headerPaddingTop + headerPaddingBottom + titleHeight + subtitleHeight;
+    var headerHeight = headerPaddingTop + headerPaddingBottom + titleHeight + subtitleHeight;
+    // EsPlay: the showcase rows are exactly as tall as their cards, so on
+    // desktop the header's scroll arrows (taller than the title) must count.
+    if (_esplayTvShowcase &&
+        PlatformDetection.useDesktopUi &&
+        !PlatformDetection.isTV &&
+        (row.rowType == HomeRowType.liveTv ||
+            row.rowType == HomeRowType.liveTvOnNow)) {
+      headerHeight = headerPaddingTop + headerPaddingBottom + 40.0;
+    }
 
     var totalHeight = childHeight + headerHeight;
     if (!fullScreenRows) {
@@ -4356,6 +4366,8 @@ class _ContentRowsState extends State<_ContentRows>
     final showInfoOverlay = prefs.get(UserPreferences.homeRowInfoOverlay);
     final navbarPosition = prefs.get(UserPreferences.navbarPosition);
     final viewportHeight = MediaQuery.sizeOf(context).height;
+    // EsPlay's showcase rows scale with the width.
+    final viewportWidth = MediaQuery.sizeOf(context).width;
 
     if (_cachedRowExtents != null &&
         listEquals(_cachedExtentRows, rows) &&
@@ -4366,6 +4378,7 @@ class _ContentRowsState extends State<_ContentRows>
         _cachedExtentShowInfoOverlay == showInfoOverlay &&
         _cachedExtentNavbarPosition == navbarPosition &&
         _cachedExtentViewportHeight == viewportHeight &&
+        _cachedExtentViewportWidth == viewportWidth &&
         _cachedExtentPrefsVersion == _layoutPrefsVersion) {
       return _cachedRowExtents!;
     }
@@ -4385,6 +4398,7 @@ class _ContentRowsState extends State<_ContentRows>
     _cachedExtentShowInfoOverlay = showInfoOverlay;
     _cachedExtentNavbarPosition = navbarPosition;
     _cachedExtentViewportHeight = viewportHeight;
+    _cachedExtentViewportWidth = viewportWidth;
     _cachedExtentPrefsVersion = _layoutPrefsVersion;
     _cachedRowExtents = extents;
     return extents;
