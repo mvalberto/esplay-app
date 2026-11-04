@@ -3331,17 +3331,19 @@ class _ContentRowsState extends State<_ContentRows>
     final subtitleHeight = hasSubtitle ? (18.0 * metadataScale) : 0.0;
     var headerHeight = headerPaddingTop + headerPaddingBottom + titleHeight + subtitleHeight;
     // EsPlay: the showcase rows are exactly as tall as their cards, so on
-    // desktop the header's scroll arrows (taller than the title) must count.
-    if (_esplayTvShowcase &&
+    // desktop the header's scroll arrows (taller than the title) must count
+    // and the modern rows' padding offset (negative by default) must not.
+    final esplayDesktopShowcaseRow = _esplayTvShowcase &&
         PlatformDetection.useDesktopUi &&
         !PlatformDetection.isTV &&
         (row.rowType == HomeRowType.liveTv ||
-            row.rowType == HomeRowType.liveTvOnNow)) {
+            row.rowType == HomeRowType.liveTvOnNow);
+    if (esplayDesktopShowcaseRow) {
       headerHeight = headerPaddingTop + headerPaddingBottom + 40.0;
     }
 
     var totalHeight = childHeight + headerHeight;
-    if (!fullScreenRows) {
+    if (!fullScreenRows && !esplayDesktopShowcaseRow) {
       if (isRowsV2) {
         final customHeight = prefs.get(UserPreferences.modernHomeRowsPadding).toDouble();
         var offset = (customHeight - 400.0).clamp(-40.0, 200.0);
