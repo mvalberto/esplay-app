@@ -4915,6 +4915,7 @@ class _ContentRowsState extends State<_ContentRows>
                                                       !_mediaBarFocusNode.hasFocus,
                                                   height: mediaBarHeight,
                                                   rowPeek: mediaBarRowPeek,
+                                                  esplayTextInset: rowLeftInset + _kHomeRowLabelInset,
                                                   onNavigateDown: _moveFocusFromMediaBarToRows,
                                                   onNavigateUp: _navigateFromMediaBarToNavbar,
                                                   onNavigateLeft: navbarIsLeft

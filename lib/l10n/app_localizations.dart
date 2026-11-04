@@ -28107,6 +28107,12 @@ abstract class AppLocalizations {
   /// **'LIVE'**
   String get esplayLiveTvLive;
 
+  /// No description provided for @esplayMediaBarNew.
+  ///
+  /// In en, this message translates to:
+  /// **'NEW'**
+  String get esplayMediaBarNew;
+
   /// No description provided for @esplayLiveTvNoTags.
   ///
   /// In en, this message translates to:

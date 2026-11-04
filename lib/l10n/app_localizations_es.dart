@@ -16382,6 +16382,9 @@ class AppLocalizationsEs extends AppLocalizations {
   String get esplayLiveTvLive => 'EN DIRECTO';
 
   @override
+  String get esplayMediaBarNew => 'NUEVO';
+
+  @override
   String get esplayLiveTvNoTags =>
       'Este servidor todavía no tiene etiquetas de canales.';
 

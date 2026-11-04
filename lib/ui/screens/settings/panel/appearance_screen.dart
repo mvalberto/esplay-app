@@ -100,14 +100,15 @@ class _AppearanceScreenState extends State<_AppearanceScreen> {
                       InterfaceStyle.material => l10n.interfaceStyleMaterial,
                     },
                   ),
-                  _TvSettingsListTile(
-                    leading: const Icon(Icons.palette_outlined),
-                    title: Text(l10n.settingsAppearanceTheme),
-                    subtitle: Text(l10n.settingsAppearanceThemeSubtitle),
-                    onTap: () => context.pushSettingsScreen(
-                      const AppearanceThemeScreen(),
+                  if (!esplayHideIntegrationsAndLooks)
+                    _TvSettingsListTile(
+                      leading: const Icon(Icons.palette_outlined),
+                      title: Text(l10n.settingsAppearanceTheme),
+                      subtitle: Text(l10n.settingsAppearanceThemeSubtitle),
+                      onTap: () => context.pushSettingsScreen(
+                        const AppearanceThemeScreen(),
+                      ),
                     ),
-                  ),
                   if (AppColorScheme.isGlass)
                     EnumPreferenceTile<GlassQualityMode>(
                       preference: UserPreferences.glassQuality,
@@ -120,12 +121,13 @@ class _AppearanceScreenState extends State<_AppearanceScreen> {
                         GlassQualityMode.reduced => l10n.glassQualityReduced,
                       },
                     ),
-                  EnumPreferenceTile<AppTheme>(
-                    preference: UserPreferences.focusColor,
-                    title: l10n.focusBorderColor,
-                    icon: Icons.border_color,
-                    labelOf: (v) => _formatCamelCaseLabel(v.name),
-                  ),
+                  if (!esplayHideIntegrationsAndLooks)
+                    EnumPreferenceTile<AppTheme>(
+                      preference: UserPreferences.focusColor,
+                      title: l10n.focusBorderColor,
+                      icon: Icons.border_color,
+                      labelOf: (v) => _formatCamelCaseLabel(v.name),
+                    ),
                   if (!esplayHideThemeStoreAndExtras) ...[
                     _TvSettingsListTile(
                       leading: const Icon(Icons.storefront_outlined),

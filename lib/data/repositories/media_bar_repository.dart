@@ -29,7 +29,7 @@ class MediaBarRepository {
   static const _fields =
       'Type,Genres,OfficialRating,CommunityRating,CriticRating,'
       'RunTimeTicks,ProductionYear,ImageTags,BackdropImageTags,'
-      'Overview,ProviderIds';
+      'Overview,ProviderIds,DateCreated';
 
   MediaBarRepository(this._client, this._prefs);
 
@@ -771,6 +771,7 @@ class MediaBarRepository {
       tmdbId: (providerIds?['Tmdb'] ?? providerIds?['tmdb'])?.toString(),
       imdbId: (providerIds?['Imdb'] ?? providerIds?['imdb'])?.toString(),
       itemType: data['Type'] as String? ?? 'Movie',
+      dateCreated: DateTime.tryParse(data['DateCreated'] as String? ?? ''),
       remoteTrailers:
           (data['RemoteTrailers'] as List?)?.cast<Map<String, dynamic>>() ??
           const [],

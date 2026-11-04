@@ -26,6 +26,21 @@ class _SettingsSearchEntry {
 /// One source screen worth of entries. Every setting on a screen shares its
 /// breadcrumb and the screen it opens, so declaring the screen once keeps
 /// each setting below down to a title and a few keywords.
+/// The screens and settings EsPlay keeps out of sight, by search id.
+const _esplayHiddenSearch = {
+  'themes',
+  'appearance.focus_color',
+  'media-bar',
+  'imdb',
+  'seasonal-row',
+  'tmdb',
+  'calendars',
+  'seerr-rows',
+  'custom-rows',
+  'services',
+  'seerr',
+};
+
 class _SearchSection {
   _SearchSection({
     required this.slug,
@@ -2089,6 +2104,13 @@ List<_SettingsSearchEntry> _buildSettingsSearchIndex({
       keywords: ['error', 'bug', 'crashes'],
     ),
   ];
+  if (esplayHideIntegrationsAndLooks) {
+    entries.removeWhere(
+      (entry) =>
+          _esplayHiddenSearch.contains(entry.id) ||
+          _esplayHiddenSearch.contains(entry.id.split('.').first),
+    );
+  }
 
   assert(() {
     final ids = <String>{};

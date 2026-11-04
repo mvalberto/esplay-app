@@ -222,13 +222,14 @@ class _HomeScreenCategoryScreenState extends State<_HomeScreenCategoryScreen> {
                 onTap: () =>
                     context.pushSettingsScreen(const HomeRowTogglesScreen()),
               ),
-              _TvSettingsListTile(
-                leading: const Icon(Icons.featured_play_list),
-                title: Text(l10n.mediaBar),
-                subtitle: Text(l10n.featuredContentAppearance),
-                onTap: () =>
-                    context.pushSettingsScreen(const MediaBarSettingsScreen()),
-              ),
+              if (!esplayHideIntegrationsAndLooks)
+                _TvSettingsListTile(
+                  leading: const Icon(Icons.featured_play_list),
+                  title: Text(l10n.mediaBar),
+                  subtitle: Text(l10n.featuredContentAppearance),
+                  onTap: () =>
+                      context.pushSettingsScreen(const MediaBarSettingsScreen()),
+                ),
             ],
           ),
 
@@ -423,7 +424,7 @@ class _HomeScreenCategoryScreenState extends State<_HomeScreenCategoryScreen> {
 
           // Every source here needs the Moonbase plugin. Seerr's rows and the
           // Radarr and Sonarr calendars also need Seerr.
-          if (pluginAvailable) ...[
+          if (pluginAvailable && !esplayHideIntegrationsAndLooks) ...[
             _SectionHeader(l10n.externalSources),
             adaptiveListSection(
               children: [

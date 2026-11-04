@@ -2,6 +2,10 @@
 /// Appearance > Extras section.
 const esplayHideThemeStoreAndExtras = true;
 
+/// Also out of sight: Integrations, the media bar settings (EsPlay has one
+/// bar), Home's external sources, the app theme and the focus border color.
+const esplayHideIntegrationsAndLooks = true;
+
 /// Quality is always the maximum (see UserPreferences.get), so the Quality &
 /// Decoding screen and the download quality pickers are not offered.
 const esplayHideQualitySettings = true;

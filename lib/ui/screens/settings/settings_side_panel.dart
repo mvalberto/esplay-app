@@ -376,12 +376,13 @@ class _SettingsSidePanelState extends ConsumerState<SettingsSidePanel> {
                 onTap: () =>
                     context.pushSettingsScreen(const DownloadSettingsScreen()),
               ),
-            _PanelEntry(
-              icon: Icons.hub,
-              title: l10n.integrations,
-              subtitle: l10n.settingsServicesSubtitle,
-              onTap: () => context.pushSettingsScreen(const _ServicesScreen()),
-            ),
+            if (!esplayHideIntegrationsAndLooks)
+              _PanelEntry(
+                icon: Icons.hub,
+                title: l10n.integrations,
+                subtitle: l10n.settingsServicesSubtitle,
+                onTap: () => context.pushSettingsScreen(const _ServicesScreen()),
+              ),
             _PanelEntry(
               icon: Icons.info_outline,
               title: l10n.aboutTitle,

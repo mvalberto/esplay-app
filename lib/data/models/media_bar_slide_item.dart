@@ -20,6 +20,9 @@ class MediaBarSlideItem {
   final String itemType;
   final List<Map<String, dynamic>> remoteTrailers;
 
+  /// When the server added it, for EsPlay's NEW badge.
+  final DateTime? dateCreated;
+
   /// The id outside titles carry in place of a server, as on Home.
   static const externalServerId = 'seerr';
 
@@ -42,6 +45,7 @@ class MediaBarSlideItem {
     this.imdbId,
     this.itemType = 'Movie',
     this.remoteTrailers = const [],
+    this.dateCreated,
   });
 
   /// Whether this title came from an outside list rather than the server, so it

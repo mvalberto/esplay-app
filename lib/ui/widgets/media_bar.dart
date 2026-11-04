@@ -99,6 +99,9 @@ class MediaBar extends StatefulWidget {
   final VoidCallback? onNavigateUp;
   final VoidCallback? onNavigateLeft;
   final FocusNode? focusNode;
+  // EsPlay: where Home's row titles start, so the bar's text lines up with
+  // them and with the showcase over the rows.
+  final double? esplayTextInset;
 
   const MediaBar({
     super.key,
@@ -112,6 +115,7 @@ class MediaBar extends StatefulWidget {
     this.onNavigateUp,
     this.onNavigateLeft,
     this.focusNode,
+    this.esplayTextInset,
   });
 
   @override
@@ -197,6 +201,9 @@ class _MediaBarState extends State<MediaBar>
   void _publishTrailerImmersive(bool value) {
     // Keep the screensaver from arming while a trailer plays on any backend.
     _screensaverController.setMediaBarTrailerActive(value);
+    // EsPlay's trailer stays in the picture's box, so the menu and the rows
+    // stay too.
+    if (_esplayLook) value = false;
     if (NavigationLayout.trailerImmersiveNotifier.value == value) return;
     final phase = SchedulerBinding.instance.schedulerPhase;
     if (phase == SchedulerPhase.idle ||
@@ -207,7 +214,7 @@ class _MediaBarState extends State<MediaBar>
         // Re-derive the value because the state may have changed again
         // within the frame.
         NavigationLayout.trailerImmersiveNotifier.value =
-            mounted && _isTrailerPlayingValue;
+            mounted && _isTrailerPlayingValue && !_esplayLook;
       });
     }
   }
@@ -2015,7 +2022,342 @@ class _MediaBarState extends State<MediaBar>
     );
   }
 
+  /// EsPlay on a TV and on Windows: the bar is the showcase over Home's rows
+  /// at full size, as on Samsung and Prime Video.
+  bool get _esplayLook => PlatformDetection.isTV || PlatformDetection.isWindows;
+
+  /// The title's picture or trailer on the right fading into the dark, its
+  /// text on the left and a progress mark per title. Left and Right still
+  /// change title and Select opens it.
+  Widget _buildEsplaySlideshow(
+    BuildContext context,
+    List<MediaBarSlideItem> items,
+  ) {
+    final l10n = AppLocalizations.of(context);
+    final currentItem = items.elementAtOrNull(_currentIndex);
+    final width = MediaQuery.sizeOf(context).width;
+    final u = width / 1920;
+    final hasLeftSidebar =
+        widget.prefs.get(UserPreferences.navbarPosition) == NavbarPosition.left;
+    final textLeft =
+        widget.esplayTextInset ?? ((hasLeftSidebar ? 88.0 : 0.0) + 60 * u);
+    final artHeight = widget.height - widget.rowPeek;
+    final background = AppColorScheme.background;
+    final hasVisibleTrailerVideo =
+        (_activeYouTubeVideoId != null ||
+            _activeWebTrailerUrl != null ||
+            _trailerUsingMedia3 ||
+            _trailerController != null) &&
+        _trailerVideoOpacity > 0;
+    final interval = Duration(
+      milliseconds: widget.prefs.get(UserPreferences.mediaBarIntervalMs),
+    );
+    final advancing =
+        items.length > 1 &&
+        widget.prefs.get(UserPreferences.mediaBarAutoAdvance) &&
+        !_isTrailerPlaying &&
+        !_isPaused &&
+        !widget.externallyPaused;
+
+    // Fades [child] to nothing from the [from] edge, solid from the last stop.
+    Widget fade(Widget child, Alignment from, List<double> stops) => ShaderMask(
+      blendMode: BlendMode.dstIn,
+      shaderCallback: (rect) => LinearGradient(
+        begin: from,
+        end: -from,
+        colors: const [
+          Color(0x00000000),
+          Color(0x00000000),
+          Color(0x80000000),
+          Color(0xFF000000),
+        ],
+        stops: stops,
+      ).createShader(rect),
+      child: child,
+    );
+    // A video can't be masked, so the same fade is laid over it instead.
+    Widget shade(Alignment from, List<double> stops) => Positioned.fill(
+      child: IgnorePointer(
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: from,
+              end: -from,
+              colors: [
+                background,
+                background,
+                background.withAlpha(128),
+                background.withAlpha(0),
+              ],
+              stops: stops,
+            ),
+          ),
+        ),
+      ),
+    );
+    const leftStops = [0.0, 0.10, 0.34, 0.62];
+    const bottomStops = [0.0, 0.06, 0.30, 0.55];
+
+    final added = currentItem?.dateCreated;
+    final isNew =
+        added != null && DateTime.now().difference(added).inDays < 30;
+    final kind = switch (currentItem?.itemType) {
+      'Movie' => l10n.movie,
+      'Series' => l10n.series,
+      _ => null,
+    };
+    final details = currentItem == null ? '' : _esplayDetails(currentItem);
+    final overview = currentItem?.overview?.trim() ?? '';
+
+    return MouseRegion(
+      onEnter: (_) => _setPaused(true),
+      onExit: (_) => _setPaused(false),
+      child: Focus(
+        focusNode: widget.focusNode,
+        autofocus: widget.focusNode == null && PlatformDetection.useLeanbackUi,
+        skipTraversal: true,
+        onFocusChange: _handleFocusChange,
+        onKeyEvent: (node, event) => _handleKeyEvent(event, items),
+        child: GestureDetector(
+          onTap: () => _navigateToItem(context, items),
+          onLongPress: () => _navigateToItemAndPlay(context, items),
+          child: SizedBox(
+            height: widget.height,
+            width: double.infinity,
+            child: Stack(
+              children: [
+                Positioned(
+                  top: 0,
+                  right: 0,
+                  width: width * 0.70,
+                  height: artHeight,
+                  child: ClipRect(
+                    child: Stack(
+                      fit: StackFit.expand,
+                      children: [
+                        AnimatedOpacity(
+                          opacity: hasVisibleTrailerVideo ? 0 : 1,
+                          duration: const Duration(milliseconds: 250),
+                          child: fade(
+                            fade(
+                              _BackdropLayer(
+                                items: items,
+                                currentIndex: _currentIndex,
+                              ),
+                              Alignment.bottomCenter,
+                              bottomStops,
+                            ),
+                            Alignment.centerLeft,
+                            leftStops,
+                          ),
+                        ),
+                        ..._buildVideoOverlays(allowPersistentMedia3: true),
+                        if (hasVisibleTrailerVideo) ...[
+                          shade(Alignment.centerLeft, leftStops),
+                          shade(Alignment.bottomCenter, bottomStops),
+                        ],
+                      ],
+                    ),
+                  ),
+                ),
+                if (currentItem != null)
+                  Positioned(
+                    left: textLeft,
+                    bottom: widget.rowPeek + 70 * u,
+                    width: 820 * u,
+                    child: AnimatedSize(
+                      duration: const Duration(milliseconds: 300),
+                      alignment: Alignment.bottomLeft,
+                      child: Column(
+                        key: ValueKey(currentItem.itemId),
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          if (!_isTrailerPlaying && (isNew || kind != null)) ...[
+                            Row(
+                              children: [
+                                if (isNew) ...[
+                                  Container(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 12 * u,
+                                      vertical: 6 * u,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFFE71414),
+                                      borderRadius: BorderRadius.circular(6 * u),
+                                    ),
+                                    child: Text(
+                                      l10n.esplayMediaBarNew,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18 * u,
+                                        fontWeight: FontWeight.w800,
+                                        letterSpacing: 1.4 * u,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(width: 14 * u),
+                                ],
+                                if (kind != null)
+                                  Text(
+                                    kind,
+                                    style: TextStyle(
+                                      color: const Color(0xFFC4C4CA),
+                                      fontSize: 22 * u,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                              ],
+                            ),
+                            SizedBox(height: 18 * u),
+                          ],
+                          SizedBox(
+                            width: 620 * u,
+                            height: (_isTrailerPlaying ? 150 : 200) * u,
+                            child: Align(
+                              alignment: Alignment.bottomLeft,
+                              child: _esplayLogoOrTitle(currentItem, u),
+                            ),
+                          ),
+                          if (details.isNotEmpty) ...[
+                            SizedBox(height: 20 * u),
+                            Text(
+                              details,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                color: const Color(0xFFC4C4CA),
+                                fontSize: 26 * u,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
+                          if (!_isTrailerPlaying && overview.isNotEmpty) ...[
+                            SizedBox(height: 18 * u),
+                            SizedBox(
+                              width: 780 * u,
+                              child: Text(
+                                overview,
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  color: const Color(0xFFA8A8B0),
+                                  fontSize: 25 * u,
+                                  height: 1.45,
+                                ),
+                              ),
+                            ),
+                          ],
+                          if (items.length > 1) ...[
+                            SizedBox(height: 34 * u),
+                            Row(
+                              children: [
+                                for (var i = 0; i < items.length; i++)
+                                  Padding(
+                                    padding: EdgeInsets.only(right: 8 * u),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(3 * u),
+                                      child: SizedBox(
+                                        width: (i == _currentIndex ? 64 : 20) * u,
+                                        height: 6 * u,
+                                        child: ColoredBox(
+                                          color: const Color(0x47FFFFFF),
+                                          child: i != _currentIndex
+                                              ? null
+                                              : TweenAnimationBuilder<double>(
+                                                  key: ValueKey(
+                                                    '$_currentIndex-$advancing',
+                                                  ),
+                                                  tween: Tween(
+                                                    begin: advancing ? 0 : 1,
+                                                    end: 1,
+                                                  ),
+                                                  duration: advancing
+                                                      ? interval
+                                                      : Duration.zero,
+                                                  builder: (context, value, _) =>
+                                                      FractionallySizedBox(
+                                                    alignment:
+                                                        Alignment.centerLeft,
+                                                    widthFactor: value,
+                                                    child: const ColoredBox(
+                                                      color: Color(0xFFE71414),
+                                                    ),
+                                                  ),
+                                                ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                SizedBox(width: 6 * u),
+                                Text(
+                                  '${_currentIndex + 1} / ${items.length}',
+                                  style: TextStyle(
+                                    color: const Color(0xFF8A8A92),
+                                    fontSize: 20 * u,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ],
+                      ),
+                    ),
+                  ),
+                // A mouse has no Left and Right to change title.
+                if (items.length > 1 && !PlatformDetection.isTV)
+                  ..._buildNavArrows(context, items.length),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _esplayLogoOrTitle(MediaBarSlideItem item, double u) {
+    final title = Text(
+      item.title,
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
+      style: TextStyle(
+        color: Colors.white,
+        fontSize: 96 * u,
+        height: 1.0,
+        fontWeight: FontWeight.w800,
+      ),
+    );
+    final logo = item.logoUrl;
+    if (logo == null) return title;
+    return BoundedNetworkImage(
+      key: ValueKey(logo),
+      imageUrl: logo,
+      fit: BoxFit.contain,
+      alignment: Alignment.bottomLeft,
+      maxWidth: 800,
+      errorBuilder: (_, _, _) => title,
+    );
+  }
+
+  static String _esplayDetails(MediaBarSlideItem item) {
+    final parts = <String>[
+      if (item.year != null) '${item.year}',
+      if ((item.officialRating ?? '').isNotEmpty) item.officialRating!,
+      if (item.communityRating != null)
+        '★ ${item.communityRating!.toStringAsFixed(1)}',
+    ];
+    final runtime = item.runtime;
+    if (runtime != null && item.itemType != 'Series' && runtime.inMinutes > 0) {
+      final h = runtime.inHours;
+      final m = runtime.inMinutes % 60;
+      parts.add(h > 0 ? '${h}h ${m}m' : '${m}m');
+    }
+    if (item.genres.isNotEmpty) parts.add(item.genres.take(3).join(', '));
+    return parts.join(' · ');
+  }
+
   Widget _buildSlideshow(BuildContext context, List<MediaBarSlideItem> items) {
+    if (_esplayLook) return _buildEsplaySlideshow(context, items);
     final overlayColor = _mediaBarOverlayColor();
     final overlayOpacity = _mediaBarOverlayOpacity();
     final currentItem = items.elementAtOrNull(_currentIndex);

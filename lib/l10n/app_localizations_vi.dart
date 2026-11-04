@@ -16178,6 +16178,9 @@ class AppLocalizationsVi extends AppLocalizations {
   String get esplayLiveTvLive => 'LIVE';
 
   @override
+  String get esplayMediaBarNew => 'NEW';
+
+  @override
   String get esplayLiveTvNoTags => 'This server has no channel tags yet.';
 
   @override
