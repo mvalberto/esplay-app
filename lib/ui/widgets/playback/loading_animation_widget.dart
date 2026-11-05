@@ -243,8 +243,8 @@ class LoadingAnimationWidget extends StatelessWidget {
   }
 }
 
-/// EsPlay: the slanted button of the logo, empty, with a red band running
-/// through it again and again.
+/// EsPlay: the logo's split play, opening and closing along its cut again
+/// and again.
 class MoonfinLogoAnimation extends StatefulWidget {
   final double size;
   final LoadingAnimationSpeed speed;
@@ -295,82 +295,77 @@ class _MoonfinLogoAnimationState extends State<MoonfinLogoAnimation>
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: widget.size,
-      height: widget.size * 44 / 124,
-      child: CustomPaint(
-        painter: _EsPlayButtonPainter(
-          CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-        ),
-      ),
+      width: widget.size * 0.6,
+      height: widget.size * 0.6 * 72 / 90,
+      child: CustomPaint(painter: _EsPlaySplitPainter(_controller)),
     );
   }
 }
 
-/// The button drawn on a 120 x 44 grid, slanted 10 degrees like the logo.
-class _EsPlayButtonPainter extends CustomPainter {
+/// The split play drawn on the icon's 90 x 72 grid: the white top half and
+/// the red bottom half move apart along the cut and back.
+class _EsPlaySplitPainter extends CustomPainter {
   final Animation<double> progress;
 
-  _EsPlayButtonPainter(this.progress) : super(repaint: progress);
+  _EsPlaySplitPainter(this.progress) : super(repaint: progress);
 
   static const _red = Color(0xFFE71414);
 
   @override
   void paint(Canvas canvas, Size size) {
+    // Out and back, easing both ways, once per run.
+    final v = progress.value;
+    final open = Curves.easeInOut.transform(v < 0.5 ? v * 2 : (1 - v) * 2);
     canvas.save();
-    canvas.translate(size.width / 2, size.height / 2);
-    canvas.scale(size.width / 124);
-    canvas.skew(-math.tan(10 * math.pi / 180), 0);
-    canvas.translate(-60, -22);
-
-    final button = RRect.fromRectAndRadius(
-      const Rect.fromLTWH(2, 2, 116, 40),
-      const Radius.circular(9),
-    );
-    canvas.drawRRect(button, Paint()..color = const Color(0x14FFFFFF));
-    canvas.save();
-    canvas.clipRRect(button);
-    canvas.drawRect(
-      Rect.fromLTWH(-50 + 170 * progress.value, 2, 50, 40),
-      Paint()..color = _red,
-    );
-    canvas.restore();
-    canvas.drawRRect(
-      button,
+    canvas.scale(size.width / 90);
+    canvas.translate(0, -14);
+    canvas.drawLine(
+      const Offset(4, 58.5),
+      const Offset(22, 56.3),
       Paint()
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = 2
-        ..color = const Color(0x38FFFFFF),
+        ..strokeWidth = 3.2
+        ..strokeCap = StrokeCap.round
+        ..color = Colors.white.withValues(alpha: 0.9),
     );
     final play = Path()
-      ..moveTo(90, 15)
-      ..lineTo(90, 29)
-      ..lineTo(102, 22)
+      ..moveTo(30, 22)
+      ..lineTo(30, 78)
+      ..lineTo(80, 50)
       ..close();
-    canvas.drawPath(
-      play,
-      Paint()
-        ..strokeWidth = 3
-        ..strokeJoin = StrokeJoin.round
-        ..style = PaintingStyle.fill
-        ..color = Colors.white,
+    void half(List<Offset> cut, Offset shift, Color color) {
+      canvas.save();
+      canvas.translate(shift.dx, shift.dy);
+      canvas.clipPath(Path()..addPolygon(cut, true));
+      canvas.drawPath(play, Paint()..color = color);
+      canvas.drawPath(
+        play,
+        Paint()
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 7
+          ..strokeJoin = StrokeJoin.round
+          ..color = color,
+      );
+      canvas.restore();
+    }
+
+    half(
+      const [Offset(0, 58), Offset(100, 46), Offset(100, 100), Offset(0, 100)],
+      Offset(-3, 2) * open,
+      _red,
     );
-    canvas.drawPath(
-      play,
-      Paint()
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = 3
-        ..strokeJoin = StrokeJoin.round
-        ..color = Colors.white,
+    half(
+      const [Offset(0, 0), Offset(100, 0), Offset(100, 46), Offset(0, 58)],
+      const Offset(4, -2.4) + Offset(6, -6) * open,
+      Colors.white,
     );
     canvas.restore();
   }
 
   @override
-  bool shouldRepaint(_EsPlayButtonPainter oldDelegate) =>
+  bool shouldRepaint(_EsPlaySplitPainter oldDelegate) =>
       oldDelegate.progress != progress;
 }
 
-/// Sleek gradient circular progress spinner.
 class StockSpinnerAnimation extends StatefulWidget {
   final double size;
   final LoadingAnimationSpeed speed;
