@@ -22,28 +22,53 @@ enum _Section { home, tags }
 /// EsPlay's live TV start page: the channel tags from Emby, what is on now and
 /// a row per tag, with the guide and recordings one tab away.
 class LiveTvScreen extends StatefulWidget {
-  const LiveTvScreen({super.key});
+  /// On TV, opens the Tags tab on this tag, as the Samsung app does.
+  final String? initialTagId;
+
+  const LiveTvScreen({super.key, this.initialTagId});
 
   @override
   State<LiveTvScreen> createState() => _LiveTvScreenState();
 }
 
 class _LiveTvScreenState extends State<LiveTvScreen> {
-  _Section _section = _Section.home;
+  late _Section _section = widget.initialTagId != null
+      ? _Section.tags
+      : _Section.home;
+  late String? _tagId = widget.initialTagId;
 
   static bool get _showNavbar => !PlatformDetection.isTV;
+
+  /// On TV a tag opens in the Tags tab, with the rail beside it.
+  void _showTag(LiveTvTag tag) {
+    setState(() {
+      _section = _Section.tags;
+      _tagId = tag.id;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final page = _buildContent(context);
     return RequestInitialFocus(
-      child: _showNavbar
-          ? Scaffold(
-              backgroundColor: Colors.black,
-              body: NavigationLayout(showBackButton: true, child: page),
-            )
-          : page,
+      // On TV, back from the Tags tab goes to the live TV home first.
+      child: PopScope(
+        canPop: !PlatformDetection.isTV || _section == _Section.home,
+        onPopInvokedWithResult: (didPop, result) {
+          if (!didPop) setState(() => _section = _Section.home);
+        },
+        child: _buildPage(page),
+      ),
     );
+  }
+
+  Widget _buildPage(Widget page) {
+    return _showNavbar
+        ? Scaffold(
+            backgroundColor: Colors.black,
+            body: NavigationLayout(showBackButton: true, child: page),
+          )
+        : page;
   }
 
   Widget _buildContent(BuildContext context) {
@@ -128,7 +153,8 @@ class _LiveTvScreenState extends State<LiveTvScreen> {
                   scrollDirection: Axis.horizontal,
                   padding: EdgeInsets.symmetric(horizontal: side),
                   itemCount: tabs.length,
-                  separatorBuilder: (context, index) => const SizedBox(width: 8),
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(width: 8),
                   itemBuilder: (context, index) {
                     final tab = tabs[index];
                     return Center(
@@ -151,7 +177,13 @@ class _LiveTvScreenState extends State<LiveTvScreen> {
                         setState(() => _section = _Section.tags),
                   ),
                   _Section.tags =>
-                    isTV ? _TvTagsView(side: side) : _TagsGrid(side: side),
+                    isTV
+                        ? _TvTagsView(
+                            key: ValueKey(_tagId),
+                            side: side,
+                            initialTagId: _tagId,
+                          )
+                        : _TagsGrid(side: side),
                 },
               ),
             ],
@@ -163,6 +195,11 @@ class _LiveTvScreenState extends State<LiveTvScreen> {
 }
 
 void _openTag(BuildContext context, LiveTvTag tag) {
+  final screen = context.findAncestorStateOfType<_LiveTvScreenState>();
+  if (PlatformDetection.isTV && screen != null) {
+    screen._showTag(tag);
+    return;
+  }
   context.push(Destinations.liveTvTagChannels(tag.id, tag.name));
 }
 
@@ -228,8 +265,9 @@ class _HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<_HomeView> {
-  late final Future<List<LiveTvTag>> _tags =
-      LiveTvTagsRepository.instance.tags().catchError((_) => <LiveTvTag>[]);
+  late final Future<List<LiveTvTag>> _tags = LiveTvTagsRepository.instance
+      .tags()
+      .catchError((_) => <LiveTvTag>[]);
   late final Future<List<Map<String, dynamic>>> _onNow = _loadOnNow();
 
   Future<List<Map<String, dynamic>>> _loadOnNow() async {
@@ -278,7 +316,8 @@ class _HomeViewState extends State<_HomeView> {
                   scrollDirection: Axis.horizontal,
                   padding: EdgeInsets.symmetric(horizontal: side),
                   itemCount: tags.length,
-                  separatorBuilder: (context, index) => const SizedBox(width: 8),
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(width: 8),
                   itemBuilder: (context, index) => Center(
                     child: LiveTvChip(
                       label: LiveTvTagName(
@@ -304,7 +343,10 @@ class _HomeViewState extends State<_HomeView> {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    _SectionTitle(side: side, title: Text(l10n.esplayLiveTvOnNow)),
+                    _SectionTitle(
+                      side: side,
+                      title: Text(l10n.esplayLiveTvOnNow),
+                    ),
                     SizedBox(
                       height: isTV ? 360 : 290,
                       child: ListView.separated(
@@ -342,14 +384,10 @@ class _OnNowCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) => LiveTvFocusable(
-        onTap: () => openLiveTvChannel(
-          context,
-          program['ChannelId'].toString(),
-        ),
-        builder: (focused) => LiveTvOnNowPoster(
-          program: program,
-          width: constraints.maxWidth,
-        ),
+        onTap: () =>
+            openLiveTvChannel(context, program['ChannelId'].toString()),
+        builder: (focused) =>
+            LiveTvOnNowPoster(program: program, width: constraints.maxWidth),
       ),
     );
   }
@@ -412,7 +450,8 @@ class _TagRowState extends State<_TagRow> {
                   width: isTV ? 240 : 150,
                   child: LiveTvChannelCard(
                     item: items[index],
-                    onTap: () => openLiveTvChannel(context, items[index].channel.id),
+                    onTap: () =>
+                        openLiveTvChannel(context, items[index].channel.id),
                   ),
                 ),
               ),
@@ -456,13 +495,18 @@ class _TagsGridState extends State<_TagsGrid> {
           );
         }
         final tags = snapshot.data ?? const [];
-        if (tags.isEmpty) return _CenteredMessage(text: l10n.esplayLiveTvNoTags);
+        if (tags.isEmpty)
+          return _CenteredMessage(text: l10n.esplayLiveTvNoTags);
         final width = MediaQuery.sizeOf(context).width;
         return GridView.builder(
           padding: EdgeInsets.fromLTRB(widget.side, 0, widget.side, 120),
           itemCount: tags.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: width >= 900 ? 4 : width >= 600 ? 3 : 2,
+            crossAxisCount: width >= 900
+                ? 4
+                : width >= 600
+                ? 3
+                : 2,
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
             mainAxisExtent: 96,
@@ -548,19 +592,21 @@ class _TagCardState extends State<_TagCard> {
 /// Android TV: the tags down the left, the focused tag's channels on the right.
 class _TvTagsView extends StatefulWidget {
   final double side;
+  final String? initialTagId;
 
-  const _TvTagsView({required this.side});
+  const _TvTagsView({super.key, required this.side, this.initialTagId});
 
   @override
   State<_TvTagsView> createState() => _TvTagsViewState();
 }
 
-class _TvTagsViewState extends State<_TvTagsView> {
+class _TvTagsViewState extends State<_TvTagsView> with LiveTvChannelsLayout {
   late final Future<List<LiveTvTag>> _tags = LiveTvTagsRepository.instance
       .tags();
   LiveTvTag? _selected;
   Future<List<LiveTvTagChannel>>? _channels;
   Timer? _settle;
+  ScrollController? _rail;
 
   void _select(LiveTvTag tag) {
     _settle?.cancel();
@@ -582,6 +628,7 @@ class _TvTagsViewState extends State<_TvTagsView> {
   @override
   void dispose() {
     _settle?.cancel();
+    _rail?.dispose();
     super.dispose();
   }
 
@@ -603,8 +650,16 @@ class _TvTagsViewState extends State<_TvTagsView> {
           );
         }
         if (_selected == null) {
-          _selected = tags.first;
-          _channels = LiveTvTagsRepository.instance.channels(tags.first.id);
+          _selected = tags.firstWhere(
+            (tag) => tag.id == widget.initialTagId,
+            orElse: () => tags.first,
+          );
+          _channels = LiveTvTagsRepository.instance.channels(_selected!.id);
+          // The chosen tag starts in view on the rail.
+          final index = tags.indexOf(_selected!);
+          _rail = ScrollController(
+            initialScrollOffset: index > 3 ? (index - 3) * 50.0 : 0,
+          );
         }
         final selected = _selected!;
         return Padding(
@@ -615,19 +670,21 @@ class _TvTagsViewState extends State<_TvTagsView> {
               SizedBox(
                 width: 300,
                 child: ListView.separated(
+                  controller: _rail,
                   padding: const EdgeInsets.only(bottom: 32),
                   itemCount: tags.length,
-                  separatorBuilder: (context, index) => const SizedBox(height: 4),
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 4),
                   itemBuilder: (context, index) {
                     final tag = tags[index];
                     final isSelected = tag.id == selected.id;
                     return LiveTvFocusable(
-                      autofocus: index == 0,
+                      autofocus: tag.id == selected.id,
                       radius: BorderRadius.circular(10),
                       onFocusChange: (focused) {
                         if (focused) _focusTag(tag);
                       },
-                      onTap: () => _openTag(context, tag),
+                      onTap: () => _select(tag),
                       builder: (focused) => Container(
                         height: 46,
                         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -661,13 +718,20 @@ class _TvTagsViewState extends State<_TvTagsView> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    LiveTvTagName(
-                      tag: selected,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                        fontWeight: FontWeight.w700,
-                      ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: LiveTvTagName(
+                            tag: selected,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 24,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                        ...sortAndSizeChips(l10n),
+                      ],
                     ),
                     const SizedBox(height: 16),
                     Expanded(
@@ -681,7 +745,7 @@ class _TvTagsViewState extends State<_TvTagsView> {
                               child: CircularProgressIndicator(),
                             );
                           }
-                          final items = snapshot.data ?? const [];
+                          final items = sortChannels(snapshot.data ?? const []);
                           if (items.isEmpty) {
                             return _CenteredMessage(
                               text: snapshot.hasError
@@ -693,6 +757,7 @@ class _TvTagsViewState extends State<_TvTagsView> {
                             items: items,
                             columns: 4,
                             autofocusFirst: false,
+                            maxTileWidth: maxTileWidth,
                           );
                         },
                       ),

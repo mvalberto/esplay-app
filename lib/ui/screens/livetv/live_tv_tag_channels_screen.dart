@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../esplay/live_tv_tags.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../preference/user_preferences.dart';
 import '../../../util/platform_detection.dart';
 import '../../widgets/focus/request_initial_focus.dart';
 import 'live_tv_tag_widgets.dart';
@@ -23,7 +25,8 @@ class LiveTvTagChannelsScreen extends StatefulWidget {
       _LiveTvTagChannelsScreenState();
 }
 
-class _LiveTvTagChannelsScreenState extends State<LiveTvTagChannelsScreen> {
+class _LiveTvTagChannelsScreenState extends State<LiveTvTagChannelsScreen>
+    with LiveTvChannelsLayout {
   late Future<List<LiveTvTagChannel>> _channels;
   bool _grid = PlatformDetection.isTV;
 
@@ -97,6 +100,8 @@ class _LiveTvTagChannelsScreenState extends State<LiveTvTagChannelsScreen> {
                         height: 36,
                         onTap: () => setState(() => _grid = true),
                       ),
+                      const SizedBox(width: 16),
+                      ...sortAndSizeChips(l10n, showSize: _grid),
                     ],
                   ),
                 ),
@@ -114,7 +119,7 @@ class _LiveTvTagChannelsScreenState extends State<LiveTvTagChannelsScreen> {
                           onRetry: _reload,
                         );
                       }
-                      final items = snapshot.data ?? const [];
+                      final items = sortChannels(snapshot.data ?? const []);
                       if (items.isEmpty) {
                         return _Message(text: l10n.esplayLiveTvNoChannels);
                       }
@@ -122,6 +127,7 @@ class _LiveTvTagChannelsScreenState extends State<LiveTvTagChannelsScreen> {
                           ? LiveTvChannelGrid(
                               items: items,
                               columns: isTV ? 4 : 2,
+                              maxTileWidth: maxTileWidth,
                             )
                           : _ChannelList(items: items);
                     },
@@ -142,15 +148,52 @@ class LiveTvChannelGrid extends StatelessWidget {
   final int columns;
   final bool autofocusFirst;
 
+  /// When set, the grid fits as many columns as tiles of at most this width
+  /// allow, instead of [columns].
+  final double? maxTileWidth;
+
   const LiveTvChannelGrid({
     super.key,
     required this.items,
     required this.columns,
     this.autofocusFirst = true,
+    this.maxTileWidth,
   });
 
   @override
   Widget build(BuildContext context) {
+    if (maxTileWidth != null) {
+      return LayoutBuilder(
+        builder: (context, constraints) {
+          const spacing = 16.0;
+          final cols =
+              ((constraints.maxWidth + spacing) / (maxTileWidth! + spacing))
+                  .ceil()
+                  .clamp(1, 16);
+          final tileWidth =
+              (constraints.maxWidth - spacing * (cols - 1)) / cols;
+          // Big tiles also show what's on; small ones only the program name.
+          final large = tileWidth >= 260;
+          final textHeight = large ? 54.0 : 28.0;
+          return GridView.builder(
+            padding: const EdgeInsets.only(bottom: 32),
+            itemCount: items.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: cols,
+              crossAxisSpacing: spacing,
+              mainAxisSpacing: spacing,
+              mainAxisExtent: tileWidth * 9 / 16 + textHeight,
+            ),
+            itemBuilder: (context, index) => LiveTvChannelCard(
+              item: items[index],
+              large: large,
+              autofocus: autofocusFirst && index == 0,
+              onTap: () => openLiveTvChannel(context, items[index].channel.id),
+            ),
+          );
+        },
+      );
+    }
     final large = PlatformDetection.isTV;
     return GridView.builder(
       padding: const EdgeInsets.only(bottom: 32),
@@ -244,7 +287,9 @@ class _ChannelList extends StatelessWidget {
                         Row(
                           children: [
                             Expanded(
-                              child: LiveTvProgressBar(value: item.progress(now)),
+                              child: LiveTvProgressBar(
+                                value: item.progress(now),
+                              ),
                             ),
                             const SizedBox(width: 8),
                             Text(
@@ -313,4 +358,173 @@ class _Message extends StatelessWidget {
       ),
     );
   }
+}
+
+/// The order and grid size of a tag's channels, shared by the tag's own
+/// screen and the TV Tags tab. Both choices are remembered.
+mixin LiveTvChannelsLayout<T extends StatefulWidget> on State<T> {
+  final _prefs = GetIt.instance<UserPreferences>();
+  late String _sort = _prefs.get(UserPreferences.esplayTagChannelsSort);
+  late int _size = _prefs
+      .get(UserPreferences.esplayTagChannelsGridSize)
+      .clamp(0, _tileWidths.length - 1);
+
+  /// Widest a grid tile may be at each size step; the grid fits as many
+  /// columns as that allows.
+  static List<double> get _tileWidths => PlatformDetection.isTV
+      ? const [200, 260, 340, 440]
+      : const [150, 210, 290, 400];
+
+  static const _sorts = ['server', 'number', 'name', 'endsSoon', 'favorites'];
+
+  double get maxTileWidth => _tileWidths[_size];
+
+  String sortLabel(AppLocalizations l10n, String sort) => switch (sort) {
+    'number' => l10n.esplayLiveTvSortNumber,
+    'name' => l10n.esplayLiveTvSortName,
+    'endsSoon' => l10n.esplayLiveTvSortEndsSoon,
+    'favorites' => l10n.esplayLiveTvSortFavorites,
+    _ => l10n.esplayLiveTvSortServer,
+  };
+
+  void _setSort(String sort) {
+    setState(() => _sort = sort);
+    _prefs.set(UserPreferences.esplayTagChannelsSort, sort);
+  }
+
+  void _setSize(int size) {
+    setState(() => _size = size);
+    _prefs.set(UserPreferences.esplayTagChannelsGridSize, size);
+  }
+
+  Future<void> pickSort(BuildContext chipContext) async {
+    final l10n = AppLocalizations.of(context);
+    final box = chipContext.findRenderObject() as RenderBox;
+    final overlay =
+        Overlay.of(chipContext).context.findRenderObject() as RenderBox;
+    final topLeft = box.localToGlobal(
+      Offset(0, box.size.height + 4),
+      ancestor: overlay,
+    );
+    final picked = await showMenu<String>(
+      context: context,
+      color: liveTvChipColor,
+      position: RelativeRect.fromLTRB(
+        topLeft.dx,
+        topLeft.dy,
+        overlay.size.width - topLeft.dx,
+        0,
+      ),
+      items: [
+        for (final sort in _sorts)
+          CheckedPopupMenuItem<String>(
+            value: sort,
+            checked: sort == _sort,
+            child: Text(
+              sortLabel(l10n, sort),
+              style: const TextStyle(color: Colors.white),
+            ),
+          ),
+      ],
+    );
+    if (picked != null && picked != _sort) _setSort(picked);
+  }
+
+  /// The channels in the chosen order; ties keep the server's order.
+  List<LiveTvTagChannel> sortChannels(List<LiveTvTagChannel> items) {
+    if (_sort == 'server') return items;
+    final now = DateTime.now();
+    final order = {for (var i = 0; i < items.length; i++) items[i]: i};
+    int compare(LiveTvTagChannel a, LiveTvTagChannel b) {
+      switch (_sort) {
+        case 'number':
+          return _channelNumber(a).compareTo(_channelNumber(b));
+        case 'name':
+          return _sortName(a).compareTo(_sortName(b));
+        case 'endsSoon':
+          if (a.hasGuide != b.hasGuide) return a.hasGuide ? -1 : 1;
+          return a.minutesLeft(now).compareTo(b.minutesLeft(now));
+        case 'favorites':
+          if (a.channel.isFavorite == b.channel.isFavorite) return 0;
+          return a.channel.isFavorite ? -1 : 1;
+      }
+      return 0;
+    }
+
+    return [...items]..sort((a, b) {
+      final c = compare(a, b);
+      return c != 0 ? c : order[a]!.compareTo(order[b]!);
+    });
+  }
+
+  /// Channels without a number go last.
+  static double _channelNumber(LiveTvTagChannel item) =>
+      double.tryParse(item.channel.number?.trim() ?? '') ?? double.infinity;
+
+  /// The name without its country prefix (`|ES|`, `ES-AV|`, `[ES-P]`...), so
+  /// AMC sorts under A whatever feed it comes from.
+  static String _sortName(LiveTvTagChannel item) => item.channel.name
+      .replaceFirst(RegExp(r'^\s*[\[|]?[A-Za-z]{2}(-[A-Za-z]+)?[\]|]\s*'), '')
+      .trim()
+      .toLowerCase();
+
+  /// The sort chip and, when [showSize], the smaller and bigger chips.
+  List<Widget> sortAndSizeChips(
+    AppLocalizations l10n, {
+    bool showSize = true,
+  }) => [
+    Builder(
+      builder: (chipContext) => LiveTvChip(
+        height: 36,
+        onTap: () => pickSort(chipContext),
+        label: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(Icons.sort_rounded, size: 18, color: Colors.white),
+            const SizedBox(width: 6),
+            Text(
+              '${l10n.esplayLiveTvSort}: '
+              '${sortLabel(l10n, _sort)}',
+            ),
+          ],
+        ),
+      ),
+    ),
+    if (showSize) ...[
+      const SizedBox(width: 16),
+      Semantics(
+        label: l10n.esplayLiveTvSmaller,
+        child: LiveTvChip(
+          height: 36,
+          onTap: () {
+            if (_size > 0) _setSize(_size - 1);
+          },
+          label: Icon(
+            Icons.zoom_out_rounded,
+            size: 20,
+            color: _size > 0 ? Colors.white : liveTvMutedText,
+          ),
+        ),
+      ),
+      const SizedBox(width: 8),
+      Semantics(
+        label: l10n.esplayLiveTvBigger,
+        child: LiveTvChip(
+          height: 36,
+          onTap: () {
+            if (_size < _tileWidths.length - 1) {
+              _setSize(_size + 1);
+            }
+          },
+          label: Icon(
+            Icons.zoom_in_rounded,
+            size: 20,
+            color: _size < _tileWidths.length - 1
+                ? Colors.white
+                : liveTvMutedText,
+          ),
+        ),
+      ),
+    ],
+  ];
 }

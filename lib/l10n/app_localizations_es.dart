@@ -16379,6 +16379,30 @@ class AppLocalizationsEs extends AppLocalizations {
   String get esplayLiveTvGrid => 'Cuadrícula';
 
   @override
+  String get esplayLiveTvSort => 'Orden';
+
+  @override
+  String get esplayLiveTvSortServer => 'Como en el servidor';
+
+  @override
+  String get esplayLiveTvSortNumber => 'Número de canal';
+
+  @override
+  String get esplayLiveTvSortName => 'Nombre';
+
+  @override
+  String get esplayLiveTvSortEndsSoon => 'Lo que acaba antes';
+
+  @override
+  String get esplayLiveTvSortFavorites => 'Favoritos primero';
+
+  @override
+  String get esplayLiveTvSmaller => 'Más pequeño';
+
+  @override
+  String get esplayLiveTvBigger => 'Más grande';
+
+  @override
   String get esplayLiveTvLive => 'EN DIRECTO';
 
   @override

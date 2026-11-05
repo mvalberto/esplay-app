@@ -3789,6 +3789,17 @@ class UserPreferences extends ChangeNotifier {
     key: 'pref_always_authenticate',
     defaultValue: false,
   );
+  /// EsPlay: how a tag's channels are sorted (server, number, name, endsSoon,
+  /// favorites) and the grid's tile size, 0 (smallest) to 3.
+  static final esplayTagChannelsSort = Preference<String>(
+    key: 'esplay_tag_channels_sort',
+    defaultValue: 'server',
+  );
+  static final esplayTagChannelsGridSize = Preference<int>(
+    key: 'esplay_tag_channels_grid_size',
+    defaultValue: 1,
+  );
+
   static final liveTvChannelSortBy = EnumPreference(
     key: 'live_tv_channel_sort_by',
     defaultValue: ChannelSortBy.number,

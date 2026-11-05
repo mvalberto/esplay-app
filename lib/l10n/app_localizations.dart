@@ -28101,6 +28101,54 @@ abstract class AppLocalizations {
   /// **'Grid'**
   String get esplayLiveTvGrid;
 
+  /// No description provided for @esplayLiveTvSort.
+  ///
+  /// In en, this message translates to:
+  /// **'Sort'**
+  String get esplayLiveTvSort;
+
+  /// No description provided for @esplayLiveTvSortServer.
+  ///
+  /// In en, this message translates to:
+  /// **'As on the server'**
+  String get esplayLiveTvSortServer;
+
+  /// No description provided for @esplayLiveTvSortNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Channel number'**
+  String get esplayLiveTvSortNumber;
+
+  /// No description provided for @esplayLiveTvSortName.
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get esplayLiveTvSortName;
+
+  /// No description provided for @esplayLiveTvSortEndsSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Ending soonest'**
+  String get esplayLiveTvSortEndsSoon;
+
+  /// No description provided for @esplayLiveTvSortFavorites.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorites first'**
+  String get esplayLiveTvSortFavorites;
+
+  /// No description provided for @esplayLiveTvSmaller.
+  ///
+  /// In en, this message translates to:
+  /// **'Smaller'**
+  String get esplayLiveTvSmaller;
+
+  /// No description provided for @esplayLiveTvBigger.
+  ///
+  /// In en, this message translates to:
+  /// **'Bigger'**
+  String get esplayLiveTvBigger;
+
   /// No description provided for @esplayLiveTvLive.
   ///
   /// In en, this message translates to:

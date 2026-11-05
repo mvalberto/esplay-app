@@ -16234,6 +16234,30 @@ class AppLocalizationsKn extends AppLocalizations {
   String get esplayLiveTvGrid => 'Grid';
 
   @override
+  String get esplayLiveTvSort => 'Sort';
+
+  @override
+  String get esplayLiveTvSortServer => 'As on the server';
+
+  @override
+  String get esplayLiveTvSortNumber => 'Channel number';
+
+  @override
+  String get esplayLiveTvSortName => 'Name';
+
+  @override
+  String get esplayLiveTvSortEndsSoon => 'Ending soonest';
+
+  @override
+  String get esplayLiveTvSortFavorites => 'Favorites first';
+
+  @override
+  String get esplayLiveTvSmaller => 'Smaller';
+
+  @override
+  String get esplayLiveTvBigger => 'Bigger';
+
+  @override
   String get esplayLiveTvLive => 'LIVE';
 
   @override

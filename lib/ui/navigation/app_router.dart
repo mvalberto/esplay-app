@@ -584,10 +584,15 @@ final appRouter = GoRouter(
         ),
         GoRoute(
           path: 'tag',
-          builder: (context, state) => LiveTvTagChannelsScreen(
-            tagId: state.uri.queryParameters['id'] ?? '',
-            tagName: state.uri.queryParameters['name'] ?? '',
-          ),
+          // On TV a tag opens in the live TV Tags tab, as on Samsung.
+          builder: (context, state) => PlatformDetection.isTV
+              ? LiveTvScreen(
+                  initialTagId: state.uri.queryParameters['id'] ?? '',
+                )
+              : LiveTvTagChannelsScreen(
+                  tagId: state.uri.queryParameters['id'] ?? '',
+                  tagName: state.uri.queryParameters['name'] ?? '',
+                ),
         ),
         GoRoute(
           path: 'schedule',
@@ -760,7 +765,8 @@ final appRouter = GoRouter(
       builder: (context, state) {
         final personId = state.pathParameters['personId']!;
         final prefs = GetIt.instance<UserPreferences>();
-        if (prefs.get(UserPreferences.detailScreenStyle) != DetailScreenStyle.classic) {
+        if (prefs.get(UserPreferences.detailScreenStyle) !=
+            DetailScreenStyle.classic) {
           return ItemDetailScreen(
             key: ValueKey('tmdb:$personId'),
             itemId: 'tmdb:$personId',
