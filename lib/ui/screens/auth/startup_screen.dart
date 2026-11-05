@@ -244,7 +244,7 @@ class _StartupScreenState extends State<StartupScreen>
               // Below the logo, which is as tall as a 3.57th of its width.
               padding: EdgeInsets.only(
                 top:
-                    math.min(MediaQuery.sizeOf(context).width * 0.62, 620.0) /
+                    math.min(MediaQuery.sizeOf(context).width * 0.465, 465.0) /
                         3.57 +
                     48,
               ),
@@ -290,7 +290,7 @@ class _StartupScreenState extends State<StartupScreen>
   Widget _buildLogoIntro() {
     // The logo's artwork is 4640 x 1300 units, starting at (150, -110).
     final screen = MediaQuery.sizeOf(context);
-    final width = math.min(screen.width * 0.62, 620.0);
+    final width = math.min(screen.width * 0.465, 465.0);
     final unit = width / 4640;
     final height = 1300 * unit;
     // In the mockup the logo is drawn at 0.3, so a screen pixel there is

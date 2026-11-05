@@ -14,7 +14,10 @@ class LiveTvTag {
   final String id;
   final String name;
 
-  const LiveTvTag({required this.id, required this.name});
+  /// The tag's 16:9 picture in Emby, when it has one.
+  final String? thumbTag;
+
+  const LiveTvTag({required this.id, required this.name, this.thumbTag});
 
   static final _numbered = RegExp(r'^(\d+)\s+(.+)$');
 
@@ -153,6 +156,7 @@ class LiveTvTagsRepository {
             LiveTvTag(
               id: tag['Id'].toString(),
               name: tag['Name']?.toString() ?? '',
+              thumbTag: (tag['ImageTags'] as Map?)?['Thumb']?.toString(),
             ),
       ];
       // By their number: Emby doesn't return them in that order. Ones without
@@ -229,7 +233,11 @@ class LiveTvTagsRepository {
       final at = DateTime.fromMillisecondsSinceEpoch(stored['at'] as int);
       final tags = [
         for (final tag in (stored['tags'] as List).cast<Map>())
-          LiveTvTag(id: tag['id'] as String, name: tag['name'] as String),
+          LiveTvTag(
+            id: tag['id'] as String,
+            name: tag['name'] as String,
+            thumbTag: tag['thumb'] as String?,
+          ),
       ];
       _entries['tags'] = (at: at, value: Future.value(tags));
     } catch (_) {
@@ -246,7 +254,8 @@ class LiveTvTagsRepository {
           'owner': _owner,
           'at': DateTime.now().millisecondsSinceEpoch,
           'tags': [
-            for (final tag in tags) {'id': tag.id, 'name': tag.name},
+            for (final tag in tags)
+              {'id': tag.id, 'name': tag.name, 'thumb': tag.thumbTag},
           ],
         }),
       );

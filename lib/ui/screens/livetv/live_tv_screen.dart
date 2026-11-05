@@ -498,6 +498,7 @@ class _TagsGridState extends State<_TagsGrid> {
         if (tags.isEmpty)
           return _CenteredMessage(text: l10n.esplayLiveTvNoTags);
         final width = MediaQuery.sizeOf(context).width;
+        final withArt = tags.any((tag) => tag.thumbTag != null);
         return GridView.builder(
           padding: EdgeInsets.fromLTRB(widget.side, 0, widget.side, 120),
           itemCount: tags.length,
@@ -509,7 +510,8 @@ class _TagsGridState extends State<_TagsGrid> {
                 : 2,
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
-            mainAxisExtent: 96,
+            mainAxisExtent: withArt ? null : 96,
+            childAspectRatio: 16 / 9,
           ),
           itemBuilder: (context, index) => _TagCard(tag: tags[index]),
         );
@@ -536,6 +538,45 @@ class _TagCardState extends State<_TagCard> {
   @override
   Widget build(BuildContext context) {
     final tag = widget.tag;
+    if (tag.thumbTag != null) {
+      return LiveTvFocusable(
+        onTap: () => _openTag(context, tag),
+        radius: BorderRadius.circular(14),
+        builder: (focused) => ClipRRect(
+          borderRadius: BorderRadius.circular(14),
+          child: Stack(
+            fit: StackFit.expand,
+            children: [
+              LiveTvTagArt(tag: tag),
+              const DecoratedBox(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [Color(0x00000000), Color(0xCC000000)],
+                    stops: [0.35, 1],
+                  ),
+                ),
+              ),
+              Positioned(
+                left: 12,
+                right: 12,
+                bottom: 10,
+                child: LiveTvTagName(
+                  tag: tag,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w800,
+                    shadows: [Shadow(blurRadius: 6)],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }
     return LiveTvFocusable(
       onTap: () => _openTag(context, tag),
       radius: BorderRadius.circular(14),
@@ -693,20 +734,37 @@ class _TvTagsViewState extends State<_TvTagsView> with LiveTvChannelsLayout {
                           color: isSelected ? Colors.white : Colors.transparent,
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        child: LiveTvTagName(
-                          tag: tag,
-                          numberColor: isSelected
-                              ? const Color(0xFFB80F0F)
-                              : null,
-                          style: TextStyle(
-                            color: isSelected
-                                ? Colors.black
-                                : const Color(0xFFD4D4D8),
-                            fontSize: 17,
-                            fontWeight: isSelected
-                                ? FontWeight.w700
-                                : FontWeight.w500,
-                          ),
+                        child: Row(
+                          children: [
+                            if (tag.thumbTag != null) ...[
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(5),
+                                child: SizedBox(
+                                  width: 54,
+                                  height: 30,
+                                  child: LiveTvTagArt(tag: tag, maxWidth: 160),
+                                ),
+                              ),
+                              const SizedBox(width: 12),
+                            ],
+                            Expanded(
+                              child: LiveTvTagName(
+                                tag: tag,
+                                numberColor: isSelected
+                                    ? const Color(0xFFB80F0F)
+                                    : null,
+                                style: TextStyle(
+                                  color: isSelected
+                                      ? Colors.black
+                                      : const Color(0xFFD4D4D8),
+                                  fontSize: 17,
+                                  fontWeight: isSelected
+                                      ? FontWeight.w700
+                                      : FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     );
@@ -718,20 +776,23 @@ class _TvTagsViewState extends State<_TvTagsView> with LiveTvChannelsLayout {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          child: LiveTvTagName(
-                            tag: selected,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 24,
-                              fontWeight: FontWeight.w700,
+                    _TagHeading(
+                      tag: selected,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: LiveTvTagName(
+                              tag: selected,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 24,
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
                           ),
-                        ),
-                        ...sortAndSizeChips(l10n),
-                      ],
+                          ...sortAndSizeChips(l10n),
+                        ],
+                      ),
                     ),
                     const SizedBox(height: 16),
                     Expanded(
@@ -769,6 +830,43 @@ class _TvTagsViewState extends State<_TvTagsView> with LiveTvChannelsLayout {
           ),
         );
       },
+    );
+  }
+}
+
+/// On TV, the tag's picture as a strip behind its heading, darker on the left
+/// where the name sits. A tag without one keeps the plain heading.
+class _TagHeading extends StatelessWidget {
+  final LiveTvTag tag;
+  final Widget child;
+
+  const _TagHeading({required this.tag, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    if (tag.thumbTag == null) return child;
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(14),
+      child: SizedBox(
+        height: 120,
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            LiveTvTagArt(key: ValueKey(tag.id), tag: tag, maxWidth: 1280),
+            const DecoratedBox(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [Color(0xE6000000), Color(0x66000000)],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Align(alignment: Alignment.centerLeft, child: child),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

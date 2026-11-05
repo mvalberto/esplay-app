@@ -158,6 +158,30 @@ class LiveTvTagName extends StatelessWidget {
   }
 }
 
+/// The tag's picture from Emby, cropped to fill. Nothing when it has none.
+class LiveTvTagArt extends StatelessWidget {
+  final LiveTvTag tag;
+  final int maxWidth;
+
+  const LiveTvTagArt({super.key, required this.tag, this.maxWidth = 640});
+
+  @override
+  Widget build(BuildContext context) {
+    final thumb = tag.thumbTag;
+    if (thumb == null) return const SizedBox.shrink();
+    return BoundedNetworkImage(
+      imageUrl: GetIt.instance<MediaServerClient>().imageApi.getThumbImageUrl(
+        tag.id,
+        maxWidth: maxWidth,
+        tag: thumb,
+      ),
+      maxWidth: maxWidth,
+      sourceAspectRatio: 16 / 9,
+      errorBuilder: (context, url, error) => const SizedBox.shrink(),
+    );
+  }
+}
+
 class LiveTvChannelLogo extends StatelessWidget {
   final String channelId;
   final String? imageTag;

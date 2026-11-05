@@ -5,7 +5,9 @@ import 'package:server_core/server_core.dart';
 
 import '../../../data/models/aggregated_item.dart';
 import '../../../data/services/media_server_client_factory.dart';
+import '../../../esplay/live_tv_tags.dart';
 import '../../widgets/bounded_network_image.dart';
+import '../livetv/live_tv_tag_widgets.dart';
 
 /// EsPlay: the top of Home on a TV while the rows have focus, as on Samsung.
 /// The title under the remote shows its picture on the right, fading into the
@@ -13,6 +15,87 @@ import '../../widgets/bounded_network_image.dart';
 /// details and synopsis. When it has a preview, [video] plays there instead of
 /// inside the card. [unit] is a 1920-wide screen's pixel, [textInset] where
 /// Home's rows start.
+/// The same top of Home for a channel tag under the remote: its picture on
+/// the right, faded the same way, and its name.
+class EsplayTagHero extends StatelessWidget {
+  final LiveTvTag tag;
+  final double unit;
+  final double textInset;
+
+  const EsplayTagHero({
+    super.key,
+    required this.tag,
+    required this.unit,
+    required this.textInset,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final u = unit;
+    final width = MediaQuery.sizeOf(context).width;
+    Widget fade(Widget child, Alignment from, List<double> stops) => ShaderMask(
+      blendMode: BlendMode.dstIn,
+      shaderCallback: (rect) => LinearGradient(
+        begin: from,
+        end: -from,
+        colors: const [
+          Color(0x00000000),
+          Color(0x00000000),
+          Color(0x80000000),
+          Color(0xFF000000),
+        ],
+        stops: stops,
+      ).createShader(rect),
+      child: child,
+    );
+    return ColoredBox(
+      color: AppColorScheme.background,
+      child: SizedBox(
+        height: EsplayMediaHero.heightFor(u),
+        child: Stack(
+          children: [
+            Positioned(
+              top: 0,
+              right: 0,
+              bottom: 0,
+              width: width * 0.66,
+              child: ClipRect(
+                child: fade(
+                  fade(
+                    LiveTvTagArt(
+                      key: ValueKey(tag.id),
+                      tag: tag,
+                      maxWidth: 1280,
+                    ),
+                    Alignment.bottomCenter,
+                    const [0.0, 0.06, 0.30, 0.55],
+                  ),
+                  Alignment.centerLeft,
+                  const [0.0, 0.10, 0.34, 0.62],
+                ),
+              ),
+            ),
+            Positioned(
+              left: textInset,
+              bottom: 26 * u,
+              width: width * 0.46,
+              child: LiveTvTagName(
+                tag: tag,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 56 * u,
+                  height: 1.05,
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class EsplayMediaHero extends StatefulWidget {
   final AggregatedItem item;
   final double unit;

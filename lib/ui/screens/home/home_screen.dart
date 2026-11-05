@@ -1002,6 +1002,9 @@ class _ContentRowsState extends State<_ContentRows>
   }
 
   final ValueNotifier<bool> _previewReadyNotifier = ValueNotifier(false);
+
+  /// EsPlay: the channel tag under the remote on Home's tags row, for the top.
+  final ValueNotifier<LiveTvTag?> _esplayHeroTag = ValueNotifier(null);
   bool get _previewReady => _previewReadyNotifier.value;
   set _previewReady(bool value) {
     if (_previewReadyNotifier.value != value) {
@@ -1563,6 +1566,7 @@ class _ContentRowsState extends State<_ContentRows>
     _chromeAudioActiveNotifier.dispose();
     _activePreviewKeyNotifier.dispose();
     _previewReadyNotifier.dispose();
+    _esplayHeroTag.dispose();
     _isActivelyScrollingNotifier.dispose();
     _infoRevealedNotifier.dispose();
     if (identical(
@@ -3006,6 +3010,7 @@ class _ContentRowsState extends State<_ContentRows>
   }
 
   void _onHomeRowTileFocused(AggregatedItem? item) {
+    _esplayHeroTag.value = null;
     final forceReveal = _forceRevealOnNextRowFocusFromMediaBar;
     _forceRevealOnNextRowFocusFromMediaBar = false;
     widget.onItemSelected(item);
@@ -5233,8 +5238,9 @@ class _ContentRowsState extends State<_ContentRows>
           leadingPadding: _isHomeRowsStyleV2() ? _kHomeRowLabelInset : 0,
           clipBehavior: cardExpansion ? Clip.none : Clip.hardEdge,
           padding: const EdgeInsets.fromLTRB(_kHomeRowLabelInset, 5, 20, 5),
-          onIndexChanged: (_, _) {
+          onIndexChanged: (_, action) {
             _onHomeRowTileFocused(null);
+            _esplayHeroTag.value = action.tag;
           },
           onFocusChange: (has) => _onRowFocusTracked(rowIndex, has),
           onVerticalNavigation: (isUp) => _onRowVerticalNavigation(
@@ -5359,9 +5365,14 @@ class _ContentRowsState extends State<_ContentRows>
       valueListenable: widget.selectedItemNotifier,
       builder: (context, item, _) {
         if (item == null) {
-          return ColoredBox(
-            color: AppColorScheme.background,
-            child: SizedBox(height: EsplayMediaHero.heightFor(u)),
+          return ValueListenableBuilder<LiveTvTag?>(
+            valueListenable: _esplayHeroTag,
+            builder: (context, tag, _) => tag?.thumbTag != null
+                ? EsplayTagHero(tag: tag!, unit: u, textInset: textInset)
+                : ColoredBox(
+                    color: AppColorScheme.background,
+                    child: SizedBox(height: EsplayMediaHero.heightFor(u)),
+                  ),
           );
         }
         if (item.type == 'Program' && item.channelId != null) {
@@ -7446,19 +7457,43 @@ class _EsplayCompactTagCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final u = unit;
     final number = tag?.number;
+    final art = tag?.thumbTag != null;
     return Container(
       width: 300 * u,
       height: 110 * u,
-      padding: EdgeInsets.symmetric(horizontal: 22 * u),
+      clipBehavior: Clip.antiAlias,
       decoration: BoxDecoration(
         color: const Color(0xFF1C1C20),
+        borderRadius: BorderRadius.circular(14 * u),
+      ),
+      foregroundDecoration: BoxDecoration(
         borderRadius: BorderRadius.circular(14 * u),
         border: Border.all(
           color: focused ? liveTvFocus : Colors.transparent,
           width: 4 * u,
         ),
       ),
-      child: Row(
+      child: Stack(
+        fit: StackFit.expand,
+        children: [
+          if (art) ...[
+            LiveTvTagArt(tag: tag!, maxWidth: 480),
+            const DecoratedBox(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Color(0xD9000000),
+                    Color(0x8C000000),
+                    Color(0x26000000),
+                  ],
+                  stops: [0, 0.55, 1],
+                ),
+              ),
+            ),
+          ],
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 22 * u),
+            child: Row(
         children: [
           if (tag == null)
             Icon(icon, color: liveTvRed, size: 54 * u)
@@ -7485,6 +7520,9 @@ class _EsplayCompactTagCard extends StatelessWidget {
                 fontWeight: FontWeight.w800,
               ),
             ),
+          ),
+        ],
+      ),
           ),
         ],
       ),
