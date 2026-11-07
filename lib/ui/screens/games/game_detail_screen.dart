@@ -287,11 +287,12 @@ class _GameDetailScreenState extends State<GameDetailScreen> with RouteAware {
         _loading = false;
       });
       // EsPlay: ROMote's box art and description for this game, from Emby.
+      // Rebuilt even without a match: the "Más de" rail reads the same index.
       unawaited(
         RomoteGames.instance
             .match(fileName: game.fileName, title: game.title)
-            .then((found) {
-              if (found != null && mounted) setState(() {});
+            .then((_) {
+              if (mounted) setState(() {});
             }, onError: (_) {}),
       );
 

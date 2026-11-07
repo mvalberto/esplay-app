@@ -6,6 +6,7 @@ import 'package:get_it/get_it.dart';
 import 'package:moonfin_design/moonfin_design.dart';
 import 'package:server_core/server_core.dart';
 
+import '../../../esplay/romote_games.dart';
 import '../../../preference/user_preferences.dart';
 import '../../../util/game_artwork_cache.dart';
 import '../../../util/platform_detection.dart';
@@ -115,9 +116,24 @@ class GamePosterRail extends StatelessWidget {
               final containArt =
                   artAspect != null &&
                   RetroArtworkShape.needsFill(artAspect, cell.aspectRatio);
+              // EsPlay: ROMote's box art once the game page has its index
+              // loaded, as the system grid does; Moonbase's libretro lookup
+              // misses names like "Alien Brigade (NA)".
+              final romoteUrl = RomoteGames.instance
+                  .cachedMatch(fileName: game.fileName, title: game.title)
+                  ?.imageUrl(
+                    maxWidth: BoundedNetworkImage.cacheWidthFor(
+                      width,
+                      MediaQuery.devicePixelRatioOf(context),
+                    ),
+                  );
               return GamePosterCard(
-                imageUrl: reference?.legacyUrl,
-                artwork: source == null || transport == null || gate == null
+                imageUrl: romoteUrl ?? reference?.legacyUrl,
+                artwork:
+                    romoteUrl != null ||
+                        source == null ||
+                        transport == null ||
+                        gate == null
                     ? null
                     : RetroArtworkImage(
                         source: source,
@@ -153,7 +169,7 @@ class GamePosterRail extends StatelessWidget {
                 cardFocusExpansion: cardFocusExpansion,
                 suppressFocusGlow: isNeon,
                 cacheManager: gameArtworkCacheManagerForScope(artworkScope),
-                loadArtwork: reference != null,
+                loadArtwork: romoteUrl != null || reference != null,
                 onArtworkLoadFinished: () => artworkDataSource
                     ?.reportImageLoaded(game.id, role: 'boxart'),
                 onArtworkError: (error) =>
