@@ -27,6 +27,7 @@ import 'pin_entry_dialog.dart';
 import 'remote_control_dialog.dart';
 import 'settings/settings_panel.dart';
 import 'image_source.dart';
+import '../../esplay/esplay_flags.dart';
 
 enum _AccountDialogAction { quickConnect }
 
@@ -341,7 +342,8 @@ class _AccountDialogState extends State<_AccountDialog> {
               const SizedBox(height: 16),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: PlatformDetection.isWeb
+                child: PlatformDetection.isWeb ||
+                        esplayHideServerChoiceAndQuickConnect
                     ? SizedBox(
                         width: double.infinity,
                         child: _ActionButton(
@@ -404,7 +406,21 @@ class _AccountDialogState extends State<_AccountDialog> {
                 const SizedBox(height: 8),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 24),
-                  child: _buildPairedActionButtons(
+                  child: esplayHideServerChoiceAndQuickConnect
+                      ? SizedBox(
+                          width: double.infinity,
+                          child: _ActionButton(
+                            label: l10n.remoteControl,
+                            onPressed: _busy
+                                ? null
+                                : () {
+                                    Navigator.of(context).pop();
+                                    showRemoteControlDialog(context);
+                                  },
+                            focusColor: focusColor,
+                          ),
+                        )
+                      : _buildPairedActionButtons(
                     first: _ActionButton(
                       label: l10n.quickConnect,
                       onPressed: _busy

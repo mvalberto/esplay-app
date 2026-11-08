@@ -10,6 +10,10 @@ const esplayHideIntegrationsAndLooks = true;
 /// settings are not offered, and Latest leaves those library types out.
 const esplayHideBooksPhotosHomeVideos = true;
 
+/// The server comes from the panel, so EsPlay offers no way to pick or type
+/// one, and no Quick Connect.
+const esplayHideServerChoiceAndQuickConnect = true;
+
 /// Quality is always the maximum (see UserPreferences.get), so the Quality &
 /// Decoding screen and the download quality pickers are not offered.
 const esplayHideQualitySettings = true;

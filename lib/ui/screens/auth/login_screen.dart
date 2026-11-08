@@ -1196,13 +1196,14 @@ class _LoginScreenState extends State<LoginScreen> {
           spacing: 12,
           runSpacing: 12,
           children: [
-            _buildActionButton(
-              label: widget.esplayMode
-                  ? l10n.esplayConnectWithServer
-                  : l10n.back,
-              focusNode: _backFocus,
-              onPressed: _navigateBack,
-            ),
+            // EsPlay: the server always comes from the panel, so no way out to
+            // typing one in.
+            if (!widget.esplayMode)
+              _buildActionButton(
+                label: l10n.back,
+                focusNode: _backFocus,
+                onPressed: _navigateBack,
+              ),
             _buildActionButton(
               label: l10n.signIn,
               focusNode: _signInFocus,
