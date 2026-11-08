@@ -982,9 +982,20 @@ class RowDataSource {
       ),
     );
 
-    final items = [
-      for (final response in responses) ..._parseItems(response, serverId),
-    ];
+    // EsPlay: a collection holding titles from several libraries comes back
+    // once per library; keep it once.
+    final seen = <String>{};
+    var repeated = 0;
+    final items = <AggregatedItem>[];
+    for (final response in responses) {
+      for (final item in _parseItems(response, serverId)) {
+        if (seen.add(item.id)) {
+          items.add(item);
+        } else {
+          repeated++;
+        }
+      }
+    }
     // Each library ordered only its own share, so the merged list needs the
     // sort redone before it can be cut back to one row's worth.
     if (responses.length > 1) {
@@ -996,6 +1007,7 @@ class RowDataSource {
     for (final response in responses) {
       totalCount += response['TotalRecordCount'] as int? ?? 0;
     }
+    totalCount -= repeated;
 
     return HomeRow(
       id: id,
