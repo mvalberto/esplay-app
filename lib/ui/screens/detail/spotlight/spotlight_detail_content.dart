@@ -211,6 +211,12 @@ class _SpotlightDetailContentState extends State<SpotlightDetailContent> {
   void initState() {
     super.initState();
     _vm.addListener(_onViewModelChanged);
+    // EsPlay: a collection's playlist card is built from the start here.
+    if (_vm.item?.type == 'BoxSet') {
+      WidgetsBinding.instance.addPostFrameCallback(
+        (_) => _vm.ensurePlaylistIndex(),
+      );
+    }
     if (PlatformDetection.isTV) {
       // The top toolbar's Down press needs a target from the first frame,
       // not only after a pushed child page pops back.

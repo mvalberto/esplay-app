@@ -383,6 +383,8 @@ class ItemDetailViewModel extends ChangeNotifier {
   bool _playlistIndexBuilding = false;
   bool get playlistIndexBuilding => _playlistIndexBuilding;
   bool _playlistFallbackTriggered = false;
+  /// EsPlay: whether a screen has asked for the collection's playlist yet.
+  bool get playlistIndexRequested => _playlistFallbackTriggered;
   bool _playlistSortRefreshing = false;
   bool get playlistSortRefreshing => _playlistSortRefreshing;
 
@@ -1082,7 +1084,9 @@ class ItemDetailViewModel extends ChangeNotifier {
       // Deliberately not awaited, so a slow Seerr server never holds the
       // collection's own members back.
       unawaited(_loadBoxSetSeerrItems());
-      futures.add(_buildPlaylistIndex());  // playlist — Phase 1, runs concurrently
+      // EsPlay: the playlist is built when it's first shown (ensurePlaylistIndex),
+      // not on open. It asks every series in the collection for its episodes,
+      // hundreds of requests for a streaming-service collection.
     } else if (type == 'MusicVideo' ||
         type == 'Movie' ||
         type == 'Trailer' ||
@@ -1553,6 +1557,7 @@ class ItemDetailViewModel extends ChangeNotifier {
           .where((entry) => entry.id != item.id)
           .toList();
     }
+    _indexCache.remove('${_client.baseUrl}|$itemId');
     // Both lists count how far into the collection they have read, and they
     // page independently in orders of their own. A cursor only steps back when
     // the hole opened behind it: stepping one that sits ahead of the hole would
@@ -1626,12 +1631,6 @@ class ItemDetailViewModel extends ChangeNotifier {
         ? _collectionFetchedCount < _collectionTotalCount
         : newItems.length == _collectionPageSize;
     _collectionItems = [..._collectionItems, ...newItems];
-    if ((_playlistIndexEntries == null || _playlistIndexEntries!.isEmpty) &&
-        !_playlistIndexBuilding &&
-        !_playlistFallbackTriggered) {
-      _playlistFallbackTriggered = true;
-      _buildPlaylistIndex();
-    }
     notifyListeners();
   }
 
@@ -1780,6 +1779,23 @@ class ItemDetailViewModel extends ChangeNotifier {
     );
   }
 
+  /// EsPlay: builds the collection's playlist the first time a screen shows it.
+  Future<void> ensurePlaylistIndex() async {
+    if (_item?.type != 'BoxSet' ||
+        _playlistIndexBuilding ||
+        _playlistFallbackTriggered) {
+      return;
+    }
+    _playlistFallbackTriggered = true;
+    await _buildPlaylistIndex();
+  }
+
+  /// EsPlay: the scanned playlist of each collection, kept for a while so
+  /// opening it again doesn't ask every series for its episodes again.
+  static final Map<String, (DateTime, List<_PlaylistItemIndexEntry>)>
+  _indexCache = {};
+  static const _indexCacheTtl = Duration(minutes: 10);
+
   /// Puts [_flattenedIds] in place, either from a saved order or by scanning
   /// the collection, then starts the first page.
   Future<void> _buildPlaylistIndex() async {
@@ -1837,6 +1853,13 @@ class ItemDetailViewModel extends ChangeNotifier {
   /// [_fetchPlaylistPage], so a collection of any size settles at a few KB.
   Future<void> _ensurePlaylistIndexEntries() async {
     if (_playlistIndexEntries != null) return;
+    final cacheKey = '${_client.baseUrl}|$itemId';
+    final cached = _indexCache[cacheKey];
+    if (cached != null &&
+        DateTime.now().difference(cached.$1) < _indexCacheTtl) {
+      _playlistIndexEntries = List.of(cached.$2);
+      return;
+    }
     try {
       // Deliberately not recursive. The scan reads the collection's own members
       // and then asks each series for its episodes below, so walking the tree
@@ -1902,6 +1925,7 @@ class ItemDetailViewModel extends ChangeNotifier {
             ),
           )
           .toList();
+      _indexCache[cacheKey] = (DateTime.now(), List.of(_playlistIndexEntries!));
     } catch (_) {}
     if (_playlistIndexEntries == null || _playlistIndexEntries!.isEmpty) {
       if (_collectionItems.isNotEmpty) {

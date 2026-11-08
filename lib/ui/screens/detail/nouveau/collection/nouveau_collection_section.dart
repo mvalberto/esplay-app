@@ -241,6 +241,10 @@ class NouveauCollectionSectionState
     _captureStableItems();
 
     _vm.addListener(_handleViewModelChanged);
+    // EsPlay: this layout shows the playlist inline, so it asks for it now.
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => unawaited(_vm.ensurePlaylistIndex()),
+    );
   }
 
   @override

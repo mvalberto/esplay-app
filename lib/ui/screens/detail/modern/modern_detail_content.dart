@@ -1173,6 +1173,13 @@ class _ModernDetailContentState extends State<ModernDetailContent> {
               l10n.playlist,
               (context, item) {
                 final hasPlaylistItems = _vm.playlistItems.isNotEmpty;
+                // EsPlay: the playlist is only built once this tab is shown.
+                if (!_vm.playlistIndexRequested) {
+                  WidgetsBinding.instance.addPostFrameCallback(
+                    (_) => _vm.ensurePlaylistIndex(),
+                  );
+                  return const Center(child: CircularProgressIndicator());
+                }
                 if (_vm.playlistSortRefreshing ||
                     (_vm.playlistIndexBuilding && !hasPlaylistItems)) {
                   return const Center(child: CircularProgressIndicator());
