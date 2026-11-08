@@ -31,6 +31,7 @@ import '../../widgets/settings/clean_settings_typography.dart';
 import '../../widgets/settings/preference_tiles.dart';
 import '../../widgets/settings/settings_section_header.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../esplay/esplay_flags.dart';
 import 'settings_app_bar.dart';
 
 const double _kHomeSectionTileRadius = 16;
@@ -707,7 +708,12 @@ class _HomeSectionsScreenState extends State<HomeSectionsScreen>
     final hiddenByRewatch =
         section.type == HomeSectionType.rewatch && !showRewatch;
 
-    return hiddenByFavorites ||
+    final hiddenByEsplay =
+        esplayHideBooksPhotosHomeVideos &&
+        section.type == HomeSectionType.resumeBook;
+
+    return hiddenByEsplay ||
+        hiddenByFavorites ||
         hiddenByCollections ||
         hiddenByServer ||
         hiddenByGenres ||

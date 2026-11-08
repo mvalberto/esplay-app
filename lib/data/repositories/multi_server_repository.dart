@@ -25,6 +25,7 @@ import 'search_repository.dart';
 import 'user_views_repository.dart';
 import '../../l10n/app_localizations.dart';
 import '../../l10n/current_app_localizations.dart';
+import '../../esplay/esplay_flags.dart';
 
 class ServerUserSession {
   final Server server;
@@ -1099,6 +1100,11 @@ class MultiServerRepository {
           if (collectionType == 'playlists' ||
               collectionType == 'boxsets' ||
               collectionType == 'livetv') {
+            continue;
+          }
+          // EsPlay: the same libraries Samsung leaves out (browseFilters.js).
+          if (esplayHideBooksPhotosHomeVideos &&
+              const {'books', 'photos', 'homevideos'}.contains(collectionType)) {
             continue;
           }
           if (latestExcludes.contains(id)) continue;

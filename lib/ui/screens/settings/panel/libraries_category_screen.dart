@@ -34,8 +34,9 @@ class _LibrariesCategoryScreen extends StatelessWidget {
                 icon: Icons.dns,
                 onChanged: _pushPersonalizationSync,
               ),
-              SwitchPreferenceTile(
-                preference: UserPreferences.showBookDiscoverTab,
+              if (!esplayHideBooksPhotosHomeVideos)
+                SwitchPreferenceTile(
+                  preference: UserPreferences.showBookDiscoverTab,
                 title: l10n.showBookDiscoverTab,
                 subtitle: l10n.showBookDiscoverTabDescription,
                 icon: Icons.explore,
@@ -61,7 +62,8 @@ class _LibrariesCategoryScreen extends StatelessWidget {
                 },
                 onChanged: _pushPersonalizationSync,
               ),
-              EnumPreferenceTile<BookLibraryStyle>(
+              if (!esplayHideBooksPhotosHomeVideos)
+                EnumPreferenceTile<BookLibraryStyle>(
                 key: const ValueKey('pref_book_library_style'),
                 preference: UserPreferences.bookLibraryStyle,
                 title: l10n.bookLibraryStyle,

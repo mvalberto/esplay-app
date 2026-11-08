@@ -44,6 +44,7 @@ import '../../../data/utils/blocked_ratings.dart';
 import '../../../util/seasonal_country.dart';
 import '../../../util/seerr_genre_art.dart';
 import '../../util/home_row_title_localizer.dart';
+import '../../../esplay/esplay_flags.dart';
 
 class HomeViewModel extends ChangeNotifier {
   /// Cards in a merged row, matching what a single library row shows.
@@ -1869,6 +1870,11 @@ class HomeViewModel extends ChangeNotifier {
       if (collectionType == 'playlists' ||
           collectionType == 'boxsets' ||
           collectionType == 'livetv') {
+        return false;
+      }
+      // EsPlay: the same libraries Samsung leaves out (browseFilters.js).
+      if (esplayHideBooksPhotosHomeVideos &&
+          const {'books', 'photos', 'homevideos'}.contains(collectionType)) {
         return false;
       }
       return !latestExcludes.contains(lib.id);

@@ -39,6 +39,9 @@ const _esplayHiddenSearch = {
   'custom-rows',
   'services',
   'seerr',
+  // EsPlay has no book libraries (esplayHideBooksPhotosHomeVideos).
+  'libraries.pref_show_book_discover_tab',
+  'libraries.pref_book_library_style',
 };
 
 class _SearchSection {

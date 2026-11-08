@@ -6,6 +6,10 @@ const esplayHideThemeStoreAndExtras = true;
 /// bar), Home's external sources, the app theme and the focus border color.
 const esplayHideIntegrationsAndLooks = true;
 
+/// EsPlay has no book, photo or home video libraries: their Home rows and
+/// settings are not offered, and Latest leaves those library types out.
+const esplayHideBooksPhotosHomeVideos = true;
+
 /// Quality is always the maximum (see UserPreferences.get), so the Quality &
 /// Decoding screen and the download quality pickers are not offered.
 const esplayHideQualitySettings = true;
