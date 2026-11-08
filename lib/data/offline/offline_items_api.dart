@@ -319,6 +319,7 @@ class OfflineItemsApi implements ItemsApi {
     bool? isHd,
     bool? is4K,
     bool? is3D,
+    bool? enableUserData,
   }) async {
     List<OfflineEntry> result;
     if (ids != null && ids.isNotEmpty) {

@@ -61,6 +61,7 @@ class JellyfinItemsApi implements ItemsApi {
     bool? isHd,
     bool? is4K,
     bool? is3D,
+    bool? enableUserData,
   }) async {
     final queryParams = {
       'ParentId': ?parentId,
@@ -103,6 +104,7 @@ class JellyfinItemsApi implements ItemsApi {
       'IsHd': ?isHd,
       'Is4K': ?is4K,
       'Is3D': ?is3D,
+      'EnableUserData': ?enableUserData,
       'IsFavorite': ?isFavorite,
       'CollapseBoxSetItems': ?collapseBoxSetItems,
       'EnableTotalRecordCount': ?enableTotalRecordCount,

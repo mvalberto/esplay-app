@@ -68,6 +68,7 @@ class _FakeItemsApi implements ItemsApi {
     bool? isHd,
     bool? is4K,
     bool? is3D,
+    bool? enableUserData,
   }) async {
     pageRequests++;
     searchTerms.add(searchTerm);

@@ -1620,6 +1620,10 @@ class ItemDetailViewModel extends ChangeNotifier {
       startIndex: _collectionFetchedCount,
       limit: _collectionPageSize,
       fields: 'PrimaryImageAspectRatio,BasicSyncInfo,People',
+      // EsPlay: without the viewer's played state. Emby works it out for a
+      // series by walking its episodes, and for Netflix's 1,340 titles that
+      // took 33 s instead of 0.7 s.
+      enableUserData: false,
     );
     final newItems = _mapItems((data['Items'] as List?) ?? []);
     final total = data['TotalRecordCount'] as int?;
@@ -1868,6 +1872,7 @@ class ItemDetailViewModel extends ChangeNotifier {
         parentId: itemId,
         limit: _indexScanLimit,
         fields: 'BasicSyncInfo',
+        enableUserData: false,
       );
       final allTopLevel = _mapItems((allData['Items'] as List?) ?? []);
 

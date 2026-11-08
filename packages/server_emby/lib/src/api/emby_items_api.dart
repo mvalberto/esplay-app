@@ -80,6 +80,7 @@ class EmbyItemsApi implements ItemsApi {
     bool? isHd,
     bool? is4K,
     bool? is3D,
+    bool? enableUserData,
   }) async {
     final queryParams = {
       'ParentId': ?parentId,
@@ -122,6 +123,7 @@ class EmbyItemsApi implements ItemsApi {
       'IsHD': ?isHd,
       'Is4K': ?is4K,
       'Is3D': ?is3D,
+      'EnableUserData': ?enableUserData,
       'IsFavorite': ?isFavorite,
       'CollapseBoxSetItems': ?collapseBoxSetItems,
       'EnableTotalRecordCount': ?enableTotalRecordCount,
