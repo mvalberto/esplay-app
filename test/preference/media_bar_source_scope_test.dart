@@ -11,6 +11,10 @@ Future<PreferenceStore> _store([Map<String, Object> initial = const {}]) async {
 }
 
 void main() {
+  // These cover the stock settings, which EsPlay otherwise fixes.
+  setUpAll(() => UserPreferences.esplayMediaBarForced = false);
+  tearDownAll(() => UserPreferences.esplayMediaBarForced = true);
+
   TestWidgetsFlutterBinding.ensureInitialized();
 
   const signedIn = {

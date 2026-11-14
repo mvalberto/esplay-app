@@ -28,6 +28,7 @@ import '../../data/services/media_server_client_factory.dart';
 import '../../data/services/sponsorblock_service.dart';
 import '../../data/services/youtube_stream_resolver.dart';
 import '../../data/viewmodels/media_bar_view_model.dart';
+import '../../esplay/esplay_flags.dart';
 import '../../preference/preference_constants.dart';
 import '../../preference/user_preferences.dart';
 import '../navigation/app_router.dart';
@@ -2023,8 +2024,34 @@ class _MediaBarState extends State<MediaBar>
   }
 
   /// EsPlay on a TV and on Windows: the bar is the showcase over Home's rows
-  /// at full size, as on Samsung and Prime Video.
-  bool get _esplayLook => PlatformDetection.isTV || PlatformDetection.isWindows;
+  /// at full size, as on Samsung and Prime Video. A phone gets it too, laid
+  /// out upright when held upright.
+  bool get _esplayLook =>
+      esplayForceMediaBar ||
+      PlatformDetection.isTV ||
+      PlatformDetection.isWindows;
+
+  /// The IMDb, TMDB and Rotten Tomatoes marks of [item], once they arrive.
+  Widget? _esplayRatings(MediaBarSlideItem item) {
+    unawaited(widget.viewModel.ensureRatings(item.itemId));
+    final ratings = widget.viewModel.ratingsFor(item.itemId);
+    if (ratings.isEmpty &&
+        item.communityRating == null &&
+        item.criticRating == null) {
+      return null;
+    }
+    return RatingsRow(
+      ratings: ratings,
+      communityRating: item.communityRating,
+      criticRating: item.criticRating,
+      enableAdditionalRatings: widget.prefs.get(
+        UserPreferences.mediaBarEnableAdditionalRatings,
+      ),
+      enabledRatings: widget.prefs.get(UserPreferences.mediaBarEnabledRatings),
+      showLabels: widget.prefs.get(UserPreferences.mediaBarShowRatingLabels),
+      showBadges: false,
+    );
+  }
 
   /// The title's picture or trailer on the right fading into the dark, its
   /// text on the left and a progress mark per title. Left and Right still
@@ -2035,8 +2062,13 @@ class _MediaBarState extends State<MediaBar>
   ) {
     final l10n = AppLocalizations.of(context);
     final currentItem = items.elementAtOrNull(_currentIndex);
+    if (PlatformDetection.useMobileUi &&
+        MediaQuery.orientationOf(context) == Orientation.portrait) {
+      return _buildEsplayPortrait(context, items);
+    }
     final width = MediaQuery.sizeOf(context).width;
-    final u = width / 1920;
+    // A phone on its side is far smaller than a TV, so its text goes larger.
+    final u = width / (PlatformDetection.useMobileUi ? 1300 : 1920);
     final hasLeftSidebar =
         widget.prefs.get(UserPreferences.navbarPosition) == NavbarPosition.left;
     final textLeft =
@@ -2108,6 +2140,7 @@ class _MediaBarState extends State<MediaBar>
     };
     final details = currentItem == null ? '' : _esplayDetails(currentItem);
     final overview = currentItem?.overview?.trim() ?? '';
+    final ratings = currentItem == null ? null : _esplayRatings(currentItem);
 
     return MouseRegion(
       onEnter: (_) => _setPaused(true),
@@ -2232,6 +2265,10 @@ class _MediaBarState extends State<MediaBar>
                               ),
                             ),
                           ],
+                          if (ratings != null) ...[
+                            SizedBox(height: 16 * u),
+                            ratings,
+                          ],
                           if (!_isTrailerPlaying && overview.isNotEmpty) ...[
                             SizedBox(height: 18 * u),
                             SizedBox(
@@ -2250,68 +2287,296 @@ class _MediaBarState extends State<MediaBar>
                           ],
                           if (items.length > 1) ...[
                             SizedBox(height: 34 * u),
-                            Row(
-                              children: [
-                                for (var i = 0; i < items.length; i++)
-                                  Padding(
-                                    padding: EdgeInsets.only(right: 8 * u),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(3 * u),
-                                      child: SizedBox(
-                                        width: (i == _currentIndex ? 64 : 20) * u,
-                                        height: 6 * u,
-                                        child: ColoredBox(
-                                          color: const Color(0x47FFFFFF),
-                                          child: i != _currentIndex
-                                              ? null
-                                              : TweenAnimationBuilder<double>(
-                                                  key: ValueKey(
-                                                    '$_currentIndex-$advancing',
-                                                  ),
-                                                  tween: Tween(
-                                                    begin: advancing ? 0 : 1,
-                                                    end: 1,
-                                                  ),
-                                                  duration: advancing
-                                                      ? interval
-                                                      : Duration.zero,
-                                                  builder: (context, value, _) =>
-                                                      FractionallySizedBox(
-                                                    alignment:
-                                                        Alignment.centerLeft,
-                                                    widthFactor: value,
-                                                    child: const ColoredBox(
-                                                      color: Color(0xFFE71414),
-                                                    ),
-                                                  ),
-                                                ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                SizedBox(width: 6 * u),
-                                Text(
-                                  '${_currentIndex + 1} / ${items.length}',
-                                  style: TextStyle(
-                                    color: const Color(0xFF8A8A92),
-                                    fontSize: 20 * u,
-                                  ),
-                                ),
-                              ],
-                            ),
+                            _esplayProgress(items, u, advancing, interval),
                           ],
                         ],
                       ),
                     ),
                   ),
                 // A mouse has no Left and Right to change title.
-                if (items.length > 1 && !PlatformDetection.isTV)
+                if (items.length > 1 &&
+                    !PlatformDetection.isTV &&
+                    !PlatformDetection.useMobileUi)
                   ..._buildNavArrows(context, items.length),
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+
+  /// The EsPlay bar on an upright phone: the picture or trailer across the
+  /// top fading into the dark, the title's text under it, and a swipe to
+  /// change title.
+  Widget _buildEsplayPortrait(
+    BuildContext context,
+    List<MediaBarSlideItem> items,
+  ) {
+    final l10n = AppLocalizations.of(context);
+    final currentItem = items.elementAtOrNull(_currentIndex);
+    final width = MediaQuery.sizeOf(context).width;
+    // Sized against a 400 wide phone.
+    final u = (width / 400).clamp(0.8, 1.6);
+    final artHeight = widget.height * 0.66;
+    final background = AppColorScheme.background;
+    final hasVisibleTrailerVideo =
+        (_activeYouTubeVideoId != null ||
+            _activeWebTrailerUrl != null ||
+            _trailerUsingMedia3 ||
+            _trailerController != null) &&
+        _trailerVideoOpacity > 0;
+    final interval = Duration(
+      milliseconds: widget.prefs.get(UserPreferences.mediaBarIntervalMs),
+    );
+    final advancing =
+        items.length > 1 &&
+        widget.prefs.get(UserPreferences.mediaBarAutoAdvance) &&
+        !_isTrailerPlaying &&
+        !_isPaused &&
+        !widget.externallyPaused;
+    const stops = [0.0, 0.08, 0.32, 0.6];
+
+    final added = currentItem?.dateCreated;
+    final isNew =
+        added != null && DateTime.now().difference(added).inDays < 30;
+    final kind = switch (currentItem?.itemType) {
+      'Movie' => l10n.movie,
+      'Series' => l10n.series,
+      _ => null,
+    };
+    final details = currentItem == null ? '' : _esplayDetails(currentItem);
+    final overview = currentItem?.overview?.trim() ?? '';
+    final ratings = currentItem == null ? null : _esplayRatings(currentItem);
+
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTap: () => _navigateToItem(context, items),
+      onLongPress: () => _navigateToItemAndPlay(context, items),
+      onHorizontalDragEnd: (drag) {
+        final velocity = drag.primaryVelocity ?? 0;
+        if (items.length < 2) return;
+        if (velocity < -300) {
+          _goToPage((_currentIndex + 1) % items.length);
+        } else if (velocity > 300) {
+          _goToPage((_currentIndex - 1 + items.length) % items.length);
+        }
+      },
+      child: SizedBox(
+        height: widget.height,
+        width: double.infinity,
+        child: Stack(
+          children: [
+            Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              height: artHeight,
+              child: ClipRect(
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    AnimatedOpacity(
+                      opacity: hasVisibleTrailerVideo ? 0 : 1,
+                      duration: const Duration(milliseconds: 250),
+                      child: ShaderMask(
+                        blendMode: BlendMode.dstIn,
+                        shaderCallback: (rect) => const LinearGradient(
+                          begin: Alignment.bottomCenter,
+                          end: Alignment.topCenter,
+                          colors: [
+                            Color(0x00000000),
+                            Color(0x00000000),
+                            Color(0x80000000),
+                            Color(0xFF000000),
+                          ],
+                          stops: stops,
+                        ).createShader(rect),
+                        child: _BackdropLayer(
+                          items: items,
+                          currentIndex: _currentIndex,
+                        ),
+                      ),
+                    ),
+                    ..._buildVideoOverlays(allowPersistentMedia3: true),
+                    if (hasVisibleTrailerVideo)
+                      Positioned.fill(
+                        child: IgnorePointer(
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.bottomCenter,
+                                end: Alignment.topCenter,
+                                colors: [
+                                  background,
+                                  background,
+                                  background.withAlpha(128),
+                                  background.withAlpha(0),
+                                ],
+                                stops: stops,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            ),
+            if (currentItem != null)
+              Positioned(
+                left: 16 * u,
+                right: 16 * u,
+                bottom: 14 * u,
+                child: Column(
+                  key: ValueKey(currentItem.itemId),
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    if (isNew || kind != null) ...[
+                      Row(
+                        children: [
+                          if (isNew) ...[
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 7 * u,
+                                vertical: 3 * u,
+                              ),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFE71414),
+                                borderRadius: BorderRadius.circular(4 * u),
+                              ),
+                              child: Text(
+                                l10n.esplayMediaBarNew,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 10 * u,
+                                  fontWeight: FontWeight.w800,
+                                  letterSpacing: 1 * u,
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 8 * u),
+                          ],
+                          if (kind != null)
+                            Text(
+                              kind,
+                              style: TextStyle(
+                                color: const Color(0xFFC4C4CA),
+                                fontSize: 12 * u,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                        ],
+                      ),
+                      SizedBox(height: 8 * u),
+                    ],
+                    SizedBox(
+                      width: width * 0.62,
+                      height: 64 * u,
+                      child: Align(
+                        alignment: Alignment.bottomLeft,
+                        child: _esplayLogoOrTitle(currentItem, u * 0.34),
+                      ),
+                    ),
+                    if (details.isNotEmpty) ...[
+                      SizedBox(height: 8 * u),
+                      Text(
+                        details,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: const Color(0xFFC4C4CA),
+                          fontSize: 12.5 * u,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                    if (ratings != null) ...[
+                      SizedBox(height: 6 * u),
+                      ratings,
+                    ],
+                    if (overview.isNotEmpty) ...[
+                      SizedBox(height: 8 * u),
+                      Text(
+                        overview,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: const Color(0xFFA8A8B0),
+                          fontSize: 12.5 * u,
+                          height: 1.4,
+                        ),
+                      ),
+                    ],
+                    if (items.length > 1) ...[
+                      SizedBox(height: 12 * u),
+                      _esplayProgress(items, u * 0.5, advancing, interval),
+                    ],
+                  ],
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  /// A mark per title; the current one fills in red while the bar advances.
+  Widget _esplayProgress(
+    List<MediaBarSlideItem> items,
+    double u,
+    bool advancing,
+    Duration interval,
+  ) {
+    return Row(
+      children: [
+        for (var i = 0; i < items.length; i++)
+          Padding(
+            padding: EdgeInsets.only(right: 8 * u),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(3 * u),
+              child: SizedBox(
+                width: (i == _currentIndex ? 64 : 20) * u,
+                height: 6 * u,
+                child: ColoredBox(
+                  color: const Color(0x47FFFFFF),
+                  child: i != _currentIndex
+                      ? null
+                      : TweenAnimationBuilder<double>(
+                          key: ValueKey(
+                            '$_currentIndex-$advancing',
+                          ),
+                          tween: Tween(
+                            begin: advancing ? 0 : 1,
+                            end: 1,
+                          ),
+                          duration: advancing
+                              ? interval
+                              : Duration.zero,
+                          builder: (context, value, _) =>
+                              FractionallySizedBox(
+                            alignment:
+                                Alignment.centerLeft,
+                            widthFactor: value,
+                            child: const ColoredBox(
+                              color: Color(0xFFE71414),
+                            ),
+                          ),
+                        ),
+                ),
+              ),
+            ),
+          ),
+        SizedBox(width: 6 * u),
+        Text(
+          '${_currentIndex + 1} / ${items.length}',
+          style: TextStyle(
+            color: const Color(0xFF8A8A92),
+            fontSize: 20 * u,
+          ),
+        ),
+      ],
     );
   }
 

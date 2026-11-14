@@ -54,6 +54,10 @@ class _Server {
 }
 
 void main() {
+  // These cover the stock settings, which EsPlay otherwise fixes.
+  setUpAll(() => UserPreferences.esplayMediaBarForced = false);
+  tearDownAll(() => UserPreferences.esplayMediaBarForced = true);
+
   tearDown(() => GetIt.instance.reset());
 
   Future<List<String>> load(_Server server, {required int itemCount}) async {

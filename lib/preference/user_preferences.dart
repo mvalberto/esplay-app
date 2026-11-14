@@ -9,6 +9,7 @@ import 'package:jellyfin_preference/jellyfin_preference.dart';
 import 'package:server_core/server_core.dart' hide ImageType;
 
 import '../data/models/aggregated_item.dart';
+import '../esplay/esplay_flags.dart';
 import '../data/models/series_track_preference.dart';
 import '../playback/audio_capability_profile.dart';
 import '../util/device_performance.dart';
@@ -793,12 +794,40 @@ class UserPreferences extends ChangeNotifier {
     return pref.withKey('${pref.key}_$scopeSuffix');
   }
 
+  /// Whether the EsPlay media bar below is in force. Tests of the stock
+  /// settings turn it off.
+  @visibleForTesting
+  static bool esplayMediaBarForced = esplayForceMediaBar;
+
+  // EsPlay: the media bar everyone gets, whatever is stored or synced.
+  static const _esplayMediaBar = <String, Object>{
+    'mediaBarEnabled': true,
+    'mediaBarMode': mediaBarModeMoonfin,
+    'mediaBarContentType': mediaBarContentTypeBoth,
+    'mediaBarSourceType': mediaBarSourceRecentlyAdded,
+    'mediaBarItemCount': '5',
+    'mediaBarAutoAdvance': true,
+    'mediaBarIntervalMs': 10000,
+    'mediaBarTrailerPreview': true,
+    'mediaBarTrailerAudio': true,
+    'mediaBarLibraryIds': '',
+    'mediaBarCollectionIds': '',
+    'mediaBarExcludedGenres': '',
+    'mediaBarExternalLists': '',
+    'mediaBarEnableAdditionalRatings': true,
+    'mediaBarEnabledRatings': 'imdb,tmdb,tomatoes',
+  };
+
   T get<T>(Preference<T> pref) {
     // EsPlay always streams and downloads at full quality, whatever is stored
     // or synced, so playback never transcodes for a bitrate cap.
     if (pref.key == maxBitrate.key) return '200' as T;
     if (pref.key == maxVideoResolution.key) return MaxVideoResolution.auto as T;
     if (pref.key == defaultDownloadQuality.key) return 'original' as T;
+    if (esplayMediaBarForced) {
+      final forced = _esplayMediaBar[pref.key];
+      if (forced != null) return forced as T;
+    }
 
     if (_isScopedPreference(pref)) {
       final scoped = _scopedPreference(pref);

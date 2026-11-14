@@ -14,6 +14,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 class _MockPluginSyncService extends Mock implements PluginSyncService {}
 
 void main() {
+  // These cover the stock settings, which EsPlay otherwise fixes.
+  setUpAll(() => UserPreferences.esplayMediaBarForced = false);
+  tearDownAll(() => UserPreferences.esplayMediaBarForced = true);
+
   TestWidgetsFlutterBinding.ensureInitialized();
 
   late UserPreferences prefs;

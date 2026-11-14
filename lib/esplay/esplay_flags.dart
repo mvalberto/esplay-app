@@ -18,6 +18,14 @@ const esplayHideServerChoiceAndQuickConnect = true;
 /// Decoding screen and the download quality pickers are not offered.
 const esplayHideQualitySettings = true;
 
+/// Everyone gets the same media bar: the EsPlay one with trailer and sound,
+/// the 5 latest titles from the Películas and Series libraries, advancing
+/// every 10 seconds, with IMDb, TMDB and Rotten Tomatoes ratings.
+const esplayForceMediaBar = true;
+
+/// The libraries the media bar draws from, by name (lower case).
+const esplayMediaBarLibraries = {'películas', 'series'};
+
 /// The panel's version policy, which the in-app updater reads instead of
 /// Moonfin's GitHub releases: per app, the lowest version still allowed and
 /// where to download a newer one.

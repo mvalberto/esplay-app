@@ -18,6 +18,10 @@ class _UserViewsApi extends Mock implements UserViewsApi {}
 
 // Issue #1881: the Item Count setting holds with plugin sync off.
 void main() {
+  // These cover the stock settings, which EsPlay otherwise fixes.
+  setUpAll(() => UserPreferences.esplayMediaBarForced = false);
+  tearDownAll(() => UserPreferences.esplayMediaBarForced = true);
+
   tearDown(() => GetIt.instance.reset());
 
   test('a picked count is shown without plugin sync', () async {

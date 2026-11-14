@@ -31,6 +31,10 @@ class _Sync extends ChangeNotifier implements PluginSyncService {
 }
 
 void main() {
+  // These cover the stock settings, which EsPlay otherwise fixes.
+  setUpAll(() => UserPreferences.esplayMediaBarForced = false);
+  tearDownAll(() => UserPreferences.esplayMediaBarForced = true);
+
   late UserPreferences prefs;
   late _Repository repository;
   late _Sync sync;

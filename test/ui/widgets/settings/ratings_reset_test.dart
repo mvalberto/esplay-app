@@ -57,6 +57,10 @@ class _RecordingAdapter implements HttpClientAdapter {
 }
 
 void main() {
+  // These cover the stock settings, which EsPlay otherwise fixes.
+  setUpAll(() => UserPreferences.esplayMediaBarForced = false);
+  tearDownAll(() => UserPreferences.esplayMediaBarForced = true);
+
   TestWidgetsFlutterBinding.ensureInitialized();
 
   late _RecordingAdapter adapter;

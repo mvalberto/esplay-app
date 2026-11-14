@@ -7,6 +7,7 @@ import 'package:get_it/get_it.dart';
 import 'package:jellyfin_preference/jellyfin_preference.dart';
 import 'package:server_core/server_core.dart';
 
+import '../../esplay/esplay_flags.dart' show esplayMediaBarLibraries;
 import '../../preference/home_section_config.dart';
 import '../../preference/preference_constants.dart';
 import '../../preference/user_preferences.dart';
@@ -105,6 +106,12 @@ class MediaBarRepository {
             !supportsMediaBarLibrary(view, preferredCollectionTypes)) {
           continue;
         }
+        if (UserPreferences.esplayMediaBarForced &&
+            !esplayMediaBarLibraries.contains(
+              view['Name']?.toString().trim().toLowerCase(),
+            )) {
+          continue;
+        }
 
         validLibraryIds.add(viewId);
 
@@ -145,6 +152,9 @@ class MediaBarRepository {
 
       final allItems = <Map<String, dynamic>>[];
       final seenIds = <String>{};
+      // EsPlay: each title's place in its library's newest-first list, so the
+      // bar can take the newest of every library in turn.
+      final rank = Map<Map<String, dynamic>, int>.identity();
       final usable = _usableFor(excludedGenres);
       var usableCount = 0;
       // A source still waiting for a slot is skipped once the pool holds twice
@@ -162,9 +172,10 @@ class MediaBarRepository {
               fetchLimit,
               parentId: parentId,
             );
-            for (final item in batch) {
+            for (final (i, item) in batch.indexed) {
               final id = item['Id']?.toString();
               if (id != null && !seenIds.add(id)) continue;
+              rank[item] = i;
               allItems.add(item);
               if (usable(item)) usableCount++;
             }
@@ -177,6 +188,17 @@ class MediaBarRepository {
       if (!GetIt.instance.isRegistered<MediaBarRepository>() ||
           GetIt.instance<MediaBarRepository>() != this) {
         return const MediaBarDisabled();
+      }
+
+      if (UserPreferences.esplayMediaBarForced) {
+        final ordered = allItems.indexed.toList()
+          ..sort((a, b) {
+            final byRank = rank[a.$2]!.compareTo(rank[b.$2]!);
+            return byRank != 0 ? byRank : a.$1.compareTo(b.$1);
+          });
+        allItems
+          ..clear()
+          ..addAll(ordered.map((e) => e.$2));
       }
 
       var selected = _selectItemsWithBackdrops(
@@ -251,8 +273,9 @@ class MediaBarRepository {
     int maxItems,
     Set<String> excludedGenres,
   ) {
-    final withBackdrops = source.where(_usableFor(excludedGenres)).toList()
-      ..shuffle();
+    final withBackdrops = source.where(_usableFor(excludedGenres)).toList();
+    // EsPlay keeps the newest first instead of a random pick.
+    if (!UserPreferences.esplayMediaBarForced) withBackdrops.shuffle();
     return withBackdrops.take(maxItems).toList();
   }
 
