@@ -75,7 +75,62 @@ class EmbyLiveTvApi implements LiveTvApi, LiveTvChannelTagsApi {
       });
       if (limit != null && programs.length >= limit) break;
     }
+    if (limit != null && programs.length < limit) {
+      await _addAiringPrograms(programs, limit, userId);
+    }
     return {'Items': programs, 'TotalRecordCount': programs.length};
+  }
+
+  /// A user whose first channels have no guide (on ep02 the list can open
+  /// with hundreds of them) still gets what airs, straight from the guide,
+  /// with each channel's logo looked up after.
+  Future<void> _addAiringPrograms(
+    List<Map<String, dynamic>> programs,
+    int limit,
+    String? userId,
+  ) async {
+    try {
+      final response = await _dio.get('/LiveTv/Programs', queryParameters: {
+        'IsAiring': true,
+        'Fields': 'ChannelInfo,Overview',
+        'EnableTotalRecordCount': false,
+        'Limit': limit * 2,
+        'UserId': ?userId,
+      });
+      final seen = {for (final p in programs) p['ChannelId']?.toString()};
+      final extra = <Map<String, dynamic>>[];
+      final items = (response.data as Map<String, dynamic>)['Items'] as List?;
+      for (final program in (items ?? const []).whereType<Map>()) {
+        final channelId = program['ChannelId']?.toString();
+        if (channelId == null || !seen.add(channelId)) continue;
+        extra.add(program.cast<String, dynamic>());
+        if (programs.length + extra.length >= limit) break;
+      }
+      if (extra.isEmpty) return;
+      final channels = await _dio.get('/LiveTv/Channels', queryParameters: {
+        'Ids': extra.map((p) => p['ChannelId']).join(','),
+        'EnableImageTypes': 'Primary',
+        'ImageTypeLimit': 1,
+        'EnableTotalRecordCount': false,
+        'UserId': ?userId,
+      });
+      final logos = <String, String>{
+        for (final c in ((channels.data as Map<String, dynamic>)['Items']
+                    as List? ??
+                const [])
+            .whereType<Map>())
+          if ((c['ImageTags'] as Map?)?['Primary'] is String)
+            c['Id'].toString(): (c['ImageTags'] as Map)['Primary'] as String,
+      };
+      for (final program in extra) {
+        programs.add({
+          ...program,
+          'ChannelPrimaryImageTag': ?logos[program['ChannelId'].toString()],
+        });
+      }
+    } catch (_) {
+      // On now just shows what the channel list found.
+    }
   }
 
   @override
