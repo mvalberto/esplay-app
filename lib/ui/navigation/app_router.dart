@@ -1,3 +1,4 @@
+import '../../esplay/esplay_flags.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
@@ -102,6 +103,7 @@ const _authRoutes = {
 /// answers false for anything it can't decide cheaply, since letting somebody
 /// through to Home costs nothing next to stranding them outside it.
 bool _shouldRunSetupWizard() {
+  if (esplayNoSetupWizard) return false;
   try {
     final client = SetupWizardGate.activeClient();
     if (client == null) return false;

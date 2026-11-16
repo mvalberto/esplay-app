@@ -23,6 +23,10 @@ const esplayHideQualitySettings = true;
 /// every 10 seconds, with IMDb, TMDB and Rotten Tomatoes ratings.
 const esplayForceMediaBar = true;
 
+/// The looks are fixed, so the first-run setup wizard never opens and Settings
+/// does not offer to run it again.
+const esplayNoSetupWizard = true;
+
 /// The libraries the media bar draws from, by name (lower case).
 const esplayMediaBarLibraries = {'películas', 'series'};
 

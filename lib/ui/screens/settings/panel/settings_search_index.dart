@@ -2095,7 +2095,8 @@ List<_SettingsSearchEntry> _buildSettingsSearchIndex({
       subtitle: l10n.settingsReportAnIssueSubtitle,
       keywords: ['bug', 'github'],
     ),
-    about.leaf(
+    if (!esplayNoSetupWizard)
+      about.leaf(
       'run_setup_again',
       l10n.runSetupAgain,
       keywords: ['setup', 'wizard', 'first run', 'onboarding', 'quick start'],

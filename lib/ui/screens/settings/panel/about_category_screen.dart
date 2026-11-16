@@ -77,7 +77,8 @@ class _AboutCategoryScreen extends StatelessWidget {
                     const _KeyboardShortcutsScreen(),
                   ),
                 ),
-              _TvSettingsListTile(
+              if (!esplayNoSetupWizard)
+                _TvSettingsListTile(
                 leading: const Icon(Icons.auto_awesome),
                 title: Text(l10n.runSetupAgain),
                 // Asking again on purpose says more than the stored answers do,
