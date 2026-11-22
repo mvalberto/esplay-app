@@ -27,6 +27,10 @@ const esplayForceMediaBar = true;
 /// does not offer to run it again.
 const esplayNoSetupWizard = true;
 
+/// The navigation's Seerr entry opens EsPlay's own requests instead. Not
+/// const only so the tests of Moonfin's own Seerr entry can switch it off.
+bool esplayRequestsInNav = true;
+
 /// The libraries the media bar draws from, by name (lower case).
 const esplayMediaBarLibraries = {'películas', 'series'};
 

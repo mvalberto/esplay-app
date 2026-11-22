@@ -1,3 +1,4 @@
+import '../esplay/esplay_report_dialog.dart';
 import 'dart:async';
 import 'dart:ui';
 
@@ -7167,6 +7168,19 @@ class DetailActionButtonsState extends State<DetailActionButtons> {
             context,
             itemIds: [item.id],
             serverId: item.serverId,
+          ),
+        ),
+      if (const {'Movie', 'Series', 'Season', 'Episode'}.contains(item.type) &&
+          shows(DetailButton.esplayReport))
+        DetailButton.esplayReport: _DetailActionButton(
+          label: l10n.esplayReportProblem,
+          icon: Icons.report_problem_outlined,
+          onPressed: () => EsplayReportDialog.show(
+            context,
+            itemId: item.id,
+            title: item.type == 'Episode'
+                ? '${item.seriesName ?? ''} · T${item.parentIndexNumber ?? '?'}E${item.indexNumber ?? '?'} ${item.name}'
+                : '${item.name}${item.productionYear != null ? ' (${item.productionYear})' : ''}',
           ),
         ),
       if (canShowDownloadActions && shows(DetailButton.download))

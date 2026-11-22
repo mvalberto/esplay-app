@@ -27999,6 +27999,312 @@ abstract class AppLocalizations {
   /// **'Connect by entering the server'**
   String get esplayConnectWithServer;
 
+  /// No description provided for @esplayRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'Requests'**
+  String get esplayRequests;
+
+  /// No description provided for @esplayRequestATitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Request a title'**
+  String get esplayRequestATitle;
+
+  /// No description provided for @esplayMyRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'My requests'**
+  String get esplayMyRequests;
+
+  /// No description provided for @esplayRequestsLeft.
+  ///
+  /// In en, this message translates to:
+  /// **'You have {n} of {max} requests left this week'**
+  String esplayRequestsLeft(String n, String max);
+
+  /// No description provided for @esplaySearchTitleHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search for a movie or series'**
+  String get esplaySearchTitleHint;
+
+  /// No description provided for @esplaySearching.
+  ///
+  /// In en, this message translates to:
+  /// **'Searching...'**
+  String get esplaySearching;
+
+  /// No description provided for @esplaySearchIntro.
+  ///
+  /// In en, this message translates to:
+  /// **'Type the title you want. If it is not on EsPlay you can request it.'**
+  String get esplaySearchIntro;
+
+  /// No description provided for @esplayNoRequestsYet.
+  ///
+  /// In en, this message translates to:
+  /// **'You have no requests or reports yet.'**
+  String get esplayNoRequestsYet;
+
+  /// No description provided for @esplayLoading.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading...'**
+  String get esplayLoading;
+
+  /// No description provided for @esplayOnEsplay.
+  ///
+  /// In en, this message translates to:
+  /// **'On EsPlay'**
+  String get esplayOnEsplay;
+
+  /// No description provided for @esplayAskedFor.
+  ///
+  /// In en, this message translates to:
+  /// **'Requested'**
+  String get esplayAskedFor;
+
+  /// No description provided for @esplayOneInterested.
+  ///
+  /// In en, this message translates to:
+  /// **'1 interested'**
+  String get esplayOneInterested;
+
+  /// No description provided for @esplayInterested.
+  ///
+  /// In en, this message translates to:
+  /// **'{n} interested'**
+  String esplayInterested(String n);
+
+  /// No description provided for @esplayStatusPending.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending'**
+  String get esplayStatusPending;
+
+  /// No description provided for @esplayStatusInProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'In progress'**
+  String get esplayStatusInProgress;
+
+  /// No description provided for @esplayStatusDone.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get esplayStatusDone;
+
+  /// No description provided for @esplayStatusRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Rejected'**
+  String get esplayStatusRejected;
+
+  /// No description provided for @esplayStatusSolved.
+  ///
+  /// In en, this message translates to:
+  /// **'Solved'**
+  String get esplayStatusSolved;
+
+  /// No description provided for @esplayReport.
+  ///
+  /// In en, this message translates to:
+  /// **'Report'**
+  String get esplayReport;
+
+  /// No description provided for @esplayRequestedOn.
+  ///
+  /// In en, this message translates to:
+  /// **'Requested on {date}'**
+  String esplayRequestedOn(String date);
+
+  /// No description provided for @esplayYouJoined.
+  ///
+  /// In en, this message translates to:
+  /// **'You joined'**
+  String get esplayYouJoined;
+
+  /// No description provided for @esplayReply.
+  ///
+  /// In en, this message translates to:
+  /// **'Reply'**
+  String get esplayReply;
+
+  /// No description provided for @esplayWatchOnEsplay.
+  ///
+  /// In en, this message translates to:
+  /// **'Watch on EsPlay'**
+  String get esplayWatchOnEsplay;
+
+  /// No description provided for @esplayYouFollowIt.
+  ///
+  /// In en, this message translates to:
+  /// **'You follow it'**
+  String get esplayYouFollowIt;
+
+  /// No description provided for @esplayRequestAnyway.
+  ///
+  /// In en, this message translates to:
+  /// **'Request anyway'**
+  String get esplayRequestAnyway;
+
+  /// No description provided for @esplayImInterested.
+  ///
+  /// In en, this message translates to:
+  /// **'I am interested'**
+  String get esplayImInterested;
+
+  /// No description provided for @esplayRequest.
+  ///
+  /// In en, this message translates to:
+  /// **'Request'**
+  String get esplayRequest;
+
+  /// No description provided for @esplayInSpainOn.
+  ///
+  /// In en, this message translates to:
+  /// **'In Spain on: {list}'**
+  String esplayInSpainOn(String list);
+
+  /// No description provided for @esplayNotInSpain.
+  ///
+  /// In en, this message translates to:
+  /// **'It is not on any platform in Spain: it may not be possible to get it.'**
+  String get esplayNotInSpain;
+
+  /// No description provided for @esplayAlreadyRequested.
+  ///
+  /// In en, this message translates to:
+  /// **'Already requested'**
+  String get esplayAlreadyRequested;
+
+  /// No description provided for @esplayInterestedFree.
+  ///
+  /// In en, this message translates to:
+  /// **'\"I am interested\" does not use up your requests.'**
+  String get esplayInterestedFree;
+
+  /// No description provided for @esplayFollowedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Done: you will see it in My requests when it is ready.'**
+  String get esplayFollowedMessage;
+
+  /// No description provided for @esplayRequestedMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Requested. You can follow it in My requests.'**
+  String get esplayRequestedMessage;
+
+  /// No description provided for @esplayRequestsWeeklyLimit.
+  ///
+  /// In en, this message translates to:
+  /// **'You have used your requests for this week. The next one frees up on {date}.'**
+  String esplayRequestsWeeklyLimit(String date);
+
+  /// No description provided for @esplayReportsDailyLimit.
+  ///
+  /// In en, this message translates to:
+  /// **'You have sent the maximum reports for today. Try again from {date}.'**
+  String esplayReportsDailyLimit(String date);
+
+  /// No description provided for @esplayRequestsAlreadyOn.
+  ///
+  /// In en, this message translates to:
+  /// **'This title is already on EsPlay.'**
+  String get esplayRequestsAlreadyOn;
+
+  /// No description provided for @esplayRequestsNoSession.
+  ///
+  /// In en, this message translates to:
+  /// **'EsPlay could not confirm your session. Sign out and in again.'**
+  String get esplayRequestsNoSession;
+
+  /// No description provided for @esplayRequestsGenericError.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Try again in a moment.'**
+  String get esplayRequestsGenericError;
+
+  /// No description provided for @esplayReportProblem.
+  ///
+  /// In en, this message translates to:
+  /// **'Report a problem'**
+  String get esplayReportProblem;
+
+  /// No description provided for @esplayReportWhatsWrong.
+  ///
+  /// In en, this message translates to:
+  /// **'What is wrong?'**
+  String get esplayReportWhatsWrong;
+
+  /// No description provided for @esplayReportAudioHint.
+  ///
+  /// In en, this message translates to:
+  /// **'No sound, out of sync, wrong language'**
+  String get esplayReportAudioHint;
+
+  /// No description provided for @esplayReportPicture.
+  ///
+  /// In en, this message translates to:
+  /// **'Picture'**
+  String get esplayReportPicture;
+
+  /// No description provided for @esplayReportPictureHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Wrong artwork or video, cuts'**
+  String get esplayReportPictureHint;
+
+  /// No description provided for @esplayReportSubtitlesHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Missing, out of sync, wrong language'**
+  String get esplayReportSubtitlesHint;
+
+  /// No description provided for @esplayReportQuality.
+  ///
+  /// In en, this message translates to:
+  /// **'Quality'**
+  String get esplayReportQuality;
+
+  /// No description provided for @esplayReportQualityHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Looks bad, stutters'**
+  String get esplayReportQualityHint;
+
+  /// No description provided for @esplayReportDetailsHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Details (optional)'**
+  String get esplayReportDetailsHint;
+
+  /// No description provided for @esplayReportDailyHint.
+  ///
+  /// In en, this message translates to:
+  /// **'You can send 5 reports a day'**
+  String get esplayReportDailyHint;
+
+  /// No description provided for @esplayReportThanks.
+  ///
+  /// In en, this message translates to:
+  /// **'Thanks. We will look into it; you can follow it in Requests.'**
+  String get esplayReportThanks;
+
+  /// No description provided for @esplaySending.
+  ///
+  /// In en, this message translates to:
+  /// **'Sending...'**
+  String get esplaySending;
+
+  /// No description provided for @esplaySend.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get esplaySend;
+
   /// No description provided for @esplayShowPassword.
   ///
   /// In en, this message translates to:

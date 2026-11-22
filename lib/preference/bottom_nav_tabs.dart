@@ -1,3 +1,4 @@
+import '../esplay/esplay_flags.dart';
 import 'user_preferences.dart';
 
 /// Destinations that can be pinned between Home and You on the mobile bottom
@@ -88,7 +89,8 @@ class BottomNavTabGates {
         BottomNavTab.favorites => showFavorites,
         BottomNavTab.genres => showGenres,
         BottomNavTab.liveTv => !kidsMode && showLiveTv,
-        BottomNavTab.discover => !kidsMode && showSeerr && seerrAvailable,
+        BottomNavTab.discover =>
+          !kidsMode && (esplayRequestsInNav || (showSeerr && seerrAvailable)),
       };
 
   /// The tabs the bar shows between Home and You. Automatic pins follow the

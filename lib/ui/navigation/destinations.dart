@@ -101,6 +101,9 @@ class Destinations {
 
   // Live TV
   static const liveTv = '/live-tv';
+
+  /// EsPlay: the panel's own requests and reports.
+  static const esplayRequests = '/esplay/requests';
   static const liveTvGuide = '/live-tv/guide';
   static const liveTvSchedule = '/live-tv/schedule';
   static const liveTvRecordings = '/live-tv/recordings';

@@ -13,6 +13,7 @@ import '../../screens/syncplay/syncplay_screen.dart';
 import '../adaptive/sf_symbol.dart';
 import '../remote_control_dialog.dart';
 import '../seerr_icons.dart';
+import '../../../esplay/esplay_flags.dart';
 import '../shuffle_overlay.dart';
 import '../user_menu_dialog.dart';
 import 'bottom_nav_model.dart';
@@ -25,6 +26,7 @@ String bottomNavTabLabel(AppLocalizations l10n, BottomNavTab tab) =>
       BottomNavTab.favorites => l10n.favorites,
       BottomNavTab.genres => l10n.genres,
       BottomNavTab.liveTv => l10n.liveTv,
+      BottomNavTab.discover when esplayRequestsInNav => l10n.esplayRequests,
       BottomNavTab.discover => GetIt.instance.isRegistered<SeerrPreferences>()
           ? GetIt.instance<SeerrPreferences>().labelOrDefault(l10n.seerr)
           : l10n.seerr,
@@ -95,6 +97,8 @@ Widget bottomNavTabIconWidget(
         color: color,
         fit: BoxFit.contain,
       ),
+    BottomNavTab.discover when esplayRequestsInNav =>
+      adaptive(Icons.add_box, Icons.add_box_outlined),
     BottomNavTab.discover => SeerrIcon(size: size, color: color, solid: active),
   };
 }
@@ -147,6 +151,7 @@ void openBottomNavTab(BuildContext context, BottomNavTab tab) {
     BottomNavTab.favorites => Destinations.allFavorites,
     BottomNavTab.genres => Destinations.allGenres,
     BottomNavTab.liveTv => Destinations.liveTv,
+    BottomNavTab.discover when esplayRequestsInNav => Destinations.esplayRequests,
     BottomNavTab.discover => Destinations.seerrDiscover,
     BottomNavTab.libraries => null,
   };

@@ -1,3 +1,4 @@
+import 'package:moonfin/esplay/esplay_flags.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:jellyfin_preference/jellyfin_preference.dart';
 import 'package:moonfin/preference/bottom_nav_tabs.dart';
@@ -13,6 +14,9 @@ Future<PreferenceStore> _store([Map<String, Object> initial = const {}]) async {
 }
 
 void main() {
+  // These cover Moonfin's own Seerr entry, which EsPlay swaps for its requests.
+  setUpAll(() => esplayRequestsInNav = false);
+  tearDownAll(() => esplayRequestsInNav = true);
   TestWidgetsFlutterBinding.ensureInitialized();
 
   group('parsePinnedBottomNavTabs', () {

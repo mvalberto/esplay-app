@@ -1,8 +1,12 @@
+import 'package:moonfin/esplay/esplay_flags.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:moonfin/preference/bottom_nav_tabs.dart';
 import 'package:moonfin/ui/widgets/bottom_nav/bottom_nav_model.dart';
 
 void main() {
+  // These cover Moonfin's own Seerr entry, which EsPlay swaps for its requests.
+  setUpAll(() => esplayRequestsInNav = false);
+  tearDownAll(() => esplayRequestsInNav = true);
   group('resolveBarItems', () {
     test('Home, the pins and You, with slots in order', () {
       final items = resolveBarItems(const BottomNavTabGates(), '');

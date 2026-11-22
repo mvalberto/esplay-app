@@ -1,3 +1,4 @@
+import '../../esplay/esplay_flags.dart';
 import 'dart:async';
 import 'dart:math' as math;
 import 'dart:ui';
@@ -1160,7 +1161,25 @@ class _TopToolbarState extends State<TopToolbar> with RouteAware {
                   ),
                 ),
               ],
-              if (showSeerr) ...[
+              if (!_kidsMode && esplayRequestsInNav) ...[
+                _gap(),
+                _orderButton(
+                  order: (order++).toDouble(),
+                  child: ExpandableIconButton(
+                    key: const ValueKey('toolbar_esplay_requests'),
+                    forceExpanded: alwaysExpanded,
+                    baseColor: nextNavColor(),
+                    iconBuilder: (size, color) =>
+                        Icon(Icons.add_box_outlined, size: size, color: color),
+                    label: l10n.esplayRequests,
+                    onPressed: () {
+                      if (_isActive(Destinations.esplayRequests)) return;
+                      context.navigateTopLevel(Destinations.esplayRequests);
+                    },
+                  ),
+                ),
+              ],
+              if (showSeerr && !esplayRequestsInNav) ...[
                 _gap(),
                 _orderButton(
                   order: (order++).toDouble(),

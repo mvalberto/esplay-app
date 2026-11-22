@@ -16326,6 +16326,179 @@ class AppLocalizationsEs extends AppLocalizations {
   String get esplayConnectWithServer => 'Conectar indicando el servidor';
 
   @override
+  String get esplayRequests => 'Solicitudes';
+
+  @override
+  String get esplayRequestATitle => 'Pedir un título';
+
+  @override
+  String get esplayMyRequests => 'Mis solicitudes';
+
+  @override
+  String esplayRequestsLeft(String n, String max) {
+    return 'Te quedan $n de $max solicitudes esta semana';
+  }
+
+  @override
+  String get esplaySearchTitleHint => 'Busca una película o serie';
+
+  @override
+  String get esplaySearching => 'Buscando...';
+
+  @override
+  String get esplaySearchIntro =>
+      'Escribe el título que quieres ver. Si no está en EsPlay, puedes pedirlo.';
+
+  @override
+  String get esplayNoRequestsYet => 'Aún no tienes solicitudes ni reportes.';
+
+  @override
+  String get esplayLoading => 'Cargando...';
+
+  @override
+  String get esplayOnEsplay => 'Ya en EsPlay';
+
+  @override
+  String get esplayAskedFor => 'Pedida';
+
+  @override
+  String get esplayOneInterested => '1 interesado';
+
+  @override
+  String esplayInterested(String n) {
+    return '$n interesados';
+  }
+
+  @override
+  String get esplayStatusPending => 'Pendiente';
+
+  @override
+  String get esplayStatusInProgress => 'En curso';
+
+  @override
+  String get esplayStatusDone => 'Hecha';
+
+  @override
+  String get esplayStatusRejected => 'Rechazada';
+
+  @override
+  String get esplayStatusSolved => 'Resuelto';
+
+  @override
+  String get esplayReport => 'Reporte';
+
+  @override
+  String esplayRequestedOn(String date) {
+    return 'Pedida el $date';
+  }
+
+  @override
+  String get esplayYouJoined => 'Te sumaste';
+
+  @override
+  String get esplayReply => 'Respuesta';
+
+  @override
+  String get esplayWatchOnEsplay => 'Ver en EsPlay';
+
+  @override
+  String get esplayYouFollowIt => 'Ya la sigues';
+
+  @override
+  String get esplayRequestAnyway => 'Pedirla igualmente';
+
+  @override
+  String get esplayImInterested => 'Me interesa';
+
+  @override
+  String get esplayRequest => 'Solicitar';
+
+  @override
+  String esplayInSpainOn(String list) {
+    return 'En España: $list';
+  }
+
+  @override
+  String get esplayNotInSpain =>
+      'No está en ninguna plataforma de España: puede que no se consiga.';
+
+  @override
+  String get esplayAlreadyRequested => 'Ya la ha pedido alguien';
+
+  @override
+  String get esplayInterestedFree =>
+      '«Me interesa» no gasta tu cupo de solicitudes.';
+
+  @override
+  String get esplayFollowedMessage =>
+      'Hecho: la verás en Mis solicitudes cuando esté lista.';
+
+  @override
+  String get esplayRequestedMessage =>
+      'Solicitada. Puedes seguirla en Mis solicitudes.';
+
+  @override
+  String esplayRequestsWeeklyLimit(String date) {
+    return 'Has usado tus solicitudes de esta semana. La siguiente se libera el $date.';
+  }
+
+  @override
+  String esplayReportsDailyLimit(String date) {
+    return 'Has enviado el máximo de reportes de hoy. Vuelve a probar a partir del $date.';
+  }
+
+  @override
+  String get esplayRequestsAlreadyOn => 'Este título ya está en EsPlay.';
+
+  @override
+  String get esplayRequestsNoSession =>
+      'EsPlay no ha podido confirmar tu sesión. Cierra sesión y vuelve a entrar.';
+
+  @override
+  String get esplayRequestsGenericError =>
+      'Algo ha fallado. Prueba de nuevo en un momento.';
+
+  @override
+  String get esplayReportProblem => 'Reportar un problema';
+
+  @override
+  String get esplayReportWhatsWrong => '¿Qué le pasa?';
+
+  @override
+  String get esplayReportAudioHint => 'No se oye, desfasado, otro idioma';
+
+  @override
+  String get esplayReportPicture => 'Imagen';
+
+  @override
+  String get esplayReportPictureHint => 'Carátula o vídeo equivocados, cortes';
+
+  @override
+  String get esplayReportSubtitlesHint => 'Faltan, no cuadran, otro idioma';
+
+  @override
+  String get esplayReportQuality => 'Calidad';
+
+  @override
+  String get esplayReportQualityHint => 'Se ve mal, va a tirones';
+
+  @override
+  String get esplayReportDetailsHint => 'Detalle (opcional)';
+
+  @override
+  String get esplayReportDailyHint => 'Puedes enviar 5 reportes al día';
+
+  @override
+  String get esplayReportThanks =>
+      'Gracias. Lo revisaremos; puedes seguirlo en Solicitudes.';
+
+  @override
+  String get esplaySending => 'Enviando...';
+
+  @override
+  String get esplaySend => 'Enviar';
+
+  @override
   String get esplayShowPassword => 'Mostrar contraseña';
 
   @override

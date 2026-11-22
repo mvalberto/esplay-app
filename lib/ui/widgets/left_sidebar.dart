@@ -1,3 +1,4 @@
+import '../../esplay/esplay_flags.dart';
 import 'dart:async';
 
 import 'dart:math' as math;
@@ -1114,7 +1115,26 @@ class _LeftSidebarState extends State<LeftSidebar> with RouteAware {
                       );
                     },
                   ),
+                if (!kidsMode && esplayRequestsInNav)
+                  _SidebarItem(
+                    key: const ValueKey('sidebar-esplay-requests'),
+                    baseColor: nextMainSidebarColor(),
+                    iconBuilder: (size, color) =>
+                        Icon(Icons.add_box_outlined, size: size, color: color),
+                    label: l10n.esplayRequests,
+                    showLabel: _showLabels,
+                    onPressed: () {
+                      _onNavigate();
+                      if (_isActive(Destinations.esplayRequests)) {
+                        _exitSidebarToContent();
+                        return;
+                      }
+                      _markNavigationAwayFromSidebar();
+                      context.navigateTopLevel(Destinations.esplayRequests);
+                    },
+                  ),
                 if (!kidsMode &&
+                    !esplayRequestsInNav &&
                     _prefs.get(UserPreferences.showSeerrButton) &&
                     GetIt.instance<PluginSyncService>().seerrAvailable)
                   _SidebarItem(

@@ -65,6 +65,7 @@ import '../../data/viewmodels/live_tv_guide_view_model.dart';
 import '../screens/livetv/live_tv_recordings_screen.dart';
 import '../screens/livetv/live_tv_schedule_screen.dart';
 import '../screens/livetv/live_tv_screen.dart';
+import '../screens/esplay/esplay_requests_screen.dart';
 import '../screens/livetv/live_tv_channel_screen.dart';
 import '../screens/livetv/live_tv_tag_channels_screen.dart';
 import '../screens/livetv/live_tv_series_recordings_screen.dart';
@@ -558,6 +559,12 @@ final appRouter = GoRouter(
                 ),
         );
       },
+    ),
+
+    // EsPlay requests
+    GoRoute(
+      path: Destinations.esplayRequests,
+      builder: (context, state) => const EsplayRequestsScreen(),
     ),
 
     // Live TV

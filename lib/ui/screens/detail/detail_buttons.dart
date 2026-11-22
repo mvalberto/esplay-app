@@ -1,3 +1,4 @@
+import '../../../esplay/esplay_flags.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
@@ -33,6 +34,7 @@ enum DetailButton {
   favorite('favorite'),
   personalRating('personalRating'),
   playlist('playlist'),
+  esplayReport('esplayReport'),
   download('download'),
   deleteFiles('deleteFiles'),
   goToSeries('goToSeries'),
@@ -79,6 +81,7 @@ enum DetailButton {
       DetailButton.seerrManage =>
         GetIt.instance<PluginSyncService>().seerrAvailable,
       DetailButton.watchWithGroup => _syncPlayAvailable,
+      DetailButton.esplayReport => esplayRequestsInNav,
       DetailButton.keepAsComplete =>
         _incompleteRecordingsSupported && canManageLiveTv(),
       _ => true,
@@ -157,6 +160,7 @@ enum DetailButton {
     DetailButton.seerrWatchlist => Icons.bookmark_border,
     DetailButton.seerrReportIssue => Icons.report_problem_outlined,
     DetailButton.seerrManage => Icons.rule,
+    DetailButton.esplayReport => Icons.report_problem_outlined,
     DetailButton.keepAsComplete => Icons.task_alt,
     DetailButton.admin => Icons.settings,
   };
@@ -182,6 +186,7 @@ enum DetailButton {
     DetailButton.seerrWatchlist => l10n.watchlist,
     DetailButton.seerrReportIssue => l10n.reportIssue,
     DetailButton.seerrManage => l10n.manageRequests,
+    DetailButton.esplayReport => l10n.esplayReportProblem,
     DetailButton.keepAsComplete => l10n.keepAsComplete,
     DetailButton.admin => l10n.admin,
   };
