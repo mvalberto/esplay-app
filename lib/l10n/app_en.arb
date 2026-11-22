@@ -15440,6 +15440,8 @@
   "esplayAppOutdated": "This version of EsPlay is out of date. Update it to keep using it.",
   "esplayPanelUnavailable": "Couldn't reach EsPlay. Check your internet connection and try again.",
   "esplayConnectWithServer": "Connect by entering the server",
+  "esplayShowPassword": "Show password",
+  "esplayHidePassword": "Hide password",
   "favoriteMoviesRow": "Favorite Movies",
   "favoriteSeriesRow": "Favorite Series",
   "favoriteEpisodesRow": "Favorite Episodes",

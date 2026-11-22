@@ -112,6 +112,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final _usernameFocus = FocusNode();
   final _passwordFocus = FocusNode();
+  final _showPasswordFocus = FocusNode();
+  bool _showPassword = false;
   final _usernameTvFieldKey = GlobalKey<CustomTVTextFieldState>();
   final _passwordTvFieldKey = GlobalKey<CustomTVTextFieldState>();
   final _signInFocus = FocusNode();
@@ -192,6 +194,7 @@ class _LoginScreenState extends State<LoginScreen> {
     _passwordController.dispose();
     _usernameFocus.dispose();
     _passwordFocus.dispose();
+    _showPasswordFocus.dispose();
     _signInFocus.dispose();
     _backFocus.dispose();
     _qcBtnFocus.dispose();
@@ -1162,14 +1165,7 @@ class _LoginScreenState extends State<LoginScreen> {
           const SizedBox(height: 16),
         ],
         if (_hasPassword)
-          _buildTextField(
-            controller: _passwordController,
-            focusNode: _passwordFocus,
-            label: l10n.password,
-            obscureText: true,
-            textInputAction: TextInputAction.done,
-            onSubmitted: (_) => _login(),
-          ),
+          _buildPasswordField(l10n),
         if (_errorMessage != null) ...[
           const SizedBox(height: 12),
           Text(_errorMessage!, style: TextStyle(color: _loginErrorColor)),
@@ -1216,11 +1212,60 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  /// The password field with an eye that shows what was typed. On a TV the eye
+  /// is its own button to the right of the field, so the remote can reach it.
+  Widget _buildPasswordField(AppLocalizations l10n) {
+    final tooltip = _showPassword
+        ? l10n.esplayHidePassword
+        : l10n.esplayShowPassword;
+    final icon = Icon(
+      _showPassword ? Icons.visibility_off_outlined : Icons.visibility_outlined,
+    );
+    void toggle() => setState(() => _showPassword = !_showPassword);
+    final field = _buildTextField(
+      controller: _passwordController,
+      focusNode: _passwordFocus,
+      label: l10n.password,
+      obscureText: true,
+      revealText: _showPassword,
+      suffix: PlatformDetection.isTV
+          ? null
+          : IconButton(
+              icon: icon,
+              tooltip: tooltip,
+              color: _loginForeground(0.6),
+              onPressed: toggle,
+            ),
+      textInputAction: TextInputAction.done,
+      onSubmitted: (_) => _login(),
+    );
+    if (!PlatformDetection.isTV) return field;
+    return Row(
+      children: [
+        Expanded(child: field),
+        const SizedBox(width: 12),
+        Tooltip(
+          message: tooltip,
+          child: OutlinedButton(
+            focusNode: _showPasswordFocus,
+            onPressed: toggle,
+            style: _outlinedFocusStyle(
+              padding: const EdgeInsets.all(14),
+            ).copyWith(minimumSize: const WidgetStatePropertyAll(Size(56, 56))),
+            child: icon,
+          ),
+        ),
+      ],
+    );
+  }
+
   Widget _buildTextField({
     required TextEditingController controller,
     required FocusNode focusNode,
     required String label,
     bool obscureText = false,
+    bool revealText = false,
+    Widget? suffix,
     List<String> recentSuggestions = const [],
     TextInputAction? textInputAction,
     ValueChanged<String>? onSubmitted,
@@ -1262,7 +1307,7 @@ class _LoginScreenState extends State<LoginScreen> {
               textStyle: TextStyle(
                 color: focused ? AppColors.black : _loginForegroundSolid,
               ),
-              textFieldType: obscureText
+              textFieldType: obscureText && !revealText
                   ? TextFieldType.password
                   : TextFieldType.other,
               popParentOnKeyboardClose: false,
@@ -1278,13 +1323,14 @@ class _LoginScreenState extends State<LoginScreen> {
     return TextField(
       controller: controller,
       focusNode: focusNode,
-      obscureText: obscureText,
+      obscureText: obscureText && !revealText,
       textInputAction: textInputAction,
       enabled: !_isLoading,
       onSubmitted: onSubmitted,
       style: TextStyle(color: _loginForegroundSolid),
       decoration: InputDecoration(
         labelText: label,
+        suffixIcon: suffix,
         labelStyle: TextStyle(color: _loginForeground(0.5)),
         filled: true,
         fillColor: _loginForeground(0.08),

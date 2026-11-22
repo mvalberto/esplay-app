@@ -16323,6 +16323,12 @@ class AppLocalizationsHr extends AppLocalizations {
   String get esplayConnectWithServer => 'Connect by entering the server';
 
   @override
+  String get esplayShowPassword => 'Show password';
+
+  @override
+  String get esplayHidePassword => 'Hide password';
+
+  @override
   String get favoriteMoviesRow => 'Favorite Movies';
 
   @override

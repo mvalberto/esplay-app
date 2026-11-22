@@ -16326,6 +16326,12 @@ class AppLocalizationsEs extends AppLocalizations {
   String get esplayConnectWithServer => 'Conectar indicando el servidor';
 
   @override
+  String get esplayShowPassword => 'Mostrar contraseña';
+
+  @override
+  String get esplayHidePassword => 'Ocultar contraseña';
+
+  @override
   String get favoriteMoviesRow => 'Películas favoritas';
 
   @override

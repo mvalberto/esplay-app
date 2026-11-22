@@ -27999,6 +27999,18 @@ abstract class AppLocalizations {
   /// **'Connect by entering the server'**
   String get esplayConnectWithServer;
 
+  /// No description provided for @esplayShowPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Show password'**
+  String get esplayShowPassword;
+
+  /// No description provided for @esplayHidePassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Hide password'**
+  String get esplayHidePassword;
+
   /// No description provided for @favoriteMoviesRow.
   ///
   /// In en, this message translates to:
