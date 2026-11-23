@@ -7,10 +7,9 @@ AggregatedLibrary _lib(String id, String type) =>
     AggregatedLibrary(id: id, name: id, collectionType: type, serverId: 's1');
 
 void main() {
-  test('the live tv button starts off', () {
-    // Most servers carry no Live TV at all, and the ones that do reach the
-    // guide through their library tile already.
-    expect(UserPreferences.showLiveTvButton.defaultValue, isFalse);
+  test('the live tv button starts on', () {
+    // EsPlay: every server carries Live TV, so it gets its own button.
+    expect(UserPreferences.showLiveTvButton.defaultValue, isTrue);
   });
 
   test('the guide is still reachable with the button off', () {
@@ -19,10 +18,7 @@ void main() {
     final libraries = [_lib('movies', 'movies'), _lib('guide', 'livetv')];
 
     expect(
-      librariesForNav(
-        libraries,
-        UserPreferences.showLiveTvButton.defaultValue,
-      ).map((lib) => lib.id),
+      librariesForNav(libraries, false).map((lib) => lib.id),
       ['movies', 'guide'],
     );
   });

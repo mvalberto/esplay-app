@@ -125,6 +125,7 @@ void main() {
       'pref_last_user_id': 'usr',
       'pref_navbar_position_srv_usr': 'bottom',
       'pref_show_favorites_button_srv_usr': false,
+      'pref_show_live_tv_button_srv_usr': false,
     };
 
     test('lands on Dock with pins from the toggles and writes nothing',

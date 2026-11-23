@@ -22,7 +22,8 @@ void main() {
     final on = await prefsWith({'episodePreviewEnabled': true});
     final off = await prefsWith({'episodePreviewEnabled': false});
 
-    expect(on.resolveMediaPreviewMode(), UserPreferences.mediaPreviewMedia);
+    // EsPlay: with no mode stored it plays the trailer.
+    expect(on.resolveMediaPreviewMode(), UserPreferences.mediaPreviewTrailer);
     expect(off.resolveMediaPreviewMode(), UserPreferences.mediaPreviewOff);
   });
 

@@ -7,6 +7,7 @@ import 'package:moonfin/auth/models/server.dart';
 import 'package:moonfin/data/repositories/multi_server_repository.dart';
 import 'package:moonfin/data/services/plugin_sync_service.dart';
 import 'package:moonfin/l10n/app_localizations.dart';
+import 'package:moonfin/preference/home_section_config.dart';
 import 'package:moonfin/preference/user_preferences.dart';
 import 'package:moonfin/ui/screens/settings/home_sections_screen.dart';
 import 'package:moonfin/util/platform_detection.dart';
@@ -58,6 +59,8 @@ void main() {
     final store = PreferenceStore();
     await store.init();
     prefs = UserPreferences(store);
+    // Moonfin's own starting layout, which these tests are written against.
+    await prefs.setHomeSectionsConfig(HomeSectionConfig.defaults());
     await prefs.set(UserPreferences.displayCollectionsRows, true);
     GetIt.instance.registerSingleton<UserPreferences>(prefs);
     GetIt.instance.registerSingleton<MediaServerClient>(

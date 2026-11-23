@@ -1252,7 +1252,7 @@ class UserPreferences extends ChangeNotifier {
 
   static final posterSize = EnumPreference(
     key: 'poster_size',
-    defaultValue: PosterSize.medium,
+    defaultValue: PosterSize.large,
     values: PosterSize.values,
   );
 
@@ -1288,9 +1288,7 @@ class UserPreferences extends ChangeNotifier {
 
   static final homeRowsStyle = EnumPreference(
     key: 'pref_home_rows_style',
-    defaultValue: PlatformDetection.useMobileUi
-        ? HomeRowsStyle.v1
-        : HomeRowsStyle.v2,
+    defaultValue: HomeRowsStyle.v2,
     values: HomeRowsStyle.values,
   );
 
@@ -1311,7 +1309,7 @@ class UserPreferences extends ChangeNotifier {
 
   static final modernCardsOnMyMediaRow = Preference<bool>(
     key: 'pref_modern_cards_my_media',
-    defaultValue: true,
+    defaultValue: false,
   );
 
   /// How far a mouse wheel notch scrolls, as a percentage of what the platform
@@ -1826,7 +1824,7 @@ class UserPreferences extends ChangeNotifier {
   /// When on, delays Modern card expansion during rapid navigation until focus settles.
   static final delayCardExpansionOnRapidScroll = Preference(
     key: 'pref_delay_card_expansion_on_rapid_scroll',
-    defaultValue: false,
+    defaultValue: true,
   );
 
   /// Structural style for the media detail screen. Stored per server and user,
@@ -1981,7 +1979,7 @@ class UserPreferences extends ChangeNotifier {
 
   static final showShuffleButton = Preference(
     key: 'pref_show_shuffle_button',
-    defaultValue: true,
+    defaultValue: false,
   );
 
   static final showGenresButton = Preference(
@@ -1996,7 +1994,7 @@ class UserPreferences extends ChangeNotifier {
 
   static final showLiveTvButton = Preference(
     key: 'pref_show_live_tv_button',
-    defaultValue: false,
+    defaultValue: true,
   );
 
   static final showDownloadsButton = Preference(
@@ -3038,7 +3036,7 @@ class UserPreferences extends ChangeNotifier {
 
   static final navbarColor = Preference(
     key: 'navbarColor',
-    defaultValue: 'gray',
+    defaultValue: 'black',
   );
 
   static final mediaBarOverlayOpacity = Preference(
@@ -3113,18 +3111,15 @@ class UserPreferences extends ChangeNotifier {
     defaultValue: '',
   );
 
-  // EsPlay: on a TV and on Windows the title under the remote or the mouse
-  // plays its trailer at the top of Home.
+  // EsPlay: the focused title plays its trailer at the top of Home.
   static final episodePreviewEnabled = Preference(
     key: 'episodePreviewEnabled',
-    defaultValue: PlatformDetection.isTV || PlatformDetection.isWindows,
+    defaultValue: true,
   );
 
   static final mediaPreviewMode = Preference(
     key: 'mediaPreviewMode',
-    defaultValue: PlatformDetection.isTV || PlatformDetection.isWindows
-        ? mediaPreviewTrailer
-        : mediaPreviewMedia,
+    defaultValue: mediaPreviewTrailer,
   );
 
   /// The preview a focused home card plays, off when the switch is off.
@@ -3153,7 +3148,7 @@ class UserPreferences extends ChangeNotifier {
   /// How loud media previews on cards play, 0 to 100.
   static final previewVolume = Preference(
     key: 'previewVolume',
-    defaultValue: 100,
+    defaultValue: 50,
   );
   static final homeRowsUniversalOverride = Preference(
     key: 'homeRowsUniversalOverride',
@@ -3230,12 +3225,12 @@ class UserPreferences extends ChangeNotifier {
 
   static final homeRowsEnableAdditionalRatings = Preference(
     key: 'homeRowsEnableAdditionalRatings',
-    defaultValue: false,
+    defaultValue: true,
   );
 
   static final homeRowsEnabledRatings = Preference(
     key: 'homeRowsEnabledRatings',
-    defaultValue: 'stars,imdb,tmdb,tomatoes,metacritic',
+    defaultValue: 'stars,imdb,tmdb,tomatoes',
   );
 
   static final homeRowsEnableEpisodeRatings = Preference(

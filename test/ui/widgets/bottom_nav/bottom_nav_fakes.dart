@@ -107,6 +107,8 @@ Future<({UserPreferences prefs, FakePlaybackManager playback})>
   PlatformDetection.setInterfaceLayout(InterfaceLayout.phone);
   ThemeRegistry.setActiveById(ThemeRegistry.moonfinId);
   await prefs.set(UserPreferences.navbarPosition, NavbarPosition.bottom);
+  // EsPlay starts with Shuffle off; these tests are written with it on.
+  await prefs.set(UserPreferences.showShuffleButton, true);
   await prefs.set(UserPreferences.bottomNavbarStyle, style);
   return (prefs: prefs, playback: playback);
 }

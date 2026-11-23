@@ -1889,7 +1889,7 @@ class _HomeSectionsScreenState extends State<HomeSectionsScreen>
               tooltip: l10n.resetToDefaults,
               onPressed: () {
                 setState(() {
-                  _sections = HomeSectionConfig.defaults();
+                  _sections = HomeSectionConfig.esplayDefaults();
                   _sortSectionsEnabledAboveDisabled();
                   _rebuildFocusNodes();
                   _setMergeContinueWatchingNextUp(

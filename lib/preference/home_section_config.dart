@@ -404,8 +404,30 @@ class HomeSectionConfig {
     return HomeSectionPluginSource.values.any((s) => s.serializedName == source);
   }
 
+  /// EsPlay's starting Home: these rows in this order, the rest off.
+  static const _esplayRows = [
+    HomeSectionType.collections,
+    HomeSectionType.resume,
+    HomeSectionType.liveTv,
+    HomeSectionType.onNow,
+    HomeSectionType.favoriteSeries,
+    HomeSectionType.favoriteMovies,
+    HomeSectionType.latestMedia,
+    HomeSectionType.genres,
+  ];
+
+  static List<HomeSectionConfig> esplayDefaults() => [
+    for (final c in defaults())
+      c.copyWith(
+        enabled: _esplayRows.contains(c.type),
+        order: _esplayRows.contains(c.type)
+            ? _esplayRows.indexOf(c.type)
+            : _esplayRows.length + c.order,
+      ),
+  ];
+
   static List<HomeSectionConfig> fromJsonString(String jsonString) {
-    if (jsonString.isEmpty) return defaults();
+    if (jsonString.isEmpty) return esplayDefaults();
     try {
       final list = jsonDecode(jsonString) as List;
       final parsed = <HomeSectionConfig>[];
@@ -420,7 +442,7 @@ class HomeSectionConfig {
       }
       return _appendMissingBuiltins(parsed);
     } catch (_) {
-      return defaults();
+      return esplayDefaults();
     }
   }
 
