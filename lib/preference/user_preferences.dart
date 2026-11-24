@@ -3061,11 +3061,11 @@ class UserPreferences extends ChangeNotifier {
 
   /// Shows the top half of the first home row over the bottom of the media
   /// bar on TV and desktop.
-  // EsPlay: on a TV and on Windows the first row shows along the bottom of
-  // the media bar, as on Prime Video.
+  // EsPlay: on a TV and on a computer (Windows, macOS) the first row shows
+  // along the bottom of the media bar, as on Prime Video.
   static final mediaBarRowPeek = Preference(
     key: 'mediaBarRowPeek',
-    defaultValue: PlatformDetection.isTV || PlatformDetection.isWindows,
+    defaultValue: PlatformDetection.isTV || PlatformDetection.isDesktop,
   );
 
   static final mediaBarTrailerPreview = Preference(

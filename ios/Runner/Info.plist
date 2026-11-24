@@ -15,7 +15,7 @@
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>Moonfin</string>
+	<string>EsPlay</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
@@ -31,7 +31,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
 			<key>CFBundleURLName</key>
-			<string>org.moonfin.app</string>
+			<string>es.esplay.app</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>moonfin</string>
@@ -106,19 +106,19 @@
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>NSLocalNetworkUsageDescription</key>
-	<string>Moonfin uses your local network to discover Jellyfin and Emby servers.</string>
+	<string>EsPlay usa la red local para conectar con tu servidor.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Moonfin needs microphone access for voice search.</string>
+	<string>EsPlay usa el micrófono para la búsqueda por voz.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Moonfin needs access to your photo library so you can choose images to upload for media artwork and metadata.</string>
+	<string>EsPlay accede a tus fotos solo para elegir imágenes que subir como carátulas.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Moonfin needs camera access to let you capture images for media artwork and metadata.</string>
+	<string>EsPlay usa la cámara solo para hacer fotos que subir como carátulas.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Moonfin does not track your location; this access is only used to read location metadata stored in images you choose for media artwork.</string>
+	<string>EsPlay no sigue tu ubicación: solo lee la que guardan las imágenes que eliges como carátula.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Moonfin does not track your location; this access is only used to read location metadata stored in images you choose for media artwork.</string>
+	<string>EsPlay no sigue tu ubicación: solo lee la que guardan las imágenes que eliges como carátula.</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>Moonfin needs speech recognition access for voice search.</string>
+	<string>EsPlay usa el reconocimiento de voz para la búsqueda por voz.</string>
 	<key>NSBonjourServices</key>
 	<array>
 		<string>_jellyfin._tcp</string>

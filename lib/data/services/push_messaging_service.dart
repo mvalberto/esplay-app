@@ -6,6 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
 import 'package:server_core/server_core.dart';
 
+import '../../esplay/esplay_flags.dart';
 import '../../firebase_options.dart';
 import '../../ui/navigation/app_router.dart';
 import '../../ui/widgets/server_messages_dialog.dart';
@@ -35,7 +36,7 @@ class PushMessagingService {
   Future<void> initialize() => _initFuture ??= _doInitialize();
 
   Future<void> _doInitialize() async {
-    if (!PlatformDetection.isMobile) return;
+    if (esplayNoPush || !PlatformDetection.isMobile) return;
 
     try {
       await Firebase.initializeApp(

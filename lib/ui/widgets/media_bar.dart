@@ -2029,7 +2029,7 @@ class _MediaBarState extends State<MediaBar>
   bool get _esplayLook =>
       esplayForceMediaBar ||
       PlatformDetection.isTV ||
-      PlatformDetection.isWindows;
+      PlatformDetection.isDesktop;
 
   /// The IMDb, TMDB and Rotten Tomatoes marks of [item], once they arrive.
   Widget? _esplayRatings(MediaBarSlideItem item) {

@@ -7,7 +7,7 @@ set -euo pipefail
 # Optional local overrides can be placed in build-ios.private.env.
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-APP_NAME="Moonfin"
+APP_NAME="EsPlay"
 ARCHIVE_DIR="$REPO_ROOT/build/ios/archive"
 IPA_DIR="$REPO_ROOT/build/ios/ipa"
 ROOT_IPA_OUTPUT=""

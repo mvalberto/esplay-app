@@ -22,11 +22,11 @@
     <true/>
   </dict>
   <key>NSLocalNetworkUsageDescription</key>
-  <string>Moonfin uses the local network to stream media from your server and to receive a client certificate from your phone when you add one on this device.</string>
+  <string>EsPlay usa la red local para reproducir desde tu servidor y para recibir un certificado de cliente desde tu móvil.</string>
   <key>CFBundleDevelopmentRegion</key>
   <string>$(DEVELOPMENT_LANGUAGE)</string>
   <key>CFBundleDisplayName</key>
-  <string>Moonfin</string>
+  <string>EsPlay</string>
   <key>CFBundleExecutable</key>
   <string>$(EXECUTABLE_NAME)</string>
   <key>CFBundleIdentifier</key>
@@ -43,7 +43,7 @@
       <key>CFBundleTypeRole</key>
       <string>Viewer</string>
       <key>CFBundleURLName</key>
-      <string>org.moonfin.app</string>
+      <string>es.esplay.app</string>
       <key>CFBundleURLSchemes</key>
       <array>
         <string>moonfin</string>

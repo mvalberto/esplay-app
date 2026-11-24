@@ -29,7 +29,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Viewer</string>
 			<key>CFBundleURLName</key>
-			<string>org.moonfin.app</string>
+			<string>es.esplay.app</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>moonfin</string>
@@ -47,7 +47,7 @@
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>NSLocalNetworkUsageDescription</key>
-	<string>Moonfin uses your local network to discover Jellyfin and Emby servers.</string>
+	<string>EsPlay usa la red local para conectar con tu servidor.</string>
 	<key>NSBonjourServices</key>
 	<array>
 		<string>_jellyfin._tcp</string>

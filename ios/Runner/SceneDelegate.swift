@@ -9,7 +9,7 @@ private final class SecondaryWindowViewController: UIViewController {
     super.viewDidLoad()
     view.backgroundColor = .systemBackground
     let label = UILabel()
-    label.text = "Moonfin is already open in another window"
+    label.text = "EsPlay ya está abierta en otra ventana"
     label.textColor = .secondaryLabel
     label.font = .preferredFont(forTextStyle: .body)
     label.numberOfLines = 0

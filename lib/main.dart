@@ -26,6 +26,7 @@ import 'background/auto_download_background_main.dart' as auto_download_bg;
 import 'data/services/auto_download_service.dart';
 import 'data/services/background_download_coordinator.dart';
 import 'data/services/download_notification_service.dart';
+import 'esplay/esplay_flags.dart';
 import 'data/services/push_messaging_service.dart';
 import 'data/services/seerr_notification_service.dart';
 import 'data/services/media_server_client_factory.dart';
@@ -949,9 +950,11 @@ void main() async {
 
     // Registered before runApp so a background/terminated push can be handled.
     // The handler itself is a no-op; the OS draws these notifications.
-    try {
-      FirebaseMessaging.onBackgroundMessage(pushBackgroundHandler);
-    } catch (_) {}
+    if (!esplayNoPush) {
+      try {
+        FirebaseMessaging.onBackgroundMessage(pushBackgroundHandler);
+      } catch (_) {}
+    }
   }
 
   await configureDependencies();

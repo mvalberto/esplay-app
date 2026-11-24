@@ -288,6 +288,8 @@ class AppUpdateService {
             _firstByExtension(assets, const ['.apk']);
       case DistributionChannel.macosDmg:
         return _firstByExtension(assets, const ['.dmg']);
+      case DistributionChannel.iosUnsigned:
+        return _firstByExtension(assets, const ['.ipa']) ?? assets.first;
       case DistributionChannel.windows:
         final isArm64 = Platform.version.toLowerCase().contains('windows_arm64');
         if (isArm64) {

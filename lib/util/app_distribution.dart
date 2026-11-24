@@ -90,6 +90,9 @@ class AppDistribution {
       case DistributionChannel.macosDmg:
       case DistributionChannel.windows:
       case DistributionChannel.linux:
+      // EsPlay: the iOS app is installed by hand too, so it checks the
+      // panel's version policy like the APK.
+      case DistributionChannel.iosUnsigned:
         return true;
       default:
         return false;

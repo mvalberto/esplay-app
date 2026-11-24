@@ -575,11 +575,11 @@ class _HomeShellState extends State<_HomeShell>
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  // EsPlay: on a TV and on Windows the showcase at the top
-                  // stands in for it.
+                  // EsPlay: on a TV and on a computer (Windows, macOS) the
+                  // showcase at the top stands in for it.
                   if (backdropStyle != UserPreferences.homeBackdropOff &&
                       !PlatformDetection.isTV &&
-                      !PlatformDetection.isWindows)
+                      !PlatformDetection.isDesktop)
                     ValueListenableBuilder<String?>(
                       valueListenable: _backdropUrlNotifier,
                       builder: (context, url, _) {
@@ -5335,10 +5335,10 @@ class _ContentRowsState extends State<_ContentRows>
   // EsPlay on a TV, the same as on Samsung: On Now opens with a showcase of the
   // program under the remote over small 16:9 cards, and the channel tags sit
   // right below as compact cards. Sizes are a 1920-wide screen's pixels.
-  // The Windows app shares the design, with the mouse standing in for the
-  // remote.
+  // The Windows and macOS apps share the design, with the mouse standing in
+  // for the remote.
   bool get _esplayTvShowcase =>
-      PlatformDetection.isTV || PlatformDetection.isWindows;
+      PlatformDetection.isTV || PlatformDetection.isDesktop;
 
   /// EsPlay: On now's posters end on their channel line, so without this the
   /// next row's title sits right under them. A TV lays On now out apart.

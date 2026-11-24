@@ -31,6 +31,10 @@ const esplayNoSetupWizard = true;
 /// const only so the tests of Moonfin's own Seerr entry can switch it off.
 bool esplayRequestsInNav = true;
 
+/// No push notifications until EsPlay has its own Firebase project: the
+/// Firebase files in the repo belong to Moonfin's project.
+const esplayNoPush = true;
+
 /// The libraries the media bar draws from, by name (lower case).
 const esplayMediaBarLibraries = {'películas', 'series'};
 
