@@ -58,16 +58,6 @@ class _AboutCategoryScreen extends StatelessWidget {
                 ),
               ),
               _TvSettingsListTile(
-                leading: const Icon(Icons.bug_report),
-                title: Text(l10n.settingsReportAnIssue),
-                subtitle: Text(l10n.settingsReportAnIssueSubtitle),
-                onTap: () => showQrOrLaunch(
-                  context,
-                  url: 'https://github.com/Moonfin-Client/Moonfin-Core/issues',
-                  title: l10n.settingsReportAnIssue,
-                ),
-              ),
-              _TvSettingsListTile(
                 leading: const Icon(Icons.troubleshoot),
                 title: const Text('Diagnóstico y registros'),
                 subtitle: const Text(
@@ -97,22 +87,6 @@ class _AboutCategoryScreen extends StatelessWidget {
                   GetIt.instance<SetupWizardGate>().beginRerun();
                   context.navigateTopLevel(Destinations.setup);
                 },
-              ),
-              _TvSettingsListTile(
-                leading: const Icon(Icons.forum),
-                title: Text(l10n.settingsJoinDiscord),
-                subtitle: Text(l10n.settingsJoinDiscordSubtitle),
-                onTap: () => showQrOrLaunch(
-                  context,
-                  url: 'https://discord.gg/moonfin',
-                  title: l10n.settingsJoinTheDiscord,
-                ),
-              ),
-              _TvSettingsListTile(
-                leading: const Icon(Icons.favorite),
-                title: Text(l10n.settingsSupportMoonfin),
-                subtitle: Text(l10n.settingsSupportMoonfinSubtitle),
-                onTap: () => showSupportDialog(context),
               ),
             ],
           ),
