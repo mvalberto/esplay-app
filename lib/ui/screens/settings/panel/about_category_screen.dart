@@ -40,11 +40,21 @@ class _AboutCategoryScreen extends StatelessWidget {
               _TvSettingsListTile(
                 leading: const Icon(Icons.code),
                 title: Text(l10n.sourceCode),
+                subtitle: const Text('github.com/mvalberto/esplay-app'),
+                onTap: () => showQrOrLaunch(
+                  context,
+                  url: 'https://github.com/mvalberto/esplay-app',
+                  title: l10n.sourceCode,
+                ),
+              ),
+              _TvSettingsListTile(
+                leading: const Icon(Icons.nightlight_round),
+                title: const Text('Basada en Moonfin'),
                 subtitle: Text(l10n.sourceCodeUrl),
                 onTap: () => showQrOrLaunch(
                   context,
                   url: 'https://github.com/Moonfin-Client/Moonfin-Core',
-                  title: l10n.sourceCode,
+                  title: 'Basada en Moonfin',
                 ),
               ),
               _TvSettingsListTile(
@@ -116,7 +126,7 @@ class _AboutCategoryScreen extends StatelessWidget {
                 onTap: () => showQrOrLaunch(
                   context,
                   url:
-                      'https://github.com/Moonfin-Client/Moonfin-Core/blob/main/LICENSE',
+                      'https://github.com/mvalberto/esplay-app/blob/esplay/LICENSE',
                   title: l10n.settingsLicenses,
                 ),
               ),
